@@ -42,6 +42,18 @@ export const PROJECTS_ITEMS = [
     description: "Tatagih - Subscription and Bill Manager"
   },
   {
+    name: "Temuin.exe",
+    type: "executable",
+    extension: "exe",
+    appId: "temuin",
+    projectId: "temuin",
+    icon: "home",
+    fileType: "Application",
+    size: "18.5 MB",
+    modified: "08/20/2024 11:10",
+    description: "Temuin - Lost & Found Crowdsourcing Platform"
+  },
+  {
     name: "Lintas.exe",
     type: "executable",
     extension: "exe",
@@ -64,6 +76,30 @@ export const PROJECTS_ITEMS = [
     size: "42.1 MB",
     modified: "12/18/2024 16:40",
     description: "NeuroFly - Drosophila Connectome x Pong"
+  },
+  {
+    name: "DompetQ.exe",
+    type: "executable",
+    extension: "exe",
+    appId: "dompetq",
+    projectId: "dompetq",
+    icon: "code",
+    fileType: "Application",
+    size: "22.4 MB",
+    modified: "05/12/2024 16:30",
+    description: "DompetQ - Fintech Mobile Wallet"
+  },
+  {
+    name: "MakalahGenerator.exe",
+    type: "executable",
+    extension: "exe",
+    appId: "makalah",
+    projectId: "makalah",
+    icon: "code",
+    fileType: "Application",
+    size: "12.8 MB",
+    modified: "09/01/2024 10:05",
+    description: "Makalah Generator - AI Academic Assistant"
   }
 ];
 
@@ -76,12 +112,161 @@ export const DATA_D_ITEMS = [
     items: PROJECTS_ITEMS
   },
   {
+    name: "tatagih",
+    type: "folder",
+    description: "Subscription & Recurring Bill Manager",
+    previewImage: "/projects/tatagih.jpg",
+    badge: "Web App / SaaS",
+    items: [
+      {
+        name: "Tatagih.exe",
+        type: "executable",
+        extension: "exe",
+        appId: "tatagih",
+        projectId: "tatagih",
+        icon: "tatagih",
+        fileType: "Application",
+        size: "14.2 MB",
+        description: "Buka Tatagih Showcase di Chrome"
+      },
+      {
+        name: "tatagih_overview.txt",
+        type: "file",
+        extension: "txt",
+        size: "2.4 KB",
+        content: `=====================================================
+PROYEK: TATAGIH - SUBSCRIPTION & BILL MANAGER
+=====================================================
+Platform   : Web App & Telegram Bot Integration
+Stack      : Laravel 10, PHP 8.2, MySQL, Bootstrap 5
+Notifikasi : Telegram Bot API, Cron Scheduler
+
+DESKRIPSI:
+Tatagih adalah aplikasi manajemen pengeluaran rutin dan langganan digital
+(Netflix, Spotify, Cloud Server, Gym, Internet) dengan otomatisasi pengingat
+jatuh tempo via bot Telegram langsung ke ponsel pengguna.
+
+FITUR UTAMA:
+✓ Dashboard kalkulasi pengeluaran bulanan & tahunan secara otomatis
+✓ Pengingat cerdas H-3 dan H-1 sebelum tagihan jatuh tempo
+✓ Estimasi akumulasi biaya langganan per tahun
+✓ Dukungan konversi mata uang untuk tagihan multi-negara (IDR/USD)
+`
+      },
+      {
+        name: "invoice_client.pdf",
+        type: "file",
+        extension: "pdf",
+        size: "120 KB"
+      },
+      {
+        name: "tatagih_spec.txt",
+        type: "file",
+        extension: "txt",
+        size: "1.2 KB",
+        content: `SPESIFIKASI TEKNIS TATAGIH:
+- Framework: Laravel 10 (MVC Architecture)
+- Database: MySQL with indexed recurring schedules
+- Bot: PHP Telegram SDK with webhook triggers
+- Security: CSRF protection, hashed passwords, rate limiting
+`
+      }
+    ]
+  },
+  {
+    name: "lintas",
+    type: "folder",
+    description: "Phone-to-PC Companion Utility",
+    badge: "Desktop Utility",
+    items: [
+      {
+        name: "Lintas.exe",
+        type: "executable",
+        extension: "exe",
+        appId: "lintas",
+        projectId: "lintas",
+        icon: "lintas",
+        fileType: "Application",
+        size: "28.6 MB",
+        description: "Buka Lintas Showcase di Chrome"
+      },
+      {
+        name: "lintas_overview.txt",
+        type: "file",
+        extension: "txt",
+        size: "2.1 KB",
+        content: `=====================================================
+PROYEK: LINTAS - PHONE-TO-PC COMPANION
+=====================================================
+Platform   : Windows & Android
+Stack      : Tauri, Rust, React, WebSockets, mDNS ZeroConf
+
+DESKRIPSI:
+Lintas menjembatani interaksi seamless antara smartphone Android dan PC Windows
+melalui jaringan lokal Wi-Fi tanpa memerlukan kabel USB atau koneksi internet cloud.
+
+FITUR UTAMA:
+✓ Sinkronisasi clipboard dua arah secara instan
+✓ Transfer file berkecepatan tinggi via LAN WebSockets
+✓ Notifikasi mirroring dari ponsel ke desktop
+✓ Zero setup: deteksi perangkat otomatis menggunakan mDNS
+`
+      }
+    ]
+  },
+  {
+    name: "neurofly",
+    type: "folder",
+    description: "Drosophila Connectome x Pong Simulation",
+    badge: "AI & Simulation",
+    items: [
+      {
+        name: "NeuroFly.exe",
+        type: "executable",
+        extension: "exe",
+        appId: "neurofly",
+        projectId: "neurofly",
+        icon: "neurofly",
+        fileType: "Application",
+        size: "42.1 MB",
+        description: "Buka NeuroFly Showcase di Chrome"
+      },
+      {
+        name: "neurofly_overview.txt",
+        type: "file",
+        extension: "txt",
+        size: "2.3 KB",
+        content: `=====================================================
+PROYEK: NEUROFLY - CONNECTOME BIOLOGICAL AI
+=====================================================
+Platform   : Web & WebGL
+Stack      : TypeScript, Three.js, Leaky Integrate-and-Fire (LIF) Network
+
+DESKRIPSI:
+Simulasi biologis interaktif yang menghubungkan arsitektur sirkuit saraf mata
+lalat buah (Drosophila Melanogaster) dengan gameplay Pong retro secara real-time.
+`
+      }
+    ]
+  },
+  {
     name: "dompetq",
     type: "folder",
     description: "Fintech E-Wallet Mobile Application",
     previewImage: "/projects/dompetq.jpg",
     badge: "Mobile App",
     items: [
+      {
+        name: "DompetQ.exe",
+        type: "executable",
+        extension: "exe",
+        appId: "dompetq",
+        projectId: "dompetq",
+        icon: "code",
+        fileType: "Application",
+        size: "22.4 MB",
+        description: "Buka DompetQ Showcase di Chrome"
+      },
       {
         name: "project_overview.txt",
         type: "file",
@@ -140,6 +325,17 @@ FITUR UTAMA:
     badge: "Full-Stack Mobile",
     items: [
       {
+        name: "Temuin.exe",
+        type: "executable",
+        extension: "exe",
+        appId: "temuin",
+        projectId: "temuin",
+        icon: "home",
+        fileType: "Application",
+        size: "18.5 MB",
+        description: "Buka Temuin Showcase di Chrome"
+      },
+      {
         name: "tentang_temuin.txt",
         type: "file",
         extension: "txt",
@@ -178,6 +374,17 @@ HIGHLIGHTS:
     previewImage: "/projects/makalah.jpg",
     badge: "Web App & AI",
     items: [
+      {
+        name: "MakalahGenerator.exe",
+        type: "executable",
+        extension: "exe",
+        appId: "makalah",
+        projectId: "makalah",
+        icon: "code",
+        fileType: "Application",
+        size: "12.8 MB",
+        description: "Buka Makalah Generator Showcase di Chrome"
+      },
       {
         name: "makalah_generator_readme.txt",
         type: "file",

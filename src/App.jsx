@@ -17,6 +17,15 @@ import { RunDialog } from './components/Common/RunDialog';
 import { DESKTOP_ITEMS } from './data/fileSystem';
 import { playWindowSound, playStartupChime, playClickSound } from './utils/sound';
 
+const PROJECT_TITLES = {
+  tatagih: 'Tatagih — Subscription & Bill Manager',
+  temuin: 'Temuin — Lost & Found Platform',
+  lintas: 'Lintas — Phone-to-PC Companion Utility',
+  neurofly: 'NeuroFly — Drosophila Connectome x Pong',
+  dompetq: 'DompetQ — Fintech E-Wallet Mobile App',
+  makalah: 'Makalah Generator — AI Academic Assistant'
+};
+
 export function App() {
   const [wallpaper, setWallpaper] = useState('/wallpapers/win11_bloom_light.jpg');
   const [accentColor, setAccentColor] = useState('#0078d4');
@@ -97,7 +106,7 @@ export function App() {
         zIndex: nextZ,
         data: customData ? { ...w.data, ...customData } : w.data,
         title: (appId === 'chrome' || appId === 'browser') && customData?.projectId
-          ? `${customData.projectId === 'tatagih' ? 'Tatagih' : customData.projectId === 'lintas' ? 'Lintas' : customData.projectId === 'neurofly' ? 'NeuroFly' : 'Project'} — Project Showcase - Google Chrome`
+          ? `${PROJECT_TITLES[customData.projectId] || 'Project Showcase'} - Google Chrome`
           : w.title
       } : w));
       return;
@@ -188,7 +197,7 @@ export function App() {
       },
       chrome: {
         title: customData?.projectId 
-          ? `${customData.projectId === 'tatagih' ? 'Tatagih' : customData.projectId === 'lintas' ? 'Lintas' : customData.projectId === 'neurofly' ? 'NeuroFly' : 'Project'} — Project Showcase - Google Chrome`
+          ? `${PROJECT_TITLES[customData.projectId] || 'Project Showcase'} - Google Chrome`
           : 'Google Chrome',
         icon: 'chrome',
         initialSize: { width: 980, height: 640 },
@@ -275,12 +284,24 @@ export function App() {
       launchApp('chrome', { projectId: 'tatagih' });
       return;
     }
+    if (fileItem.name && fileItem.name.toLowerCase().includes('temuin')) {
+      launchApp('chrome', { projectId: 'temuin' });
+      return;
+    }
     if (fileItem.name && fileItem.name.toLowerCase().includes('lintas')) {
       launchApp('chrome', { projectId: 'lintas' });
       return;
     }
     if (fileItem.name && fileItem.name.toLowerCase().includes('neurofly')) {
       launchApp('chrome', { projectId: 'neurofly' });
+      return;
+    }
+    if (fileItem.name && fileItem.name.toLowerCase().includes('dompetq')) {
+      launchApp('chrome', { projectId: 'dompetq' });
+      return;
+    }
+    if (fileItem.name && fileItem.name.toLowerCase().includes('makalah')) {
+      launchApp('chrome', { projectId: 'makalah' });
       return;
     }
     if (fileItem.extension === 'txt' || fileItem.content) {
@@ -411,15 +432,18 @@ export function App() {
       case 'antigravity':
         return <TerminalApp onLaunchApp={launchApp} />;
       case 'tatagih':
+      case 'temuin':
       case 'lintas':
       case 'neurofly':
+      case 'dompetq':
+      case 'makalah':
       case 'browser':
       case 'chrome':
       case 'ldplayer':
         return (
           <BrowserApp
             onOpenFile={openFile}
-            initialProject={win.data?.projectId || (win.appId === 'tatagih' || win.appId === 'lintas' || win.appId === 'neurofly' ? win.appId : 'tatagih')}
+            initialProject={win.data?.projectId || (['tatagih', 'temuin', 'lintas', 'neurofly', 'dompetq', 'makalah'].includes(win.appId) ? win.appId : 'tatagih')}
             initialUrl={win.data?.url}
             onLaunchApp={launchApp}
           />

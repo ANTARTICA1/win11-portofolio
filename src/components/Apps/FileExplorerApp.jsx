@@ -4,7 +4,7 @@ import {
   Plus, ChevronRight, ChevronDown, LayoutGrid, List
 } from 'lucide-react';
 import { WinIcon } from '../Common/WinIcon';
-import { DATA_D_ITEMS } from '../../data/fileSystem';
+import { DATA_D_ITEMS, PROJECTS_ITEMS } from '../../data/fileSystem';
 import { playClickSound } from '../../utils/sound';
 import './FileExplorer.css';
 
@@ -29,12 +29,17 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
 
     if (currentPath === 'Home') {
       return [
+        { name: 'Projects', type: 'folder', badge: 'Applications', size: `${PROJECTS_ITEMS.length} items` },
         { name: 'Downloads', type: 'folder', size: '3 items' },
         { name: 'Documents', type: 'folder', size: '3 items' },
-        { name: 'tatagih file', type: 'folder', size: '2 items' },
+        { name: 'tatagih file', type: 'folder', size: '3 items' },
         { name: 'Curriculum_Vitae.pdf', type: 'file', extension: 'pdf', size: '240 KB' },
         { name: 'README_RECRUITER.txt', type: 'file', extension: 'txt', size: '3.4 KB' }
       ];
+    }
+
+    if (currentPath === 'Projects' || currentPath === 'Data (D:) > Projects' || currentPath.endsWith('> Projects')) {
+      return PROJECTS_ITEMS;
     }
 
     if (currentPath === 'Gallery') {
@@ -64,6 +69,17 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
 
     if (currentPath === 'tatagih file') {
       return [
+        {
+          name: 'Tatagih.exe',
+          type: 'executable',
+          extension: 'exe',
+          appId: 'tatagih',
+          projectId: 'tatagih',
+          icon: 'tatagih',
+          fileType: 'Application',
+          size: '14.2 MB',
+          description: 'Tatagih Subscription Manager'
+        },
         { name: 'invoice_client.pdf', type: 'file', extension: 'pdf', size: '120 KB' },
         { name: 'rekap_pembayaran.txt', type: 'file', extension: 'txt', size: '1.4 KB' }
       ];
@@ -71,6 +87,8 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
 
     if (currentPath === 'shortcut') {
       return [
+        { name: 'Tatagih', type: 'file', extension: 'lnk', projectId: 'tatagih' },
+        { name: 'Temuin', type: 'file', extension: 'lnk', projectId: 'temuin' },
         { name: 'Visual Studio Code', type: 'file', extension: 'lnk' },
         { name: 'Google Chrome', type: 'file', extension: 'lnk' },
         { name: 'Antigravity', type: 'file', extension: 'lnk' }
@@ -105,10 +123,14 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
       return DATA_D_ITEMS;
     }
 
-    if (currentPath.startsWith('Data (D:) > ')) {
-      const folderName = currentPath.replace('Data (D:) > ', '');
-      const folder = DATA_D_ITEMS.find(f => f.name.toLowerCase() === folderName.toLowerCase());
-      return folder?.items || [];
+    const pathParts = currentPath.split(' > ');
+    const lastPart = pathParts[pathParts.length - 1];
+    if (lastPart.toLowerCase() === 'projects') {
+      return PROJECTS_ITEMS;
+    }
+    const matchedFolder = DATA_D_ITEMS.find(f => f.name.toLowerCase() === lastPart.toLowerCase());
+    if (matchedFolder && matchedFolder.items) {
+      return matchedFolder.items;
     }
 
     return DATA_D_ITEMS;
@@ -118,6 +140,7 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
   const filteredItems = rawItems.filter(item => 
     item.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
+  const selectedItem = rawItems.find(item => item.name === selectedItemName);
 
   const navigateTo = (newPath) => {
     playClickSound();
@@ -149,9 +172,11 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
   };
 
   const handleUp = () => {
-    if (currentPath.startsWith('Data (D:) > ')) {
-      navigateTo('Data (D:)');
-    } else if (currentPath === 'Data (D:)' || currentPath === 'Downloads' || currentPath === 'Documents' || currentPath === 'Home' || currentPath === 'Gallery' || currentPath === 'Local Disk (C:)') {
+    if (currentPath.includes(' > ')) {
+      const parts = currentPath.split(' > ');
+      parts.pop();
+      navigateTo(parts.join(' > '));
+    } else if (currentPath === 'Projects' || currentPath === 'Data (D:)' || currentPath === 'Downloads' || currentPath === 'Documents' || currentPath === 'Home' || currentPath === 'Gallery' || currentPath === 'Local Disk (C:)') {
       navigateTo('This PC');
     }
   };
@@ -169,37 +194,58 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
     if (item.type === 'drive') {
       navigateTo(item.name);
     } else if (item.type === 'folder') {
-      if (currentPath === 'Data (D:)') {
-        navigateTo(`Data (D:) > ${item.name}`);
-      } else if (currentPath === 'Home' || currentPath === 'This PC') {
+      if (item.name.toLowerCase() === 'projects') {
+        navigateTo('Projects');
+      } else if (currentPath === 'This PC' || currentPath === 'Home') {
         navigateTo(item.name);
       } else {
         navigateTo(`${currentPath} > ${item.name}`);
       }
-    } else if (item.projectId) {
+    } else if (
+      item.projectId || 
+      item.type === 'executable' || 
+      item.extension === 'exe' ||
+      item.appId === 'tatagih' ||
+      item.appId === 'temuin' ||
+      item.appId === 'lintas' ||
+      item.appId === 'neurofly' ||
+      item.appId === 'dompetq' ||
+      item.appId === 'makalah'
+    ) {
+      const lower = (item.name || '').toLowerCase();
+      let targetProj = item.projectId;
+      if (!targetProj) {
+        if (lower.includes('tatagih')) targetProj = 'tatagih';
+        else if (lower.includes('temuin')) targetProj = 'temuin';
+        else if (lower.includes('lintas')) targetProj = 'lintas';
+        else if (lower.includes('neurofly')) targetProj = 'neurofly';
+        else if (lower.includes('dompetq')) targetProj = 'dompetq';
+        else if (lower.includes('makalah')) targetProj = 'makalah';
+        else targetProj = 'tatagih';
+      }
       if (onLaunchApp) {
-        onLaunchApp('chrome', { projectId: item.projectId });
+        onLaunchApp('chrome', { projectId: targetProj });
       } else if (onOpenFile) {
-        onOpenFile({ ...item, appId: 'chrome', projectId: item.projectId });
+        onOpenFile({ ...item, appId: 'chrome', projectId: targetProj });
       }
     } else if (item.name && item.name.toLowerCase().includes('tatagih')) {
-      if (onLaunchApp) {
-        onLaunchApp('chrome', { projectId: 'tatagih' });
-      } else if (onOpenFile) {
-        onOpenFile({ ...item, appId: 'chrome', projectId: 'tatagih' });
-      }
+      if (onLaunchApp) onLaunchApp('chrome', { projectId: 'tatagih' });
+      else if (onOpenFile) onOpenFile({ ...item, appId: 'chrome', projectId: 'tatagih' });
+    } else if (item.name && item.name.toLowerCase().includes('temuin')) {
+      if (onLaunchApp) onLaunchApp('chrome', { projectId: 'temuin' });
+      else if (onOpenFile) onOpenFile({ ...item, appId: 'chrome', projectId: 'temuin' });
     } else if (item.name && item.name.toLowerCase().includes('lintas')) {
-      if (onLaunchApp) {
-        onLaunchApp('chrome', { projectId: 'lintas' });
-      } else if (onOpenFile) {
-        onOpenFile({ ...item, appId: 'chrome', projectId: 'lintas' });
-      }
+      if (onLaunchApp) onLaunchApp('chrome', { projectId: 'lintas' });
+      else if (onOpenFile) onOpenFile({ ...item, appId: 'chrome', projectId: 'lintas' });
     } else if (item.name && item.name.toLowerCase().includes('neurofly')) {
-      if (onLaunchApp) {
-        onLaunchApp('chrome', { projectId: 'neurofly' });
-      } else if (onOpenFile) {
-        onOpenFile({ ...item, appId: 'chrome', projectId: 'neurofly' });
-      }
+      if (onLaunchApp) onLaunchApp('chrome', { projectId: 'neurofly' });
+      else if (onOpenFile) onOpenFile({ ...item, appId: 'chrome', projectId: 'neurofly' });
+    } else if (item.name && item.name.toLowerCase().includes('dompetq')) {
+      if (onLaunchApp) onLaunchApp('chrome', { projectId: 'dompetq' });
+      else if (onOpenFile) onOpenFile({ ...item, appId: 'chrome', projectId: 'dompetq' });
+    } else if (item.name && item.name.toLowerCase().includes('makalah')) {
+      if (onLaunchApp) onLaunchApp('chrome', { projectId: 'makalah' });
+      else if (onOpenFile) onOpenFile({ ...item, appId: 'chrome', projectId: 'makalah' });
     } else {
       if (onOpenFile) {
         onOpenFile(item);
@@ -210,12 +256,19 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
   const getBreadcrumbs = () => {
     const parts = ['This PC'];
     if (currentPath === 'This PC') return parts;
+    if (currentPath === 'Projects') {
+      parts.push('Projects');
+      return parts;
+    }
     if (currentPath.startsWith('Data (D:)')) {
       parts.push('Data (D:)');
       if (currentPath.includes(' > ')) {
         const sub = currentPath.split(' > ')[1];
         parts.push(sub);
       }
+    } else if (currentPath.includes(' > ')) {
+      const subParts = currentPath.split(' > ');
+      parts.push(...subParts);
     } else {
       parts.push(currentPath);
     }
@@ -223,6 +276,7 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
   };
 
   const getTabIcon = () => {
+    if (currentPath === 'Projects') return 'folder';
     if (currentPath === 'Downloads') return 'downloads';
     if (currentPath === 'Documents') return 'documents';
     if (currentPath === 'Gallery') return 'gallery';
@@ -239,7 +293,7 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
         <div className="explorer-tab">
           <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
             <WinIcon name={getTabIcon()} size={16} />
-            <span>{currentPath.includes(' > ') ? currentPath.split(' > ')[1] : currentPath}</span>
+            <span>{currentPath.includes(' > ') ? currentPath.split(' > ').pop() : currentPath}</span>
           </div>
           <span className="explorer-tab-close">×</span>
         </div>
@@ -259,6 +313,30 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
             <span>Sidebar</span>
           </button>
           <div className="cmd-divider" />
+          {selectedItem && (
+            <button 
+              className="cmd-btn" 
+              onClick={() => handleItemDoubleClick(selectedItem)}
+              style={{ 
+                backgroundColor: 'rgba(0, 120, 212, 0.28)', 
+                color: '#60cdff', 
+                border: '1px solid #0078d4',
+                fontWeight: 600,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 6,
+                padding: '4px 12px',
+                borderRadius: '4px'
+              }}
+            >
+              <WinIcon name={selectedItem.projectId || 'chrome'} size={14} />
+              <span>
+                {selectedItem.type === 'executable' || selectedItem.projectId
+                  ? `Buka ${selectedItem.name.replace('.exe', '')} di Chrome`
+                  : `Buka ${selectedItem.name}`}
+              </span>
+            </button>
+          )}
           <button className="cmd-btn" onClick={() => alert('Folder baru dibuat')}>
             <Plus size={15} color="#0078d4" />
             <span>New</span>
@@ -344,7 +422,8 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
                   className="breadcrumb-segment"
                   onClick={() => {
                     if (index === 0) navigateTo('This PC');
-                    else if (index === 1 && part === 'Data (D:)') navigateTo('Data (D:)');
+                    else if (part === 'Projects') navigateTo('Projects');
+                    else if (part === 'Data (D:)') navigateTo('Data (D:)');
                   }}
                 >
                   {part}
@@ -363,7 +442,7 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
           <input
             type="text"
             className="search-input"
-            placeholder={`Search ${currentPath.includes(' > ') ? currentPath.split(' > ')[1] : currentPath}`}
+            placeholder={`Search ${currentPath.includes(' > ') ? currentPath.split(' > ').pop() : currentPath}`}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -378,6 +457,14 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
           >
             <WinIcon name="home" size={16} />
             <span>Home</span>
+          </div>
+          <div 
+            className={`sidebar-item ${currentPath === 'Projects' ? 'selected' : ''}`}
+            onClick={() => navigateTo('Projects')}
+          >
+            <WinIcon name="folder" size={16} />
+            <span style={{ fontWeight: 600, color: '#38bdf8' }}>Projects (Portfolio)</span>
+            <span className="sidebar-pin"><WinIcon name="pin" size={12} /></span>
           </div>
           <div 
             className={`sidebar-item ${currentPath === 'Gallery' ? 'selected' : ''}`}
@@ -524,6 +611,11 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
                           </div>
                         )}
                       </>
+                    ) : item.type === 'executable' || item.extension === 'exe' ? (
+                      <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <WinIcon name={item.projectId || item.icon || 'chrome'} size={50} />
+                        <span style={{ position: 'absolute', bottom: -2, right: -4, backgroundColor: '#0078d4', color: '#fff', fontSize: '9px', fontWeight: 700, padding: '1px 4px', borderRadius: '3px', textTransform: 'uppercase', boxShadow: '0 2px 4px rgba(0,0,0,0.4)' }}>EXE</span>
+                      </div>
                     ) : item.extension === 'pdf' ? (
                       <WinIcon name="pdf" size={48} />
                     ) : item.extension === 'jpg' || item.extension === 'png' ? (
@@ -531,10 +623,13 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
                     ) : item.extension === 'txt' ? (
                       <WinIcon name="notepad" size={48} />
                     ) : (
-                      <WinIcon name="document" size={48} />
+                      <WinIcon name={item.icon || 'document'} size={48} />
                     )}
                   </div>
                   <span className="folder-name">{item.name}</span>
+                  {(item.type === 'executable' || item.extension === 'exe') && (
+                    <span style={{ fontSize: '10px', color: '#38bdf8', marginTop: '2px', fontWeight: 600 }}>Aplikasi</span>
+                  )}
                 </div>
               );
             })}

@@ -218,6 +218,159 @@ const PROJECTS_DATA = {
       }
     ],
     architecture: 'Data konektivitas diekstraksi dari server neuPrint Janelia menggunakan Cypher query. Data diproses menggunakan Python, NumPy, dan NetworkX untuk membentuk adjacency matrix berbobot. Engine simulasi Pong membaca vektor keluaran neuron motorik untuk memperbarui posisi paddle dengan kecepatan 60fps.'
+  },
+  temuin: {
+    id: 'temuin',
+    name: 'Temuin',
+    tagline: 'Lost & Found Crowdsourcing Platform',
+    fullTitle: 'Temuin — Location-Based Lost & Found Community Platform',
+    category: 'Crowdsourcing & Geo-Mapping',
+    status: 'Portfolio Project Showcase',
+    period: '2023 - 2024',
+    liveUrl: 'https://temuin.vercel.app',
+    githubUrl: 'https://github.com/agungkrisna/temuin-mobile',
+    stack: ['React Native', 'Expo', 'Express.js', 'MongoDB', 'Google Maps API', 'Cloudinary'],
+    stats: [
+      { label: 'Pencarian Lokasi', value: 'Google Maps Radius' },
+      { label: 'Verifikasi Klaim', value: 'Multi-Step Ownership' },
+      { label: 'Target Platform', value: 'Android & iOS (Mobile)' },
+      { label: 'Privasi Pengguna', value: 'In-App Secure Chat' }
+    ],
+    photos: [
+      {
+        id: 'temuin-map',
+        title: 'Peta Sebaran Laporan Barang Hilang & Ditemukan',
+        caption: 'Antarmuka peta geolokasi interaktif yang menampilkan pin laporan kehilangan dan penemuan barang berdasarkan radius lokasi pengguna.',
+        mockupType: 'temuin-map'
+      },
+      {
+        id: 'temuin-detail',
+        title: 'Formulir Laporan & Verifikasi Bukti Kepemilikan',
+        caption: 'Sistem formulir pelaporan dengan fitur unggah foto bukti, deskripsi detail, serta pertanyaan rahasia untuk memvalidasi kepemilikan sah.',
+        mockupType: 'temuin-detail'
+      },
+      {
+        id: 'temuin-chat',
+        title: 'Saluran Chat Aman Antara Penemu dan Pemilik',
+        caption: 'Ruang obrolan langsung terenkripsi di dalam aplikasi untuk memfasilitasi serah terima barang tanpa perlu membagikan nomor telepon pribadi.',
+        mockupType: 'temuin-chat'
+      },
+      {
+        id: 'temuin-history',
+        title: 'Dashboard Riwayat Klaim & Status Penemuan',
+        caption: 'Panel pantau status laporan (Diverifikasi, Proses Serah Terima, Selesai) dengan riwayat aktivitas pelaporan lengkap.',
+        mockupType: 'temuin-history'
+      }
+    ],
+    problem: 'Kehilangan barang berharga di ruang publik (kunci motor, dompet, dokumen identitas) sering kali berujung tanpa kejelasan karena tidak adanya wadah terpusat antara pihak yang menemukan dengan pihak yang mencari.',
+    solution: 'Temuin menghubungkan masyarakat penemu dan pencari barang melalui platform mobile berbasis geolokasi Google Maps. Dilengkapi fitur verifikasi kepemilikan ketat dan chat in-app yang menjaga kerahasiaan nomor kontak pengguna.',
+    keyFeatures: [
+      {
+        title: 'Pemetaan Lokasi GPS Terintegrasi',
+        desc: 'Menampilkan titik lokasi barang hilang atau ditemukan secara real-time pada peta interaktif dengan filter radius kilometer.'
+      },
+      {
+        title: 'Verifikasi Bertingkat',
+        desc: 'Penemu dapat menyertakan pertanyaan kepemilikan rahasia (misal: warna gantungan kunci atau nomor seri) sebelum klaim disetujui.'
+      },
+      {
+        title: 'In-App Chat Privat',
+        desc: 'Komunikasi langsung yang aman antara penemu dan pemilik tanpa mengekspos nomor WhatsApp atau media sosial pribadi.'
+      },
+      {
+        title: 'Kategorisasi Barang Cerdas',
+        desc: 'Pemisahan kategori barang (Dokumen, Elektronik, Kunci, Dompet, Kendaraan) untuk mempermudah penyaringan pencarian.'
+      }
+    ],
+    architecture: 'Aplikasi mobile dibangun dengan React Native dan Expo untuk kompatibilitas cross-platform Android dan iOS. Backend API dibangun menggunakan Express.js dan database MongoDB dengan indeks spasial geospatial query 2dsphere untuk pencarian radius lokasi efisien. Gambar barang disimpan secara terenkripsi di Cloudinary CDN.'
+  },
+  dompetq: {
+    id: 'dompetq',
+    name: 'DompetQ',
+    tagline: 'Fintech E-Wallet Mobile Application',
+    fullTitle: 'DompetQ — Secure Digital Wallet & Financial Tracker',
+    category: 'Mobile Application & Fintech',
+    status: 'Portfolio Project Showcase',
+    period: '2023',
+    liveUrl: 'https://demo.dompetq.app',
+    githubUrl: 'https://github.com/agungkrisna/dompetq',
+    stack: ['Flutter', 'Riverpod', 'Node.js', 'PostgreSQL', 'Redis', 'Biometric Auth'],
+    stats: [
+      { label: 'Fitur Utama', value: 'QRIS & Split Bill' },
+      { label: 'Keamanan', value: 'Biometric & PIN Encryption' },
+      { label: 'Latency Transaksi', value: '< 200ms' },
+      { label: 'Analitik Keuangan', value: 'Monthly Budget Breakdown' }
+    ],
+    photos: [
+      {
+        id: 'dompetq-dash',
+        title: 'Dashboard Keuangan & Saldo Real-Time',
+        caption: 'Tampilan saldo utama, aksi cepat transfer, scan QRIS, top-up saldo, dan rekap mutasi transaksi harian.',
+        mockupType: 'dompetq-dash'
+      },
+      {
+        id: 'dompetq-split',
+        title: 'Fitur Split Bill Komunitas Otomatis',
+        caption: 'Kalkulator cerdas pembagian tagihan makan atau liburan bersama teman secara adil lengkap dengan pengingat pembayaran.',
+        mockupType: 'tatagih-dashboard'
+      }
+    ],
+    problem: 'Pencatatan pengeluaran harian dan pengelolaan saldo e-wallet sering terpecah-pecah di berbagai aplikasi, menyulitkan pengguna dalam mengontrol batas anggaran bulanan.',
+    solution: 'DompetQ memadukan dompet digital dengan pelacak keuangan cerdas, transaksi QRIS instan, dan fitur split-bill otomatis yang memudahkan pembagian beban tagihan bersama.',
+    keyFeatures: [
+      {
+        title: 'Transaksi QRIS Instan',
+        desc: 'Mendukung pembayaran merchant dan transfer antar pengguna dengan validasi PIN serta biometrik sidik jari.'
+      },
+      {
+        title: 'Split-Bill Otomatis',
+        desc: 'Membagi tagihan belanja bersama teman secara merata atau proporsional hanya dengan beberapa ketukan.'
+      },
+      {
+        title: 'Analitik Budgeting Bulanan',
+        desc: 'Visualisasi grafik pengeluaran berdasarkan kategori kebutuhan primer, sekunder, dan hiburan.'
+      }
+    ],
+    architecture: 'Frontend dibangun menggunakan Flutter dengan manajemen state Riverpod. Backend microservices berbasis Node.js dan PostgreSQL dengan isolasi database transaksi ACID yang aman.'
+  },
+  makalah: {
+    id: 'makalah',
+    name: 'Makalah Generator',
+    tagline: 'AI Academic Draft & Citation Assistant',
+    fullTitle: 'Makalah Generator — Smart Research & Paper Assistant',
+    category: 'Web Application & Generative AI',
+    status: 'Portfolio Project Showcase',
+    period: '2024',
+    liveUrl: 'https://makalah-gen.vercel.app',
+    githubUrl: 'https://github.com/agungkrisna/makalah-generator',
+    stack: ['Next.js 14', 'TypeScript', 'TailwindCSS', 'OpenAI GPT-4', 'LaTeX Engine'],
+    stats: [
+      { label: 'Model AI', value: 'GPT-4 Academic Pipeline' },
+      { label: 'Standar Sitasi', value: 'APA 7th, IEEE, Harvard' },
+      { label: 'Format Ekspor', value: 'PDF & LaTeX Source' },
+      { label: 'Waktu Draf', value: '< 45 Detik' }
+    ],
+    photos: [
+      {
+        id: 'makalah-dash',
+        title: 'Editor AI Penulisan Draf Akademik & Sitasi',
+        caption: 'Antarmuka pembuat kerangka riset dengan asisten AI yang merumuskan latar belakang, tinjauan pustaka, dan sitasi standar akademik.',
+        mockupType: 'makalah-dash'
+      }
+    ],
+    problem: 'Penyusunan kerangka awal draf penelitian dan pengorganisasian daftar pustaka sering kali memakan waktu berhari-hari bagi mahasiswa dan peneliti.',
+    solution: 'Makalah Generator mengotomatisasi penyusunan outline riset dan penataan referensi sitasi secara terstruktur sesuai kaidah penulisan ilmiah standar.',
+    keyFeatures: [
+      {
+        title: 'AI Academic Prompting',
+        desc: 'Memandu perumusan rumusan masalah, hipotesis, dan metode penelitian ilmiah.'
+      },
+      {
+        title: 'Format Sitasi Otomatis',
+        desc: 'Mendukung format sitasi standar APA edisi ke-7, IEEE, dan Harvard secara tepat.'
+      }
+    ],
+    architecture: 'Dibangun di atas Next.js 14 App Router, TypeScript, dan integrasi streaming response OpenAI GPT-4 API dengan sanitasi teks ketat.'
   }
 };
 
@@ -500,6 +653,96 @@ const renderMockupVisual = (type) => {
           <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '8.5px', color: '#94a3b8' }}>
             <span>LC11 Target Tracking</span>
             <span>12,282 Total Contacts</span>
+          </div>
+        </div>
+      );
+
+    case 'temuin-map':
+      return (
+        <div style={{ width: '92%', height: '88%', backgroundColor: '#064e3b', borderRadius: '8px', border: '1px solid #059669', padding: '10px', display: 'flex', flexDirection: 'column', gap: '6px', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10px', color: '#6ee7b7', fontWeight: 700 }}>
+            <span>📍 TEMUIN GEOLOCATION MAP</span>
+            <span style={{ backgroundColor: 'rgba(5,150,105,0.4)', padding: '2px 6px', borderRadius: '4px' }}>Radius: 3 KM</span>
+          </div>
+          <div style={{ flex: 1, backgroundColor: '#022c22', borderRadius: '6px', border: '1px dashed #059669', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ position: 'absolute', top: '15px', left: '25px', backgroundColor: '#ef4444', color: '#ffffff', fontSize: '8px', padding: '2px 6px', borderRadius: '4px', fontWeight: 700 }}>❗ Dompet Hilang</div>
+            <div style={{ position: 'absolute', bottom: '20px', right: '30px', backgroundColor: '#10b981', color: '#ffffff', fontSize: '8px', padding: '2px 6px', borderRadius: '4px', fontWeight: 700 }}>✓ Kunci Ditemukan</div>
+            <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#3b82f6', border: '2px solid #ffffff' }}></div>
+          </div>
+        </div>
+      );
+
+    case 'temuin-detail':
+      return (
+        <div style={{ width: '92%', height: '88%', backgroundColor: '#064e3b', borderRadius: '8px', border: '1px solid #059669', padding: '10px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+          <div style={{ fontSize: '11px', fontWeight: 700, color: '#a7f3d0' }}>🔍 Verifikasi Klaim Barang</div>
+          <div style={{ backgroundColor: '#022c22', padding: '6px 8px', borderRadius: '4px', fontSize: '9px', color: '#d1fae5' }}>
+            Barang: <b>Dompet Kulit Cokelat (BCA, KTP)</b>
+          </div>
+          <div style={{ backgroundColor: '#022c22', padding: '6px 8px', borderRadius: '4px', fontSize: '9px', color: '#6ee7b7' }}>
+            Pertanyaan Verifikasi: <i>Apa merek gantungan di dompet?</i>
+          </div>
+          <div style={{ marginTop: 'auto', backgroundColor: '#10b981', color: '#ffffff', textAlign: 'center', padding: '5px', borderRadius: '4px', fontSize: '9.5px', fontWeight: 700 }}>
+            Ajukan Bukti Kepemilikan
+          </div>
+        </div>
+      );
+
+    case 'temuin-chat':
+      return (
+        <div style={{ width: '92%', height: '88%', backgroundColor: '#064e3b', borderRadius: '8px', border: '1px solid #059669', padding: '10px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+          <div style={{ fontSize: '10.5px', fontWeight: 700, color: '#6ee7b7', borderBottom: '1px solid #059669', paddingBottom: '4px' }}>💬 Chat Penemu & Pemilik (Aman)</div>
+          <div style={{ alignSelf: 'flex-start', backgroundColor: '#022c22', padding: '6px', borderRadius: '6px', fontSize: '9px', color: '#d1fae5', maxWidth: '85%' }}>
+            Halo, kunci motor Beat Anda sudah saya titipkan di pos satpam kampus ya.
+          </div>
+          <div style={{ alignSelf: 'flex-end', backgroundColor: '#10b981', padding: '6px', borderRadius: '6px', fontSize: '9px', color: '#ffffff', maxWidth: '85%' }}>
+            Terima kasih banyak mas! Segera saya ambil siang ini.
+          </div>
+        </div>
+      );
+
+    case 'temuin-history':
+      return (
+        <div style={{ width: '92%', height: '88%', backgroundColor: '#064e3b', borderRadius: '8px', border: '1px solid #059669', padding: '10px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+          <div style={{ fontSize: '11px', fontWeight: 700, color: '#6ee7b7' }}>📋 Status Laporan Penemuan</div>
+          <div style={{ backgroundColor: '#022c22', padding: '6px 8px', borderRadius: '4px', display: 'flex', justifyContent: 'space-between', fontSize: '9px', color: '#d1fae5' }}>
+            <span>KTM Universitas</span>
+            <span style={{ color: '#34d399', fontWeight: 700 }}>SELESAI (KLAIMED)</span>
+          </div>
+          <div style={{ backgroundColor: '#022c22', padding: '6px 8px', borderRadius: '4px', display: 'flex', justifyContent: 'space-between', fontSize: '9px', color: '#d1fae5' }}>
+            <span>Kunci Motor Honda</span>
+            <span style={{ color: '#fbbf24', fontWeight: 700 }}>PROSES SERAH TERIMA</span>
+          </div>
+        </div>
+      );
+
+    case 'dompetq-dash':
+      return (
+        <div style={{ width: '92%', height: '88%', backgroundColor: '#1e1b4b', borderRadius: '8px', border: '1px solid #4338ca', padding: '10px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10px', color: '#818cf8', fontWeight: 700 }}>
+            <span>💳 DOMPETQ FINTECH WALLET</span>
+            <span style={{ color: '#4ade80' }}>ACTIVE</span>
+          </div>
+          <div style={{ backgroundColor: '#312e81', padding: '8px', borderRadius: '6px' }}>
+            <div style={{ fontSize: '8.5px', color: '#c7d2fe' }}>SALDO UTAMA</div>
+            <div style={{ fontSize: '14px', fontWeight: 800, color: '#ffffff' }}>Rp 1.450.000</div>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4px', fontSize: '9px', textAlign: 'center' }}>
+            <div style={{ backgroundColor: '#4338ca', color: '#ffffff', padding: '4px', borderRadius: '4px' }}>Scan QRIS</div>
+            <div style={{ backgroundColor: '#4338ca', color: '#ffffff', padding: '4px', borderRadius: '4px' }}>Split Bill</div>
+          </div>
+        </div>
+      );
+
+    case 'makalah-dash':
+      return (
+        <div style={{ width: '92%', height: '88%', backgroundColor: '#1c1917', borderRadius: '8px', border: '1px solid #44403c', padding: '10px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+          <div style={{ fontSize: '10.5px', fontWeight: 700, color: '#fbbf24' }}>🤖 Makalah Generator — AI Research Assistant</div>
+          <div style={{ backgroundColor: '#292524', padding: '6px', borderRadius: '4px', fontSize: '9px', color: '#e7e5e4' }}>
+            Topik: <b>Implementasi Convolutional Neural Network pada Citra Medis</b>
+          </div>
+          <div style={{ backgroundColor: '#292524', padding: '6px', borderRadius: '4px', fontSize: '8.5px', color: '#a8a29e' }}>
+            Format: APA 7th Edition • Bab 1 & 2 Draf Siap Diekspor ke LaTeX/PDF
           </div>
         </div>
       );

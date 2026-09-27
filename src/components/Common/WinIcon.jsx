@@ -81,7 +81,13 @@ const ICON_MAP = {
   'power': '/icons/power.png',
   'pdf': '/icons/documents.png',
   'briefcase': '/icons/store.png',
-  'recruiter': '/icons/store.png'
+  'recruiter': '/icons/store.png',
+  'tatagih': '/icons/chrome.svg',
+  'temuin': '/icons/home.svg',
+  'lintas': '/icons/chrome.svg',
+  'neurofly': '/icons/antigravity.svg',
+  'dompetq': '/icons/code.png',
+  'makalah': '/icons/notepad.png'
 };
 
 export const WinIcon = ({ name, size = 32, className = '', badge = null }) => {

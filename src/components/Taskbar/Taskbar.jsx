@@ -19,6 +19,8 @@ export const Taskbar = ({
   onToggleMinimizeAll,
   onOpenSettings,
   onRestart,
+  onShutDown,
+  onSleep,
   accentColor
 }) => {
   const [startOpen, setStartOpen] = useState(false);
@@ -265,6 +267,8 @@ export const Taskbar = ({
         onClose={() => setStartOpen(false)}
         onLaunchApp={onLaunchApp}
         onRestart={onRestart}
+        onShutDown={onShutDown}
+        onSleep={onSleep}
       />
 
       <QuickSettings

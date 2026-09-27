@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Search, ChevronDown, User } from 'lucide-react';
+import { Search, ChevronDown, User, Moon, Power, RotateCcw } from 'lucide-react';
 import { WinIcon } from '../Common/WinIcon';
 import { playClickSound } from '../../utils/sound';
 
-export const StartMenu = ({ isOpen, onClose, onLaunchApp, onOpenFile, onRestart }) => {
+export const StartMenu = ({ isOpen, onClose, onLaunchApp, onOpenFile, onRestart, onShutDown, onSleep }) => {
   const [search, setSearch] = useState('');
   const [showPowerMenu, setShowPowerMenu] = useState(false);
   const menuRef = useRef(null);
@@ -353,40 +353,87 @@ export const StartMenu = ({ isOpen, onClose, onLaunchApp, onOpenFile, onRestart 
               minWidth: '150px'
             }}
           >
-            <div
+            <button
               onClick={() => {
                 setShowPowerMenu(false);
-                onRestart();
+                onClose();
+                if (onSleep) onSleep();
               }}
               style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
                 padding: '8px 12px',
-                fontSize: '12px',
+                fontSize: '12.5px',
                 color: '#ffffff',
                 cursor: 'pointer',
-                borderRadius: '4px'
+                borderRadius: '5px',
+                background: 'transparent',
+                border: 'none',
+                width: '100%',
+                textAlign: 'left',
+                transition: 'background-color 0.1s'
               }}
               onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)'}
               onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
             >
-              🔄 Restart OS
-            </div>
-            <div
+              <Moon size={15} color="#94a3b8" />
+              <span>Sleep</span>
+            </button>
+            <button
               onClick={() => {
                 setShowPowerMenu(false);
-                alert('Shutting down session. Terima kasih telah mengunjungi portfolio Agung Krisna!');
+                onClose();
+                if (onShutDown) onShutDown();
               }}
               style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
                 padding: '8px 12px',
-                fontSize: '12px',
-                color: '#ef4444',
+                fontSize: '12.5px',
+                color: '#ffffff',
                 cursor: 'pointer',
-                borderRadius: '4px'
+                borderRadius: '5px',
+                background: 'transparent',
+                border: 'none',
+                width: '100%',
+                textAlign: 'left',
+                transition: 'background-color 0.1s'
               }}
               onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)'}
               onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
             >
-              🛑 Shut Down
-            </div>
+              <Power size={15} color="#ef4444" />
+              <span>Shut down</span>
+            </button>
+            <button
+              onClick={() => {
+                setShowPowerMenu(false);
+                onClose();
+                if (onRestart) onRestart();
+              }}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+                padding: '8px 12px',
+                fontSize: '12.5px',
+                color: '#ffffff',
+                cursor: 'pointer',
+                borderRadius: '5px',
+                background: 'transparent',
+                border: 'none',
+                width: '100%',
+                textAlign: 'left',
+                transition: 'background-color 0.1s'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+            >
+              <RotateCcw size={15} color="#38bdf8" />
+              <span>Restart</span>
+            </button>
           </div>
         )}
       </div>

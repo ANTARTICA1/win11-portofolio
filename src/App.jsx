@@ -24,6 +24,7 @@ export function App() {
   const [topZIndex, setTopZIndex] = useState(100);
   const [activeWindowId, setActiveWindowId] = useState('win-explorer-initial');
   const [runDialogOpen, setRunDialogOpen] = useState(false);
+  const [powerScreen, setPowerScreen] = useState(null);
 
   const [windows, setWindows] = useState([
     {
@@ -361,11 +362,29 @@ export function App() {
   };
 
   const restartOS = () => {
-    playStartupChime();
-    setWindows([]);
+    playWindowSound('min');
+    setPowerScreen('restarting');
     setTimeout(() => {
-      launchApp('explorer', { path: 'Data (D:)' });
-    }, 400);
+      playStartupChime();
+      setWindows([]);
+      setPowerScreen(null);
+      setTimeout(() => {
+        launchApp('explorer', { path: 'Data (D:)' });
+      }, 350);
+    }, 1200);
+  };
+
+  const shutDownOS = () => {
+    playWindowSound('min');
+    setPowerScreen('shutting_down');
+    setTimeout(() => {
+      setWindows([]);
+      setPowerScreen('off');
+    }, 1200);
+  };
+
+  const sleepOS = () => {
+    setPowerScreen('sleep');
   };
 
   const renderAppContent = (win) => {
@@ -482,6 +501,8 @@ export function App() {
         onToggleMinimizeAll={toggleMinimizeAll}
         onOpenSettings={() => launchApp('settings')}
         onRestart={restartOS}
+        onShutDown={shutDownOS}
+        onSleep={sleepOS}
         accentColor={accentColor}
       />
 
@@ -504,6 +525,103 @@ export function App() {
           else launchApp(cmd);
         }}
       />
+
+      {powerScreen && (
+        <div
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 999999,
+            backgroundColor: '#000000',
+            color: '#ffffff',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontFamily: 'Segoe UI, -apple-system, sans-serif',
+            userSelect: 'none',
+            cursor: powerScreen === 'sleep' || powerScreen === 'off' ? 'pointer' : 'default'
+          }}
+          onClick={() => {
+            if (powerScreen === 'sleep') {
+              setPowerScreen(null);
+            } else if (powerScreen === 'off') {
+              playStartupChime();
+              setPowerScreen(null);
+              setTimeout(() => {
+                launchApp('explorer', { path: 'Data (D:)' });
+              }, 400);
+            }
+          }}
+        >
+          {powerScreen === 'restarting' && (
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
+              <div
+                style={{
+                  width: '36px',
+                  height: '36px',
+                  borderRadius: '50%',
+                  border: '3px solid rgba(255, 255, 255, 0.2)',
+                  borderTopColor: '#38bdf8',
+                  animation: 'spin 1s linear infinite'
+                }}
+              />
+              <span style={{ fontSize: '18px', fontWeight: 400, letterSpacing: '0.5px' }}>
+                Restarting
+              </span>
+            </div>
+          )}
+
+          {powerScreen === 'shutting_down' && (
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
+              <div
+                style={{
+                  width: '36px',
+                  height: '36px',
+                  borderRadius: '50%',
+                  border: '3px solid rgba(255, 255, 255, 0.2)',
+                  borderTopColor: '#38bdf8',
+                  animation: 'spin 1s linear infinite'
+                }}
+              />
+              <span style={{ fontSize: '18px', fontWeight: 400, letterSpacing: '0.5px' }}>
+                Shutting down
+              </span>
+            </div>
+          )}
+
+          {powerScreen === 'off' && (
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px' }}>
+              <div
+                style={{
+                  width: '56px',
+                  height: '56px',
+                  borderRadius: '50%',
+                  backgroundColor: 'rgba(255, 255, 255, 0.08)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  boxShadow: '0 0 24px rgba(56, 189, 248, 0.2)'
+                }}
+              >
+                <WinIcon name="power" size={26} />
+              </div>
+              <span style={{ fontSize: '14px', color: '#94a3b8' }}>
+                Komputer dimatikan. Klik di mana saja untuk menyalakan kembali.
+              </span>
+            </div>
+          )}
+
+          {powerScreen === 'sleep' && (
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '14px' }}>
+              <span style={{ fontSize: '14px', color: '#64748b' }}>
+                Sleep mode. Klik di mana saja untuk melanjutkan sesi.
+              </span>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

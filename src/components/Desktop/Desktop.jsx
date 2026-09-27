@@ -16,13 +16,12 @@ export const Desktop = ({
   const [selectedIconId, setSelectedIconId] = useState(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [contextMenu, setContextMenu] = useState(null);
-  const [showRecruiterTip, setShowRecruiterTip] = useState(true);
 
   const [selectionBox, setSelectionBox] = useState(null);
   const selectionStartRef = useRef(null);
 
   const handleDesktopPointerDown = (e) => {
-    if (e.target.closest('.win-context-menu') || e.target.closest('.desktop-icon-item') || e.target.closest('.recruiter-tip-badge')) {
+    if (e.target.closest('.win-context-menu') || e.target.closest('.desktop-icon-item')) {
       return;
     }
 
@@ -120,56 +119,6 @@ export const Desktop = ({
           }}
         />
       )}
-
-      {showRecruiterTip && (
-        <div
-          className="recruiter-tip-badge anim-flyout"
-          onClick={() => {
-            playClickSound();
-            onLaunchApp('recruiter');
-          }}
-        >
-          <div style={{
-            width: '36px',
-            height: '36px',
-            borderRadius: '50%',
-            backgroundColor: '#8b5cf6',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexShrink: 0
-          }}>
-            <Sparkles size={18} color="#ffffff" />
-          </div>
-
-          <div style={{ flex: 1 }}>
-            <div style={{ fontSize: '12.5px', fontWeight: 600, color: '#f3e8ff' }}>
-              ⚡ Mode Cepat Rekruter (Fast Track)
-            </div>
-            <div style={{ fontSize: '11px', color: '#94a3b8', lineHeight: 1.3 }}>
-              Klik di sini untuk langsung download CV, keahlian utama, & WhatsApp dalam 10 detik!
-            </div>
-          </div>
-
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              setShowRecruiterTip(false);
-            }}
-            style={{
-              background: 'none',
-              border: 'none',
-              color: '#9ca3af',
-              cursor: 'pointer',
-              padding: '4px'
-            }}
-            title="Tutup banner"
-          >
-            <X size={15} />
-          </button>
-        </div>
-      )}
-
       <div className="desktop-grid">
         {DESKTOP_ITEMS.map((item) => {
           const isSelected = selectedIconId === item.id;

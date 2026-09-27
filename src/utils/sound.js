@@ -72,6 +72,29 @@ export const playWindowSound = (type = 'open') => {
   } catch {}
 };
 
+export const playNotificationSound = () => {
+  try {
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    const now = ctx.currentTime;
+    [
+      { freq: 784, time: 0, dur: 0.12 },
+      { freq: 1046.5, time: 0.08, dur: 0.22 }
+    ].forEach(({ freq, time, dur }) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, now + time);
+      gain.gain.setValueAtTime(0.04, now + time);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + time + dur);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now + time);
+      osc.stop(now + time + dur);
+    });
+  } catch {}
+};
+
 export const playStartupChime = () => {
   try {
     const ctx = getAudioContext();

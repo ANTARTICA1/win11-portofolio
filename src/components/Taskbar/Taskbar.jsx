@@ -70,11 +70,10 @@ export const Taskbar = ({
   };
 
   const defaultTaskbarApps = [
-    { id: 'recruiter', name: 'Recruiter Hub ⚡', icon: 'briefcase' },
     { id: 'explorer', name: 'File Explorer', icon: 'explorer' },
-    { id: 'browser', name: 'Edge Showcase', icon: 'edge' },
-    { id: 'terminal', name: 'PowerShell', icon: 'terminal' },
-    { id: 'notepad', name: 'Notepad', icon: 'notepad' }
+    { id: 'chrome', name: 'Google Chrome', icon: 'chrome-badged' },
+    { id: 'antigravity', name: 'Antigravity', icon: 'antigravity' },
+    { id: 'browser', name: 'Microsoft Edge', icon: 'edge' }
   ];
 
   return (

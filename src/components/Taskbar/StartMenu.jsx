@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
-import { 
-  Search, Power, User, ArrowRight, Sparkles, FileText, 
-  ExternalLink, Download, Clock 
-} from 'lucide-react';
+import { Search, ChevronDown, User } from 'lucide-react';
 import { WinIcon } from '../Common/WinIcon';
-import { INITIAL_USER } from '../../data/fileSystem';
 import { playClickSound } from '../../utils/sound';
 
 export const StartMenu = ({ isOpen, onClose, onLaunchApp, onOpenFile, onRestart }) => {
@@ -14,21 +10,51 @@ export const StartMenu = ({ isOpen, onClose, onLaunchApp, onOpenFile, onRestart 
   if (!isOpen) return null;
 
   const pinnedApps = [
-    { id: 'recruiter', name: 'Recruiter Hub', icon: 'briefcase', badge: 'Fast Track' },
+    { id: 'browser', name: 'Microsoft Edge', icon: 'edge' },
+    { id: 'ms-store', name: 'Microsoft Store', icon: 'ms-store' },
+    { id: 'xbox', name: 'XBOX', icon: 'xbox' },
+    { id: 'todo', name: 'To Do', icon: 'todo' },
+    { id: 'calculator', name: 'Calculator', icon: 'calculator' },
+    { id: 'clock', name: 'Clock', icon: 'clock' },
+    { id: 'paint', name: 'Paint', icon: 'paint' },
+    { id: 'onenote', name: 'OneNote', icon: 'onenote' },
     { id: 'explorer', name: 'File Explorer', icon: 'explorer' },
-    { id: 'browser', name: 'Edge Showcase', icon: 'edge' },
-    { id: 'terminal', name: 'PowerShell', icon: 'terminal' },
-    { id: 'notepad', name: 'Notepad', icon: 'notepad' },
-    { id: 'photos', name: 'Certificates', icon: 'image' },
-    { id: 'settings', name: 'Settings', icon: 'settings' },
-    { id: 'calculator', name: 'Calculator', icon: 'calc' }
+    { id: 'chrome', name: 'Google Chrome', icon: 'chrome' },
+    { id: 'antigravity', name: 'Antigravity', icon: 'antigravity' },
+    { id: 'ldplayer', name: 'LDPlayer 14', icon: 'ldplayer' }
   ];
 
-  const recommendedFiles = [
-    { name: 'README_RECRUITER.txt', subtitle: 'Catatan penting untuk Rekruter', icon: 'notepad', type: 'file' },
-    { name: 'Curriculum_Vitae.pdf', subtitle: 'Download CV Terbaru', icon: 'pdf', type: 'file' },
-    { name: 'dompetq_preview.jpg', subtitle: 'Preview Proyek Fintech', icon: 'image', type: 'file' },
-    { name: 'temuin_preview.jpg', subtitle: 'Preview Proyek Crowdsourcing', icon: 'image', type: 'file' }
+  const categoryGroups = [
+    {
+      name: 'Productivity',
+      icons: ['chrome', 'folder', 'discord', 'edge'],
+      appToLaunch: 'chrome'
+    },
+    {
+      name: 'Creativity',
+      icons: ['vlc', 'gallery', 'video-editor', 'paint'],
+      appToLaunch: 'paint'
+    },
+    {
+      name: 'Utilities & Tools',
+      icons: ['snipping-tool', 'settings', 'download-manager', 'winrar'],
+      appToLaunch: 'settings'
+    },
+    {
+      name: 'Developer',
+      icons: ['antigravity', 'mail', 'vscode', 'terminal'],
+      appToLaunch: 'antigravity'
+    },
+    {
+      name: 'Coding & Terminal',
+      icons: ['vscode', 'terminal', 'powershell', 'notepad'],
+      appToLaunch: 'terminal'
+    },
+    {
+      name: 'Media & Play',
+      icons: ['media-player', 'xbox', 'discord', 'chrome'],
+      appToLaunch: 'xbox'
+    }
   ];
 
   const filteredApps = pinnedApps.filter(a => a.name.toLowerCase().includes(search.toLowerCase()));
@@ -41,16 +67,16 @@ export const StartMenu = ({ isOpen, onClose, onLaunchApp, onOpenFile, onRestart 
         bottom: 'calc(var(--taskbar-height) + 12px)',
         left: '50%',
         transform: 'translateX(-50%)',
-        width: '540px',
-        maxWidth: '94vw',
-        height: '600px',
-        maxHeight: '82vh',
-        backgroundColor: 'rgba(32, 32, 32, 0.94)',
-        backdropFilter: 'blur(30px) saturate(150%)',
-        WebkitBackdropFilter: 'blur(30px) saturate(150%)',
+        width: '600px',
+        maxWidth: '95vw',
+        height: '660px',
+        maxHeight: '86vh',
+        backgroundColor: 'rgba(28, 28, 36, 0.94)',
+        backdropFilter: 'blur(35px) saturate(160%)',
+        WebkitBackdropFilter: 'blur(35px) saturate(160%)',
         borderRadius: '12px',
         border: '1px solid rgba(255, 255, 255, 0.12)',
-        boxShadow: '0 20px 50px rgba(0, 0, 0, 0.6), 0 4px 16px rgba(0, 0, 0, 0.4)',
+        boxShadow: '0 24px 60px rgba(0, 0, 0, 0.7), 0 4px 20px rgba(0, 0, 0, 0.4)',
         zIndex: 10001,
         display: 'flex',
         flexDirection: 'column',
@@ -62,8 +88,8 @@ export const StartMenu = ({ isOpen, onClose, onLaunchApp, onOpenFile, onRestart 
         <div style={{
           display: 'flex',
           alignItems: 'center',
-          backgroundColor: 'rgba(255, 255, 255, 0.07)',
-          border: '1px solid rgba(255, 255, 255, 0.14)',
+          backgroundColor: 'rgba(255, 255, 255, 0.06)',
+          border: '1px solid rgba(255, 255, 255, 0.12)',
           borderRadius: '24px',
           padding: '8px 16px',
           gap: '10px'
@@ -72,7 +98,7 @@ export const StartMenu = ({ isOpen, onClose, onLaunchApp, onOpenFile, onRestart 
           <input
             type="text"
             className="selectable"
-            placeholder="Type here to search (e.g. dompetq, resume, skills)..."
+            placeholder="Search for apps, settings, and documents"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             autoFocus
@@ -85,6 +111,7 @@ export const StartMenu = ({ isOpen, onClose, onLaunchApp, onOpenFile, onRestart 
               fontSize: '13px'
             }}
           />
+          <WinIcon name="mobile-device" size={16} />
         </div>
       </div>
 
@@ -93,17 +120,16 @@ export const StartMenu = ({ isOpen, onClose, onLaunchApp, onOpenFile, onRestart 
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          marginBottom: '16px'
+          marginBottom: '14px'
         }}>
           <span style={{ fontSize: '13px', fontWeight: 600, color: '#ffffff' }}>Pinned</span>
-          <span style={{ fontSize: '11px', color: '#9ca3af', cursor: 'pointer' }}>All apps &gt;</span>
         </div>
 
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(4, 1fr)',
-          gap: '12px',
-          marginBottom: '24px'
+          gridTemplateColumns: 'repeat(6, 1fr)',
+          gap: '8px 4px',
+          marginBottom: '26px'
         }}>
           {filteredApps.map((app) => (
             <div
@@ -118,34 +144,29 @@ export const StartMenu = ({ isOpen, onClose, onLaunchApp, onOpenFile, onRestart 
                 flexDirection: 'column',
                 alignItems: 'center',
                 textAlign: 'center',
-                padding: '10px 6px',
+                padding: '10px 4px',
                 borderRadius: '6px',
                 cursor: 'pointer',
-                transition: 'background-color 0.12s',
-                position: 'relative'
+                transition: 'background-color 0.12s'
               }}
               onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.08)'}
               onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
             >
-              {app.badge && (
-                <span style={{
-                  position: 'absolute',
-                  top: '2px',
-                  right: '2px',
-                  backgroundColor: '#8b5cf6',
-                  color: '#fff',
-                  fontSize: '9px',
-                  fontWeight: 700,
-                  padding: '1px 5px',
-                  borderRadius: '6px'
-                }}>
-                  {app.badge}
-                </span>
-              )}
-              <div style={{ marginBottom: '6px' }}>
-                <WinIcon name={app.icon} size={36} />
+              <div style={{ marginBottom: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <WinIcon name={app.icon} size={38} />
               </div>
-              <span style={{ fontSize: '12px', color: '#f1f5f9' }}>{app.name}</span>
+              <span style={{
+                fontSize: '11px',
+                color: '#f1f5f9',
+                lineHeight: 1.2,
+                display: '-webkit-box',
+                WebkitLineClamp: 2,
+                WebkitBoxOrient: 'vertical',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis'
+              }}>
+                {app.name}
+              </span>
             </div>
           ))}
         </div>
@@ -154,53 +175,82 @@ export const StartMenu = ({ isOpen, onClose, onLaunchApp, onOpenFile, onRestart 
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          marginBottom: '12px'
+          marginBottom: '14px'
         }}>
-          <span style={{ fontSize: '13px', fontWeight: 600, color: '#ffffff' }}>Recommended</span>
-          <span style={{ fontSize: '11px', color: '#9ca3af' }}>More &gt;</span>
+          <span style={{ fontSize: '13px', fontWeight: 600, color: '#ffffff' }}>All</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '11.5px', color: '#9ca3af', cursor: 'pointer' }}>
+            <span>View: Category</span>
+            <ChevronDown size={13} />
+          </div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px' }}>
-          {recommendedFiles.map((file, idx) => (
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(3, 1fr)',
+          gap: '14px',
+          marginBottom: '20px'
+        }}>
+          {categoryGroups.map((group, idx) => (
             <div
               key={idx}
               onClick={() => {
                 playClickSound();
-                if (file.name.endsWith('.txt')) {
-                  onLaunchApp('notepad');
-                } else if (file.name.endsWith('.pdf')) {
-                  onLaunchApp('recruiter');
-                } else {
-                  onLaunchApp('photos');
-                }
+                onLaunchApp(group.appToLaunch);
                 onClose();
               }}
               style={{
                 display: 'flex',
+                flexDirection: 'column',
                 alignItems: 'center',
-                gap: '10px',
-                padding: '8px 12px',
-                borderRadius: '6px',
-                cursor: 'pointer',
-                transition: 'background-color 0.12s'
+                cursor: 'pointer'
               }}
-              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.08)'}
-              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
             >
-              <WinIcon name={file.icon} size={28} />
-              <div style={{ overflow: 'hidden' }}>
-                <div style={{ fontSize: '12px', color: '#ffffff', textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }}>
-                  {file.name}
-                </div>
-                <div style={{ fontSize: '10.5px', color: '#9ca3af' }}>{file.subtitle}</div>
+              <div
+                style={{
+                  width: '100%',
+                  aspectRatio: '1.2',
+                  backgroundColor: 'rgba(255, 255, 255, 0.04)',
+                  border: '1px solid rgba(255, 255, 255, 0.07)',
+                  borderRadius: '10px',
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(2, 1fr)',
+                  gridTemplateRows: 'repeat(2, 1fr)',
+                  padding: '12px',
+                  placeItems: 'center',
+                  gap: '8px',
+                  transition: 'background-color 0.15s, transform 0.1s'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.09)';
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.04)';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                }}
+              >
+                {group.icons.map((iconName, i) => (
+                  <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <WinIcon name={iconName} size={22} />
+                  </div>
+                ))}
               </div>
+              <span style={{
+                marginTop: '8px',
+                fontSize: '11px',
+                color: '#e2e8f0',
+                textAlign: 'center',
+                fontWeight: 500
+              }}>
+                {group.name}
+              </span>
             </div>
           ))}
         </div>
       </div>
 
       <div style={{
-        backgroundColor: 'rgba(25, 25, 25, 0.95)',
+        backgroundColor: 'rgba(22, 22, 28, 0.95)',
         borderTop: '1px solid rgba(255, 255, 255, 0.08)',
         padding: '12px 28px',
         display: 'flex',
@@ -217,7 +267,7 @@ export const StartMenu = ({ isOpen, onClose, onLaunchApp, onOpenFile, onRestart 
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '10px',
+            gap: '12px',
             cursor: 'pointer',
             padding: '4px 8px',
             borderRadius: '6px'
@@ -229,20 +279,17 @@ export const StartMenu = ({ isOpen, onClose, onLaunchApp, onOpenFile, onRestart 
             width: '32px',
             height: '32px',
             borderRadius: '50%',
-            backgroundColor: '#8b5cf6',
-            color: '#fff',
+            backgroundColor: '#475569',
+            color: '#ffffff',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
-            fontWeight: 700,
-            fontSize: '13px'
+            justifyContent: 'center'
           }}>
-            AK
+            <User size={18} />
           </div>
-          <div>
-            <div style={{ fontSize: '12.5px', fontWeight: 600, color: '#ffffff' }}>{INITIAL_USER.name}</div>
-            <div style={{ fontSize: '10.5px', color: '#9ca3af' }}>{INITIAL_USER.role}</div>
-          </div>
+          <span style={{ fontSize: '13px', color: '#f1f5f9', fontWeight: 500, fontFamily: 'Segoe UI, sans-serif' }}>
+            agung krisna
+          </span>
         </div>
 
         <button
@@ -266,7 +313,7 @@ export const StartMenu = ({ isOpen, onClose, onLaunchApp, onOpenFile, onRestart 
           onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
           title="Power Options"
         >
-          <Power size={18} />
+          <WinIcon name="power" size={18} />
         </button>
 
         {showPowerMenu && (

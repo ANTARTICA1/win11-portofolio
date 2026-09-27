@@ -290,6 +290,18 @@
   cursor: pointer;
   font-size: 12.5px;
   transition: background-color 0.1s;
+  position: relative;
+}
+
+.sidebar-item .sidebar-pin {
+  margin-left: auto;
+  opacity: 0.65;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar-item:hover .sidebar-pin {
+  opacity: 1;
 }
 
 .sidebar-item:hover {

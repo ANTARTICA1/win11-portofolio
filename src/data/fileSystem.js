@@ -534,7 +534,7 @@ menggeser / mengubah ukuran jendela, dan membuka Start Menu!
     type: "app",
     app: "explorer",
     path: "Data (D:)",
-    icon: "folder"
+    icon: "explorer"
   },
   {
     id: "edge_browser",
@@ -576,27 +576,27 @@ menggeser / mengubah ukuran jendela, dan membuka Start Menu!
     name: "Antigravity AI",
     type: "app",
     app: "terminal",
-    icon: "sparkles"
+    icon: "antigravity"
   },
   {
     id: "vscode",
     name: "Visual Studio Code",
     type: "app",
     app: "terminal",
-    icon: "code"
+    icon: "vscode"
   },
   {
     id: "discord",
     name: "Discord",
     type: "app",
     app: "recruiter",
-    icon: "message"
+    icon: "discord"
   },
   {
     id: "calculator",
     name: "Calculator",
     type: "app",
     app: "calculator",
-    icon: "calc"
+    icon: "calculator"
   }
 ];

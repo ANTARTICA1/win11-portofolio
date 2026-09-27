@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import { 
   ArrowLeft, ArrowRight, ArrowUp, RefreshCw, Search,
-  Plus, Scissors, Copy, Edit3, Share2, Trash2, 
-  ArrowUpDown, LayoutGrid, List, ChevronRight, ChevronDown,
-  HardDrive, Folder, FileText, Image as ImageIcon, Home,
-  FolderOpen, Cloud, Download, Laptop, Smartphone, Globe
+  Plus, ChevronRight, ChevronDown, LayoutGrid, List
 } from 'lucide-react';
 import { WinIcon } from '../Common/WinIcon';
 import { DATA_D_ITEMS } from '../../data/fileSystem';
@@ -19,6 +16,7 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedItemName, setSelectedItemName] = useState(null);
   const [viewMode, setViewMode] = useState('grid');
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   const getCurrentItems = () => {
     if (currentPath === 'This PC') {
@@ -29,14 +27,23 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
       ];
     }
 
-    if (currentPath === 'Data (D:)') {
-      return DATA_D_ITEMS;
+    if (currentPath === 'Home') {
+      return [
+        { name: 'Downloads', type: 'folder', size: '3 items' },
+        { name: 'Documents', type: 'folder', size: '3 items' },
+        { name: 'tatagih file', type: 'folder', size: '2 items' },
+        { name: 'Curriculum_Vitae.pdf', type: 'file', extension: 'pdf', size: '240 KB' },
+        { name: 'README_RECRUITER.txt', type: 'file', extension: 'txt', size: '3.4 KB' }
+      ];
     }
 
-    if (currentPath.startsWith('Data (D:) > ')) {
-      const folderName = currentPath.replace('Data (D:) > ', '');
-      const folder = DATA_D_ITEMS.find(f => f.name.toLowerCase() === folderName.toLowerCase());
-      return folder?.items || [];
+    if (currentPath === 'Gallery') {
+      return [
+        { name: 'dompetq_preview.jpg', type: 'file', extension: 'jpg', size: '1.2 MB' },
+        { name: 'temuin_preview.jpg', type: 'file', extension: 'jpg', size: '980 KB' },
+        { name: 'sertifikat_flutter.png', type: 'file', extension: 'png', size: '1.5 MB' },
+        { name: 'sertifikat_react.png', type: 'file', extension: 'png', size: '1.4 MB' }
+      ];
     }
 
     if (currentPath === 'Downloads') {
@@ -53,6 +60,55 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
         { name: 'pengalaman_kerja.txt', type: 'file', extension: 'txt', size: '1.8 KB' },
         { name: 'tatagih_spec.txt', type: 'file', extension: 'txt', size: '1.2 KB' }
       ];
+    }
+
+    if (currentPath === 'tatagih file') {
+      return [
+        { name: 'invoice_client.pdf', type: 'file', extension: 'pdf', size: '120 KB' },
+        { name: 'rekap_pembayaran.txt', type: 'file', extension: 'txt', size: '1.4 KB' }
+      ];
+    }
+
+    if (currentPath === 'shortcut') {
+      return [
+        { name: 'Visual Studio Code', type: 'file', extension: 'lnk' },
+        { name: 'Google Chrome', type: 'file', extension: 'lnk' },
+        { name: 'Antigravity', type: 'file', extension: 'lnk' }
+      ];
+    }
+
+    if (currentPath === 'TikTok') {
+      return [
+        { name: 'content_script.txt', type: 'file', extension: 'txt', size: '4.2 KB' },
+        { name: 'video_teaser.mp4', type: 'file', extension: 'mp4', size: '14.8 MB' }
+      ];
+    }
+
+    if (currentPath === 'Network') {
+      return [
+        { name: 'FTP.Laptop', type: 'network_drive', isDrive: true, total: '512 GB', free: '210 GB' },
+        { name: '192.168.1.6', type: 'network_drive', isDrive: true, total: '1 TB', free: '620 GB' },
+        { name: 'FTP.Handphone', type: 'network_drive', isDrive: true, total: '128 GB', free: '64 GB' }
+      ];
+    }
+
+    if (currentPath === 'Local Disk (C:)') {
+      return [
+        { name: 'Program Files', type: 'folder' },
+        { name: 'Program Files (x86)', type: 'folder' },
+        { name: 'Users', type: 'folder' },
+        { name: 'Windows', type: 'folder' }
+      ];
+    }
+
+    if (currentPath === 'Data (D:)') {
+      return DATA_D_ITEMS;
+    }
+
+    if (currentPath.startsWith('Data (D:) > ')) {
+      const folderName = currentPath.replace('Data (D:) > ', '');
+      const folder = DATA_D_ITEMS.find(f => f.name.toLowerCase() === folderName.toLowerCase());
+      return folder?.items || [];
     }
 
     return DATA_D_ITEMS;
@@ -95,12 +151,10 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
   const handleUp = () => {
     if (currentPath.startsWith('Data (D:) > ')) {
       navigateTo('Data (D:)');
-    } else if (currentPath === 'Data (D:)' || currentPath === 'Downloads' || currentPath === 'Documents') {
+    } else if (currentPath === 'Data (D:)' || currentPath === 'Downloads' || currentPath === 'Documents' || currentPath === 'Home' || currentPath === 'Gallery' || currentPath === 'Local Disk (C:)') {
       navigateTo('This PC');
     }
   };
-
-  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   const handleItemClick = (item) => {
     setSelectedItemName(item.name);
@@ -117,6 +171,8 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
     } else if (item.type === 'folder') {
       if (currentPath === 'Data (D:)') {
         navigateTo(`Data (D:) > ${item.name}`);
+      } else if (currentPath === 'Home' || currentPath === 'This PC') {
+        navigateTo(item.name);
       } else {
         navigateTo(`${currentPath} > ${item.name}`);
       }
@@ -142,12 +198,23 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
     return parts;
   };
 
+  const getTabIcon = () => {
+    if (currentPath === 'Downloads') return 'downloads';
+    if (currentPath === 'Documents') return 'documents';
+    if (currentPath === 'Gallery') return 'gallery';
+    if (currentPath === 'Home') return 'home';
+    if (currentPath === 'This PC') return 'this-pc';
+    if (currentPath.includes('(C:)')) return 'drive-c';
+    if (currentPath.includes('(D:)')) return 'drive-d';
+    return 'folder';
+  };
+
   return (
     <div className="explorer-container">
       <div className="explorer-tabs-bar">
         <div className="explorer-tab">
           <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-            <WinIcon name="folder" size={16} />
+            <WinIcon name={getTabIcon()} size={16} />
             <span>{currentPath.includes(' > ') ? currentPath.split(' > ')[1] : currentPath}</span>
           </div>
           <span className="explorer-tab-close">×</span>
@@ -164,7 +231,7 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
       <div className="explorer-command-bar">
         <div className="command-bar-left">
           <button className="cmd-btn" onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)} style={{ backgroundColor: mobileSidebarOpen ? 'rgba(0,120,212,0.25)' : 'transparent' }}>
-            <Folder size={14} color="#0078d4" />
+            <WinIcon name="folder" size={14} />
             <span>Sidebar</span>
           </button>
           <div className="cmd-divider" />
@@ -175,36 +242,43 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
           </button>
           <div className="cmd-divider" />
           <button className="cmd-btn icon-only" title="Cut" disabled={!selectedItemName}>
-            <Scissors size={14} />
+            <WinIcon name="scissors" size={16} />
           </button>
           <button className="cmd-btn icon-only" title="Copy" disabled={!selectedItemName}>
-            <Copy size={14} />
+            <WinIcon name="copy" size={16} />
+          </button>
+          <button className="cmd-btn icon-only" title="Paste" disabled={!selectedItemName}>
+            <WinIcon name="paste" size={16} />
           </button>
           <button className="cmd-btn icon-only" title="Rename" disabled={!selectedItemName}>
-            <Edit3 size={14} />
+            <WinIcon name="rename" size={16} />
           </button>
           <button className="cmd-btn icon-only" title="Share" disabled={!selectedItemName}>
-            <Share2 size={14} />
+            <WinIcon name="share" size={16} />
           </button>
           <button className="cmd-btn icon-only" title="Delete" disabled={!selectedItemName}>
-            <Trash2 size={14} />
+            <WinIcon name="delete" size={16} />
           </button>
           <div className="cmd-divider" />
           <button className="cmd-btn" title="Sort options">
-            <ArrowUpDown size={14} />
+            <WinIcon name="sort" size={15} />
             <span>Sort</span>
             <ChevronDown size={12} />
           </button>
           <button className="cmd-btn" onClick={() => setViewMode(viewMode === 'grid' ? 'list' : 'grid')}>
-            {viewMode === 'grid' ? <LayoutGrid size={14} /> : <List size={14} />}
+            <WinIcon name="view-grid" size={15} />
             <span>View</span>
             <ChevronDown size={12} />
+          </button>
+          <button className="cmd-btn icon-only" title="See more">
+            <span style={{ fontSize: '13px', letterSpacing: '1px', fontWeight: 'bold', color: '#9ca3af' }}>•••</span>
           </button>
         </div>
 
         <div className="command-bar-right">
-          <button className="cmd-btn icon-only" title="Details Pane">
-            <List size={14} />
+          <button className="cmd-btn preview-btn" title="Preview pane">
+            <WinIcon name="preview-pane" size={15} />
+            <span>Preview</span>
           </button>
         </div>
       </div>
@@ -238,7 +312,7 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
         </div>
 
         <div className="address-box">
-          <WinIcon name="computer" size={16} />
+          <WinIcon name="this-pc" size={16} />
           <div className="address-breadcrumbs">
             {getBreadcrumbs().map((part, index) => (
               <React.Fragment key={index}>
@@ -278,15 +352,19 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
             className={`sidebar-item ${currentPath === 'Home' ? 'selected' : ''}`}
             onClick={() => navigateTo('Home')}
           >
-            <Home size={16} color="#0284c7" />
+            <WinIcon name="home" size={16} />
             <span>Home</span>
           </div>
-          <div className="sidebar-item">
-            <ImageIcon size={16} color="#10b981" />
+          <div 
+            className={`sidebar-item ${currentPath === 'Gallery' ? 'selected' : ''}`}
+            onClick={() => navigateTo('Gallery')}
+          >
+            <WinIcon name="gallery" size={16} />
             <span>Gallery</span>
           </div>
           <div className="sidebar-item">
-            <Cloud size={16} color="#3b82f6" />
+            <span className="sidebar-chevron"><ChevronRight size={12} /></span>
+            <WinIcon name="onedrive" size={16} />
             <span>agung - Personal</span>
           </div>
 
@@ -296,31 +374,47 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
             className={`sidebar-item ${currentPath === 'Downloads' ? 'selected' : ''}`}
             onClick={() => navigateTo('Downloads')}
           >
-            <Download size={16} color="#0078d4" />
+            <WinIcon name="downloads" size={16} />
             <span>Downloads</span>
+            <span className="sidebar-pin"><WinIcon name="pin" size={12} /></span>
           </div>
           <div className="sidebar-item">
-            <Laptop size={16} color="#8b5cf6" />
+            <WinIcon name="ftp-laptop" size={16} />
             <span>FTP.Laptop</span>
+            <span className="sidebar-pin"><WinIcon name="pin" size={12} /></span>
           </div>
           <div className="sidebar-item">
-            <Globe size={16} color="#10b981" />
+            <WinIcon name="shared-folder" size={16} />
             <span>192.168.1.6</span>
+            <span className="sidebar-pin"><WinIcon name="pin" size={12} /></span>
           </div>
           <div 
             className={`sidebar-item ${currentPath === 'Documents' ? 'selected' : ''}`}
             onClick={() => navigateTo('Documents')}
           >
-            <FileText size={16} color="#f59e0b" />
+            <WinIcon name="documents" size={16} />
             <span>Documents</span>
           </div>
-          <div className="sidebar-item">
-            <Folder size={16} color="#eab308" />
+          <div 
+            className={`sidebar-item ${currentPath === 'tatagih file' ? 'selected' : ''}`}
+            onClick={() => navigateTo('tatagih file')}
+          >
+            <WinIcon name="folder" size={16} />
             <span>tatagih file</span>
           </div>
-          <div className="sidebar-item">
-            <Folder size={16} color="#eab308" />
+          <div 
+            className={`sidebar-item ${currentPath === 'shortcut' ? 'selected' : ''}`}
+            onClick={() => navigateTo('shortcut')}
+          >
+            <WinIcon name="folder" size={16} />
             <span>shortcut</span>
+          </div>
+          <div 
+            className={`sidebar-item ${currentPath === 'TikTok' ? 'selected' : ''}`}
+            onClick={() => navigateTo('TikTok')}
+          >
+            <WinIcon name="folder" size={16} />
+            <span>TikTok</span>
           </div>
 
           <div className="sidebar-divider" />
@@ -330,28 +424,38 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
             onClick={() => navigateTo('This PC')}
           >
             <span className="sidebar-chevron"><ChevronDown size={14} /></span>
-            <WinIcon name="computer" size={16} />
+            <WinIcon name="this-pc" size={16} />
             <span>This PC</span>
           </div>
 
           <div className="sidebar-item nested">
-            <Smartphone size={15} color="#ec4899" />
+            <span className="sidebar-chevron"><ChevronRight size={12} /></span>
+            <WinIcon name="shared-folder" size={16} />
             <span>FTP.Handphone</span>
           </div>
-          <div className="sidebar-item nested">
-            <HardDrive size={15} color="#0078d4" />
+          <div 
+            className={`sidebar-item nested ${currentPath === 'Local Disk (C:)' ? 'selected' : ''}`}
+            onClick={() => navigateTo('Local Disk (C:)')}
+          >
+            <span className="sidebar-chevron"><ChevronRight size={12} /></span>
+            <WinIcon name="drive-c" size={16} />
             <span>Local Disk (C:)</span>
           </div>
           <div 
             className={`sidebar-item nested ${currentPath.startsWith('Data (D:)') ? 'selected' : ''}`}
             onClick={() => navigateTo('Data (D:)')}
           >
-            <HardDrive size={15} color="#0078d4" />
+            <span className="sidebar-chevron"><ChevronRight size={12} /></span>
+            <WinIcon name="drive-d" size={16} />
             <span>Data (D:)</span>
           </div>
 
-          <div className="sidebar-item">
-            <Globe size={16} color="#94a3b8" />
+          <div 
+            className={`sidebar-item ${currentPath === 'Network' ? 'selected' : ''}`}
+            onClick={() => navigateTo('Network')}
+          >
+            <span className="sidebar-chevron"><ChevronRight size={12} /></span>
+            <WinIcon name="network-pc" size={16} />
             <span>Network</span>
           </div>
         </div>
@@ -380,7 +484,13 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
                 >
                   <div className="folder-icon-wrapper">
                     {item.isDrive ? (
-                      <HardDrive size={46} color="#0078d4" />
+                      item.name.includes('(C:)') ? (
+                        <WinIcon name="drive-c" size={52} />
+                      ) : item.name.includes('(D:)') ? (
+                        <WinIcon name="drive-d" size={52} />
+                      ) : (
+                        <WinIcon name="shared-folder" size={52} />
+                      )
                     ) : item.type === 'folder' ? (
                       <>
                         <WinIcon name="folder" size={54} />
@@ -393,9 +503,11 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
                     ) : item.extension === 'pdf' ? (
                       <WinIcon name="pdf" size={48} />
                     ) : item.extension === 'jpg' || item.extension === 'png' ? (
-                      <WinIcon name="image" size={48} />
-                    ) : (
+                      <WinIcon name="photos" size={48} />
+                    ) : item.extension === 'txt' ? (
                       <WinIcon name="notepad" size={48} />
+                    ) : (
+                      <WinIcon name="document" size={48} />
                     )}
                   </div>
                   <span className="folder-name">{item.name}</span>
@@ -417,18 +529,18 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
           )}
         </div>
         <div className="status-right">
-          <LayoutGrid 
-            size={14} 
-            color={viewMode === 'grid' ? '#0078d4' : '#9ca3af'} 
-            style={{ cursor: 'pointer' }}
+          <span 
+            style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
             onClick={() => setViewMode('grid')}
-          />
-          <List 
-            size={14} 
-            color={viewMode === 'list' ? '#0078d4' : '#9ca3af'} 
-            style={{ cursor: 'pointer' }}
+          >
+            <LayoutGrid size={14} color={viewMode === 'grid' ? '#0078d4' : '#9ca3af'} />
+          </span>
+          <span 
+            style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
             onClick={() => setViewMode('list')}
-          />
+          >
+            <List size={14} color={viewMode === 'list' ? '#0078d4' : '#9ca3af'} />
+          </span>
         </div>
       </div>
     </div>

@@ -142,21 +142,69 @@ export function App() {
       },
       calculator: {
         title: 'Calculator',
-        icon: 'calc',
+        icon: 'calculator',
         initialSize: { width: 340, height: 460 },
         initialPosition: { x: 200 + (windows.length % 5) * 25, y: 80 + (windows.length % 5) * 20 }
       },
       taskmgr: {
         title: 'Task Manager',
-        icon: 'calc',
+        icon: 'calculator',
         initialSize: { width: 680, height: 460 },
         initialPosition: { x: 130 + (windows.length % 5) * 25, y: 65 + (windows.length % 5) * 20 }
       },
       antigravity: {
         title: 'Antigravity AI Agent Terminal',
-        icon: 'sparkles',
+        icon: 'antigravity',
         initialSize: { width: 760, height: 480 },
         initialPosition: { x: 150 + (windows.length % 5) * 25, y: 75 + (windows.length % 5) * 20 }
+      },
+      chrome: {
+        title: 'Google Chrome',
+        icon: 'chrome',
+        initialSize: { width: 920, height: 600 },
+        initialPosition: { x: 70 + (windows.length % 5) * 25, y: 35 + (windows.length % 5) * 20 }
+      },
+      'ms-store': {
+        title: 'Microsoft Store',
+        icon: 'ms-store',
+        initialSize: { width: 880, height: 580 },
+        initialPosition: { x: 80 + (windows.length % 5) * 25, y: 40 + (windows.length % 5) * 20 }
+      },
+      xbox: {
+        title: 'XBOX',
+        icon: 'xbox',
+        initialSize: { width: 840, height: 540 },
+        initialPosition: { x: 90 + (windows.length % 5) * 25, y: 45 + (windows.length % 5) * 20 }
+      },
+      todo: {
+        title: 'Microsoft To Do',
+        icon: 'todo',
+        initialSize: { width: 720, height: 500 },
+        initialPosition: { x: 100 + (windows.length % 5) * 25, y: 50 + (windows.length % 5) * 20 }
+      },
+      clock: {
+        title: 'Clock',
+        icon: 'clock',
+        initialSize: { width: 480, height: 420 },
+        initialPosition: { x: 150 + (windows.length % 5) * 25, y: 70 + (windows.length % 5) * 20 }
+      },
+      paint: {
+        title: 'Paint',
+        icon: 'paint',
+        initialSize: { width: 840, height: 560 },
+        initialPosition: { x: 80 + (windows.length % 5) * 25, y: 40 + (windows.length % 5) * 20 }
+      },
+      onenote: {
+        title: 'OneNote',
+        icon: 'onenote',
+        initialSize: { width: 800, height: 520 },
+        initialPosition: { x: 90 + (windows.length % 5) * 25, y: 45 + (windows.length % 5) * 20 }
+      },
+      ldplayer: {
+        title: 'LDPlayer 14',
+        icon: 'ldplayer',
+        initialSize: { width: 880, height: 560 },
+        initialPosition: { x: 80 + (windows.length % 5) * 25, y: 40 + (windows.length % 5) * 20 }
       }
     };
 
@@ -282,27 +330,35 @@ export function App() {
           />
         );
       case 'notepad':
+      case 'todo':
+      case 'onenote':
         return (
           <NotepadApp
             initialContent={win.data?.content || DESKTOP_ITEMS.find(d => d.id === 'readme_recruiter')?.content}
-            fileName={win.data?.name || 'README_RECRUITER.txt'}
+            fileName={win.data?.name || (win.appId === 'todo' ? 'To_Do_List.txt' : win.appId === 'onenote' ? 'Catatan_OneNote.txt' : 'README_RECRUITER.txt')}
           />
         );
       case 'terminal':
       case 'antigravity':
         return <TerminalApp onLaunchApp={launchApp} />;
       case 'browser':
+      case 'chrome':
+      case 'ldplayer':
         return <BrowserApp onOpenFile={openFile} />;
       case 'photos':
+      case 'paint':
         return (
           <PhotosApp
             initialImage={win.data?.imageUrl || '/certificates/cert_fullstack.jpg'}
-            initialTitle={win.data?.title || 'Certificate: Mobile & Full Stack Development'}
+            initialTitle={win.data?.title || (win.appId === 'paint' ? 'Paint Studio Showcase' : 'Photos - Certificate & Gallery')}
           />
         );
       case 'recruiter':
+      case 'ms-store':
+      case 'xbox':
         return <RecruiterHubApp onOpenFile={openFile} onOpenApp={launchApp} />;
       case 'settings':
+      case 'clock':
         return (
           <SettingsApp
             currentWallpaper={wallpaper}
@@ -321,7 +377,7 @@ export function App() {
         return (
           <div style={{ padding: '24px', color: '#fff' }}>
             <h3>{win.title}</h3>
-            <p>Aplikasi ini siap dikembangkan lebih lanjut.</p>
+            <p>Aplikasi ini siap digunakan.</p>
           </div>
         );
     }

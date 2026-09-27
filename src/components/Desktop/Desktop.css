@@ -71,31 +71,6 @@
   line-height: 1.25;
 }
 
-.recruiter-tip-badge {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  background: rgba(24, 24, 32, 0.88);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(139, 92, 246, 0.4);
-  border-radius: 10px;
-  padding: 10px 16px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-  cursor: pointer;
-  z-index: 5;
-  transition: transform 0.15s, border-color 0.15s;
-  max-width: 380px;
-}
-
-.recruiter-tip-badge:hover {
-  transform: translateY(-2px);
-  border-color: rgba(139, 92, 246, 0.8);
-}
-
 .win-context-menu {
   position: fixed;
   background: rgba(36, 36, 36, 0.94);
@@ -141,12 +116,5 @@
   .desktop-grid {
     grid-template-rows: repeat(auto-fill, 78px);
     grid-auto-columns: 74px;
-  }
-  .recruiter-tip-badge {
-    top: auto;
-    bottom: 12px;
-    right: 12px;
-    left: 12px;
-    max-width: none;
   }
 }

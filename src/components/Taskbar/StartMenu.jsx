@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Search, ChevronDown, User } from 'lucide-react';
 import { WinIcon } from '../Common/WinIcon';
 import { playClickSound } from '../../utils/sound';
@@ -6,6 +6,24 @@ import { playClickSound } from '../../utils/sound';
 export const StartMenu = ({ isOpen, onClose, onLaunchApp, onOpenFile, onRestart }) => {
   const [search, setSearch] = useState('');
   const [showPowerMenu, setShowPowerMenu] = useState(false);
+  const menuRef = useRef(null);
+
+  useEffect(() => {
+    const handleOutsideClick = (e) => {
+      if (isOpen && menuRef.current && !menuRef.current.contains(e.target)) {
+        if (!e.target.closest('.start-btn')) {
+          onClose();
+        }
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('pointerdown', handleOutsideClick);
+    }
+    return () => {
+      document.removeEventListener('pointerdown', handleOutsideClick);
+    };
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
@@ -61,16 +79,19 @@ export const StartMenu = ({ isOpen, onClose, onLaunchApp, onOpenFile, onRestart 
 
   return (
     <div
-      className="anim-flyout"
+      ref={menuRef}
+      className="anim-start-menu"
       style={{
         position: 'fixed',
         bottom: 'calc(var(--taskbar-height) + 12px)',
-        left: '50%',
-        transform: 'translateX(-50%)',
+        left: 0,
+        right: 0,
+        marginLeft: 'auto',
+        marginRight: 'auto',
         width: '600px',
-        maxWidth: '95vw',
+        maxWidth: 'calc(100vw - 24px)',
         height: '660px',
-        maxHeight: '86vh',
+        maxHeight: 'calc(100vh - var(--taskbar-height) - 32px)',
         backgroundColor: 'rgba(28, 28, 36, 0.94)',
         backdropFilter: 'blur(35px) saturate(160%)',
         WebkitBackdropFilter: 'blur(35px) saturate(160%)',

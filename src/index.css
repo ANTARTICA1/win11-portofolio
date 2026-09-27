@@ -179,6 +179,21 @@ html, body, #root {
   animation: flyoutSlideUp 0.2s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
 }
 
+@keyframes startMenuSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.985);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.anim-start-menu {
+  animation: startMenuSlideUp 0.18s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
+}
+
 @media (max-width: 768px) {
   :root {
     --taskbar-height: 52px;

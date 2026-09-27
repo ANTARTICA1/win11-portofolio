@@ -1,0 +1,225 @@
+import React, { useState, useRef } from 'react';
+import { Sparkles, X, Send } from 'lucide-react';
+import { WinIcon } from '../Common/WinIcon';
+import { DESKTOP_ITEMS } from '../../data/fileSystem';
+import { ContextMenu } from './ContextMenu';
+import { playClickSound } from '../../utils/sound';
+import './Desktop.css';
+
+export const Desktop = ({
+  wallpaper,
+  onLaunchApp,
+  onOpenFile,
+  onOpenSettings,
+  accentColor
+}) => {
+  const [selectedIconId, setSelectedIconId] = useState(null);
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [contextMenu, setContextMenu] = useState(null);
+  const [showRecruiterTip, setShowRecruiterTip] = useState(true);
+
+  const [selectionBox, setSelectionBox] = useState(null);
+  const selectionStartRef = useRef(null);
+
+  const handleDesktopPointerDown = (e) => {
+    if (e.target.closest('.win-context-menu') || e.target.closest('.desktop-icon-item') || e.target.closest('.recruiter-tip-badge')) {
+      return;
+    }
+
+    setContextMenu(null);
+    setSelectedIconId(null);
+
+    selectionStartRef.current = { x: e.clientX, y: e.clientY };
+    setSelectionBox({
+      x: e.clientX,
+      y: e.clientY,
+      width: 0,
+      height: 0
+    });
+  };
+
+  const handleDesktopPointerMove = (e) => {
+    if (!selectionStartRef.current) return;
+
+    const startX = selectionStartRef.current.x;
+    const startY = selectionStartRef.current.y;
+
+    const currentX = e.clientX;
+    const currentY = e.clientY;
+
+    const x = Math.min(startX, currentX);
+    const y = Math.min(startY, currentY);
+    const width = Math.abs(currentX - startX);
+    const height = Math.abs(currentY - startY);
+
+    setSelectionBox({ x, y, width, height });
+  };
+
+  const handleDesktopPointerUp = () => {
+    selectionStartRef.current = null;
+    setSelectionBox(null);
+  };
+
+  const handleContextMenu = (e) => {
+    e.preventDefault();
+    playClickSound();
+    setContextMenu({ x: e.clientX, y: e.clientY });
+  };
+
+  const handleRefresh = () => {
+    setIsRefreshing(true);
+    setTimeout(() => setIsRefreshing(false), 200);
+  };
+
+  const handleIconClick = (e, item) => {
+    e.stopPropagation();
+    setSelectedIconId(item.id);
+  };
+
+  const handleIconDoubleClick = (e, item) => {
+    e.stopPropagation();
+    playClickSound();
+
+    if (item.app === 'notepad' && item.content) {
+      onOpenFile({
+        name: item.name,
+        type: 'file',
+        extension: item.extension || 'txt',
+        content: item.content
+      });
+    } else if (item.app === 'pdf_viewer') {
+      onLaunchApp('recruiter');
+    } else if (item.app === 'explorer') {
+      onLaunchApp('explorer', item.path || 'Data (D:)');
+    } else {
+      onLaunchApp(item.app || 'explorer');
+    }
+  };
+
+  return (
+    <div
+      className={`desktop-area ${isRefreshing ? 'opacity-80' : ''}`}
+      style={{
+        backgroundImage: `url(${wallpaper})`,
+        opacity: isRefreshing ? 0.75 : 1,
+        transition: 'opacity 0.15s ease'
+      }}
+      onPointerDown={handleDesktopPointerDown}
+      onPointerMove={handleDesktopPointerMove}
+      onPointerUp={handleDesktopPointerUp}
+      onContextMenu={handleContextMenu}
+    >
+      {selectionBox && selectionBox.width > 3 && selectionBox.height > 3 && (
+        <div
+          className="desktop-selection-box"
+          style={{
+            left: `${selectionBox.x}px`,
+            top: `${selectionBox.y}px`,
+            width: `${selectionBox.width}px`,
+            height: `${selectionBox.height}px`
+          }}
+        />
+      )}
+
+      {showRecruiterTip && (
+        <div
+          className="recruiter-tip-badge anim-flyout"
+          onClick={() => {
+            playClickSound();
+            onLaunchApp('recruiter');
+          }}
+        >
+          <div style={{
+            width: '36px',
+            height: '36px',
+            borderRadius: '50%',
+            backgroundColor: '#8b5cf6',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexShrink: 0
+          }}>
+            <Sparkles size={18} color="#ffffff" />
+          </div>
+
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: '12.5px', fontWeight: 600, color: '#f3e8ff' }}>
+              ⚡ Mode Cepat Rekruter (Fast Track)
+            </div>
+            <div style={{ fontSize: '11px', color: '#94a3b8', lineHeight: 1.3 }}>
+              Klik di sini untuk langsung download CV, keahlian utama, & WhatsApp dalam 10 detik!
+            </div>
+          </div>
+
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowRecruiterTip(false);
+            }}
+            style={{
+              background: 'none',
+              border: 'none',
+              color: '#9ca3af',
+              cursor: 'pointer',
+              padding: '4px'
+            }}
+            title="Tutup banner"
+          >
+            <X size={15} />
+          </button>
+        </div>
+      )}
+
+      <div className="desktop-grid">
+        {DESKTOP_ITEMS.map((item) => {
+          const isSelected = selectedIconId === item.id;
+
+          return (
+            <div
+              key={item.id}
+              className={`desktop-icon-item ${isSelected ? 'is-selected' : ''}`}
+              onClick={(e) => handleIconClick(e, item)}
+              onDoubleClick={(e) => handleIconDoubleClick(e, item)}
+              onTouchEnd={(e) => {
+                const now = Date.now();
+                const lastTouch = item._lastTouch || 0;
+                if (now - lastTouch < 350) {
+                  handleIconDoubleClick(e, item);
+                } else {
+                  handleIconClick(e, item);
+                }
+                item._lastTouch = now;
+              }}
+              title={item.name}
+            >
+              <div className="desktop-icon-img">
+                <WinIcon name={item.icon} size={36} />
+              </div>
+              <span className="desktop-icon-label">{item.name}</span>
+            </div>
+          );
+        })}
+      </div>
+
+      {contextMenu && (
+        <ContextMenu
+          x={contextMenu.x}
+          y={contextMenu.y}
+          onClose={() => setContextMenu(null)}
+          onRefresh={handleRefresh}
+          onOpenSettings={(tab) => onOpenSettings(tab)}
+          onOpenTerminal={() => onLaunchApp('terminal')}
+          onNewTextFile={() => {
+            onOpenFile({
+              name: 'New_Document.txt',
+              type: 'file',
+              extension: 'txt',
+              content: 'Ketik catatan baru di sini...'
+            });
+          }}
+          accentColor={accentColor}
+        />
+      )}
+    </div>
+  );
+};

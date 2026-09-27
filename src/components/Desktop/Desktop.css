@@ -1,0 +1,152 @@
+.desktop-area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: calc(100vh - var(--taskbar-height));
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  user-select: none;
+}
+
+.desktop-grid {
+  display: grid;
+  grid-template-rows: repeat(auto-fill, 90px);
+  grid-auto-flow: column;
+  grid-auto-columns: 82px;
+  gap: 4px;
+  padding: 10px;
+  height: 100%;
+  width: fit-content;
+  z-index: 2;
+  position: relative;
+}
+
+.desktop-icon-item {
+  width: 78px;
+  height: 84px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.1s, border-color 0.1s;
+  text-align: center;
+  position: relative;
+}
+
+.desktop-icon-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.desktop-icon-item.is-selected {
+  background: rgba(0, 120, 212, 0.22);
+  border-color: rgba(0, 120, 212, 0.6);
+}
+
+.desktop-icon-img {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.desktop-icon-label {
+  font-size: 11.5px;
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 0 2px rgba(0, 0, 0, 0.8);
+  word-break: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.25;
+}
+
+.recruiter-tip-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(24, 24, 32, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  border-radius: 10px;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  z-index: 5;
+  transition: transform 0.15s, border-color 0.15s;
+  max-width: 380px;
+}
+
+.recruiter-tip-badge:hover {
+  transform: translateY(-2px);
+  border-color: rgba(139, 92, 246, 0.8);
+}
+
+.win-context-menu {
+  position: fixed;
+  background: rgba(36, 36, 36, 0.94);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+  padding: 6px;
+  width: 220px;
+  z-index: 20000;
+  color: #ffffff;
+  font-size: 12px;
+}
+
+.context-menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.1s;
+}
+
+.context-menu-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.context-menu-item-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.context-menu-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 4px 6px;
+}
+
+@media (max-width: 768px) {
+  .desktop-grid {
+    grid-template-rows: repeat(auto-fill, 78px);
+    grid-auto-columns: 74px;
+  }
+  .recruiter-tip-badge {
+    top: auto;
+    bottom: 12px;
+    right: 12px;
+    left: 12px;
+    max-width: none;
+  }
+}

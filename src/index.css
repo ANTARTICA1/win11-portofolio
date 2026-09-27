@@ -1,0 +1,164 @@
+:root {
+  --font-family: 'Segoe UI Variable Display', 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'Cascadia Code', 'Consolas', monospace;
+
+  --bg-desktop: #0b0c10;
+  --mica-bg: rgba(32, 32, 32, 0.88);
+  --mica-window-bg: rgba(28, 28, 28, 0.94);
+  --mica-titlebar: rgba(38, 38, 38, 0.96);
+  --mica-content: #191919;
+  --taskbar-bg: rgba(26, 26, 26, 0.82);
+  --flyout-bg: rgba(36, 36, 36, 0.92);
+
+  --accent-color: #0078d4;
+  --accent-hover: #106ebe;
+  --accent-light: rgba(0, 120, 212, 0.2);
+
+  --text-primary: #ffffff;
+  --text-secondary: #d1d5db;
+  --text-muted: #9ca3af;
+  --text-dim: #6b7280;
+
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-light: rgba(255, 255, 255, 0.14);
+  --border-strong: rgba(255, 255, 255, 0.22);
+
+  --hover-subtle: rgba(255, 255, 255, 0.06);
+  --hover-card: rgba(255, 255, 255, 0.09);
+  --active-press: rgba(255, 255, 255, 0.12);
+
+  --shadow-window: 0 16px 36px rgba(0, 0, 0, 0.55), 0 4px 12px rgba(0, 0, 0, 0.35);
+  --shadow-flyout: 0 12px 30px rgba(0, 0, 0, 0.6), 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-taskbar: 0 -2px 10px rgba(0, 0, 0, 0.35);
+
+  --taskbar-height: 48px;
+  --window-radius: 9px;
+  --button-radius: 4px;
+}
+
+[data-theme="light"] {
+  --mica-bg: rgba(243, 243, 243, 0.88);
+  --mica-window-bg: rgba(249, 249, 249, 0.95);
+  --mica-titlebar: rgba(240, 240, 240, 0.98);
+  --mica-content: #ffffff;
+  --taskbar-bg: rgba(243, 243, 243, 0.86);
+  --flyout-bg: rgba(255, 255, 255, 0.95);
+
+  --text-primary: #18181b;
+  --text-secondary: #3f3f46;
+  --text-muted: #71717a;
+  --text-dim: #a1a1aa;
+
+  --border-subtle: rgba(0, 0, 0, 0.08);
+  --border-light: rgba(0, 0, 0, 0.15);
+  --border-strong: rgba(0, 0, 0, 0.25);
+
+  --hover-subtle: rgba(0, 0, 0, 0.05);
+  --hover-card: rgba(0, 0, 0, 0.08);
+  --active-press: rgba(0, 0, 0, 0.12);
+
+  --shadow-window: 0 16px 36px rgba(0, 0, 0, 0.25), 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+html, body, #root {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: var(--font-family);
+  color: var(--text-primary);
+  background-color: #050508;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 6px;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.35);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.selectable, input, textarea, code, pre {
+  user-select: text !important;
+  -webkit-user-select: text !important;
+}
+
+.desktop-selection-box {
+  position: absolute;
+  background: rgba(0, 120, 212, 0.22);
+  border: 1px solid rgba(0, 120, 212, 0.8);
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+@keyframes windowPop {
+  0% {
+    transform: scale(0.96) translateY(12px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes flyoutSlideUp {
+  0% {
+    transform: translateY(20px) scale(0.97);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes tooltipFade {
+  0% {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.anim-window {
+  animation: windowPop 0.18s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
+}
+
+.anim-flyout {
+  animation: flyoutSlideUp 0.2s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --taskbar-height: 52px;
+  }
+}

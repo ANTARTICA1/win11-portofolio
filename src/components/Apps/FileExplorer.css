@@ -1,0 +1,456 @@
+.explorer-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background: #191919;
+  color: #e5e7eb;
+  font-size: 13px;
+}
+
+.explorer-tabs-bar {
+  display: flex;
+  align-items: center;
+  background: #202020;
+  padding: 6px 12px 0 12px;
+  gap: 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.explorer-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #191919;
+  color: #ffffff;
+  padding: 6px 14px;
+  border-radius: 8px 8px 0 0;
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: none;
+  cursor: pointer;
+  position: relative;
+  min-width: 130px;
+  justify-content: space-between;
+}
+
+.explorer-tab.inactive {
+  background: transparent;
+  color: #9ca3af;
+  border-color: transparent;
+}
+
+.explorer-tab.inactive:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: #e5e7eb;
+}
+
+.explorer-tab-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  color: #9ca3af;
+}
+
+.explorer-tab-close:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+.explorer-new-tab-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  color: #9ca3af;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+
+.explorer-new-tab-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.explorer-command-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 14px;
+  background: #1f1f1f;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.command-bar-left, .command-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.cmd-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 8px;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  color: #d1d5db;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.12s;
+}
+
+.cmd-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.cmd-btn.icon-only {
+  padding: 6px;
+}
+
+.cmd-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.cmd-divider {
+  width: 1px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.12);
+  margin: 0 4px;
+}
+
+.explorer-address-bar-row {
+  display: flex;
+  align-items: center;
+  padding: 8px 14px;
+  gap: 8px;
+  background: #191919;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.nav-buttons {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.nav-btn {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  color: #9ca3af;
+  cursor: pointer;
+}
+
+.nav-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.nav-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.address-box {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background: #252525;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  padding: 4px 10px;
+  gap: 6px;
+  height: 32px;
+}
+
+.address-box:focus-within {
+  border-color: var(--accent-color);
+  background: #2b2b2b;
+}
+
+.address-breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  overflow: hidden;
+  font-size: 12px;
+}
+
+.breadcrumb-segment {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #d1d5db;
+  padding: 2px 4px;
+  border-radius: 3px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.breadcrumb-segment:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.breadcrumb-sep {
+  color: #6b7280;
+  font-size: 11px;
+}
+
+.refresh-btn {
+  background: transparent;
+  border: none;
+  color: #9ca3af;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 3px;
+  border-radius: 3px;
+}
+
+.refresh-btn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.search-box {
+  width: 240px;
+  display: flex;
+  align-items: center;
+  background: #252525;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  padding: 4px 10px;
+  gap: 8px;
+  height: 32px;
+}
+
+.search-box:focus-within {
+  border-color: var(--accent-color);
+  background: #2b2b2b;
+}
+
+.search-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-size: 12px;
+  width: 100%;
+}
+
+.search-input::placeholder {
+  color: #6b7280;
+}
+
+.explorer-main-area {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.explorer-sidebar {
+  width: 210px;
+  background: #1c1c1c;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  overflow-y: auto;
+  padding: 8px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 5px;
+  color: #d1d5db;
+  cursor: pointer;
+  font-size: 12.5px;
+  transition: background-color 0.1s;
+}
+
+.sidebar-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+}
+
+.sidebar-item.selected {
+  background: rgba(255, 255, 255, 0.09);
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.sidebar-item.nested {
+  padding-left: 24px;
+}
+
+.sidebar-chevron {
+  display: flex;
+  align-items: center;
+  color: #9ca3af;
+  margin-right: -2px;
+}
+
+.sidebar-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  margin: 6px 4px;
+}
+
+.explorer-content-view {
+  flex: 1;
+  background: #191919;
+  overflow-y: auto;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.explorer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(115px, 1fr));
+  gap: 16px 12px;
+  align-content: flex-start;
+}
+
+.folder-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 8px 6px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+  position: relative;
+}
+
+.folder-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.folder-card.selected {
+  background: rgba(0, 120, 212, 0.18);
+  border-color: rgba(0, 120, 212, 0.6);
+}
+
+.folder-icon-wrapper {
+  width: 68px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 6px;
+}
+
+.folder-inner-preview {
+  position: absolute;
+  top: 18px;
+  width: 38px;
+  height: 24px;
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+  background: #fff;
+}
+
+.folder-inner-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.folder-name {
+  font-size: 12px;
+  color: #e5e7eb;
+  word-break: break-word;
+  max-width: 105px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.3;
+}
+
+.explorer-status-bar {
+  height: 26px;
+  background: #1a1a1a;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+.status-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+@media (max-width: 768px) {
+  .explorer-sidebar {
+    display: none;
+    position: absolute;
+    top: 86px;
+    left: 0;
+    bottom: 26px;
+    width: 220px;
+    z-index: 50;
+    background: #1e1e1e;
+    box-shadow: 6px 0 24px rgba(0, 0, 0, 0.7);
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  .explorer-sidebar.mobile-open {
+    display: flex !important;
+  }
+  .search-box {
+    width: 140px;
+  }
+  .command-bar-left .cmd-btn:not(:first-child):not(:nth-child(3)) {
+    display: none;
+  }
+  .explorer-grid {
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 12px 8px;
+    padding: 12px 10px;
+  }
+  .folder-card {
+    padding: 10px 4px;
+  }
+}

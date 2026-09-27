@@ -1,0 +1,194 @@
+.win-window {
+  position: absolute;
+  background: var(--mica-window-bg);
+  backdrop-filter: blur(28px) saturate(140%);
+  -webkit-backdrop-filter: blur(28px) saturate(140%);
+  border: 1px solid var(--border-light);
+  border-radius: var(--window-radius);
+  box-shadow: var(--shadow-window);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  will-change: transform, width, height, top, left;
+  transition: transform 0.15s ease, opacity 0.15s ease, box-shadow 0.15s ease;
+}
+
+.win-window.is-active {
+  border-color: var(--border-strong);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.7), 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.win-window.is-minimized {
+  display: none !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+.win-window.is-maximized {
+  border-radius: 0 !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-top: none !important;
+  box-shadow: none !important;
+}
+
+.win-titlebar {
+  height: 40px;
+  background: var(--mica-titlebar);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4px 0 14px;
+  border-bottom: 1px solid var(--border-subtle);
+  cursor: default;
+}
+
+.win-title-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+
+.win-title-icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.win-title-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.win-controls {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  position: relative;
+}
+
+.win-ctrl-btn {
+  width: 44px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background-color 0.12s, color 0.12s;
+}
+
+.win-ctrl-btn:hover {
+  background: var(--hover-card);
+  color: var(--text-primary);
+}
+
+.win-ctrl-btn.close-btn:hover {
+  background: #e81123;
+  color: #ffffff;
+}
+
+.snap-layouts-flyout {
+  position: absolute;
+  top: 40px;
+  right: 44px;
+  background: rgba(36, 36, 36, 0.95);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 64px);
+  gap: 8px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+}
+
+.snap-card {
+  width: 64px;
+  height: 48px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  display: flex;
+  overflow: hidden;
+  gap: 2px;
+  padding: 2px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.snap-card:hover {
+  border-color: var(--accent-color);
+  background: rgba(0, 120, 212, 0.15);
+}
+
+.snap-zone {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 2px;
+  transition: background 0.1s;
+}
+
+.snap-zone:hover {
+  background: var(--accent-color);
+}
+
+.win-body {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: var(--mica-content);
+  position: relative;
+}
+
+.win-resize-handle {
+  position: absolute;
+  z-index: 10;
+}
+
+.resize-n { top: -4px; left: 8px; right: 8px; height: 8px; cursor: n-resize; }
+.resize-s { bottom: -4px; left: 8px; right: 8px; height: 8px; cursor: s-resize; }
+.resize-w { left: -4px; top: 8px; bottom: 8px; width: 8px; cursor: w-resize; }
+.resize-e { right: -4px; top: 8px; bottom: 8px; width: 8px; cursor: e-resize; }
+
+.resize-nw { top: -4px; left: -4px; width: 12px; height: 12px; cursor: nw-resize; }
+.resize-ne { top: -4px; right: -4px; width: 12px; height: 12px; cursor: ne-resize; }
+.resize-sw { bottom: -4px; left: -4px; width: 12px; height: 12px; cursor: sw-resize; }
+.resize-se { bottom: -4px; right: -4px; width: 12px; height: 12px; cursor: se-resize; }
+
+@media (max-width: 768px) {
+  .win-window:not(.is-minimized) {
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: calc(100vh - var(--taskbar-height)) !important;
+    border-radius: 0 !important;
+    border: none !important;
+  }
+  .win-resize-handle {
+    display: none !important;
+  }
+  .snap-layouts-flyout {
+    display: none !important;
+  }
+  .win-titlebar {
+    height: 44px;
+    padding: 0 4px 0 10px;
+  }
+  .win-ctrl-btn {
+    width: 44px;
+  }
+}

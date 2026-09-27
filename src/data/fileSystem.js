@@ -28,7 +28,53 @@ export const RECRUITER_SUMMARY = {
   ]
 };
 
+export const PROJECTS_ITEMS = [
+  {
+    name: "Tatagih.exe",
+    type: "executable",
+    extension: "exe",
+    appId: "tatagih",
+    projectId: "tatagih",
+    icon: "tatagih",
+    fileType: "Application",
+    size: "14.2 MB",
+    modified: "10/14/2024 14:28",
+    description: "Tatagih - Subscription and Bill Manager"
+  },
+  {
+    name: "Lintas.exe",
+    type: "executable",
+    extension: "exe",
+    appId: "lintas",
+    projectId: "lintas",
+    icon: "lintas",
+    fileType: "Application",
+    size: "28.6 MB",
+    modified: "11/02/2024 09:15",
+    description: "Lintas - Phone-to-PC Companion Utility"
+  },
+  {
+    name: "NeuroFly.exe",
+    type: "executable",
+    extension: "exe",
+    appId: "neurofly",
+    projectId: "neurofly",
+    icon: "neurofly",
+    fileType: "Application",
+    size: "42.1 MB",
+    modified: "12/18/2024 16:40",
+    description: "NeuroFly - Drosophila Connectome x Pong"
+  }
+];
+
 export const DATA_D_ITEMS = [
+  {
+    name: "Projects",
+    type: "folder",
+    description: "Executable Applications Portfolio",
+    badge: "Applications",
+    items: PROJECTS_ITEMS
+  },
   {
     name: "dompetq",
     type: "folder",
@@ -463,6 +509,37 @@ export const DESKTOP_ITEMS = [
     icon: "computer"
   },
   {
+    id: "user_files",
+    name: "User Files",
+    type: "system",
+    app: "explorer",
+    path: "Documents",
+    icon: "folder"
+  },
+  {
+    id: "file_explorer",
+    name: "File Explorer",
+    type: "app",
+    app: "explorer",
+    path: "Projects",
+    icon: "explorer"
+  },
+  {
+    id: "projects_folder",
+    name: "Projects",
+    type: "app",
+    app: "explorer",
+    path: "Projects",
+    icon: "folder"
+  },
+  {
+    id: "chrome_app",
+    name: "Google Chrome",
+    type: "app",
+    app: "chrome",
+    icon: "chrome"
+  },
+  {
     id: "recycle_bin",
     name: "Recycle Bin",
     type: "system",
@@ -470,71 +547,25 @@ export const DESKTOP_ITEMS = [
     icon: "trash"
   },
   {
-    id: "readme_recruiter",
-    name: "README_RECRUITER.txt",
-    type: "file",
-    extension: "txt",
-    app: "notepad",
-    icon: "notepad",
-    content: `===================================================================
-SELAMAT DATANG REKRUTER & TECH LEAD!
-===================================================================
-
-Halo! Terima kasih telah berkunjung ke sistem operasi portfolio saya.
-Website ini dirancang secara khusus untuk memberikan pengalaman 
-interaktif 1:1 mirip Windows 11 tanpa backend, ringan, dan cepat!
-
-SIAPA SAYA?
-Nama        : Agung Krisna
-Spesialisasi: Full-Stack Web & Mobile Developer
-Keahlian    : Flutter, React.js, Next.js, React Native, Node.js, TypeScript
-
-CARA CEPAT MENILAI KUALIFIKASI SAYA:
-1. Hub Fast-Track Rekruter:
-   Klik tombol "⚡ Mode Rekruter" di pojok kanan atas desktop atau buka
-   aplikasi "Recruiter Hub" dari Start Menu.
-2. File Explorer (This PC > Data D:):
-   Buka folder "dompetq", "project temuin", atau "Makalah Generator"
-   untuk melihat arsitektur & screenshot proyek nyata.
-3. Terminal (PowerShell):
-   Jalankan perintah 'whoami', 'skills', 'projects', atau 'neofetch' 
-   untuk pengalaman CLI interaktif!
-4. Browser Edge:
-   Buka untuk melihat showcase web interaktif dengan tombol Live Demo & GitHub.
-
-INGIN SEGERA MENGHUBUNGI SAYA?
-- WhatsApp : +62 812-3456-7890 (Tersedia via 1-klik di Recruiter Hub)
-- Email    : agungkrisna.dev@gmail.com
-- GitHub   : https://github.com/agungkrisna
-- LinkedIn : https://linkedin.com/in/agungkrisna
-
-Selamat bereksplorasi! Jangan ragu untuk klik kanan pada desktop, 
-menggeser / mengubah ukuran jendela, dan membuka Start Menu!
-`
+    id: "tatagih_app",
+    name: "Tatagih.exe",
+    type: "executable",
+    app: "tatagih",
+    icon: "tatagih"
   },
   {
-    id: "recruiter_hub",
-    name: "Recruiter Hub ⚡",
-    type: "app",
-    app: "recruiter",
-    icon: "briefcase",
-    isRecommended: true
+    id: "lintas_app",
+    name: "Lintas.exe",
+    type: "executable",
+    app: "lintas",
+    icon: "lintas"
   },
   {
-    id: "cv_pdf",
-    name: "Curriculum_Vitae.pdf",
-    type: "file",
-    extension: "pdf",
-    app: "pdf_viewer",
-    icon: "pdf"
-  },
-  {
-    id: "file_explorer",
-    name: "File Explorer",
-    type: "app",
-    app: "explorer",
-    path: "Data (D:)",
-    icon: "explorer"
+    id: "neurofly_app",
+    name: "NeuroFly.exe",
+    type: "executable",
+    app: "neurofly",
+    icon: "neurofly"
   },
   {
     id: "edge_browser",

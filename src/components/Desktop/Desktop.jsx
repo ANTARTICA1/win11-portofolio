@@ -90,6 +90,14 @@ export const Desktop = ({
       onLaunchApp('recruiter');
     } else if (item.app === 'explorer') {
       onLaunchApp('explorer', item.path || 'Data (D:)');
+    } else if (item.projectId) {
+      onLaunchApp('chrome', { projectId: item.projectId });
+    } else if (item.app === 'tatagih' || (item.name && item.name.toLowerCase().includes('tatagih'))) {
+      onLaunchApp('chrome', { projectId: 'tatagih' });
+    } else if (item.app === 'lintas' || (item.name && item.name.toLowerCase().includes('lintas'))) {
+      onLaunchApp('chrome', { projectId: 'lintas' });
+    } else if (item.app === 'neurofly' || (item.name && item.name.toLowerCase().includes('neurofly'))) {
+      onLaunchApp('chrome', { projectId: 'neurofly' });
     } else {
       onLaunchApp(item.app || 'explorer');
     }

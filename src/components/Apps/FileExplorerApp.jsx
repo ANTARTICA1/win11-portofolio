@@ -8,7 +8,7 @@ import { DATA_D_ITEMS } from '../../data/fileSystem';
 import { playClickSound } from '../../utils/sound';
 import './FileExplorer.css';
 
-export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenFolder }) => {
+export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenFolder, onLaunchApp }) => {
   const [currentPath, setCurrentPath] = useState(initialPath);
   const [history, setHistory] = useState([initialPath]);
   const [historyIndex, setHistoryIndex] = useState(0);
@@ -175,6 +175,30 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
         navigateTo(item.name);
       } else {
         navigateTo(`${currentPath} > ${item.name}`);
+      }
+    } else if (item.projectId) {
+      if (onLaunchApp) {
+        onLaunchApp('chrome', { projectId: item.projectId });
+      } else if (onOpenFile) {
+        onOpenFile({ ...item, appId: 'chrome', projectId: item.projectId });
+      }
+    } else if (item.name && item.name.toLowerCase().includes('tatagih')) {
+      if (onLaunchApp) {
+        onLaunchApp('chrome', { projectId: 'tatagih' });
+      } else if (onOpenFile) {
+        onOpenFile({ ...item, appId: 'chrome', projectId: 'tatagih' });
+      }
+    } else if (item.name && item.name.toLowerCase().includes('lintas')) {
+      if (onLaunchApp) {
+        onLaunchApp('chrome', { projectId: 'lintas' });
+      } else if (onOpenFile) {
+        onOpenFile({ ...item, appId: 'chrome', projectId: 'lintas' });
+      }
+    } else if (item.name && item.name.toLowerCase().includes('neurofly')) {
+      if (onLaunchApp) {
+        onLaunchApp('chrome', { projectId: 'neurofly' });
+      } else if (onOpenFile) {
+        onOpenFile({ ...item, appId: 'chrome', projectId: 'neurofly' });
       }
     } else {
       if (onOpenFile) {

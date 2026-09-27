@@ -11,13 +11,14 @@ import { RecruiterHubApp } from './components/Apps/RecruiterHubApp';
 import { SettingsApp } from './components/Apps/SettingsApp';
 import { CalculatorApp } from './components/Apps/CalculatorApp';
 import { TaskManagerApp } from './components/Apps/TaskManagerApp';
+
 import { NotificationToast } from './components/Common/NotificationToast';
 import { RunDialog } from './components/Common/RunDialog';
 import { DESKTOP_ITEMS } from './data/fileSystem';
 import { playWindowSound, playStartupChime, playClickSound } from './utils/sound';
 
 export function App() {
-  const [wallpaper, setWallpaper] = useState('/wallpapers/purple_ribbon.jpg');
+  const [wallpaper, setWallpaper] = useState('/wallpapers/win11_bloom_light.jpg');
   const [accentColor, setAccentColor] = useState('#0078d4');
   const [isDarkTheme, setIsDarkTheme] = useState(true);
   const [topZIndex, setTopZIndex] = useState(100);
@@ -28,14 +29,14 @@ export function App() {
     {
       id: 'win-explorer-initial',
       appId: 'explorer',
-      title: 'Data (D:)',
+      title: 'Projects',
       icon: 'explorer',
       isMinimized: false,
       isMaximized: false,
       zIndex: 101,
       initialPosition: { x: 70, y: 35 },
       initialSize: { width: 880, height: 560 },
-      data: { path: 'Data (D:)' }
+      data: { path: 'Projects' }
     }
   ]);
 
@@ -85,11 +86,19 @@ export function App() {
     playWindowSound('open');
     const existing = windows.find(w => w.appId === appId);
 
-    if (existing && !customData) {
+    if (existing) {
       const nextZ = topZIndex + 1;
       setTopZIndex(nextZ);
       setActiveWindowId(existing.id);
-      setWindows(prev => prev.map(w => w.id === existing.id ? { ...w, isMinimized: false, zIndex: nextZ } : w));
+      setWindows(prev => prev.map(w => w.id === existing.id ? { 
+        ...w, 
+        isMinimized: false, 
+        zIndex: nextZ,
+        data: customData ? { ...w.data, ...customData } : w.data,
+        title: (appId === 'chrome' || appId === 'browser') && customData?.projectId
+          ? `${customData.projectId === 'tatagih' ? 'Tatagih' : customData.projectId === 'lintas' ? 'Lintas' : customData.projectId === 'neurofly' ? 'NeuroFly' : 'Project'} — Project Showcase - Google Chrome`
+          : w.title
+      } : w));
       return;
     }
 
@@ -158,10 +167,30 @@ export function App() {
         initialSize: { width: 760, height: 480 },
         initialPosition: { x: 150 + (windows.length % 5) * 25, y: 75 + (windows.length % 5) * 20 }
       },
-      chrome: {
-        title: 'Google Chrome',
-        icon: 'chrome',
+            tatagih: {
+        title: 'Tatagih',
+        icon: 'tatagih',
         initialSize: { width: 920, height: 600 },
+        initialPosition: { x: 70 + (windows.length % 5) * 25, y: 35 + (windows.length % 5) * 20 }
+      },
+      lintas: {
+        title: 'Lintas',
+        icon: 'lintas',
+        initialSize: { width: 780, height: 560 },
+        initialPosition: { x: 90 + (windows.length % 5) * 25, y: 45 + (windows.length % 5) * 20 }
+      },
+      neurofly: {
+        title: 'NeuroFly',
+        icon: 'neurofly',
+        initialSize: { width: 920, height: 620 },
+        initialPosition: { x: 80 + (windows.length % 5) * 25, y: 40 + (windows.length % 5) * 20 }
+      },
+      chrome: {
+        title: customData?.projectId 
+          ? `${customData.projectId === 'tatagih' ? 'Tatagih' : customData.projectId === 'lintas' ? 'Lintas' : customData.projectId === 'neurofly' ? 'NeuroFly' : 'Project'} — Project Showcase - Google Chrome`
+          : 'Google Chrome',
+        icon: 'chrome',
+        initialSize: { width: 980, height: 640 },
         initialPosition: { x: 70 + (windows.length % 5) * 25, y: 35 + (windows.length % 5) * 20 }
       },
       'ms-store': {
@@ -233,6 +262,26 @@ export function App() {
   };
 
   const openFile = (fileItem) => {
+    if (fileItem.projectId) {
+      launchApp('chrome', { projectId: fileItem.projectId });
+      return;
+    }
+    if (fileItem.appId === 'chrome' || fileItem.name === 'Google Chrome') {
+      launchApp('chrome', fileItem.projectId ? { projectId: fileItem.projectId } : null);
+      return;
+    }
+    if (fileItem.name && fileItem.name.toLowerCase().includes('tatagih')) {
+      launchApp('chrome', { projectId: 'tatagih' });
+      return;
+    }
+    if (fileItem.name && fileItem.name.toLowerCase().includes('lintas')) {
+      launchApp('chrome', { projectId: 'lintas' });
+      return;
+    }
+    if (fileItem.name && fileItem.name.toLowerCase().includes('neurofly')) {
+      launchApp('chrome', { projectId: 'neurofly' });
+      return;
+    }
     if (fileItem.extension === 'txt' || fileItem.content) {
       launchApp('notepad', {
         name: fileItem.name,
@@ -327,6 +376,7 @@ export function App() {
             initialPath={win.data?.path || 'Data (D:)'}
             onOpenFile={openFile}
             onOpenFolder={(folder) => {}}
+            onLaunchApp={launchApp}
           />
         );
       case 'notepad':
@@ -341,10 +391,20 @@ export function App() {
       case 'terminal':
       case 'antigravity':
         return <TerminalApp onLaunchApp={launchApp} />;
+      case 'tatagih':
+      case 'lintas':
+      case 'neurofly':
       case 'browser':
       case 'chrome':
       case 'ldplayer':
-        return <BrowserApp onOpenFile={openFile} />;
+        return (
+          <BrowserApp
+            onOpenFile={openFile}
+            initialProject={win.data?.projectId || (win.appId === 'tatagih' || win.appId === 'lintas' || win.appId === 'neurofly' ? win.appId : 'tatagih')}
+            initialUrl={win.data?.url}
+            onLaunchApp={launchApp}
+          />
+        );
       case 'photos':
       case 'paint':
         return (

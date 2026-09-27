@@ -117,7 +117,8 @@
   font-size: 12px;
 }
 
-.tray-btn:hover {
+.tray-btn:hover,
+.tray-btn.active {
   background: var(--hover-card);
 }
 

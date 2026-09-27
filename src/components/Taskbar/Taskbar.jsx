@@ -7,6 +7,7 @@ import { WinIcon } from '../Common/WinIcon';
 import { StartMenu } from './StartMenu';
 import { QuickSettings } from './QuickSettings';
 import { CalendarFlyout } from './CalendarFlyout';
+import { SystemTrayFlyout } from './SystemTrayFlyout';
 import { playClickSound, playWindowSound } from '../../utils/sound';
 import './Taskbar.css';
 
@@ -23,6 +24,7 @@ export const Taskbar = ({
   const [startOpen, setStartOpen] = useState(false);
   const [quickSettingsOpen, setQuickSettingsOpen] = useState(false);
   const [calendarOpen, setCalendarOpen] = useState(false);
+  const [systemTrayOpen, setSystemTrayOpen] = useState(false);
   const [taskbarMenu, setTaskbarMenu] = useState(null);
 
   const [timeStr, setTimeStr] = useState('');
@@ -44,6 +46,7 @@ export const Taskbar = ({
     setStartOpen(!startOpen);
     setQuickSettingsOpen(false);
     setCalendarOpen(false);
+    setSystemTrayOpen(false);
     setTaskbarMenu(null);
   };
 
@@ -52,6 +55,7 @@ export const Taskbar = ({
     setQuickSettingsOpen(!quickSettingsOpen);
     setStartOpen(false);
     setCalendarOpen(false);
+    setSystemTrayOpen(false);
     setTaskbarMenu(null);
   };
 
@@ -60,6 +64,17 @@ export const Taskbar = ({
     setCalendarOpen(!calendarOpen);
     setStartOpen(false);
     setQuickSettingsOpen(false);
+    setSystemTrayOpen(false);
+    setTaskbarMenu(null);
+  };
+
+  const handleToggleSystemTray = (e) => {
+    if (e && e.stopPropagation) e.stopPropagation();
+    playClickSound();
+    setSystemTrayOpen(!systemTrayOpen);
+    setStartOpen(false);
+    setQuickSettingsOpen(false);
+    setCalendarOpen(false);
     setTaskbarMenu(null);
   };
 
@@ -152,8 +167,12 @@ export const Taskbar = ({
         </div>
 
         <div className="taskbar-right">
-          <button className="tray-btn" title="Show hidden icons">
-            <ChevronUp size={14} color="#9ca3af" />
+          <button 
+            className={`tray-btn ${systemTrayOpen ? 'active' : ''}`} 
+            title="Show hidden icons"
+            onClick={handleToggleSystemTray}
+          >
+            <ChevronUp size={14} color={systemTrayOpen ? '#38bdf8' : '#9ca3af'} />
           </button>
 
           <div className="tray-btn" onClick={handleToggleQuickSettings} title="Internet, Sound & Battery">
@@ -258,6 +277,15 @@ export const Taskbar = ({
       <CalendarFlyout
         isOpen={calendarOpen}
         onClose={() => setCalendarOpen(false)}
+        accentColor={accentColor}
+      />
+
+      <SystemTrayFlyout
+        isOpen={systemTrayOpen}
+        onClose={() => setSystemTrayOpen(false)}
+        onLaunchApp={onLaunchApp}
+        onOpenSettings={onOpenSettings}
+        onOpenQuickSettings={handleToggleQuickSettings}
         accentColor={accentColor}
       />
     </>

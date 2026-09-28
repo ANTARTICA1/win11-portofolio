@@ -14,6 +14,7 @@ import { TaskManagerApp } from './components/Apps/TaskManagerApp';
 
 import { NotificationToast } from './components/Common/NotificationToast';
 import { RunDialog } from './components/Common/RunDialog';
+import { WinIcon } from './components/Common/WinIcon';
 import { DESKTOP_ITEMS } from './data/fileSystem';
 import { playWindowSound, playStartupChime, playClickSound } from './utils/sound';
 

@@ -90,9 +90,8 @@ const ICON_MAP = {
   'makalah': '/icons/notepad.png'
 };
 
-export const WinIcon = ({ name, size = 32, className = '', badge = null }) => {
+export const WinIcon = ({ name, size = 32, className = '' }) => {
   const iconSrc = ICON_MAP[name] || '/icons/folder.png';
-  const hasBadge = badge === 'A' || name === 'chrome-badged';
 
   return (
     <div
@@ -119,29 +118,6 @@ export const WinIcon = ({ name, size = 32, className = '', badge = null }) => {
         }}
         draggable={false}
       />
-      {hasBadge && (
-        <div
-          style={{
-            position: 'absolute',
-            top: '-2px',
-            right: '-2px',
-            width: Math.max(14, size * 0.42),
-            height: Math.max(14, size * 0.42),
-            borderRadius: '50%',
-            backgroundColor: '#ea580c',
-            color: '#ffffff',
-            fontSize: Math.max(8, Math.round(size * 0.25)) + 'px',
-            fontWeight: 'bold',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            border: '1.5px solid #1f1f1f',
-            lineHeight: 1
-          }}
-        >
-          A
-        </div>
-      )}
     </div>
   );
 };

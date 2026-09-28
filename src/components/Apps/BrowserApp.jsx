@@ -875,21 +875,21 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
           onClick={() => handleSelectProject('tatagih')}
         >
           <WinIcon name="tatagih" size={13} />
-          <span>💳 Tatagih (Bill Manager)</span>
+          <span>Tatagih (Bill Manager)</span>
         </div>
         <div
           className={`chrome-bookmark-item ${activeProjectId === 'lintas' ? 'active' : ''}`}
           onClick={() => handleSelectProject('lintas')}
         >
           <WinIcon name="lintas" size={13} />
-          <span>📱 Lintas (Companion Utility)</span>
+          <span>Lintas (Companion Utility)</span>
         </div>
         <div
           className={`chrome-bookmark-item ${activeProjectId === 'neurofly' ? 'active' : ''}`}
           onClick={() => handleSelectProject('neurofly')}
         >
           <WinIcon name="neurofly" size={13} />
-          <span>🧠 NeuroFly (Drosophila × Pong)</span>
+          <span>NeuroFly (Drosophila × Pong)</span>
         </div>
         <a
           href="https://github.com/agungkrisna"

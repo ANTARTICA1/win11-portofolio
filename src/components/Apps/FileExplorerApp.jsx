@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { 
   ArrowLeft, ArrowRight, ArrowUp, RefreshCw, Search,
   Plus, ChevronRight, ChevronDown, LayoutGrid, List, RotateCcw, X
@@ -6,6 +6,7 @@ import {
 import { WinIcon } from '../Common/WinIcon';
 import { DATA_D_ITEMS, PROJECTS_ITEMS, RECYCLE_BIN_ITEMS } from '../../data/fileSystem';
 import { playClickSound } from '../../utils/sound';
+import { isMobileDevice } from '../../utils/device';
 import { useWindow } from '../Windows/WindowContext';
 import './FileExplorer.css';
 
@@ -279,14 +280,21 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
     }
   };
 
+  const lastExplorerOpenTimeRef = useRef(0);
+
   const handleItemClick = (item) => {
     setSelectedItemName(item.name);
-    if (typeof window !== 'undefined' && window.innerWidth <= 768) {
+    // Di HP (Mobile): 1x klik langsung membuka folder/file
+    if (isMobileDevice()) {
       handleItemDoubleClick(item);
     }
   };
 
   const handleItemDoubleClick = (item) => {
+    const now = Date.now();
+    if (now - lastExplorerOpenTimeRef.current < 300) return;
+    lastExplorerOpenTimeRef.current = now;
+
     playClickSound();
     setMobileSidebarOpen(false);
     if (item.type === 'drive') {
@@ -787,16 +795,16 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
                       key={index}
                       className={`details-row ${isSelected ? 'selected' : ''}`}
                       onClick={() => handleItemClick(item)}
-                      onDoubleClick={() => handleItemDoubleClick(item)}
-                      onTouchEnd={() => {
-                        const now = Date.now();
-                        const lastTouch = item._lastTouch || 0;
-                        if (now - lastTouch < 350) {
+                      onDoubleClick={() => {
+                        if (!isMobileDevice()) {
                           handleItemDoubleClick(item);
-                        } else {
+                        }
+                      }}
+                      onTouchEnd={(e) => {
+                        if (isMobileDevice()) {
+                          e.stopPropagation();
                           handleItemClick(item);
                         }
-                        item._lastTouch = now;
                       }}
                     >
                       <div className="details-col col-name">
@@ -824,16 +832,16 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
                     key={index}
                     className={`folder-card ${isSelected ? 'selected' : ''}`}
                     onClick={() => handleItemClick(item)}
-                    onDoubleClick={() => handleItemDoubleClick(item)}
-                    onTouchEnd={() => {
-                      const now = Date.now();
-                      const lastTouch = item._lastTouch || 0;
-                      if (now - lastTouch < 350) {
+                    onDoubleClick={() => {
+                      if (!isMobileDevice()) {
                         handleItemDoubleClick(item);
-                      } else {
+                      }
+                    }}
+                    onTouchEnd={(e) => {
+                      if (isMobileDevice()) {
+                        e.stopPropagation();
                         handleItemClick(item);
                       }
-                      item._lastTouch = now;
                     }}
                   >
                     <div className="folder-icon-wrapper">

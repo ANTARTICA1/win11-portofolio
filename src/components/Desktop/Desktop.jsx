@@ -4,6 +4,7 @@ import { WinIcon } from '../Common/WinIcon';
 import { DESKTOP_ITEMS } from '../../data/fileSystem';
 import { ContextMenu } from './ContextMenu';
 import { playClickSound } from '../../utils/sound';
+import { isMobileDevice } from '../../utils/device';
 import './Desktop.css';
 
 export const Desktop = ({
@@ -70,13 +71,13 @@ export const Desktop = ({
     setTimeout(() => setIsRefreshing(false), 200);
   };
 
-  const handleIconClick = (e, item) => {
-    e.stopPropagation();
-    setSelectedIconId(item.id);
-  };
+  const lastOpenTimeRef = useRef(0);
 
-  const handleIconDoubleClick = (e, item) => {
-    e.stopPropagation();
+  const handleOpenItem = (item) => {
+    const now = Date.now();
+    if (now - lastOpenTimeRef.current < 300) return;
+    lastOpenTimeRef.current = now;
+
     playClickSound();
 
     if (item.app === 'notepad' && item.content) {
@@ -102,6 +103,32 @@ export const Desktop = ({
       onLaunchApp('explorer', { path: 'Recycle Bin' });
     } else {
       onLaunchApp(item.app || 'explorer');
+    }
+  };
+
+  const handleIconClick = (e, item) => {
+    e.stopPropagation();
+    setSelectedIconId(item.id);
+
+    // Di HP (Mobile): 1x klik langsung membuka aplikasi/file
+    if (isMobileDevice()) {
+      handleOpenItem(item);
+    }
+  };
+
+  const handleIconDoubleClick = (e, item) => {
+    e.stopPropagation();
+    // Di Windows / Desktop: butuh double click untuk membuka
+    if (!isMobileDevice()) {
+      handleOpenItem(item);
+    }
+  };
+
+  const handleIconTouchEnd = (e, item) => {
+    if (isMobileDevice()) {
+      e.stopPropagation();
+      setSelectedIconId(item.id);
+      handleOpenItem(item);
     }
   };
 
@@ -139,16 +166,7 @@ export const Desktop = ({
               className={`desktop-icon-item ${isSelected ? 'is-selected' : ''}`}
               onClick={(e) => handleIconClick(e, item)}
               onDoubleClick={(e) => handleIconDoubleClick(e, item)}
-              onTouchEnd={(e) => {
-                const now = Date.now();
-                const lastTouch = item._lastTouch || 0;
-                if (now - lastTouch < 350) {
-                  handleIconDoubleClick(e, item);
-                } else {
-                  handleIconClick(e, item);
-                }
-                item._lastTouch = now;
-              }}
+              onTouchEnd={(e) => handleIconTouchEnd(e, item)}
               title={item.name}
             >
               <div className="desktop-icon-img">

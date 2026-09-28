@@ -24,8 +24,8 @@ export const SettingsApp = ({
   }, []);
 
   const wallpapers = [
-    { id: 'win11_bloom_light', name: 'Windows 11 Bloom (Default)', path: '/wallpapers/win11_bloom_light.jpg' },
-    { id: 'win11_bloom_dark', name: 'Windows 11 Bloom (Dark)', path: '/wallpapers/win11_bloom_dark.jpg' },
+    { id: 'win11_bloom_dark', name: 'Windows 11 Bloom (Dark / Default)', path: '/wallpapers/win11_bloom_dark.jpg' },
+    { id: 'win11_bloom_light', name: 'Windows 11 Bloom (Light)', path: '/wallpapers/win11_bloom_light.jpg' },
     { id: 'win11_glow', name: 'Windows 11 Glow', path: '/wallpapers/win11_glow.jpg' },
     { id: 'win11_motion', name: 'Windows 11 Captured Motion', path: '/wallpapers/win11_motion.jpg' },
     { id: 'win11_sunrise', name: 'Windows 11 Sunrise', path: '/wallpapers/win11_sunrise.jpg' },

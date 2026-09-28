@@ -28,7 +28,7 @@ const PROJECT_TITLES = {
 };
 
 export function App() {
-  const [wallpaper, setWallpaper] = useState('/wallpapers/win11_bloom_light.jpg');
+  const [wallpaper, setWallpaper] = useState('/wallpapers/win11_bloom_dark.jpg');
   const [accentColor, setAccentColor] = useState('#0078d4');
   const [isDarkTheme, setIsDarkTheme] = useState(true);
   const [topZIndex, setTopZIndex] = useState(100);

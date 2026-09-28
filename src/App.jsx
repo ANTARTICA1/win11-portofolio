@@ -120,7 +120,13 @@ export function App() {
     const appConfigs = {
       explorer: {
         title: customData?.path || 'Data (D:)',
-        icon: 'explorer',
+        icon: (customData?.path === 'Recycle Bin' || customData?.path?.toLowerCase().includes('recycle')) ? 'trash' : 'explorer',
+        initialSize: { width: 880, height: 560 },
+        initialPosition: { x: 80 + (windows.length % 5) * 25, y: 40 + (windows.length % 5) * 20 }
+      },
+      recycle_bin: {
+        title: 'Recycle Bin',
+        icon: 'trash',
         initialSize: { width: 880, height: 560 },
         initialPosition: { x: 80 + (windows.length % 5) * 25, y: 40 + (windows.length % 5) * 20 }
       },
@@ -412,9 +418,10 @@ export function App() {
   const renderAppContent = (win) => {
     switch (win.appId) {
       case 'explorer':
+      case 'recycle_bin':
         return (
           <FileExplorerApp
-            initialPath={win.data?.path || 'Data (D:)'}
+            initialPath={win.appId === 'recycle_bin' ? 'Recycle Bin' : (win.data?.path || 'Data (D:)')}
             onOpenFile={openFile}
             onOpenFolder={(folder) => {}}
             onLaunchApp={launchApp}
@@ -474,7 +481,7 @@ export function App() {
           />
         );
       case 'calculator':
-        return <CalculatorApp />;
+        return <CalculatorApp onLaunchApp={launchApp} />;
       case 'taskmgr':
         return <TaskManagerApp />;
       default:

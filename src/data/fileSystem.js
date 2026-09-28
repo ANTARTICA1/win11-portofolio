@@ -838,3 +838,64 @@ export const DESKTOP_ITEMS = [
     icon: "calculator"
   }
 ];
+
+export const RECYCLE_BIN_ITEMS = [
+  {
+    name: 'catatan_rahasia_terbuang.txt',
+    type: 'file',
+    extension: 'txt',
+    size: '1.2 KB',
+    originalLocation: 'C:\\Users\\KRISNA\\Documents',
+    dateDeleted: '9/27/2026 11:42 PM',
+    itemType: 'Text Document',
+    content: `=======================================================
+           [CATATAN RAHASIA // DEVELOPER HINT]
+=======================================================
+
+Status: Dibuang ke Recycle Bin
+Prioritas: Rahasia
+
+Catatan:
+Jangan sampai lupa kode rahasia untuk membuka 
+Developer Secret Vault & Easter Egg!
+
+Petunjuk:
+1. Buka aplikasi Kalkulator (Calculator) di desktop / taskbar.
+2. Masukkan angka kode: 6969
+3. Tekan '=' (atau tombol Enter).
+
+Akan terbuka brankas rahasia & dossier pengembang!
+=======================================================`
+  },
+  {
+    name: '1. topologi.png',
+    type: 'file',
+    extension: 'png',
+    size: '87 KB',
+    originalLocation: 'C:\\Users\\KRISNA\\Downloads',
+    dateDeleted: '9/11/2026 4:37 PM',
+    itemType: 'PNG File',
+    imageUrl: '/wallpapers/win11_bloom_light.jpg'
+  },
+  {
+    name: '.trashed-1789969246-Screenshot_2026-07-12.jpg',
+    type: 'file',
+    extension: 'jpg',
+    size: '497 KB',
+    originalLocation: 'C:\\Users\\KRISNA\\Downloads\\file\\bbjd\\bb',
+    dateDeleted: '9/16/2026 7:33 AM',
+    itemType: 'JPG File',
+    imageUrl: '/wallpapers/win11_bloom_dark.jpg'
+  },
+  {
+    name: 'draft_desain_portofolio_v1.jpg',
+    type: 'file',
+    extension: 'jpg',
+    size: '505 KB',
+    originalLocation: 'C:\\Users\\KRISNA\\Downloads\\Archive\\portfolio',
+    dateDeleted: '9/17/2026 1:24 PM',
+    itemType: 'JPG File',
+    imageUrl: '/wallpapers/win11_bloom_light.jpg'
+  }
+];
+

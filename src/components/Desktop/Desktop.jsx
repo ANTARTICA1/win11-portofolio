@@ -98,6 +98,8 @@ export const Desktop = ({
       onLaunchApp('chrome', { projectId: 'lintas' });
     } else if (item.app === 'neurofly' || (item.name && item.name.toLowerCase().includes('neurofly'))) {
       onLaunchApp('chrome', { projectId: 'neurofly' });
+    } else if (item.app === 'recycle_bin' || item.id === 'recycle_bin') {
+      onLaunchApp('explorer', { path: 'Recycle Bin' });
     } else {
       onLaunchApp(item.app || 'explorer');
     }

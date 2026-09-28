@@ -1,12 +1,26 @@
 import React, { useState } from 'react';
 import { 
   ArrowLeft, ArrowRight, ArrowUp, RefreshCw, Search,
-  Plus, ChevronRight, ChevronDown, LayoutGrid, List
+  Plus, ChevronRight, ChevronDown, LayoutGrid, List, RotateCcw
 } from 'lucide-react';
 import { WinIcon } from '../Common/WinIcon';
-import { DATA_D_ITEMS, PROJECTS_ITEMS } from '../../data/fileSystem';
+import { DATA_D_ITEMS, PROJECTS_ITEMS, RECYCLE_BIN_ITEMS } from '../../data/fileSystem';
 import { playClickSound } from '../../utils/sound';
 import './FileExplorer.css';
+
+const getItemIconName = (item) => {
+  if (item.isDrive) {
+    if (item.name.includes('(C:)')) return 'drive-c';
+    if (item.name.includes('(D:)')) return 'drive-d';
+    return 'shared-folder';
+  }
+  if (item.type === 'folder') return 'folder';
+  if (item.type === 'executable' || item.extension === 'exe') return item.projectId || item.icon || 'chrome';
+  if (item.extension === 'pdf') return 'pdf';
+  if (item.extension === 'jpg' || item.extension === 'png') return 'photos';
+  if (item.extension === 'txt') return 'notepad';
+  return item.icon || 'notepad';
+};
 
 export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenFolder, onLaunchApp }) => {
   const [currentPath, setCurrentPath] = useState(initialPath);
@@ -15,10 +29,15 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
 
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedItemName, setSelectedItemName] = useState(null);
-  const [viewMode, setViewMode] = useState('grid');
+  const [viewMode, setViewMode] = useState(initialPath === 'Recycle Bin' ? 'list' : 'grid');
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const [recycleBinItems, setRecycleBinItems] = useState(RECYCLE_BIN_ITEMS);
 
   const getCurrentItems = () => {
+    if (currentPath === 'Recycle Bin') {
+      return recycleBinItems;
+    }
+
     if (currentPath === 'This PC') {
       return [
         { name: 'Local Disk (C:)', type: 'drive', isDrive: true, total: '256 GB', free: '142 GB' },
@@ -254,6 +273,7 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
   };
 
   const getBreadcrumbs = () => {
+    if (currentPath === 'Recycle Bin') return ['Recycle Bin'];
     const parts = ['This PC'];
     if (currentPath === 'This PC') return parts;
     if (currentPath === 'Projects') {
@@ -276,6 +296,7 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
   };
 
   const getTabIcon = () => {
+    if (currentPath === 'Recycle Bin') return 'trash';
     if (currentPath === 'Projects') return 'folder';
     if (currentPath === 'Downloads') return 'downloads';
     if (currentPath === 'Documents') return 'documents';
@@ -337,11 +358,43 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
               </span>
             </button>
           )}
-          <button className="cmd-btn" onClick={() => alert('Folder baru dibuat')}>
-            <Plus size={15} color="#0078d4" />
-            <span>New</span>
-            <ChevronDown size={12} />
-          </button>
+          {currentPath === 'Recycle Bin' ? (
+            <>
+              <button 
+                className="cmd-btn" 
+                onClick={() => {
+                  playClickSound();
+                  if (recycleBinItems.length === 0) {
+                    alert('Recycle Bin sudah kosong.');
+                  } else if (window.confirm('Apakah Anda yakin ingin mengosongkan Recycle Bin?')) {
+                    setRecycleBinItems([]);
+                    setSelectedItemName(null);
+                  }
+                }}
+              >
+                <WinIcon name="trash" size={15} />
+                <span>Empty Recycle Bin</span>
+              </button>
+              <button 
+                className="cmd-btn" 
+                onClick={() => {
+                  playClickSound();
+                  setRecycleBinItems(RECYCLE_BIN_ITEMS);
+                  alert('Semua item di Recycle Bin telah dipulihkan.');
+                }}
+              >
+                <RotateCcw size={14} color="#0078d4" />
+                <span>Restore all items</span>
+              </button>
+              <div className="cmd-divider" />
+            </>
+          ) : (
+            <button className="cmd-btn" onClick={() => alert('Folder baru dibuat')}>
+              <Plus size={15} color="#0078d4" />
+              <span>New</span>
+              <ChevronDown size={12} />
+            </button>
+          )}
           <div className="cmd-divider" />
           <button className="cmd-btn icon-only" title="Cut" disabled={!selectedItemName}>
             <WinIcon name="scissors" size={16} />
@@ -414,7 +467,7 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
         </div>
 
         <div className="address-box">
-          <WinIcon name="this-pc" size={16} />
+          <WinIcon name={currentPath === 'Recycle Bin' ? 'trash' : 'this-pc'} size={16} />
           <div className="address-breadcrumbs">
             {getBreadcrumbs().map((part, index) => (
               <React.Fragment key={index}>
@@ -527,6 +580,13 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
             <WinIcon name="folder" size={16} />
             <span>TikTok</span>
           </div>
+          <div 
+            className={`sidebar-item ${currentPath === 'Recycle Bin' ? 'selected' : ''}`}
+            onClick={() => navigateTo('Recycle Bin')}
+          >
+            <WinIcon name="trash" size={16} />
+            <span>Recycle Bin</span>
+          </div>
 
           <div className="sidebar-divider" />
 
@@ -572,68 +632,115 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
         </div>
 
         <div className="explorer-content-view">
-          <div className="explorer-grid">
-            {filteredItems.map((item, index) => {
-              const isSelected = selectedItemName === item.name;
+          {(viewMode === 'list' || currentPath === 'Recycle Bin') ? (
+            <div className="explorer-details-table">
+              <div className="details-header-row">
+                <div className="details-col col-name">Name</div>
+                <div className="details-col col-loc">Original Location</div>
+                <div className="details-col col-date">Date Deleted</div>
+                <div className="details-col col-size">Size</div>
+                <div className="details-col col-type">Item type</div>
+              </div>
+              <div className="details-body">
+                {filteredItems.map((item, index) => {
+                  const isSelected = selectedItemName === item.name;
 
-              return (
-                <div
-                  key={index}
-                  className={`folder-card ${isSelected ? 'selected' : ''}`}
-                  onClick={() => handleItemClick(item)}
-                  onDoubleClick={() => handleItemDoubleClick(item)}
-                  onTouchEnd={(e) => {
-                    const now = Date.now();
-                    const lastTouch = item._lastTouch || 0;
-                    if (now - lastTouch < 350) {
-                      handleItemDoubleClick(item);
-                    } else {
-                      handleItemClick(item);
-                    }
-                    item._lastTouch = now;
-                  }}
-                >
-                  <div className="folder-icon-wrapper">
-                    {item.isDrive ? (
-                      item.name.includes('(C:)') ? (
-                        <WinIcon name="drive-c" size={52} />
-                      ) : item.name.includes('(D:)') ? (
-                        <WinIcon name="drive-d" size={52} />
-                      ) : (
-                        <WinIcon name="shared-folder" size={52} />
-                      )
-                    ) : item.type === 'folder' ? (
-                      <>
-                        <WinIcon name="folder" size={54} />
-                        {item.previewImage && (
-                          <div className="folder-inner-preview">
-                            <img src={item.previewImage} alt="preview" />
-                          </div>
-                        )}
-                      </>
-                    ) : item.type === 'executable' || item.extension === 'exe' ? (
-                      <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <WinIcon name={item.projectId || item.icon || 'chrome'} size={50} />
-                        <span style={{ position: 'absolute', bottom: -2, right: -4, backgroundColor: '#0078d4', color: '#fff', fontSize: '9px', fontWeight: 700, padding: '1px 4px', borderRadius: '3px', textTransform: 'uppercase', boxShadow: '0 2px 4px rgba(0,0,0,0.4)' }}>EXE</span>
+                  return (
+                    <div
+                      key={index}
+                      className={`details-row ${isSelected ? 'selected' : ''}`}
+                      onClick={() => handleItemClick(item)}
+                      onDoubleClick={() => handleItemDoubleClick(item)}
+                      onTouchEnd={() => {
+                        const now = Date.now();
+                        const lastTouch = item._lastTouch || 0;
+                        if (now - lastTouch < 350) {
+                          handleItemDoubleClick(item);
+                        } else {
+                          handleItemClick(item);
+                        }
+                        item._lastTouch = now;
+                      }}
+                    >
+                      <div className="details-col col-name">
+                        <WinIcon name={getItemIconName(item)} size={18} />
+                        <span className="details-name-text">{item.name}</span>
                       </div>
-                    ) : item.extension === 'pdf' ? (
-                      <WinIcon name="pdf" size={48} />
-                    ) : item.extension === 'jpg' || item.extension === 'png' ? (
-                      <WinIcon name="photos" size={48} />
-                    ) : item.extension === 'txt' ? (
-                      <WinIcon name="notepad" size={48} />
-                    ) : (
-                      <WinIcon name={item.icon || 'document'} size={48} />
+                      <div className="details-col col-loc">{item.originalLocation || 'C:\\Users\\KRISNA'}</div>
+                      <div className="details-col col-date">{item.dateDeleted || '9/27/2026 11:42 PM'}</div>
+                      <div className="details-col col-size">{item.size || '-'}</div>
+                      <div className="details-col col-type">
+                        {item.itemType || (item.extension ? `${item.extension.toUpperCase()} File` : (item.type === 'folder' ? 'File folder' : 'Document'))}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          ) : (
+            <div className="explorer-grid">
+              {filteredItems.map((item, index) => {
+                const isSelected = selectedItemName === item.name;
+
+                return (
+                  <div
+                    key={index}
+                    className={`folder-card ${isSelected ? 'selected' : ''}`}
+                    onClick={() => handleItemClick(item)}
+                    onDoubleClick={() => handleItemDoubleClick(item)}
+                    onTouchEnd={() => {
+                      const now = Date.now();
+                      const lastTouch = item._lastTouch || 0;
+                      if (now - lastTouch < 350) {
+                        handleItemDoubleClick(item);
+                      } else {
+                        handleItemClick(item);
+                      }
+                      item._lastTouch = now;
+                    }}
+                  >
+                    <div className="folder-icon-wrapper">
+                      {item.isDrive ? (
+                        item.name.includes('(C:)') ? (
+                          <WinIcon name="drive-c" size={52} />
+                        ) : item.name.includes('(D:)') ? (
+                          <WinIcon name="drive-d" size={52} />
+                        ) : (
+                          <WinIcon name="shared-folder" size={52} />
+                        )
+                      ) : item.type === 'folder' ? (
+                        <>
+                          <WinIcon name="folder" size={54} />
+                          {item.previewImage && (
+                            <div className="folder-inner-preview">
+                              <img src={item.previewImage} alt="preview" />
+                            </div>
+                          )}
+                        </>
+                      ) : item.type === 'executable' || item.extension === 'exe' ? (
+                        <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                          <WinIcon name={item.projectId || item.icon || 'chrome'} size={50} />
+                          <span style={{ position: 'absolute', bottom: -2, right: -4, backgroundColor: '#0078d4', color: '#fff', fontSize: '9px', fontWeight: 700, padding: '1px 4px', borderRadius: '3px', textTransform: 'uppercase', boxShadow: '0 2px 4px rgba(0,0,0,0.4)' }}>EXE</span>
+                        </div>
+                      ) : item.extension === 'pdf' ? (
+                        <WinIcon name="pdf" size={48} />
+                      ) : item.extension === 'jpg' || item.extension === 'png' ? (
+                        <WinIcon name="photos" size={48} />
+                      ) : item.extension === 'txt' ? (
+                        <WinIcon name="notepad" size={48} />
+                      ) : (
+                        <WinIcon name={item.icon || 'document'} size={48} />
+                      )}
+                    </div>
+                    <span className="folder-name">{item.name}</span>
+                    {(item.type === 'executable' || item.extension === 'exe') && (
+                      <span style={{ fontSize: '10px', color: '#38bdf8', marginTop: '2px', fontWeight: 600 }}>Aplikasi</span>
                     )}
                   </div>
-                  <span className="folder-name">{item.name}</span>
-                  {(item.type === 'executable' || item.extension === 'exe') && (
-                    <span style={{ fontSize: '10px', color: '#38bdf8', marginTop: '2px', fontWeight: 600 }}>Aplikasi</span>
-                  )}
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
+          )}
         </div>
       </div>
 

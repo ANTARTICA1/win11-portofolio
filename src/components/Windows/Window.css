@@ -192,3 +192,39 @@
     width: 44px;
   }
 }
+
+.notepad-win-controls,
+.terminal-win-controls {
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.notepad-win-controls .win-ctrl-btn,
+.terminal-win-controls .win-ctrl-btn {
+  width: 46px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: #9aa0a6;
+  cursor: pointer;
+  transition: background-color 0.12s, color 0.12s;
+}
+
+.notepad-win-controls .win-ctrl-btn:hover,
+.terminal-win-controls .win-ctrl-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.notepad-win-controls .win-ctrl-btn.close-btn:hover,
+.terminal-win-controls .win-ctrl-btn.close-btn:hover {
+  background: #e81123 !important;
+  color: #ffffff !important;
+}
+

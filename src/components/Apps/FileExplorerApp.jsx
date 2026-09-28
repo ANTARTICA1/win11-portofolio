@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { 
   ArrowLeft, ArrowRight, ArrowUp, RefreshCw, Search,
-  Plus, ChevronRight, ChevronDown, LayoutGrid, List, RotateCcw
+  Plus, ChevronRight, ChevronDown, LayoutGrid, List, RotateCcw, X
 } from 'lucide-react';
 import { WinIcon } from '../Common/WinIcon';
 import { DATA_D_ITEMS, PROJECTS_ITEMS, RECYCLE_BIN_ITEMS } from '../../data/fileSystem';
 import { playClickSound } from '../../utils/sound';
+import { useWindow } from '../Windows/WindowContext';
 import './FileExplorer.css';
 
 const getItemIconName = (item) => {
@@ -23,9 +24,27 @@ const getItemIconName = (item) => {
 };
 
 export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenFolder, onLaunchApp }) => {
-  const [currentPath, setCurrentPath] = useState(initialPath);
-  const [history, setHistory] = useState([initialPath]);
-  const [historyIndex, setHistoryIndex] = useState(0);
+  const winCtx = useWindow();
+  const [tabs, setTabs] = useState(() => [
+    {
+      id: 'tab-1',
+      path: initialPath,
+      history: [initialPath],
+      historyIndex: 0
+    }
+  ]);
+  const [activeTabId, setActiveTabId] = useState('tab-1');
+
+  const activeTab = tabs.find(t => t.id === activeTabId) || tabs[0] || {
+    id: 'tab-1',
+    path: initialPath,
+    history: [initialPath],
+    historyIndex: 0
+  };
+
+  const currentPath = activeTab.path;
+  const history = activeTab.history;
+  const historyIndex = activeTab.historyIndex;
 
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedItemName, setSelectedItemName] = useState(null);
@@ -163,11 +182,17 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
 
   const navigateTo = (newPath) => {
     playClickSound();
-    const newHistory = history.slice(0, historyIndex + 1);
-    newHistory.push(newPath);
-    setHistory(newHistory);
-    setHistoryIndex(newHistory.length - 1);
-    setCurrentPath(newPath);
+    setTabs(prev => prev.map(t => {
+      if (t.id !== activeTabId) return t;
+      const newHistory = t.history.slice(0, t.historyIndex + 1);
+      newHistory.push(newPath);
+      return {
+        ...t,
+        path: newPath,
+        history: newHistory,
+        historyIndex: newHistory.length - 1
+      };
+    }));
     setSelectedItemName(null);
     setSearchQuery('');
   };
@@ -175,28 +200,82 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
   const handleBack = () => {
     if (historyIndex > 0) {
       playClickSound();
-      const newIdx = historyIndex - 1;
-      setHistoryIndex(newIdx);
-      setCurrentPath(history[newIdx]);
+      setTabs(prev => prev.map(t => {
+        if (t.id !== activeTabId) return t;
+        const nextIdx = t.historyIndex - 1;
+        return {
+          ...t,
+          historyIndex: nextIdx,
+          path: t.history[nextIdx]
+        };
+      }));
+      setSelectedItemName(null);
+      setSearchQuery('');
     }
   };
 
   const handleForward = () => {
     if (historyIndex < history.length - 1) {
       playClickSound();
-      const newIdx = historyIndex + 1;
-      setHistoryIndex(newIdx);
-      setCurrentPath(history[newIdx]);
+      setTabs(prev => prev.map(t => {
+        if (t.id !== activeTabId) return t;
+        const nextIdx = t.historyIndex + 1;
+        return {
+          ...t,
+          historyIndex: nextIdx,
+          path: t.history[nextIdx]
+        };
+      }));
+      setSelectedItemName(null);
+      setSearchQuery('');
     }
   };
 
   const handleUp = () => {
+    playClickSound();
     if (currentPath.includes(' > ')) {
       const parts = currentPath.split(' > ');
       parts.pop();
       navigateTo(parts.join(' > '));
     } else if (currentPath === 'Projects' || currentPath === 'Data (D:)' || currentPath === 'Downloads' || currentPath === 'Documents' || currentPath === 'Home' || currentPath === 'Gallery' || currentPath === 'Local Disk (C:)') {
       navigateTo('This PC');
+    }
+  };
+
+  const handleNewTab = () => {
+    playClickSound();
+    const newId = `tab-${Date.now()}`;
+    const newPath = currentPath === 'Downloads' ? 'Data (D:)' : 'Downloads';
+    setTabs(prev => [
+      ...prev,
+      {
+        id: newId,
+        path: newPath,
+        history: [newPath],
+        historyIndex: 0
+      }
+    ]);
+    setActiveTabId(newId);
+  };
+
+  const handleCloseTab = (tabId, e) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    playClickSound();
+    if (tabs.length === 1) {
+      if (winCtx?.onClose) {
+        winCtx.onClose();
+      }
+      return;
+    }
+    const idx = tabs.findIndex(t => t.id === tabId);
+    const newTabs = tabs.filter(t => t.id !== tabId);
+    setTabs(newTabs);
+    if (activeTabId === tabId) {
+      const nextTab = newTabs[Math.max(0, idx - 1)];
+      setActiveTabId(nextTab.id);
     }
   };
 
@@ -295,38 +374,160 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
     return parts;
   };
 
-  const getTabIcon = () => {
-    if (currentPath === 'Recycle Bin') return 'trash';
-    if (currentPath === 'Projects') return 'folder';
-    if (currentPath === 'Downloads') return 'downloads';
-    if (currentPath === 'Documents') return 'documents';
-    if (currentPath === 'Gallery') return 'gallery';
-    if (currentPath === 'Home') return 'home';
-    if (currentPath === 'This PC') return 'this-pc';
-    if (currentPath.includes('(C:)')) return 'drive-c';
-    if (currentPath.includes('(D:)')) return 'drive-d';
+  const getTabIcon = (path = currentPath) => {
+    if (path === 'Recycle Bin') return 'trash';
+    if (path === 'Projects' || path.endsWith('> Projects')) return 'folder';
+    if (path === 'Downloads') return 'downloads';
+    if (path === 'Documents') return 'documents';
+    if (path === 'Gallery') return 'gallery';
+    if (path === 'Home') return 'home';
+    if (path === 'This PC') return 'this-pc';
+    if (path.includes('(C:)')) return 'drive-c';
+    if (path.includes('(D:)')) return 'drive-d';
     return 'folder';
   };
 
   return (
     <div className="explorer-container">
-      <div className="explorer-tabs-bar">
-        <div className="explorer-tab">
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-            <WinIcon name={getTabIcon()} size={16} />
-            <span>{currentPath.includes(' > ') ? currentPath.split(' > ').pop() : currentPath}</span>
-          </div>
-          <span className="explorer-tab-close">×</span>
+      {/* 1. Combined Windows 11 Tabs & Titlebar (Tabs + Window Controls in the EXACT SAME ROW) */}
+      <div
+        className="explorer-tabs-bar"
+        onPointerDown={winCtx?.handleTitlePointerDown}
+        onPointerMove={winCtx?.handleTitlePointerMove}
+        onPointerUp={winCtx?.handleTitlePointerUp}
+        onDoubleClick={() => {
+          if (!winCtx?.isMobile && winCtx?.onMaximize) {
+            playClickSound();
+            winCtx.onMaximize();
+          }
+        }}
+      >
+        <div className="explorer-tabstrip">
+          {tabs.map((tab) => {
+            const isTabActive = tab.id === activeTabId;
+            const tabName = tab.path.includes(' > ') ? tab.path.split(' > ').pop() : tab.path;
+            return (
+              <div
+                key={tab.id}
+                className={`explorer-tab ${isTabActive ? 'active' : 'inactive'}`}
+                onClick={() => {
+                  playClickSound();
+                  setActiveTabId(tab.id);
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: 7, overflow: 'hidden' }}>
+                  <WinIcon name={getTabIcon(tab.path)} size={16} />
+                  <span className="explorer-tab-title">{tabName}</span>
+                </div>
+                <button
+                  type="button"
+                  className="explorer-tab-close"
+                  title="Close tab"
+                  onPointerDown={(e) => e.stopPropagation()}
+                  onClick={(e) => handleCloseTab(tab.id, e)}
+                >
+                  <X size={12} />
+                </button>
+              </div>
+            );
+          })}
+
+          <button 
+            type="button"
+            className="explorer-new-tab-btn" 
+            title="New Tab"
+            onPointerDown={(e) => e.stopPropagation()}
+            onClick={handleNewTab}
+          >
+            <Plus size={15} />
+          </button>
         </div>
-        <button 
-          className="explorer-new-tab-btn" 
-          title="New Tab"
-          onClick={() => navigateTo('This PC')}
-        >
-          <Plus size={15} />
-        </button>
+
+        {/* Empty draggable space */}
+        <div className="explorer-titlebar-drag-spacer" />
+
+        {/* Window controls (Minimize, Maximize, Close) in the SAME ROW */}
+        {winCtx?.WindowControls && (
+          <winCtx.WindowControls
+            onMinimize={winCtx.onMinimize}
+            onMaximize={winCtx.onMaximize}
+            onClose={winCtx.onClose}
+            isMaximized={winCtx.isMaximized}
+            isMobile={winCtx.isMobile}
+            showSnapLayouts={winCtx.showSnapLayouts}
+            setShowSnapLayouts={winCtx.setShowSnapLayouts}
+            snapWindow={winCtx.snapWindow}
+            className="explorer-win-controls"
+          />
+        )}
       </div>
 
+      {/* 2. Navigation & Address Bar Row */}
+      <div className="explorer-address-bar-row">
+        <div className="nav-buttons">
+          <button 
+            className="nav-btn" 
+            disabled={historyIndex === 0}
+            onClick={handleBack}
+            title="Back"
+          >
+            <ArrowLeft size={16} />
+          </button>
+          <button 
+            className="nav-btn" 
+            disabled={historyIndex >= history.length - 1}
+            onClick={handleForward}
+            title="Forward"
+          >
+            <ArrowRight size={16} />
+          </button>
+          <button 
+            className="nav-btn" 
+            disabled={currentPath === 'This PC'}
+            onClick={handleUp}
+            title="Up to parent directory"
+          >
+            <ArrowUp size={16} />
+          </button>
+        </div>
+
+        <div className="address-box">
+          <WinIcon name={currentPath === 'Recycle Bin' ? 'trash' : 'this-pc'} size={16} />
+          <div className="address-breadcrumbs">
+            {getBreadcrumbs().map((part, index) => (
+              <React.Fragment key={index}>
+                <span 
+                  className="breadcrumb-segment"
+                  onClick={() => {
+                    if (index === 0) navigateTo('This PC');
+                    else if (part === 'Projects') navigateTo('Projects');
+                    else if (part === 'Data (D:)') navigateTo('Data (D:)');
+                  }}
+                >
+                  {part}
+                </span>
+                {index < getBreadcrumbs().length - 1 && <span className="breadcrumb-sep">&gt;</span>}
+              </React.Fragment>
+            ))}
+          </div>
+          <button className="refresh-btn" onClick={() => playClickSound()} title="Refresh">
+            <RefreshCw size={13} />
+          </button>
+        </div>
+
+        <div className="search-box">
+          <Search size={14} color="#9ca3af" />
+          <input
+            type="text"
+            className="search-input"
+            placeholder={`Search ${currentPath.includes(' > ') ? currentPath.split(' > ').pop() : currentPath}`}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </div>
+      </div>
+
+      {/* 3. Command Bar */}
       <div className="explorer-command-bar">
         <div className="command-bar-left">
           <button className="cmd-btn" onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)} style={{ backgroundColor: mobileSidebarOpen ? 'rgba(0,120,212,0.25)' : 'transparent' }}>
@@ -435,70 +636,6 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
             <WinIcon name="preview-pane" size={15} />
             <span>Preview</span>
           </button>
-        </div>
-      </div>
-
-      <div className="explorer-address-bar-row">
-        <div className="nav-buttons">
-          <button 
-            className="nav-btn" 
-            disabled={historyIndex === 0}
-            onClick={handleBack}
-            title="Back"
-          >
-            <ArrowLeft size={16} />
-          </button>
-          <button 
-            className="nav-btn" 
-            disabled={historyIndex >= history.length - 1}
-            onClick={handleForward}
-            title="Forward"
-          >
-            <ArrowRight size={16} />
-          </button>
-          <button 
-            className="nav-btn" 
-            disabled={currentPath === 'This PC'}
-            onClick={handleUp}
-            title="Up to parent directory"
-          >
-            <ArrowUp size={16} />
-          </button>
-        </div>
-
-        <div className="address-box">
-          <WinIcon name={currentPath === 'Recycle Bin' ? 'trash' : 'this-pc'} size={16} />
-          <div className="address-breadcrumbs">
-            {getBreadcrumbs().map((part, index) => (
-              <React.Fragment key={index}>
-                <span 
-                  className="breadcrumb-segment"
-                  onClick={() => {
-                    if (index === 0) navigateTo('This PC');
-                    else if (part === 'Projects') navigateTo('Projects');
-                    else if (part === 'Data (D:)') navigateTo('Data (D:)');
-                  }}
-                >
-                  {part}
-                </span>
-                {index < getBreadcrumbs().length - 1 && <span className="breadcrumb-sep">&gt;</span>}
-              </React.Fragment>
-            ))}
-          </div>
-          <button className="refresh-btn" onClick={() => playClickSound()} title="Refresh">
-            <RefreshCw size={13} />
-          </button>
-        </div>
-
-        <div className="search-box">
-          <Search size={14} color="#9ca3af" />
-          <input
-            type="text"
-            className="search-input"
-            placeholder={`Search ${currentPath.includes(' > ') ? currentPath.split(' > ').pop() : currentPath}`}
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
         </div>
       </div>
 

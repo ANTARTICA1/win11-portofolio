@@ -2,7 +2,91 @@ import React, { useRef, useState, useEffect } from 'react';
 import { Minus, Square, Copy, X } from 'lucide-react';
 import { WinIcon } from '../Common/WinIcon';
 import { playClickSound, playWindowSound } from '../../utils/sound';
+import { WindowContext } from './WindowContext';
 import './Window.css';
+
+export const WindowControls = ({
+  onMinimize,
+  onMaximize,
+  onClose,
+  isMaximized,
+  isMobile,
+  showSnapLayouts,
+  setShowSnapLayouts,
+  snapWindow,
+  className = ''
+}) => {
+  return (
+    <div className={`win-controls ${className}`}>
+      <button
+        type="button"
+        className="win-ctrl-btn"
+        title="Minimize"
+        onPointerDown={(e) => e.stopPropagation()}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          playWindowSound('min');
+          onMinimize();
+        }}
+      >
+        <Minus size={14} />
+      </button>
+
+      {!isMobile && (
+        <div
+          style={{ position: 'relative', height: '100%' }}
+          onMouseEnter={() => setShowSnapLayouts(true)}
+          onMouseLeave={() => setShowSnapLayouts(false)}
+        >
+          <button
+            type="button"
+            className="win-ctrl-btn"
+            title={isMaximized ? "Restore" : "Maximize"}
+            onPointerDown={(e) => e.stopPropagation()}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              playClickSound();
+              setShowSnapLayouts(false);
+              onMaximize();
+            }}
+          >
+            {isMaximized ? <Copy size={13} style={{ transform: 'rotate(180deg)' }} /> : <Square size={13} />}
+          </button>
+
+          {showSnapLayouts && (
+            <div className="snap-layouts-flyout anim-flyout">
+              <div className="snap-card" title="Snap Left 50%" onClick={() => snapWindow('left')}>
+                <div className="snap-zone" />
+                <div style={{ flex: 1 }} />
+              </div>
+              <div className="snap-card" title="Snap Right 50%" onClick={() => snapWindow('right')}>
+                <div style={{ flex: 1 }} />
+                <div className="snap-zone" />
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      <button
+        type="button"
+        className="win-ctrl-btn close-btn"
+        title="Close"
+        onPointerDown={(e) => e.stopPropagation()}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          playClickSound();
+          onClose();
+        }}
+      >
+        <X size={15} />
+      </button>
+    </div>
+  );
+};
 
 export const Window = ({
   id,
@@ -18,6 +102,7 @@ export const Window = ({
   onMinimize,
   onMaximize,
   onClose,
+  hideTitlebar = false,
   children
 }) => {
   const [pos, setPos] = useState(initialPosition);
@@ -39,7 +124,7 @@ export const Window = ({
 
   const handleTitlePointerDown = (e) => {
     if (isMobile || isMaximized) return;
-    if (e.target.closest('.win-controls')) return;
+    if (e.target.closest('.win-controls, button, .chrome-tab, .chrome-tab-close, .chrome-newtab-btn, .chrome-tab-search-btn, input, a')) return;
 
     onFocus();
     const target = e.currentTarget;
@@ -183,6 +268,21 @@ export const Window = ({
     };
   };
 
+  const windowContextValue = {
+    isMaximized,
+    isMobile,
+    onMinimize,
+    onMaximize,
+    onClose,
+    handleTitlePointerDown,
+    handleTitlePointerMove,
+    handleTitlePointerUp,
+    snapWindow,
+    showSnapLayouts,
+    setShowSnapLayouts,
+    WindowControls
+  };
+
   return (
     <div
       ref={windowRef}
@@ -192,97 +292,43 @@ export const Window = ({
         if (!isActive) onFocus();
       }}
     >
-      <div
-        className="win-titlebar"
-        onPointerDown={handleTitlePointerDown}
-        onPointerMove={handleTitlePointerMove}
-        onPointerUp={handleTitlePointerUp}
-        onDoubleClick={() => {
-          if (!isMobile) {
-            playClickSound();
-            onMaximize();
-          }
-        }}
-      >
-        <div className="win-title-left">
-          <div className="win-title-icon">
-            <WinIcon name={icon} size={18} />
-          </div>
-          <span className="win-title-text">{title}</span>
-        </div>
-
-        <div className="win-controls">
-          <button
-            type="button"
-            className="win-ctrl-btn"
-            title="Minimize"
-            onPointerDown={(e) => e.stopPropagation()}
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              playWindowSound('min');
-              onMinimize();
-            }}
-          >
-            <Minus size={14} />
-          </button>
-
-          {!isMobile && (
-            <div
-              style={{ position: 'relative', height: '100%' }}
-              onMouseEnter={() => setShowSnapLayouts(true)}
-              onMouseLeave={() => setShowSnapLayouts(false)}
-            >
-              <button
-                type="button"
-                className="win-ctrl-btn"
-                title={isMaximized ? "Restore" : "Maximize"}
-                onPointerDown={(e) => e.stopPropagation()}
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  playClickSound();
-                  setShowSnapLayouts(false);
-                  onMaximize();
-                }}
-              >
-                {isMaximized ? <Copy size={13} style={{ transform: 'rotate(180deg)' }} /> : <Square size={13} />}
-              </button>
-
-              {showSnapLayouts && (
-                <div className="snap-layouts-flyout anim-flyout">
-                  <div className="snap-card" title="Snap Left 50%" onClick={() => snapWindow('left')}>
-                    <div className="snap-zone" />
-                    <div style={{ flex: 1 }} />
-                  </div>
-                  <div className="snap-card" title="Snap Right 50%" onClick={() => snapWindow('right')}>
-                    <div style={{ flex: 1 }} />
-                    <div className="snap-zone" />
-                  </div>
-                </div>
-              )}
-            </div>
-          )}
-
-          <button
-            type="button"
-            className="win-ctrl-btn close-btn"
-            title="Close"
-            onPointerDown={(e) => e.stopPropagation()}
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
+      {!hideTitlebar && (
+        <div
+          className="win-titlebar"
+          onPointerDown={handleTitlePointerDown}
+          onPointerMove={handleTitlePointerMove}
+          onPointerUp={handleTitlePointerUp}
+          onDoubleClick={() => {
+            if (!isMobile) {
               playClickSound();
-              onClose();
-            }}
-          >
-            <X size={15} />
-          </button>
+              onMaximize();
+            }
+          }}
+        >
+          <div className="win-title-left">
+            <div className="win-title-icon">
+              <WinIcon name={icon} size={18} />
+            </div>
+            <span className="win-title-text">{title}</span>
+          </div>
+
+          <WindowControls
+            onMinimize={onMinimize}
+            onMaximize={onMaximize}
+            onClose={onClose}
+            isMaximized={isMaximized}
+            isMobile={isMobile}
+            showSnapLayouts={showSnapLayouts}
+            setShowSnapLayouts={setShowSnapLayouts}
+            snapWindow={snapWindow}
+          />
         </div>
-      </div>
+      )}
 
       <div className="win-body">
-        {children}
+        <WindowContext.Provider value={windowContextValue}>
+          {children}
+        </WindowContext.Provider>
       </div>
 
       {!isMaximized && !isMobile && (

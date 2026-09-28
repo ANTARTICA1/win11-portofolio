@@ -3,10 +3,11 @@ import {
   ArrowLeft, ArrowRight, RotateCw, Lock, Star, ExternalLink, 
   Sparkles, Send, ShieldCheck, Download, Code2, Layers, Cpu,
   CheckCircle2, AlertCircle, Clock, Smartphone, Monitor, Brain,
-  ChevronRight, X, ZoomIn, Info, FolderGit2, BookOpen, Share2
+  ChevronRight, ChevronDown, Plus, X, ZoomIn, Info, FolderGit2, BookOpen, Share2
 } from 'lucide-react';
 import { WinIcon } from '../Common/WinIcon';
 import { playClickSound } from '../../utils/sound';
+import { useWindow } from '../Windows/WindowContext';
 import './BrowserApp.css';
 
 const PROJECTS_DATA = {
@@ -753,24 +754,101 @@ const renderMockupVisual = (type) => {
 };
 
 export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl = null, onLaunchApp }) => {
+  const winCtx = useWindow();
   const [activeProjectId, setActiveProjectId] = useState(initialProject || 'tatagih');
   const [selectedPhotoModal, setSelectedPhotoModal] = useState(null);
   const [isBookmarked, setIsBookmarked] = useState(true);
   const [isReloading, setIsReloading] = useState(false);
+  const [showTabSearch, setShowTabSearch] = useState(false);
 
-  useEffect(() => {
-    if (initialProject && PROJECTS_DATA[initialProject]) {
-      setActiveProjectId(initialProject);
-    }
-  }, [initialProject]);
+  const projectKeys = Object.keys(PROJECTS_DATA);
 
-  const currentProject = PROJECTS_DATA[activeProjectId] || PROJECTS_DATA.tatagih;
-  const currentUrl = `https://agungkrisna.dev/projects/${currentProject.id}`;
+  const [tabs, setTabs] = useState(() => {
+    const initKey = initialProject || 'tatagih';
+    const p = PROJECTS_DATA[initKey] || PROJECTS_DATA.tatagih;
+    return [
+      {
+        id: p.id,
+        projectId: p.id,
+        title: `${p.name} — Showcase`,
+        icon: 'chrome'
+      }
+    ];
+  });
 
   const handleSelectProject = (projectId) => {
     playClickSound();
     setActiveProjectId(projectId);
+    setTabs((prev) => {
+      const exists = prev.find((t) => (t.projectId || t.id) === projectId);
+      if (exists) return prev;
+      const p = PROJECTS_DATA[projectId];
+      return [
+        ...prev,
+        {
+          id: projectId,
+          projectId: projectId,
+          title: p ? `${p.name} — Showcase` : 'New Tab',
+          icon: 'chrome'
+        }
+      ];
+    });
   };
+
+  useEffect(() => {
+    if (initialProject && PROJECTS_DATA[initialProject]) {
+      handleSelectProject(initialProject);
+    }
+  }, [initialProject]);
+
+  const handleNewTab = () => {
+    playClickSound();
+    const availableKey = projectKeys.find((k) => !tabs.some((t) => (t.projectId || t.id) === k));
+    if (availableKey) {
+      handleSelectProject(availableKey);
+    } else {
+      const nextKey = projectKeys[tabs.length % projectKeys.length];
+      const p = PROJECTS_DATA[nextKey];
+      const newId = `${p.id}-${Date.now()}`;
+      setTabs((prev) => [
+        ...prev,
+        {
+          id: newId,
+          projectId: p.id,
+          title: `${p.name} — Showcase`,
+          icon: 'chrome'
+        }
+      ]);
+      setActiveProjectId(p.id);
+    }
+  };
+
+  const handleCloseTab = (tabId, e) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    playClickSound();
+    if (tabs.length === 1) {
+      if (winCtx?.onClose) {
+        winCtx.onClose();
+      }
+      return;
+    }
+    const idx = tabs.findIndex((t) => t.id === tabId);
+    const newTabs = tabs.filter((t) => t.id !== tabId);
+    setTabs(newTabs);
+
+    const closedTab = tabs[idx];
+    const targetProjId = closedTab?.projectId || closedTab?.id;
+    if (activeProjectId === targetProjId) {
+      const fallbackTab = newTabs[Math.max(0, idx - 1)];
+      setActiveProjectId(fallbackTab.projectId || fallbackTab.id);
+    }
+  };
+
+  const currentProject = PROJECTS_DATA[activeProjectId] || PROJECTS_DATA.tatagih;
+  const currentUrl = `https://agungkrisna.dev/projects/${currentProject.id}`;
 
   const handleReload = () => {
     playClickSound();
@@ -780,38 +858,128 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
     }, 400);
   };
 
-  const projectKeys = Object.keys(PROJECTS_DATA);
   const currentIndex = projectKeys.indexOf(activeProjectId);
   const prevProjectKey = projectKeys[(currentIndex - 1 + projectKeys.length) % projectKeys.length];
   const nextProjectKey = projectKeys[(currentIndex + 1) % projectKeys.length];
 
   return (
     <div className="chrome-browser">
-      <div className="chrome-tabstrip">
-        {projectKeys.map((pKey) => {
-          const p = PROJECTS_DATA[pKey];
-          const isActive = pKey === activeProjectId;
-          return (
-            <div
-              key={pKey}
-              className={`chrome-tab ${isActive ? 'active' : ''}`}
-              onClick={() => handleSelectProject(pKey)}
-            >
-              <WinIcon name={p.id} size={15} />
-              <span className="chrome-tab-title">{p.name} — Showcase</span>
-              <span className="chrome-tab-close">
-                <X size={12} />
-              </span>
+      {/* 1. Combined Chrome Titlebar (Tabs + Window Controls in the EXACT SAME ROW) */}
+      <div
+        className="chrome-titlebar"
+        onPointerDown={winCtx?.handleTitlePointerDown}
+        onPointerMove={winCtx?.handleTitlePointerMove}
+        onPointerUp={winCtx?.handleTitlePointerUp}
+        onDoubleClick={() => {
+          if (!winCtx?.isMobile && winCtx?.onMaximize) {
+            playClickSound();
+            winCtx.onMaximize();
+          }
+        }}
+      >
+        {/* Tab Search Chevron button (matches user reference image) */}
+        <div className="chrome-tab-search-wrapper" onPointerDown={(e) => e.stopPropagation()}>
+          <button
+            type="button"
+            className="chrome-tab-search-btn"
+            title="Tab search"
+            onClick={(e) => {
+              e.stopPropagation();
+              playClickSound();
+              setShowTabSearch(!showTabSearch);
+            }}
+          >
+            <ChevronDown size={14} />
+          </button>
+
+          {showTabSearch && (
+            <div className="chrome-tab-search-flyout anim-flyout">
+              <div className="tab-search-header">Daftar Tab & Showcase</div>
+              <div className="tab-search-list">
+                {projectKeys.map((pKey) => {
+                  const p = PROJECTS_DATA[pKey];
+                  const isActive = pKey === activeProjectId;
+                  return (
+                    <div
+                      key={pKey}
+                      className={`tab-search-item ${isActive ? 'active' : ''}`}
+                      onClick={() => {
+                        handleSelectProject(pKey);
+                        setShowTabSearch(false);
+                      }}
+                    >
+                      <WinIcon name={p.id} size={16} />
+                      <div className="tab-search-item-info">
+                        <span className="tab-search-item-title">{p.name} — Showcase</span>
+                        <span className="tab-search-item-sub">{p.category}</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-          );
-        })}
-        <div
-          className="chrome-newtab-btn"
-          title="New Tab"
-          onClick={() => handleSelectProject('tatagih')}
-        >
-          +
+          )}
         </div>
+
+        {/* Tabstrip */}
+        <div className="chrome-tabstrip">
+          {tabs.map((tab) => {
+            const isTabActive = (tab.projectId || tab.id) === activeProjectId;
+            return (
+              <div
+                key={tab.id}
+                className={`chrome-tab ${isTabActive ? 'active' : ''}`}
+                onClick={() => {
+                  playClickSound();
+                  setActiveProjectId(tab.projectId || tab.id);
+                }}
+              >
+                <WinIcon name="chrome" size={15} />
+                <span className="chrome-tab-title">{tab.title}</span>
+                <button
+                  type="button"
+                  className="chrome-tab-close"
+                  title="Tutup Tab"
+                  onPointerDown={(e) => e.stopPropagation()}
+                  onClick={(e) => handleCloseTab(tab.id, e)}
+                >
+                  <X size={12} />
+                </button>
+              </div>
+            );
+          })}
+
+          <button
+            type="button"
+            className="chrome-newtab-btn"
+            title="Tab Baru"
+            onPointerDown={(e) => e.stopPropagation()}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleNewTab();
+            }}
+          >
+            <Plus size={15} />
+          </button>
+        </div>
+
+        {/* Empty draggable area between tabs and window controls */}
+        <div className="chrome-titlebar-drag-spacer" />
+
+        {/* Window Controls (Minimize, Maximize, Close) in the SAME ROW */}
+        {winCtx?.WindowControls && (
+          <winCtx.WindowControls
+            onMinimize={winCtx.onMinimize}
+            onMaximize={winCtx.onMaximize}
+            onClose={winCtx.onClose}
+            isMaximized={winCtx.isMaximized}
+            isMobile={winCtx.isMobile}
+            showSnapLayouts={winCtx.showSnapLayouts}
+            setShowSnapLayouts={winCtx.setShowSnapLayouts}
+            snapWindow={winCtx.snapWindow}
+            className="chrome-win-controls"
+          />
+        )}
       </div>
 
       <div className="chrome-toolbar">

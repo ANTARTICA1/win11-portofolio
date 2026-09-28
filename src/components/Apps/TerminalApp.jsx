@@ -1,8 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { Plus, X } from 'lucide-react';
+import { WinIcon } from '../Common/WinIcon';
 import { INITIAL_USER, RECRUITER_SUMMARY } from '../../data/fileSystem';
 import { playClickSound } from '../../utils/sound';
+import { useWindow } from '../Windows/WindowContext';
 
 export const TerminalApp = ({ onLaunchApp }) => {
+  const winCtx = useWindow();
   const [history, setHistory] = useState([
     {
       type: 'system',
@@ -215,20 +219,148 @@ d-----         9/26/2026   9:45 PM                Projects
   };
 
   return (
-    <div
-      onClick={() => inputRef.current?.focus()}
-      style={{
-        width: '100%',
-        height: '100%',
-        backgroundColor: '#0c1021',
-        color: '#f8fafc',
-        fontFamily: 'Cascadia Code, Consolas, monospace',
-        fontSize: '13px',
-        padding: '16px',
-        overflowY: 'auto',
-        position: 'relative'
-      }}
-    >
+    <div style={{
+      width: '100%',
+      height: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      backgroundColor: '#0c1021',
+      overflow: 'hidden'
+    }}>
+      {/* Windows 11 Terminal Titlebar (Tabs + Window Controls in 1 row) */}
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'stretch',
+          backgroundColor: '#070a14',
+          height: '40px',
+          padding: '0 0 0 8px',
+          position: 'relative',
+          userSelect: 'none',
+          cursor: 'default',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.08)'
+        }}
+        onPointerDown={winCtx?.handleTitlePointerDown}
+        onPointerMove={winCtx?.handleTitlePointerMove}
+        onPointerUp={winCtx?.handleTitlePointerUp}
+        onDoubleClick={() => {
+          if (!winCtx?.isMobile && winCtx?.onMaximize) {
+            playClickSound();
+            winCtx.onMaximize();
+          }
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'flex-end', height: '100%', gap: '2px' }}>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              backgroundColor: '#161b33',
+              color: '#ffffff',
+              padding: '0 8px 0 12px',
+              height: '34px',
+              borderRadius: '8px 8px 0 0',
+              fontSize: '12px',
+              fontWeight: 500,
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              borderBottom: 'none',
+              minWidth: '160px',
+              justifyContent: 'space-between'
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
+              <WinIcon name="powershell" size={15} />
+              <span>Windows PowerShell</span>
+            </div>
+            <button
+              type="button"
+              title="Close Tab"
+              style={{
+                width: '18px',
+                height: '18px',
+                borderRadius: '4px',
+                border: 'none',
+                background: 'transparent',
+                color: '#9ca3af',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+              onPointerDown={(e) => e.stopPropagation()}
+              onClick={(e) => {
+                e.stopPropagation();
+                if (winCtx?.onClose) winCtx.onClose();
+              }}
+            >
+              <X size={12} />
+            </button>
+          </div>
+          <button
+            type="button"
+            title="New Tab"
+            style={{
+              width: '28px',
+              height: '28px',
+              borderRadius: '4px',
+              border: 'none',
+              background: 'transparent',
+              color: '#9ca3af',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginBottom: '3px',
+              marginLeft: '2px'
+            }}
+            onPointerDown={(e) => e.stopPropagation()}
+            onClick={() => {
+              playClickSound();
+              setHistory(prev => [
+                ...prev,
+                {
+                  type: 'system',
+                  text: `Windows PowerShell\nKetik 'help' untuk melihat daftar perintah.`
+                }
+              ]);
+            }}
+          >
+            <Plus size={15} />
+          </button>
+        </div>
+
+        <div style={{ flex: 1, minWidth: '20px', height: '100%' }} />
+
+        {winCtx?.WindowControls && (
+          <winCtx.WindowControls
+            onMinimize={winCtx.onMinimize}
+            onMaximize={winCtx.onMaximize}
+            onClose={winCtx.onClose}
+            isMaximized={winCtx.isMaximized}
+            isMobile={winCtx.isMobile}
+            showSnapLayouts={winCtx.showSnapLayouts}
+            setShowSnapLayouts={winCtx.setShowSnapLayouts}
+            snapWindow={winCtx.snapWindow}
+            className="terminal-win-controls"
+          />
+        )}
+      </div>
+
+      <div
+        onClick={() => inputRef.current?.focus()}
+        style={{
+          flex: 1,
+          width: '100%',
+          backgroundColor: '#0c1021',
+          color: '#f8fafc',
+          fontFamily: 'Cascadia Code, Consolas, monospace',
+          fontSize: '13px',
+          padding: '16px',
+          overflowY: 'auto',
+          position: 'relative'
+        }}
+      >
       {isMatrixActive && (
         <div style={{
           position: 'absolute',
@@ -319,6 +451,7 @@ d-----         9/26/2026   9:45 PM                Projects
       </div>
 
       <div ref={terminalEndRef} />
+      </div>
     </div>
   );
 };

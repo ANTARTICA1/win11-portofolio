@@ -520,6 +520,7 @@ export function App() {
           onMinimize={() => minimizeWindow(win.id)}
           onMaximize={() => maximizeWindow(win.id)}
           onClose={() => closeWindow(win.id)}
+          hideTitlebar={['chrome', 'browser', 'tatagih', 'temuin', 'lintas', 'neurofly', 'dompetq', 'makalah', 'ldplayer', 'explorer', 'recycle_bin', 'notepad', 'todo', 'onenote', 'terminal', 'antigravity'].includes(win.appId)}
         >
           {renderAppContent(win)}
         </Window>

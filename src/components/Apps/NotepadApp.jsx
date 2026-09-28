@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
-import { Download, FileText, Check } from 'lucide-react';
+import { Download, FileText, Check, Plus, X } from 'lucide-react';
+import { WinIcon } from '../Common/WinIcon';
 import { playClickSound } from '../../utils/sound';
+import { useWindow } from '../Windows/WindowContext';
 
 export const NotepadApp = ({ initialContent = '', fileName = 'Untitled.txt' }) => {
+  const winCtx = useWindow();
   const [content, setContent] = useState(initialContent);
   const [savedNotice, setSavedNotice] = useState(false);
 
@@ -33,6 +36,121 @@ export const NotepadApp = ({ initialContent = '', fileName = 'Untitled.txt' }) =
       color: '#ffffff',
       fontFamily: 'Segoe UI, sans-serif'
     }}>
+      {/* Windows 11 Notepad Titlebar (Tabs + Window Controls in 1 row) */}
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'stretch',
+          backgroundColor: '#1f1f20',
+          height: '40px',
+          padding: '0 0 0 8px',
+          position: 'relative',
+          userSelect: 'none',
+          cursor: 'default',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.05)'
+        }}
+        onPointerDown={winCtx?.handleTitlePointerDown}
+        onPointerMove={winCtx?.handleTitlePointerMove}
+        onPointerUp={winCtx?.handleTitlePointerUp}
+        onDoubleClick={() => {
+          if (!winCtx?.isMobile && winCtx?.onMaximize) {
+            playClickSound();
+            winCtx.onMaximize();
+          }
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'flex-end', height: '100%', gap: '2px' }}>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              backgroundColor: '#2b2b2b',
+              color: '#ffffff',
+              padding: '0 8px 0 12px',
+              height: '34px',
+              borderRadius: '8px 8px 0 0',
+              fontSize: '12px',
+              fontWeight: 500,
+              border: '1px solid rgba(255, 255, 255, 0.08)',
+              borderBottom: 'none',
+              minWidth: '130px',
+              maxWidth: '220px',
+              justifyContent: 'space-between'
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '7px', overflow: 'hidden' }}>
+              <WinIcon name="notepad" size={15} />
+              <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{fileName}</span>
+            </div>
+            <button
+              type="button"
+              title="Close Tab"
+              style={{
+                width: '18px',
+                height: '18px',
+                borderRadius: '4px',
+                border: 'none',
+                background: 'transparent',
+                color: '#9ca3af',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+              onPointerDown={(e) => e.stopPropagation()}
+              onClick={(e) => {
+                e.stopPropagation();
+                if (winCtx?.onClose) winCtx.onClose();
+              }}
+            >
+              <X size={12} />
+            </button>
+          </div>
+          <button
+            type="button"
+            title="New Tab"
+            style={{
+              width: '28px',
+              height: '28px',
+              borderRadius: '4px',
+              border: 'none',
+              background: 'transparent',
+              color: '#9ca3af',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginBottom: '3px',
+              marginLeft: '2px'
+            }}
+            onPointerDown={(e) => e.stopPropagation()}
+            onClick={() => {
+              playClickSound();
+              setContent('');
+            }}
+          >
+            <Plus size={15} />
+          </button>
+        </div>
+
+        <div style={{ flex: 1, minWidth: '20px', height: '100%' }} />
+
+        {winCtx?.WindowControls && (
+          <winCtx.WindowControls
+            onMinimize={winCtx.onMinimize}
+            onMaximize={winCtx.onMaximize}
+            onClose={winCtx.onClose}
+            isMaximized={winCtx.isMaximized}
+            isMobile={winCtx.isMobile}
+            showSnapLayouts={winCtx.showSnapLayouts}
+            setShowSnapLayouts={winCtx.setShowSnapLayouts}
+            snapWindow={winCtx.snapWindow}
+            className="notepad-win-controls"
+          />
+        )}
+      </div>
+
       <div style={{
         display: 'flex',
         alignItems: 'center',

@@ -80,16 +80,13 @@ export const SystemTrayFlyout = ({
       }
     },
     {
-      id: 'discord',
-      name: 'Discord',
-      status: 'Ready - Online (Voice Connected)',
+      id: 'whatsapp',
+      name: 'WhatsApp',
+      status: 'Online — Chat with Gungkrisna',
       iconType: 'win',
-      winIcon: 'discord',
+      winIcon: 'whatsapp',
       action: () => {
-        if (onLaunchApp) onLaunchApp('notepad', {
-          name: 'Discord_Status.txt',
-          content: 'Discord Background Service: Running\nVoice Server: Low Latency Singapore\nConnected Account: Agung Krisna\nStatus: Active'
-        });
+        if (onLaunchApp) onLaunchApp('whatsapp');
       }
     },
     {

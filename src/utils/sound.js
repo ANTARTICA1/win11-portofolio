@@ -122,3 +122,49 @@ export const playStartupChime = () => {
     });
   } catch {}
 };
+
+export const playWhatsAppSentSound = () => {
+  try {
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    const now = ctx.currentTime;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(950, now);
+    osc.frequency.exponentialRampToValueAtTime(1400, now + 0.04);
+    
+    gain.gain.setValueAtTime(0.04, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+    
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    
+    osc.start(now);
+    osc.stop(now + 0.05);
+  } catch {}
+};
+
+export const playWhatsAppReceivedSound = () => {
+  try {
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    const now = ctx.currentTime;
+    [
+      { freq: 880, time: 0, dur: 0.08 },
+      { freq: 1174.66, time: 0.07, dur: 0.16 }
+    ].forEach(({ freq, time, dur }) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, now + time);
+      gain.gain.setValueAtTime(0.045, now + time);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + time + dur);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now + time);
+      osc.stop(now + time + dur);
+    });
+  } catch {}
+};

@@ -11,6 +11,7 @@ import { RecruiterHubApp } from './components/Apps/RecruiterHubApp';
 import { SettingsApp } from './components/Apps/SettingsApp';
 import { CalculatorApp } from './components/Apps/CalculatorApp';
 import { TaskManagerApp } from './components/Apps/TaskManagerApp';
+import { WhatsAppApp } from './components/Apps/WhatsAppApp';
 
 import { NotificationToast } from './components/Common/NotificationToast';
 import { RunDialog } from './components/Common/RunDialog';
@@ -251,6 +252,18 @@ export function App() {
         icon: 'ldplayer',
         initialSize: { width: 880, height: 560 },
         initialPosition: { x: 80 + (windows.length % 5) * 25, y: 40 + (windows.length % 5) * 20 }
+      },
+      whatsapp: {
+        title: 'WhatsApp',
+        icon: 'whatsapp',
+        initialSize: { width: 920, height: 620 },
+        initialPosition: { x: 70 + (windows.length % 5) * 25, y: 35 + (windows.length % 5) * 20 }
+      },
+      discord: {
+        title: 'WhatsApp',
+        icon: 'whatsapp',
+        initialSize: { width: 920, height: 620 },
+        initialPosition: { x: 70 + (windows.length % 5) * 25, y: 35 + (windows.length % 5) * 20 }
       }
     };
 
@@ -468,6 +481,9 @@ export function App() {
       case 'ms-store':
       case 'xbox':
         return <RecruiterHubApp onOpenFile={openFile} onOpenApp={launchApp} />;
+      case 'whatsapp':
+      case 'discord':
+        return <WhatsAppApp onLaunchApp={launchApp} />;
       case 'settings':
       case 'clock':
         return (

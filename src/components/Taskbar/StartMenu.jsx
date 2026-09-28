@@ -28,6 +28,7 @@ export const StartMenu = ({ isOpen, onClose, onLaunchApp, onOpenFile, onRestart,
   if (!isOpen) return null;
 
   const pinnedApps = [
+    { id: 'whatsapp', name: 'WhatsApp', icon: 'whatsapp' },
     { id: 'browser', name: 'Microsoft Edge', icon: 'edge' },
     { id: 'ms-store', name: 'Microsoft Store', icon: 'ms-store' },
     { id: 'xbox', name: 'XBOX', icon: 'xbox' },
@@ -45,7 +46,7 @@ export const StartMenu = ({ isOpen, onClose, onLaunchApp, onOpenFile, onRestart,
   const categoryGroups = [
     {
       name: 'Productivity',
-      icons: ['chrome', 'folder', 'discord', 'edge'],
+      icons: ['chrome', 'folder', 'whatsapp', 'edge'],
       appToLaunch: 'chrome'
     },
     {
@@ -70,8 +71,8 @@ export const StartMenu = ({ isOpen, onClose, onLaunchApp, onOpenFile, onRestart,
     },
     {
       name: 'Media & Play',
-      icons: ['media-player', 'xbox', 'discord', 'chrome'],
-      appToLaunch: 'xbox'
+      icons: ['media-player', 'xbox', 'whatsapp', 'chrome'],
+      appToLaunch: 'whatsapp'
     }
   ];
 

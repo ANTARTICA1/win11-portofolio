@@ -824,11 +824,11 @@ export const DESKTOP_ITEMS = [
     icon: "vscode"
   },
   {
-    id: "discord",
-    name: "Discord",
+    id: "whatsapp",
+    name: "WhatsApp",
     type: "app",
-    app: "recruiter",
-    icon: "discord"
+    app: "whatsapp",
+    icon: "whatsapp"
   },
   {
     id: "calculator",

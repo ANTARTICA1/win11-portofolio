@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { 
   ArrowLeft, ArrowRight, RotateCw, Lock, Star, ExternalLink, 
-  Sparkles, Send, ShieldCheck, Download, Code2, Layers, Cpu,
+  Send, ShieldCheck, Download, Code2, Layers, Cpu,
   CheckCircle2, AlertCircle, Clock, Smartphone, Monitor, Brain,
-  ChevronRight, ChevronDown, Plus, X, ZoomIn, Info, FolderGit2, BookOpen, Share2
+  ChevronRight, ChevronDown, Plus, X, ZoomIn, Info, FolderGit2, BookOpen, Share2,
+  SkipBack, Pause, SkipForward
 } from 'lucide-react';
 import { WinIcon } from '../Common/WinIcon';
 import { playClickSound } from '../../utils/sound';
@@ -33,25 +34,29 @@ const PROJECTS_DATA = {
         id: 'tatagih-dash',
         title: 'Dashboard Ringkasan Pengeluaran & Tagihan Bulanan',
         caption: 'Halaman beranda utama menampilkan total komitmen bulanan (Rp 320.000) dan daftar tagihan terdekat (Netflix Rp 186.000, YouTube Premium Rp 59.000, Game Pass Rp 75.000) serta status jatuh tempo.',
-        mockupType: 'tatagih-dashboard'
+        mockupType: 'tatagih-dashboard',
+        imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80'
       },
       {
         id: 'tatagih-bot',
         title: 'Integrasi Telegram Bot Reminder Otomatis',
         caption: 'Workflow pengingat terjadwal yang mengirimkan notifikasi interaktif ke smartphone pengguna melalui Telegram Bot H-3 dan H-1 sebelum tanggal pendebitan saldo.',
-        mockupType: 'tatagih-bot'
+        mockupType: 'tatagih-bot',
+        imageUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80'
       },
       {
         id: 'tatagih-subs',
         title: 'Formulir Manajemen Langganan & Siklus Billing',
         caption: 'Antarmuka terperinci untuk menambahkan langganan baru, menentukan siklus penagihan (Bulanan/Tahunan), kategori pengeluaran, serta tanggal jatuh tempo.',
-        mockupType: 'tatagih-table'
+        mockupType: 'tatagih-table',
+        imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80'
       },
       {
         id: 'tatagih-analytics',
         title: 'Analitik Distribusi Pengeluaran & Kategori',
         caption: 'Visualisasi grafik pengeluaran berdasarkan proporsi kategori (Entertainment, Productivity, Utilities) dan estimasi proyeksi biaya langganan tahunan.',
-        mockupType: 'tatagih-analytics'
+        mockupType: 'tatagih-analytics',
+        imageUrl: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=1200&q=80'
       }
     ],
     problem: 'Banyak pengguna modern berlangganan berbagai layanan digital (streaming film, musik, cloud storage, software produktivitas) tanpa pencatatan terpusat. Akibatnya, saldo debit/kredit sering terpotong otomatis tanpa persiapan dana, dan langganan masa uji coba (trial) lupa dibatalkan sehingga membebani keuangan pribadi.',
@@ -103,25 +108,29 @@ const PROJECTS_DATA = {
         id: 'lintas-connection',
         title: 'Dashboard Status Koneksi & Pairing Perangkat',
         caption: 'Antarmuka pairing mendeteksi smartphone (Oppo A53) terhubung ke PC melalui Local Area Network (LAN) dengan monitoring latensi dan status enkripsi koneksi.',
-        mockupType: 'lintas-dash'
+        mockupType: 'lintas-dash',
+        imageUrl: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80'
       },
       {
         id: 'lintas-touchpad',
         title: 'Virtual Precision Trackpad & Gesture Support',
         caption: 'Area sentuh layar penuh pada smartphone yang mengubah layar ponsel menjadi trackpad nirkabel responsif dengan gesture scroll dua jari dan klik tombol kanan/kiri.',
-        mockupType: 'lintas-touchpad'
+        mockupType: 'lintas-touchpad',
+        imageUrl: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=1200&q=80'
       },
       {
         id: 'lintas-media',
         title: 'Media Remote Controller & Windows Quick Actions',
         caption: 'Panel kendali pemutar multimedia (Play/Pause, Next, Volume slider) serta tombol pintas cepat One-Tap Lock PC dan Sleep untuk kenyamanan saat presentasi.',
-        mockupType: 'lintas-media'
+        mockupType: 'lintas-media',
+        imageUrl: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1200&q=80'
       },
       {
         id: 'lintas-clipboard',
         title: 'Sinkronisasi Clipboard Dua Arah & File Beam',
         caption: 'Fitur sinkronisasi teks clipboard instan antara smartphone dan PC serta pengiriman file lokal berkecepatan tinggi tanpa bergantung pada cloud pihak ketiga.',
-        mockupType: 'lintas-sync'
+        mockupType: 'lintas-sync',
+        imageUrl: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1200&q=80'
       }
     ],
     problem: 'Saat presentasi, menonton dari kejauhan, atau bersantai di meja kerja, pengguna sering kali harus menjangkau mouse dan keyboard fisik hanya untuk menjeda video, mengatur volume, mengunci komputer saat beranjak, atau memindahkan teks dari smartphone ke komputer. Aplikasi remote yang ada di pasar seringkali sarat iklan, membutuhkan server cloud, atau memiliki jeda input yang lambat.',
@@ -173,25 +182,29 @@ const PROJECTS_DATA = {
         id: 'neurofly-circuit',
         title: 'Topologi Graf Konektom Visual Lobe Drosophila',
         caption: 'Visualisasi interkoneksi 438 neuron visual Drosophila beserta bobot kontak sinaptik hasil ekstraksi langsung dari database Janelia Research Campus via platform neuPrint.',
-        mockupType: 'neurofly-graph'
+        mockupType: 'neurofly-graph',
+        imageUrl: 'https://images.unsplash.com/photo-1507413245164-6160d8298b31?auto=format&fit=crop&w=1200&q=80'
       },
       {
         id: 'neurofly-pathway',
         title: 'Sirkuit Deteksi Gerak Elementer (T4, T5, Mi1, Tm3)',
         caption: 'Pemodelan skema interneuron medula (Mi1, Tm3) yang menyediakan delay temporal untuk sel deteksi gerak terarah T4 dan T5 sebelum menuju lobula.',
-        mockupType: 'neurofly-circuit'
+        mockupType: 'neurofly-circuit',
+        imageUrl: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=1200&q=80'
       },
       {
         id: 'neurofly-pong',
         title: 'Simulasi Autopilot Pong Berbasis Sinyal Neuromorfik',
         caption: 'Antarmuka simulasi Pong interaktif di mana paddle dikendalikan oleh akumulasi potensial aksi dari sirkuit saraf visual biologis untuk melacak posisi bola.',
-        mockupType: 'neurofly-sim'
+        mockupType: 'neurofly-sim',
+        imageUrl: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80'
       },
       {
         id: 'neurofly-metrics',
         title: 'Matriks Bobot Sinapsis & Pelacakan Objek LC11',
         caption: 'Distribusi kuantitatif kekuatan sinapsis dan vektor pemrosesan neuron proyeksi lobula LC11 dalam mendeteksi objek kecil yang bergerak cepat.',
-        mockupType: 'neurofly-matrix'
+        mockupType: 'neurofly-matrix',
+        imageUrl: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80'
       }
     ],
     problem: 'Model kecerdasan buatan komersial saat ini memerlukan komputasi tensor berat dan energi yang sangat besar untuk mengenali gerak visual dan mengambil keputusan kontrol sederhana. Sebaliknya, sistem visual biologis serangga seperti lalat buah (Drosophila melanogaster) mampu mendeteksi gerak dan bermanuver secara lincah dalam hitungan milidetik dengan konsumsi daya hanya beberapa mikrowatt.',
@@ -242,25 +255,29 @@ const PROJECTS_DATA = {
         id: 'temuin-map',
         title: 'Peta Sebaran Laporan Barang Hilang & Ditemukan',
         caption: 'Antarmuka peta geolokasi interaktif yang menampilkan pin laporan kehilangan dan penemuan barang berdasarkan radius lokasi pengguna.',
-        mockupType: 'temuin-map'
+        mockupType: 'temuin-map',
+        imageUrl: 'https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=1200&q=80'
       },
       {
         id: 'temuin-detail',
         title: 'Formulir Laporan & Verifikasi Bukti Kepemilikan',
         caption: 'Sistem formulir pelaporan dengan fitur unggah foto bukti, deskripsi detail, serta pertanyaan rahasia untuk memvalidasi kepemilikan sah.',
-        mockupType: 'temuin-detail'
+        mockupType: 'temuin-detail',
+        imageUrl: 'https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=1200&q=80'
       },
       {
         id: 'temuin-chat',
         title: 'Saluran Chat Aman Antara Penemu dan Pemilik',
         caption: 'Ruang obrolan langsung terenkripsi di dalam aplikasi untuk memfasilitasi serah terima barang tanpa perlu membagikan nomor telepon pribadi.',
-        mockupType: 'temuin-chat'
+        mockupType: 'temuin-chat',
+        imageUrl: 'https://images.unsplash.com/photo-1577563908411-5077b6dc7624?auto=format&fit=crop&w=1200&q=80'
       },
       {
         id: 'temuin-history',
         title: 'Dashboard Riwayat Klaim & Status Penemuan',
         caption: 'Panel pantau status laporan (Diverifikasi, Proses Serah Terima, Selesai) dengan riwayat aktivitas pelaporan lengkap.',
-        mockupType: 'temuin-history'
+        mockupType: 'temuin-history',
+        imageUrl: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=1200&q=80'
       }
     ],
     problem: 'Kehilangan barang berharga di ruang publik (kunci motor, dompet, dokumen identitas) sering kali berujung tanpa kejelasan karena tidak adanya wadah terpusat antara pihak yang menemukan dengan pihak yang mencari.',
@@ -307,13 +324,15 @@ const PROJECTS_DATA = {
         id: 'dompetq-dash',
         title: 'Dashboard Keuangan & Saldo Real-Time',
         caption: 'Tampilan saldo utama, aksi cepat transfer, scan QRIS, top-up saldo, dan rekap mutasi transaksi harian.',
-        mockupType: 'dompetq-dash'
+        mockupType: 'dompetq-dash',
+        imageUrl: 'https://images.unsplash.com/photo-1556742049-0a67c5574f73?auto=format&fit=crop&w=1200&q=80'
       },
       {
         id: 'dompetq-split',
         title: 'Fitur Split Bill Komunitas Otomatis',
         caption: 'Kalkulator cerdas pembagian tagihan makan atau liburan bersama teman secara adil lengkap dengan pengingat pembayaran.',
-        mockupType: 'tatagih-dashboard'
+        mockupType: 'tatagih-dashboard',
+        imageUrl: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1200&q=80'
       }
     ],
     problem: 'Pencatatan pengeluaran harian dan pengelolaan saldo e-wallet sering terpecah-pecah di berbagai aplikasi, menyulitkan pengguna dalam mengontrol batas anggaran bulanan.',
@@ -356,7 +375,8 @@ const PROJECTS_DATA = {
         id: 'makalah-dash',
         title: 'Editor AI Penulisan Draf Akademik & Sitasi',
         caption: 'Antarmuka pembuat kerangka riset dengan asisten AI yang merumuskan latar belakang, tinjauan pustaka, dan sitasi standar akademik.',
-        mockupType: 'makalah-dash'
+        mockupType: 'makalah-dash',
+        imageUrl: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=1200&q=80'
       }
     ],
     problem: 'Penyusunan kerangka awal draf penelitian dan pengorganisasian daftar pustaka sering kali memakan waktu berhari-hari bagi mahasiswa dan peneliti.',
@@ -379,32 +399,32 @@ const renderMockupVisual = (type) => {
   switch (type) {
     case 'tatagih-dashboard':
       return (
-        <div style={{ width: '92%', height: '88%', backgroundColor: '#0f172a', borderRadius: '8px', border: '1px solid #334155', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #1e293b', paddingBottom: '6px' }}>
-            <span style={{ fontSize: '11px', fontWeight: 700, color: '#38bdf8' }}>💳 TATAGIH FINANCIAL DASHBOARD</span>
-            <span style={{ fontSize: '10px', color: '#4ade80', backgroundColor: 'rgba(74, 222, 128, 0.1)', padding: '2px 6px', borderRadius: '4px' }}>Demo Data</span>
+        <div style={{ width: '92%', height: '88%', backgroundColor: '#0f172a', borderRadius: '6px', border: '1px solid #334155', padding: '14px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #1e293b', paddingBottom: '8px' }}>
+            <span style={{ fontSize: '11px', fontWeight: 700, color: '#38bdf8', letterSpacing: '0.5px' }}>TATAGIH FINANCIAL DASHBOARD</span>
+            <span style={{ fontSize: '10px', color: '#4ade80', backgroundColor: '#14532d', padding: '2px 8px', borderRadius: '4px' }}>Demo Data</span>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
-            <div style={{ backgroundColor: '#1e293b', padding: '6px 8px', borderRadius: '6px' }}>
-              <div style={{ fontSize: '9px', color: '#94a3b8' }}>TOTAL BULAN INI</div>
-              <div style={{ fontSize: '14px', fontWeight: 800, color: '#ffffff' }}>Rp 320.000</div>
+            <div style={{ backgroundColor: '#1e293b', padding: '8px 10px', borderRadius: '4px' }}>
+              <div style={{ fontSize: '9.5px', color: '#94a3b8', textTransform: 'uppercase' }}>Total Bulan Ini</div>
+              <div style={{ fontSize: '15px', fontWeight: 800, color: '#ffffff' }}>Rp 320.000</div>
             </div>
-            <div style={{ backgroundColor: '#1e293b', padding: '6px 8px', borderRadius: '6px' }}>
-              <div style={{ fontSize: '9px', color: '#94a3b8' }}>TAGIHAN TERDEKAT</div>
-              <div style={{ fontSize: '11px', fontWeight: 700, color: '#f59e0b' }}>Netflix (H-2)</div>
+            <div style={{ backgroundColor: '#1e293b', padding: '8px 10px', borderRadius: '4px' }}>
+              <div style={{ fontSize: '9.5px', color: '#94a3b8', textTransform: 'uppercase' }}>Tagihan Terdekat</div>
+              <div style={{ fontSize: '12px', fontWeight: 700, color: '#f59e0b' }}>Netflix (H-2)</div>
             </div>
           </div>
-          <div style={{ flex: 1, backgroundColor: '#1e293b', borderRadius: '6px', padding: '6px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '9.5px', color: '#e2e8f0', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '3px' }}>
-              <span>🍿 Netflix Premium</span>
+          <div style={{ flex: 1, backgroundColor: '#1e293b', borderRadius: '4px', padding: '8px 10px', display: 'flex', flexDirection: 'column', gap: '6px', justifyContent: 'center' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10px', color: '#e2e8f0', borderBottom: '1px solid #334155', paddingBottom: '4px' }}>
+              <span>Netflix Premium</span>
               <span style={{ fontWeight: 600 }}>Rp 186.000</span>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '9.5px', color: '#e2e8f0', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '3px' }}>
-              <span>📺 YouTube Premium</span>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10px', color: '#e2e8f0', borderBottom: '1px solid #334155', paddingBottom: '4px' }}>
+              <span>YouTube Premium</span>
               <span style={{ fontWeight: 600 }}>Rp 59.000</span>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '9.5px', color: '#e2e8f0' }}>
-              <span>🎮 Xbox Game Pass</span>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10px', color: '#e2e8f0' }}>
+              <span>Xbox Game Pass</span>
               <span style={{ fontWeight: 600 }}>Rp 75.000</span>
             </div>
           </div>
@@ -413,47 +433,49 @@ const renderMockupVisual = (type) => {
 
     case 'tatagih-bot':
       return (
-        <div style={{ width: '92%', height: '88%', backgroundColor: '#0e1621', borderRadius: '8px', border: '1px solid #242f3d', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', borderBottom: '1px solid #17212b', paddingBottom: '6px' }}>
-            <div style={{ width: '22px', height: '22px', borderRadius: '50%', backgroundColor: '#2b5278', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '11px' }}>🤖</div>
+        <div style={{ width: '92%', height: '88%', backgroundColor: '#0e1621', borderRadius: '6px', border: '1px solid #242f3d', padding: '14px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', borderBottom: '1px solid #17212b', paddingBottom: '8px' }}>
+            <div style={{ width: '22px', height: '22px', borderRadius: '50%', backgroundColor: '#2b5278', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ffffff', fontSize: '10px', fontWeight: 700 }}>
+              TB
+            </div>
             <div>
               <div style={{ fontSize: '11px', fontWeight: 600, color: '#ffffff' }}>Tatagih Reminder Bot</div>
               <div style={{ fontSize: '9px', color: '#4ade80' }}>bot verified</div>
             </div>
           </div>
-          <div style={{ alignSelf: 'flex-start', maxWidth: '90%', backgroundColor: '#182533', padding: '8px 10px', borderRadius: '8px 8px 8px 0', border: '1px solid #2b5278' }}>
-            <div style={{ fontSize: '10px', color: '#f59e0b', fontWeight: 700, marginBottom: '2px' }}>⚠️ Peringatan Tagihan H-3</div>
-            <div style={{ fontSize: '9.5px', color: '#e2e8f0', lineHeight: 1.4 }}>
+          <div style={{ alignSelf: 'flex-start', maxWidth: '90%', backgroundColor: '#182533', padding: '10px 12px', borderRadius: '8px 8px 8px 0', border: '1px solid #2b5278' }}>
+            <div style={{ fontSize: '10px', color: '#f59e0b', fontWeight: 700, marginBottom: '4px' }}>Peringatan Tagihan H-3</div>
+            <div style={{ fontSize: '10px', color: '#e2e8f0', lineHeight: 1.4 }}>
               Tagihan <b>Netflix Premium</b> sebesar <b>Rp 186.000</b> akan jatuh tempo pada 18 Oktober.
             </div>
-            <div style={{ fontSize: '8px', color: '#64748b', textAlign: 'right', marginTop: '4px' }}>08:00 WIB</div>
+            <div style={{ fontSize: '8.5px', color: '#64748b', textAlign: 'right', marginTop: '4px' }}>08:00 WIB</div>
           </div>
-          <div style={{ display: 'flex', gap: '6px', marginTop: 'auto' }}>
-            <div style={{ flex: 1, backgroundColor: '#2b5278', color: '#ffffff', textAlign: 'center', padding: '4px', borderRadius: '4px', fontSize: '9px', fontWeight: 600 }}>Sudah Dibayar</div>
-            <div style={{ flex: 1, backgroundColor: 'rgba(255,255,255,0.06)', color: '#94a3b8', textAlign: 'center', padding: '4px', borderRadius: '4px', fontSize: '9px' }}>Snooze (H-1)</div>
+          <div style={{ display: 'flex', gap: '8px', marginTop: 'auto' }}>
+            <div style={{ flex: 1, backgroundColor: '#2b5278', color: '#ffffff', textAlign: 'center', padding: '6px', borderRadius: '4px', fontSize: '9.5px', fontWeight: 600 }}>Sudah Dibayar</div>
+            <div style={{ flex: 1, backgroundColor: '#1e293b', color: '#94a3b8', textAlign: 'center', padding: '6px', borderRadius: '4px', fontSize: '9.5px' }}>Snooze (H-1)</div>
           </div>
         </div>
       );
 
     case 'tatagih-table':
       return (
-        <div style={{ width: '92%', height: '88%', backgroundColor: '#0f172a', borderRadius: '8px', border: '1px solid #334155', padding: '12px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-          <div style={{ fontSize: '11px', fontWeight: 700, color: '#ffffff' }}>➕ Tambah Subscription Baru</div>
-          <div style={{ backgroundColor: '#1e293b', padding: '6px 8px', borderRadius: '4px', fontSize: '9.5px', color: '#94a3b8' }}>
+        <div style={{ width: '92%', height: '88%', backgroundColor: '#0f172a', borderRadius: '6px', border: '1px solid #334155', padding: '14px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <div style={{ fontSize: '11px', fontWeight: 700, color: '#ffffff', borderBottom: '1px solid #1e293b', paddingBottom: '6px' }}>Tambah Subscription Baru</div>
+          <div style={{ backgroundColor: '#1e293b', padding: '8px 10px', borderRadius: '4px', fontSize: '10px', color: '#94a3b8' }}>
             Nama Layanan: <span style={{ color: '#ffffff', fontWeight: 600 }}>Spotify Family Plan</span>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px' }}>
-            <div style={{ backgroundColor: '#1e293b', padding: '6px 8px', borderRadius: '4px', fontSize: '9.5px', color: '#94a3b8' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+            <div style={{ backgroundColor: '#1e293b', padding: '8px 10px', borderRadius: '4px', fontSize: '10px', color: '#94a3b8' }}>
               Biaya: <span style={{ color: '#ffffff', fontWeight: 600 }}>Rp 86.900</span>
             </div>
-            <div style={{ backgroundColor: '#1e293b', padding: '6px 8px', borderRadius: '4px', fontSize: '9.5px', color: '#94a3b8' }}>
-              Siklus: <span style={{ color: '#38bdf8', fontWeight: 600 }}>Bulanan</span>
+            <div style={{ backgroundColor: '#1e293b', padding: '8px 10px', borderRadius: '4px', fontSize: '10px', color: '#38bdf8', fontWeight: 600 }}>
+              Siklus: Bulanan
             </div>
           </div>
-          <div style={{ backgroundColor: '#1e293b', padding: '6px 8px', borderRadius: '4px', fontSize: '9.5px', color: '#94a3b8' }}>
+          <div style={{ backgroundColor: '#1e293b', padding: '8px 10px', borderRadius: '4px', fontSize: '10px', color: '#94a3b8' }}>
             Reminder: <span style={{ color: '#4ade80', fontWeight: 600 }}>Aktif (Telegram Bot H-3, H-1)</span>
           </div>
-          <div style={{ marginTop: 'auto', backgroundColor: '#2563eb', color: '#ffffff', textAlign: 'center', padding: '5px', borderRadius: '4px', fontSize: '10px', fontWeight: 700 }}>
+          <div style={{ marginTop: 'auto', backgroundColor: '#2563eb', color: '#ffffff', textAlign: 'center', padding: '7px', borderRadius: '4px', fontSize: '10.5px', fontWeight: 700 }}>
             Simpan Langganan
           </div>
         </div>
@@ -461,11 +483,11 @@ const renderMockupVisual = (type) => {
 
     case 'tatagih-analytics':
       return (
-        <div style={{ width: '92%', height: '88%', backgroundColor: '#0f172a', borderRadius: '8px', border: '1px solid #334155', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          <div style={{ fontSize: '11px', fontWeight: 700, color: '#a855f7' }}>📊 Analisis Pengeluaran Per Kategori</div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', margin: '4px 0' }}>
-            <div style={{ flex: 1 }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '9px', marginBottom: '2px' }}>
+        <div style={{ width: '92%', height: '88%', backgroundColor: '#0f172a', borderRadius: '6px', border: '1px solid #334155', padding: '14px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          <div style={{ fontSize: '11px', fontWeight: 700, color: '#a855f7', borderBottom: '1px solid #1e293b', paddingBottom: '6px' }}>Analisis Pengeluaran Per Kategori</div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', flex: 1, justifyContent: 'center' }}>
+            <div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '9.5px', color: '#e2e8f0', marginBottom: '3px' }}>
                 <span>Entertainment (58%)</span>
                 <span>Rp 186.000</span>
               </div>
@@ -473,10 +495,8 @@ const renderMockupVisual = (type) => {
                 <div style={{ width: '58%', height: '100%', backgroundColor: '#ec4899' }}></div>
               </div>
             </div>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', margin: '4px 0' }}>
-            <div style={{ flex: 1 }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '9px', marginBottom: '2px' }}>
+            <div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '9.5px', color: '#e2e8f0', marginBottom: '3px' }}>
                 <span>Gaming / Hobby (24%)</span>
                 <span>Rp 75.000</span>
               </div>
@@ -484,10 +504,8 @@ const renderMockupVisual = (type) => {
                 <div style={{ width: '24%', height: '100%', backgroundColor: '#3b82f6' }}></div>
               </div>
             </div>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', margin: '4px 0' }}>
-            <div style={{ flex: 1 }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '9px', marginBottom: '2px' }}>
+            <div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '9.5px', color: '#e2e8f0', marginBottom: '3px' }}>
                 <span>Productivity (18%)</span>
                 <span>Rp 59.000</span>
               </div>
@@ -501,78 +519,80 @@ const renderMockupVisual = (type) => {
 
     case 'lintas-dash':
       return (
-        <div style={{ width: '92%', height: '88%', backgroundColor: '#111827', borderRadius: '8px', border: '1px solid #374151', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        <div style={{ width: '92%', height: '88%', backgroundColor: '#111827', borderRadius: '6px', border: '1px solid #374151', padding: '14px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #1f2937', paddingBottom: '6px' }}>
-            <span style={{ fontSize: '11px', fontWeight: 700, color: '#60a5fa' }}>📱 LINTAS COMPANION DAEMON</span>
-            <span style={{ fontSize: '9px', color: '#22c55e', backgroundColor: 'rgba(34,197,94,0.1)', padding: '2px 6px', borderRadius: '4px' }}>CONNECTED</span>
+            <span style={{ fontSize: '11px', fontWeight: 700, color: '#60a5fa' }}>LINTAS COMPANION DAEMON</span>
+            <span style={{ fontSize: '9.5px', color: '#22c55e', backgroundColor: '#064e3b', padding: '2px 8px', borderRadius: '4px', fontWeight: 600 }}>CONNECTED</span>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', backgroundColor: '#1f2937', padding: '8px', borderRadius: '6px' }}>
-            <div style={{ fontSize: '20px' }}>📱</div>
-            <div style={{ flex: 1 }}>
-              <div style={{ fontSize: '11px', fontWeight: 700, color: '#ffffff' }}>Oppo A53 (Android 12)</div>
-              <div style={{ fontSize: '9px', color: '#9ca3af' }}>IP: 192.168.1.14 • Port: 8089</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', backgroundColor: '#1f2937', padding: '10px', borderRadius: '6px' }}>
+            <div style={{ width: '32px', height: '32px', borderRadius: '6px', backgroundColor: '#374151', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#60a5fa' }}>
+              <Smartphone size={18} />
             </div>
-            <div style={{ fontSize: '10px', fontWeight: 600, color: '#4ade80' }}>8 ms</div>
+            <div style={{ flex: 1 }}>
+              <div style={{ fontSize: '11.5px', fontWeight: 700, color: '#ffffff' }}>Oppo A53 (Android 12)</div>
+              <div style={{ fontSize: '9.5px', color: '#9ca3af' }}>IP: 192.168.1.14 : 8089</div>
+            </div>
+            <div style={{ fontSize: '10.5px', fontWeight: 600, color: '#4ade80' }}>8 ms</div>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px' }}>
-            <div style={{ backgroundColor: '#1f2937', padding: '6px', borderRadius: '4px', textAlign: 'center', fontSize: '9.5px', color: '#e5e7eb' }}>Trackpad Active</div>
-            <div style={{ backgroundColor: '#1f2937', padding: '6px', borderRadius: '4px', textAlign: 'center', fontSize: '9.5px', color: '#e5e7eb' }}>Clipboard Synced</div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+            <div style={{ backgroundColor: '#1f2937', padding: '8px', borderRadius: '4px', textAlign: 'center', fontSize: '10px', color: '#e5e7eb' }}>Trackpad Active</div>
+            <div style={{ backgroundColor: '#1f2937', padding: '8px', borderRadius: '4px', textAlign: 'center', fontSize: '10px', color: '#e5e7eb' }}>Clipboard Synced</div>
           </div>
         </div>
       );
 
     case 'lintas-touchpad':
       return (
-        <div style={{ width: '92%', height: '88%', backgroundColor: '#09090b', borderRadius: '8px', border: '1px solid #27272a', padding: '10px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        <div style={{ width: '92%', height: '88%', backgroundColor: '#09090b', borderRadius: '6px', border: '1px solid #27272a', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '10px', color: '#a1a1aa' }}>
-            <span>VIRTUAL TOUCHPAD</span>
+            <span style={{ fontWeight: 600 }}>VIRTUAL TOUCHPAD</span>
             <span>Sensitivity: 1.2x</span>
           </div>
           <div style={{ flex: 1, border: '1px dashed #3f3f46', borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: '4px' }}>
             <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#3b82f6', opacity: 0.8 }}></div>
-            <div style={{ fontSize: '9px', color: '#71717a' }}>Tap or drag to control cursor</div>
+            <div style={{ fontSize: '9.5px', color: '#71717a' }}>Tap or drag to control cursor</div>
           </div>
-          <div style={{ display: 'flex', gap: '6px' }}>
-            <div style={{ flex: 1, backgroundColor: '#27272a', textAlign: 'center', padding: '6px', borderRadius: '4px', fontSize: '9.5px', color: '#ffffff' }}>Left Click</div>
-            <div style={{ flex: 1, backgroundColor: '#27272a', textAlign: 'center', padding: '6px', borderRadius: '4px', fontSize: '9.5px', color: '#ffffff' }}>Right Click</div>
+          <div style={{ display: 'flex', gap: '8px' }}>
+            <div style={{ flex: 1, backgroundColor: '#27272a', textAlign: 'center', padding: '8px', borderRadius: '4px', fontSize: '10px', color: '#ffffff' }}>Left Click</div>
+            <div style={{ flex: 1, backgroundColor: '#27272a', textAlign: 'center', padding: '8px', borderRadius: '4px', fontSize: '10px', color: '#ffffff' }}>Right Click</div>
           </div>
         </div>
       );
 
     case 'lintas-media':
       return (
-        <div style={{ width: '92%', height: '88%', backgroundColor: '#111827', borderRadius: '8px', border: '1px solid #374151', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          <div style={{ fontSize: '11px', fontWeight: 700, color: '#f59e0b' }}>🎵 Windows Media Controller</div>
-          <div style={{ backgroundColor: '#1f2937', padding: '8px', borderRadius: '6px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-            <div style={{ fontSize: '10px', fontWeight: 600, color: '#ffffff' }}>Bohemian Rhapsody — Queen</div>
+        <div style={{ width: '92%', height: '88%', backgroundColor: '#111827', borderRadius: '6px', border: '1px solid #374151', padding: '14px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          <div style={{ fontSize: '11px', fontWeight: 700, color: '#f59e0b' }}>Windows Media Controller</div>
+          <div style={{ backgroundColor: '#1f2937', padding: '10px', borderRadius: '6px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <div style={{ fontSize: '10.5px', fontWeight: 600, color: '#ffffff' }}>Bohemian Rhapsody — Queen</div>
             <div style={{ height: '4px', backgroundColor: '#374151', borderRadius: '2px', overflow: 'hidden' }}>
               <div style={{ width: '64%', height: '100%', backgroundColor: '#f59e0b' }}></div>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '14px', fontSize: '14px', color: '#ffffff' }}>
-              <span>⏮️</span>
-              <span>⏸️</span>
-              <span>⏭️</span>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', fontSize: '12px', color: '#ffffff', alignItems: 'center', padding: '4px 0' }}>
+              <SkipBack size={14} style={{ cursor: 'pointer' }} />
+              <Pause size={16} style={{ cursor: 'pointer' }} />
+              <SkipForward size={14} style={{ cursor: 'pointer' }} />
             </div>
           </div>
-          <div style={{ display: 'flex', gap: '6px', marginTop: 'auto' }}>
-            <div style={{ flex: 1, backgroundColor: '#dc2626', color: '#ffffff', textAlign: 'center', padding: '5px', borderRadius: '4px', fontSize: '9.5px', fontWeight: 600 }}>🔒 Lock PC</div>
-            <div style={{ flex: 1, backgroundColor: '#374151', color: '#ffffff', textAlign: 'center', padding: '5px', borderRadius: '4px', fontSize: '9.5px', fontWeight: 600 }}>Vol: 72%</div>
+          <div style={{ display: 'flex', gap: '8px', marginTop: 'auto' }}>
+            <div style={{ flex: 1, backgroundColor: '#dc2626', color: '#ffffff', textAlign: 'center', padding: '7px', borderRadius: '4px', fontSize: '10px', fontWeight: 600 }}>Lock PC</div>
+            <div style={{ flex: 1, backgroundColor: '#374151', color: '#ffffff', textAlign: 'center', padding: '7px', borderRadius: '4px', fontSize: '10px', fontWeight: 600 }}>Vol: 72%</div>
           </div>
         </div>
       );
 
     case 'lintas-sync':
       return (
-        <div style={{ width: '92%', height: '88%', backgroundColor: '#111827', borderRadius: '8px', border: '1px solid #374151', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          <div style={{ fontSize: '11px', fontWeight: 700, color: '#38bdf8' }}>📋 Real-Time Clipboard Sync</div>
-          <div style={{ backgroundColor: '#1f2937', padding: '8px', borderRadius: '6px', borderLeft: '3px solid #38bdf8' }}>
-            <div style={{ fontSize: '8.5px', color: '#9ca3af', marginBottom: '2px' }}>COPIED FROM PHONE (10:14 AM)</div>
-            <div style={{ fontSize: '9.5px', color: '#ffffff', fontFamily: 'monospace' }}>https://github.com/agungkrisna/lintas</div>
+        <div style={{ width: '92%', height: '88%', backgroundColor: '#111827', borderRadius: '6px', border: '1px solid #374151', padding: '14px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          <div style={{ fontSize: '11px', fontWeight: 700, color: '#38bdf8' }}>Real-Time Clipboard Sync</div>
+          <div style={{ backgroundColor: '#1f2937', padding: '10px', borderRadius: '6px', borderLeft: '3px solid #38bdf8' }}>
+            <div style={{ fontSize: '8.5px', color: '#9ca3af', marginBottom: '3px', textTransform: 'uppercase' }}>Copied from phone (10:14 AM)</div>
+            <div style={{ fontSize: '10px', color: '#ffffff', fontFamily: 'monospace' }}>https://github.com/agungkrisna/lintas</div>
           </div>
-          <div style={{ backgroundColor: '#1f2937', padding: '8px', borderRadius: '6px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '8.5px', color: '#9ca3af', marginBottom: '3px' }}>
+          <div style={{ backgroundColor: '#1f2937', padding: '10px', borderRadius: '6px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '9px', color: '#9ca3af', marginBottom: '4px' }}>
               <span>LAN File Beam: presentation.pdf</span>
-              <span>100%</span>
+              <span style={{ color: '#22c55e', fontWeight: 600 }}>100%</span>
             </div>
             <div style={{ height: '4px', backgroundColor: '#374151', borderRadius: '2px', overflow: 'hidden' }}>
               <div style={{ width: '100%', height: '100%', backgroundColor: '#22c55e' }}></div>
@@ -583,44 +603,44 @@ const renderMockupVisual = (type) => {
 
     case 'neurofly-graph':
       return (
-        <div style={{ width: '92%', height: '88%', backgroundColor: '#030712', borderRadius: '8px', border: '1px solid #1f2937', padding: '10px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10px', color: '#818cf8', fontWeight: 700 }}>
-            <span>🧠 CONNECTOME TOPOLOGY</span>
-            <span style={{ color: '#38bdf8', fontSize: '9px' }}>438 NEURONS</span>
+        <div style={{ width: '92%', height: '88%', backgroundColor: '#030712', borderRadius: '6px', border: '1px solid #1f2937', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10.5px', color: '#818cf8', fontWeight: 700 }}>
+            <span>CONNECTOME TOPOLOGY</span>
+            <span style={{ color: '#38bdf8', fontSize: '9.5px' }}>438 NEURONS</span>
           </div>
           <div style={{ flex: 1, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <div style={{ position: 'absolute', width: '70px', height: '70px', borderRadius: '50%', border: '1px dashed rgba(129,140,248,0.3)' }}></div>
-            <div style={{ position: 'absolute', top: '15px', left: '25px', backgroundColor: '#f43f5e', color: '#ffffff', fontSize: '8px', padding: '2px 5px', borderRadius: '3px' }}>LC11</div>
-            <div style={{ position: 'absolute', top: '20px', right: '30px', backgroundColor: '#3b82f6', color: '#ffffff', fontSize: '8px', padding: '2px 5px', borderRadius: '3px' }}>T4a</div>
-            <div style={{ position: 'absolute', bottom: '25px', left: '35px', backgroundColor: '#10b981', color: '#ffffff', fontSize: '8px', padding: '2px 5px', borderRadius: '3px' }}>Mi1</div>
-            <div style={{ position: 'absolute', bottom: '20px', right: '25px', backgroundColor: '#a855f7', color: '#ffffff', fontSize: '8px', padding: '2px 5px', borderRadius: '3px' }}>Tm3</div>
-            <div style={{ width: '14px', height: '14px', borderRadius: '50%', backgroundColor: '#fbbf24' }}></div>
+            <div style={{ position: 'absolute', width: '70px', height: '70px', borderRadius: '50%', border: '1px dashed #374151' }}></div>
+            <div style={{ position: 'absolute', top: '15px', left: '25px', backgroundColor: '#e11d48', color: '#ffffff', fontSize: '8px', padding: '2px 5px', borderRadius: '3px', fontWeight: 700 }}>LC11</div>
+            <div style={{ position: 'absolute', top: '20px', right: '30px', backgroundColor: '#2563eb', color: '#ffffff', fontSize: '8px', padding: '2px 5px', borderRadius: '3px', fontWeight: 700 }}>T4a</div>
+            <div style={{ position: 'absolute', bottom: '25px', left: '35px', backgroundColor: '#059669', color: '#ffffff', fontSize: '8px', padding: '2px 5px', borderRadius: '3px', fontWeight: 700 }}>Mi1</div>
+            <div style={{ position: 'absolute', bottom: '20px', right: '25px', backgroundColor: '#7c3aed', color: '#ffffff', fontSize: '8px', padding: '2px 5px', borderRadius: '3px', fontWeight: 700 }}>Tm3</div>
+            <div style={{ width: '14px', height: '14px', borderRadius: '50%', backgroundColor: '#d97706' }}></div>
           </div>
-          <div style={{ fontSize: '8.5px', color: '#64748b', textAlign: 'center' }}>2,199 Directed Synaptic Contacts Mapped</div>
+          <div style={{ fontSize: '9px', color: '#64748b', textAlign: 'center' }}>2,199 Directed Synaptic Contacts Mapped</div>
         </div>
       );
 
     case 'neurofly-circuit':
       return (
-        <div style={{ width: '92%', height: '88%', backgroundColor: '#030712', borderRadius: '8px', border: '1px solid #1f2937', padding: '10px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-          <div style={{ fontSize: '10px', color: '#ec4899', fontWeight: 700 }}>⚡ MOTION DETECTOR DELAY LINE</div>
+        <div style={{ width: '92%', height: '88%', backgroundColor: '#030712', borderRadius: '6px', border: '1px solid #1f2937', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <div style={{ fontSize: '10.5px', color: '#ec4899', fontWeight: 700 }}>MOTION DETECTOR DELAY LINE</div>
           <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 8px' }}>
             <div style={{ textAlign: 'center' }}>
               <div style={{ fontSize: '8.5px', color: '#94a3b8' }}>Photoreceptor</div>
-              <div style={{ width: '28px', height: '28px', borderRadius: '50%', backgroundColor: '#334155', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '9px', margin: '3px auto' }}>R1-6</div>
+              <div style={{ width: '28px', height: '28px', borderRadius: '50%', backgroundColor: '#334155', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '9px', margin: '4px auto', color: '#ffffff' }}>R1-6</div>
             </div>
-            <div style={{ color: '#64748b', fontSize: '10px' }}>➔</div>
+            <div style={{ color: '#64748b', fontSize: '11px' }}>&rarr;</div>
             <div style={{ textAlign: 'center' }}>
               <div style={{ fontSize: '8.5px', color: '#94a3b8' }}>Delay Mi1</div>
-              <div style={{ width: '28px', height: '28px', borderRadius: '50%', backgroundColor: '#1e3a8a', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '9px', margin: '3px auto' }}>τ_1</div>
+              <div style={{ width: '28px', height: '28px', borderRadius: '50%', backgroundColor: '#1e3a8a', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '9px', margin: '4px auto', color: '#ffffff' }}>&tau;_1</div>
             </div>
-            <div style={{ color: '#64748b', fontSize: '10px' }}>➔</div>
+            <div style={{ color: '#64748b', fontSize: '11px' }}>&rarr;</div>
             <div style={{ textAlign: 'center' }}>
               <div style={{ fontSize: '8.5px', color: '#94a3b8' }}>Motion T4/T5</div>
-              <div style={{ width: '28px', height: '28px', borderRadius: '50%', backgroundColor: '#065f46', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '9px', margin: '3px auto' }}>EMD</div>
+              <div style={{ width: '28px', height: '28px', borderRadius: '50%', backgroundColor: '#065f46', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '9px', margin: '4px auto', color: '#ffffff' }}>EMD</div>
             </div>
           </div>
-          <div style={{ backgroundColor: 'rgba(255,255,255,0.05)', padding: '4px', borderRadius: '4px', fontSize: '8.5px', color: '#cbd5e1', textAlign: 'center' }}>
+          <div style={{ backgroundColor: '#111827', padding: '5px', borderRadius: '4px', fontSize: '9px', color: '#cbd5e1', textAlign: 'center' }}>
             Hassenstein-Reichardt Correlator Simulation
           </div>
         </div>
@@ -628,30 +648,30 @@ const renderMockupVisual = (type) => {
 
     case 'neurofly-sim':
       return (
-        <div style={{ width: '92%', height: '88%', backgroundColor: '#090d16', borderRadius: '8px', border: '1px solid #1e293b', padding: '10px', display: 'flex', flexDirection: 'column' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '9.5px', color: '#94a3b8', borderBottom: '1px solid #1e293b', paddingBottom: '4px', marginBottom: '6px' }}>
+        <div style={{ width: '92%', height: '88%', backgroundColor: '#090d16', borderRadius: '6px', border: '1px solid #1e293b', padding: '12px', display: 'flex', flexDirection: 'column' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '9.5px', color: '#94a3b8', borderBottom: '1px solid #1e293b', paddingBottom: '4px', marginBottom: '8px' }}>
             <span>AUTOPILOT PONG PADDLE</span>
-            <span style={{ color: '#4ade80' }}>NEURAL FIRE: UP (0.84)</span>
+            <span style={{ color: '#4ade80', fontWeight: 600 }}>NEURAL FIRE: UP (0.84)</span>
           </div>
           <div style={{ flex: 1, border: '1px solid #1e293b', position: 'relative', overflow: 'hidden', backgroundColor: '#020617' }}>
             <div style={{ position: 'absolute', top: '24px', left: '8px', width: '5px', height: '36px', backgroundColor: '#38bdf8', borderRadius: '2px' }}></div>
             <div style={{ position: 'absolute', top: '38px', left: '120px', width: '7px', height: '7px', borderRadius: '50%', backgroundColor: '#f43f5e' }}></div>
             <div style={{ position: 'absolute', top: '10px', right: '8px', width: '5px', height: '42px', backgroundColor: '#a855f7', borderRadius: '2px' }}></div>
-            <div style={{ position: 'absolute', top: '50%', left: 0, right: 0, borderTop: '1px dashed rgba(255,255,255,0.1)' }}></div>
+            <div style={{ position: 'absolute', top: '50%', left: 0, right: 0, borderTop: '1px dashed #1e293b' }}></div>
           </div>
         </div>
       );
 
     case 'neurofly-matrix':
       return (
-        <div style={{ width: '92%', height: '88%', backgroundColor: '#030712', borderRadius: '8px', border: '1px solid #1f2937', padding: '10px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-          <div style={{ fontSize: '10px', color: '#38bdf8', fontWeight: 700 }}>📊 neuPrint MaleCNS v1.0 Synapse Matrix</div>
-          <div style={{ flex: 1, display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '3px', backgroundColor: '#0b1120', padding: '4px', borderRadius: '4px' }}>
+        <div style={{ width: '92%', height: '88%', backgroundColor: '#030712', borderRadius: '6px', border: '1px solid #1f2937', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <div style={{ fontSize: '10.5px', color: '#38bdf8', fontWeight: 700 }}>neuPrint MaleCNS v1.0 Synapse Matrix</div>
+          <div style={{ flex: 1, display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '3px', backgroundColor: '#0b1120', padding: '6px', borderRadius: '4px' }}>
             {[1, 0.4, 0.8, 0.2, 0.9, 0.5, 0.3, 0.7, 0.1, 0.9, 0.4, 0.6, 0.8, 0.2, 0.5, 1, 0.3, 0.7, 0.6, 0.9, 0.4, 0.2, 0.8, 0.1].map((v, i) => (
-              <div key={i} style={{ backgroundColor: `rgba(56, 189, 248, ${v})`, borderRadius: '2px', height: '100%' }}></div>
+              <div key={i} style={{ backgroundColor: '#0284c7', opacity: v, borderRadius: '2px', height: '100%' }}></div>
             ))}
           </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '8.5px', color: '#94a3b8' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '9px', color: '#94a3b8' }}>
             <span>LC11 Target Tracking</span>
             <span>12,282 Total Contacts</span>
           </div>
@@ -660,30 +680,30 @@ const renderMockupVisual = (type) => {
 
     case 'temuin-map':
       return (
-        <div style={{ width: '92%', height: '88%', backgroundColor: '#064e3b', borderRadius: '8px', border: '1px solid #059669', padding: '10px', display: 'flex', flexDirection: 'column', gap: '6px', position: 'relative', overflow: 'hidden' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10px', color: '#6ee7b7', fontWeight: 700 }}>
-            <span>📍 TEMUIN GEOLOCATION MAP</span>
-            <span style={{ backgroundColor: 'rgba(5,150,105,0.4)', padding: '2px 6px', borderRadius: '4px' }}>Radius: 3 KM</span>
+        <div style={{ width: '92%', height: '88%', backgroundColor: '#064e3b', borderRadius: '6px', border: '1px solid #059669', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10.5px', color: '#6ee7b7', fontWeight: 700 }}>
+            <span>TEMUIN GEOLOCATION MAP</span>
+            <span style={{ backgroundColor: '#065f46', padding: '2px 8px', borderRadius: '4px', fontSize: '9px' }}>Radius: 3 KM</span>
           </div>
           <div style={{ flex: 1, backgroundColor: '#022c22', borderRadius: '6px', border: '1px dashed #059669', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <div style={{ position: 'absolute', top: '15px', left: '25px', backgroundColor: '#ef4444', color: '#ffffff', fontSize: '8px', padding: '2px 6px', borderRadius: '4px', fontWeight: 700 }}>❗ Dompet Hilang</div>
-            <div style={{ position: 'absolute', bottom: '20px', right: '30px', backgroundColor: '#10b981', color: '#ffffff', fontSize: '8px', padding: '2px 6px', borderRadius: '4px', fontWeight: 700 }}>✓ Kunci Ditemukan</div>
-            <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#3b82f6', border: '2px solid #ffffff' }}></div>
+            <div style={{ position: 'absolute', top: '15px', left: '25px', backgroundColor: '#dc2626', color: '#ffffff', fontSize: '8px', padding: '2px 6px', borderRadius: '3px', fontWeight: 700 }}>[HILANG] Dompet</div>
+            <div style={{ position: 'absolute', bottom: '20px', right: '30px', backgroundColor: '#059669', color: '#ffffff', fontSize: '8px', padding: '2px 6px', borderRadius: '3px', fontWeight: 700 }}>[TEMU] Kunci</div>
+            <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#2563eb', border: '2px solid #ffffff' }}></div>
           </div>
         </div>
       );
 
     case 'temuin-detail':
       return (
-        <div style={{ width: '92%', height: '88%', backgroundColor: '#064e3b', borderRadius: '8px', border: '1px solid #059669', padding: '10px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-          <div style={{ fontSize: '11px', fontWeight: 700, color: '#a7f3d0' }}>🔍 Verifikasi Klaim Barang</div>
-          <div style={{ backgroundColor: '#022c22', padding: '6px 8px', borderRadius: '4px', fontSize: '9px', color: '#d1fae5' }}>
+        <div style={{ width: '92%', height: '88%', backgroundColor: '#064e3b', borderRadius: '6px', border: '1px solid #059669', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <div style={{ fontSize: '11px', fontWeight: 700, color: '#a7f3d0' }}>Verifikasi Klaim Barang</div>
+          <div style={{ backgroundColor: '#022c22', padding: '8px 10px', borderRadius: '4px', fontSize: '9.5px', color: '#d1fae5' }}>
             Barang: <b>Dompet Kulit Cokelat (BCA, KTP)</b>
           </div>
-          <div style={{ backgroundColor: '#022c22', padding: '6px 8px', borderRadius: '4px', fontSize: '9px', color: '#6ee7b7' }}>
+          <div style={{ backgroundColor: '#022c22', padding: '8px 10px', borderRadius: '4px', fontSize: '9.5px', color: '#6ee7b7' }}>
             Pertanyaan Verifikasi: <i>Apa merek gantungan di dompet?</i>
           </div>
-          <div style={{ marginTop: 'auto', backgroundColor: '#10b981', color: '#ffffff', textAlign: 'center', padding: '5px', borderRadius: '4px', fontSize: '9.5px', fontWeight: 700 }}>
+          <div style={{ marginTop: 'auto', backgroundColor: '#10b981', color: '#ffffff', textAlign: 'center', padding: '6px', borderRadius: '4px', fontSize: '10px', fontWeight: 700 }}>
             Ajukan Bukti Kepemilikan
           </div>
         </div>
@@ -691,12 +711,12 @@ const renderMockupVisual = (type) => {
 
     case 'temuin-chat':
       return (
-        <div style={{ width: '92%', height: '88%', backgroundColor: '#064e3b', borderRadius: '8px', border: '1px solid #059669', padding: '10px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-          <div style={{ fontSize: '10.5px', fontWeight: 700, color: '#6ee7b7', borderBottom: '1px solid #059669', paddingBottom: '4px' }}>💬 Chat Penemu & Pemilik (Aman)</div>
-          <div style={{ alignSelf: 'flex-start', backgroundColor: '#022c22', padding: '6px', borderRadius: '6px', fontSize: '9px', color: '#d1fae5', maxWidth: '85%' }}>
+        <div style={{ width: '92%', height: '88%', backgroundColor: '#064e3b', borderRadius: '6px', border: '1px solid #059669', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <div style={{ fontSize: '10.5px', fontWeight: 700, color: '#6ee7b7', borderBottom: '1px solid #059669', paddingBottom: '4px' }}>Chat Penemu & Pemilik (Aman)</div>
+          <div style={{ alignSelf: 'flex-start', backgroundColor: '#022c22', padding: '8px', borderRadius: '6px', fontSize: '9.5px', color: '#d1fae5', maxWidth: '85%' }}>
             Halo, kunci motor Beat Anda sudah saya titipkan di pos satpam kampus ya.
           </div>
-          <div style={{ alignSelf: 'flex-end', backgroundColor: '#10b981', padding: '6px', borderRadius: '6px', fontSize: '9px', color: '#ffffff', maxWidth: '85%' }}>
+          <div style={{ alignSelf: 'flex-end', backgroundColor: '#059669', padding: '8px', borderRadius: '6px', fontSize: '9.5px', color: '#ffffff', maxWidth: '85%' }}>
             Terima kasih banyak mas! Segera saya ambil siang ini.
           </div>
         </div>
@@ -704,13 +724,13 @@ const renderMockupVisual = (type) => {
 
     case 'temuin-history':
       return (
-        <div style={{ width: '92%', height: '88%', backgroundColor: '#064e3b', borderRadius: '8px', border: '1px solid #059669', padding: '10px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-          <div style={{ fontSize: '11px', fontWeight: 700, color: '#6ee7b7' }}>📋 Status Laporan Penemuan</div>
-          <div style={{ backgroundColor: '#022c22', padding: '6px 8px', borderRadius: '4px', display: 'flex', justifyContent: 'space-between', fontSize: '9px', color: '#d1fae5' }}>
+        <div style={{ width: '92%', height: '88%', backgroundColor: '#064e3b', borderRadius: '6px', border: '1px solid #059669', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <div style={{ fontSize: '11px', fontWeight: 700, color: '#6ee7b7' }}>Status Laporan Penemuan</div>
+          <div style={{ backgroundColor: '#022c22', padding: '8px 10px', borderRadius: '4px', display: 'flex', justifyContent: 'space-between', fontSize: '9.5px', color: '#d1fae5' }}>
             <span>KTM Universitas</span>
             <span style={{ color: '#34d399', fontWeight: 700 }}>SELESAI (KLAIMED)</span>
           </div>
-          <div style={{ backgroundColor: '#022c22', padding: '6px 8px', borderRadius: '4px', display: 'flex', justifyContent: 'space-between', fontSize: '9px', color: '#d1fae5' }}>
+          <div style={{ backgroundColor: '#022c22', padding: '8px 10px', borderRadius: '4px', display: 'flex', justifyContent: 'space-between', fontSize: '9.5px', color: '#d1fae5' }}>
             <span>Kunci Motor Honda</span>
             <span style={{ color: '#fbbf24', fontWeight: 700 }}>PROSES SERAH TERIMA</span>
           </div>
@@ -719,30 +739,30 @@ const renderMockupVisual = (type) => {
 
     case 'dompetq-dash':
       return (
-        <div style={{ width: '92%', height: '88%', backgroundColor: '#1e1b4b', borderRadius: '8px', border: '1px solid #4338ca', padding: '10px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10px', color: '#818cf8', fontWeight: 700 }}>
-            <span>💳 DOMPETQ FINTECH WALLET</span>
-            <span style={{ color: '#4ade80' }}>ACTIVE</span>
+        <div style={{ width: '92%', height: '88%', backgroundColor: '#1e1b4b', borderRadius: '6px', border: '1px solid #4338ca', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10.5px', color: '#818cf8', fontWeight: 700 }}>
+            <span>DOMPETQ FINTECH WALLET</span>
+            <span style={{ color: '#4ade80', backgroundColor: '#064e3b', padding: '2px 6px', borderRadius: '3px' }}>ACTIVE</span>
           </div>
-          <div style={{ backgroundColor: '#312e81', padding: '8px', borderRadius: '6px' }}>
-            <div style={{ fontSize: '8.5px', color: '#c7d2fe' }}>SALDO UTAMA</div>
-            <div style={{ fontSize: '14px', fontWeight: 800, color: '#ffffff' }}>Rp 1.450.000</div>
+          <div style={{ backgroundColor: '#312e81', padding: '10px', borderRadius: '6px' }}>
+            <div style={{ fontSize: '9px', color: '#c7d2fe' }}>SALDO UTAMA</div>
+            <div style={{ fontSize: '15px', fontWeight: 800, color: '#ffffff' }}>Rp 1.450.000</div>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4px', fontSize: '9px', textAlign: 'center' }}>
-            <div style={{ backgroundColor: '#4338ca', color: '#ffffff', padding: '4px', borderRadius: '4px' }}>Scan QRIS</div>
-            <div style={{ backgroundColor: '#4338ca', color: '#ffffff', padding: '4px', borderRadius: '4px' }}>Split Bill</div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px', fontSize: '9.5px', textAlign: 'center' }}>
+            <div style={{ backgroundColor: '#4338ca', color: '#ffffff', padding: '6px', borderRadius: '4px' }}>Scan QRIS</div>
+            <div style={{ backgroundColor: '#4338ca', color: '#ffffff', padding: '6px', borderRadius: '4px' }}>Split Bill</div>
           </div>
         </div>
       );
 
     case 'makalah-dash':
       return (
-        <div style={{ width: '92%', height: '88%', backgroundColor: '#1c1917', borderRadius: '8px', border: '1px solid #44403c', padding: '10px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-          <div style={{ fontSize: '10.5px', fontWeight: 700, color: '#fbbf24' }}>🤖 Makalah Generator — AI Research Assistant</div>
-          <div style={{ backgroundColor: '#292524', padding: '6px', borderRadius: '4px', fontSize: '9px', color: '#e7e5e4' }}>
+        <div style={{ width: '92%', height: '88%', backgroundColor: '#1c1917', borderRadius: '6px', border: '1px solid #44403c', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <div style={{ fontSize: '11px', fontWeight: 700, color: '#fbbf24' }}>Makalah Generator — AI Research Assistant</div>
+          <div style={{ backgroundColor: '#292524', padding: '8px 10px', borderRadius: '4px', fontSize: '9.5px', color: '#e7e5e4' }}>
             Topik: <b>Implementasi Convolutional Neural Network pada Citra Medis</b>
           </div>
-          <div style={{ backgroundColor: '#292524', padding: '6px', borderRadius: '4px', fontSize: '8.5px', color: '#a8a29e' }}>
+          <div style={{ backgroundColor: '#292524', padding: '8px 10px', borderRadius: '4px', fontSize: '9px', color: '#a8a29e' }}>
             Format: APA 7th Edition • Bab 1 & 2 Draf Siap Diekspor ke LaTeX/PDF
           </div>
         </div>
@@ -756,6 +776,8 @@ const renderMockupVisual = (type) => {
 export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl = null, onLaunchApp }) => {
   const winCtx = useWindow();
   const [activeProjectId, setActiveProjectId] = useState(initialProject || 'tatagih');
+  const [activePhotoIndex, setActivePhotoIndex] = useState(0);
+  const [previewMode, setPreviewMode] = useState('photo');
   const [selectedPhotoModal, setSelectedPhotoModal] = useState(null);
   const [isBookmarked, setIsBookmarked] = useState(true);
   const [isReloading, setIsReloading] = useState(false);
@@ -779,6 +801,7 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
   const handleSelectProject = (projectId) => {
     playClickSound();
     setActiveProjectId(projectId);
+    setActivePhotoIndex(0);
     setTabs((prev) => {
       const exists = prev.find((t) => (t.projectId || t.id) === projectId);
       if (exists) return prev;
@@ -861,6 +884,7 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
   const currentIndex = projectKeys.indexOf(activeProjectId);
   const prevProjectKey = projectKeys[(currentIndex - 1 + projectKeys.length) % projectKeys.length];
   const nextProjectKey = projectKeys[(currentIndex + 1) % projectKeys.length];
+  const activePhoto = currentProject.photos[activePhotoIndex] || currentProject.photos[0] || {};
 
   return (
     <div className="chrome-browser">
@@ -877,7 +901,7 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
           }
         }}
       >
-        {/* Tab Search Chevron button (matches user reference image) */}
+        {/* Tab Search Chevron button */}
         <div className="chrome-tab-search-wrapper" onPointerDown={(e) => e.stopPropagation()}>
           <button
             type="button"
@@ -1073,18 +1097,20 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
 
       <div className="chrome-content-area">
         <div className="chrome-page-container">
-          <div className="project-nav-pills">
-            <span style={{ fontSize: '12px', color: '#64748b', fontWeight: 600, marginRight: '4px' }}>
-              PILIH PROYEK:
-            </span>
+          {/* Top Project Selector (Flat Button Row) */}
+          <div className="project-nav-bar">
+            <span className="project-nav-label">PROYEK:</span>
             {projectKeys.map((pKey) => {
               const p = PROJECTS_DATA[pKey];
               const isActive = pKey === activeProjectId;
               return (
                 <button
                   key={pKey}
-                  className={`project-nav-pill ${isActive ? 'active' : ''}`}
-                  onClick={() => handleSelectProject(pKey)}
+                  className={`project-nav-btn ${isActive ? 'active' : ''}`}
+                  onClick={() => {
+                    handleSelectProject(pKey);
+                    setActivePhotoIndex(0);
+                  }}
                 >
                   <WinIcon name={p.id} size={14} />
                   <span>{p.name}</span>
@@ -1093,175 +1119,264 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
             })}
           </div>
 
-          <div className="showcase-hero">
-            <div className="hero-badge-row">
-              <span className="hero-category-tag">{currentProject.category}</span>
-              <span className="hero-status-tag">
-                <span className="hero-status-dot"></span>
+          {/* 1. Project Header & Overview (FLAT, NO CARD) */}
+          <header className="project-header">
+            <div className="project-meta-row">
+              <span className="project-category-badge">{currentProject.category}</span>
+              <span className="project-status-badge">
+                <span className="status-bullet"></span>
                 {currentProject.status}
               </span>
-              <span style={{ fontSize: '11px', color: '#94a3b8' }}>
-                Tahun Rilis: {currentProject.period}
-              </span>
+              <span className="project-year-badge">Tahun: {currentProject.period}</span>
             </div>
 
-            <h1 className="hero-title">{currentProject.fullTitle}</h1>
-            <p className="hero-subtitle">{currentProject.solution}</p>
+            <h1 className="project-main-title">{currentProject.fullTitle}</h1>
+            <p className="project-lead-desc">{currentProject.solution}</p>
 
-            <div className="hero-stack-pills">
+            <div className="project-stack-row">
               {currentProject.stack.map((item, idx) => (
-                <span key={idx} className="hero-stack-pill">{item}</span>
+                <span key={idx} className="project-stack-tag">{item}</span>
               ))}
             </div>
 
-            <div className="hero-actions-row">
+            <div className="project-actions-row">
               <a
                 href={currentProject.githubUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="hero-action-btn-primary"
+                className="btn-github"
               >
                 <FolderGit2 size={16} />
-                <span>Lihat Source Code (GitHub)</span>
+                <span>Source Code (GitHub)</span>
               </a>
               <a
                 href={currentProject.liveUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="hero-action-btn-secondary"
+                className="btn-live"
               >
                 <ExternalLink size={15} />
                 <span>Kunjungi Live Demo</span>
               </a>
             </div>
-          </div>
+          </header>
 
-          <div className="stats-grid">
+          {/* 2. Key Metrics Row (FLAT, NO CARD - subtle borders only) */}
+          <section className="project-metrics-row">
             {currentProject.stats.map((stat, idx) => (
-              <div key={idx} className="stat-card">
-                <div className="stat-label">{stat.label}</div>
-                <div className="stat-value">{stat.value}</div>
+              <div key={idx} className="metric-cell">
+                <div className="metric-label">{stat.label}</div>
+                <div className="metric-value">{stat.value}</div>
               </div>
             ))}
-          </div>
+          </section>
 
-          <div className="section-heading-row">
-            <h2 className="section-title">
-              <Sparkles size={20} color="#3b82f6" />
-              <span>Galeri Tangkapan Layar & Mockup UI</span>
-            </h2>
-            <span className="section-badge-note">
-              Klik gambar untuk memperbesar preview
-            </span>
-          </div>
+          {/* 3. CARD 1: Interactive System Interface Previewer (CARD 1 OF 2) */}
+          <section className="project-card preview-showcase-card">
+            <div className="preview-card-header">
+              <div className="preview-header-left">
+                <span className="preview-card-title">Galeri Dokumentasi Antarmuka</span>
+                <span className="preview-screen-count">
+                  Foto {activePhotoIndex + 1} dari {currentProject.photos.length}
+                </span>
+              </div>
 
-          <div className="gallery-grid">
-            {currentProject.photos.map((photo) => (
-              <div
-                key={photo.id}
-                className="mockup-card"
-                onClick={() => setSelectedPhotoModal(photo)}
-              >
-                <div className="mockup-screen-container">
-                  {renderMockupVisual(photo.mockupType)}
+              {/* Mode Switcher & Tab Switcher */}
+              <div className="preview-header-actions">
+                <div className="preview-mode-switch">
+                  <button
+                    type="button"
+                    className={`preview-mode-btn ${previewMode === 'photo' ? 'active' : ''}`}
+                    onClick={() => {
+                      playClickSound();
+                      setPreviewMode('photo');
+                    }}
+                  >
+                    Foto Screenshot
+                  </button>
+                  <button
+                    type="button"
+                    className={`preview-mode-btn ${previewMode === 'mockup' ? 'active' : ''}`}
+                    onClick={() => {
+                      playClickSound();
+                      setPreviewMode('mockup');
+                    }}
+                  >
+                    Skema UI
+                  </button>
                 </div>
-                <div className="mockup-card-body">
-                  <div className="mockup-card-title">{photo.title}</div>
-                  <p className="mockup-card-caption">{photo.caption}</p>
-                  <div className="mockup-card-zoom-hint">
+
+                <div className="preview-tab-row">
+                  {currentProject.photos.map((photo, idx) => (
+                    <button
+                      key={photo.id}
+                      type="button"
+                      className={`preview-tab-btn ${activePhotoIndex === idx ? 'active' : ''}`}
+                      onClick={() => {
+                        playClickSound();
+                        setActivePhotoIndex(idx);
+                      }}
+                    >
+                      <span>Foto {idx + 1}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Main Featured Photo Viewport */}
+            <div
+              className="preview-viewport-container"
+              onClick={() => setSelectedPhotoModal(activePhoto)}
+              title="Klik untuk memperbesar gambar"
+            >
+              {previewMode === 'photo' && activePhoto?.imageUrl ? (
+                <div className="preview-photo-stage">
+                  <img
+                    src={activePhoto.imageUrl}
+                    alt={activePhoto.title}
+                    className="preview-featured-img"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                    }}
+                  />
+                  <div className="preview-zoom-badge">
                     <ZoomIn size={13} />
-                    <span>Perbesar Gambar & Detail</span>
+                    <span>Klik untuk memperbesar</span>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="section-heading-row">
-            <h2 className="section-title">
-              <Info size={20} color="#8b5cf6" />
-              <span>Detail Penjelasan & Latar Belakang Aplikasi</span>
-            </h2>
-          </div>
-
-          <div className="deepdive-grid">
-            <div className="deepdive-box">
-              <div className="deepdive-box-title">
-                <AlertCircle size={18} color="#f59e0b" />
-                <span>Latar Belakang & Masalah (Problem Statement)</span>
-              </div>
-              <p className="deepdive-box-text">{currentProject.problem}</p>
-            </div>
-
-            <div className="deepdive-box">
-              <div className="deepdive-box-title">
-                <CheckCircle2 size={18} color="#22c55e" />
-                <span>Solusi & Pendekatan yang Diterapkan</span>
-              </div>
-              <p className="deepdive-box-text">{currentProject.solution}</p>
-            </div>
-          </div>
-
-          <div className="section-heading-row">
-            <h2 className="section-title">
-              <Layers size={20} color="#06b6d4" />
-              <span>Fitur-Fitur Utama (Key Features)</span>
-            </h2>
-          </div>
-
-          <div className="features-list">
-            {currentProject.keyFeatures.map((feat, idx) => (
-              <div key={idx} className="feature-item-row">
-                <div className="feature-icon-badge">
-                  <CheckCircle2 size={18} />
+              ) : (
+                <div className="preview-mockup-stage">
+                  {renderMockupVisual(activePhoto?.mockupType)}
                 </div>
-                <div className="feature-item-content">
-                  <div className="feature-item-title">{feat.title}</div>
-                  <p className="feature-item-desc">{feat.desc}</p>
+              )}
+            </div>
+
+            {/* Brief Explanation Underneath (Penjelasan Sekilas) */}
+            <div className="preview-caption-bar">
+              <div className="preview-caption-tag">Penjelasan Sekilas:</div>
+              <div className="preview-caption-title">{activePhoto?.title}</div>
+              <p className="preview-caption-text">{activePhoto?.caption}</p>
+            </div>
+
+            {/* Several Photos Reel (Koleksi Beberapa Foto Lengkap Dengan Ringkasan) */}
+            {currentProject.photos.length > 1 && (
+              <div className="preview-thumbnails-container">
+                <div className="preview-thumbnails-label">
+                  Koleksi Foto Proyek ({currentProject.photos.length} Tangkapan Layar):
+                </div>
+                <div className="preview-thumbnails-grid">
+                  {currentProject.photos.map((photo, idx) => (
+                    <div
+                      key={photo.id}
+                      className={`preview-thumb-box ${activePhotoIndex === idx ? 'active' : ''}`}
+                      onClick={() => {
+                        playClickSound();
+                        setActivePhotoIndex(idx);
+                      }}
+                    >
+                      <div className="thumb-img-wrapper">
+                        {photo.imageUrl ? (
+                          <img src={photo.imageUrl} alt={photo.title} className="thumb-preview-img" />
+                        ) : (
+                          <div className="thumb-placeholder-box">Foto {idx + 1}</div>
+                        )}
+                        <span className="thumb-index-badge">Foto {idx + 1}</span>
+                      </div>
+                      <div className="thumb-meta">
+                        <div className="thumb-title">{photo.title}</div>
+                        <div className="thumb-desc-snippet">{photo.caption}</div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
-            ))}
-          </div>
+            )}
+          </section>
 
-          <div className="section-heading-row">
-            <h2 className="section-title">
-              <Cpu size={20} color="#ec4899" />
-              <span>Arsitektur Sistem & Spesifikasi Teknis</span>
-            </h2>
-          </div>
+          {/* 4. Problem & Solution Context (FLAT, NO CARD - Editorial 2-column) */}
+          <section className="editorial-context-section">
+            <div className="editorial-col">
+              <h2 className="editorial-heading">Latar Belakang & Masalah</h2>
+              <p className="editorial-body">{currentProject.problem}</p>
+            </div>
+            <div className="editorial-col">
+              <h2 className="editorial-heading">Solusi & Pendekatan</h2>
+              <p className="editorial-body">{currentProject.solution}</p>
+            </div>
+          </section>
 
-          <div className="deepdive-box" style={{ marginBottom: '32px' }}>
-            <p className="deepdive-box-text" style={{ fontSize: '13.5px', lineHeight: '1.7' }}>
-              {currentProject.architecture}
-            </p>
-          </div>
+          {/* 5. Key Features (FLAT, NO CARD - Clean checklist) */}
+          <section className="key-features-section">
+            <h2 className="editorial-heading" style={{ marginBottom: '16px' }}>Fitur-Fitur Utama</h2>
+            <div className="features-checklist">
+              {currentProject.keyFeatures.map((feat, idx) => (
+                <div key={idx} className="feature-list-row">
+                  <CheckCircle2 size={16} className="feature-check-icon" />
+                  <div className="feature-text">
+                    <span className="feature-name">{feat.title}:</span>
+                    <span className="feature-desc"> {feat.desc}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
 
-          <div className="bottom-project-switch-bar">
-            <div>
-              <div style={{ fontSize: '11px', color: '#94a3b8', textTransform: 'uppercase', marginBottom: '3px' }}>
-                Jelajahi Proyek Lainnya
-              </div>
-              <div style={{ fontSize: '14px', fontWeight: 600, color: '#ffffff' }}>
-                Beralih ke dokumentasi aplikasi berikutnya
+          {/* 6. CARD 2: System Architecture & Technical Specifications (CARD 2 OF 2) */}
+          <section className="project-card architecture-spec-card">
+            <div className="arch-card-header">
+              <h2 className="arch-card-title">Arsitektur Sistem & Spesifikasi Teknis</h2>
+            </div>
+            <div className="arch-card-body">
+              <p className="arch-narrative">{currentProject.architecture}</p>
+
+              <div className="arch-specs-grid">
+                <div className="spec-item">
+                  <span className="spec-label">Core Tech Stack</span>
+                  <span className="spec-value">{currentProject.stack.join(', ')}</span>
+                </div>
+                <div className="spec-item">
+                  <span className="spec-label">Kategori Proyek</span>
+                  <span className="spec-value">{currentProject.category}</span>
+                </div>
+                <div className="spec-item">
+                  <span className="spec-label">Siklus Pengembangan</span>
+                  <span className="spec-value">{currentProject.period} ({currentProject.status})</span>
+                </div>
+                <div className="spec-item">
+                  <span className="spec-label">Lisensi / Deployment</span>
+                  <span className="spec-value">Live Production / Open Source Repository</span>
+                </div>
               </div>
             </div>
-            <div style={{ display: 'flex', gap: '10px' }}>
+          </section>
+
+          {/* 7. Bottom Navigation (FLAT, NO CARD) */}
+          <footer className="project-footer-nav">
+            <div className="footer-nav-label">Jelajahi Proyek Lainnya:</div>
+            <div className="footer-nav-links">
               <button
-                className="switch-nav-btn"
-                onClick={() => handleSelectProject(prevProjectKey)}
+                className="footer-nav-btn"
+                onClick={() => {
+                  handleSelectProject(prevProjectKey);
+                  setActivePhotoIndex(0);
+                }}
               >
                 <ArrowLeft size={14} />
                 <span>{PROJECTS_DATA[prevProjectKey].name}</span>
               </button>
               <button
-                className="switch-nav-btn"
-                onClick={() => handleSelectProject(nextProjectKey)}
+                className="footer-nav-btn"
+                onClick={() => {
+                  handleSelectProject(nextProjectKey);
+                  setActivePhotoIndex(0);
+                }}
               >
                 <span>{PROJECTS_DATA[nextProjectKey].name}</span>
                 <ArrowRight size={14} />
               </button>
             </div>
-          </div>
+          </footer>
         </div>
       </div>
 
@@ -1285,7 +1400,18 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
             </div>
             <div className="lightbox-body">
               <div className="lightbox-preview-frame">
-                {renderMockupVisual(selectedPhotoModal.mockupType)}
+                {selectedPhotoModal?.imageUrl ? (
+                  <img
+                    src={selectedPhotoModal.imageUrl}
+                    alt={selectedPhotoModal.title}
+                    style={{ maxWidth: '100%', maxHeight: '60vh', objectFit: 'contain', borderRadius: '4px' }}
+                  />
+                ) : (
+                  renderMockupVisual(selectedPhotoModal.mockupType)
+                )}
+              </div>
+              <div style={{ fontSize: '11px', color: '#64748b', textTransform: 'uppercase', fontWeight: 700, letterSpacing: '0.5px' }}>
+                Penjelasan Sekilas:
               </div>
               <p className="lightbox-caption-text">
                 {selectedPhotoModal.caption}

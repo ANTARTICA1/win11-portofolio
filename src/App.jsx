@@ -12,6 +12,9 @@ import { SettingsApp } from './components/Apps/SettingsApp';
 import { CalculatorApp } from './components/Apps/CalculatorApp';
 import { TaskManagerApp } from './components/Apps/TaskManagerApp';
 import { WhatsAppApp } from './components/Apps/WhatsAppApp';
+import { LinkedInApp } from './components/Apps/LinkedInApp';
+import { ChromeDinoGame } from './components/Apps/ChromeDinoGame';
+import { ExternalLink } from 'lucide-react';
 
 import { NotificationToast } from './components/Common/NotificationToast';
 import { RunDialog } from './components/Common/RunDialog';
@@ -264,6 +267,24 @@ export function App() {
         icon: 'whatsapp',
         initialSize: { width: 920, height: 620 },
         initialPosition: { x: 70 + (windows.length % 5) * 25, y: 35 + (windows.length % 5) * 20 }
+      },
+      linkedin: {
+        title: 'LinkedIn — Anak Agung Ngurah Krisna Artha Wibawa',
+        icon: 'linkedin',
+        initialSize: { width: 900, height: 640 },
+        initialPosition: { x: 75 + (windows.length % 5) * 25, y: 35 + (windows.length % 5) * 20 }
+      },
+      krisnaartha_site: {
+        title: 'krisnaartha.my.id — Personal Portfolio Website',
+        icon: 'krisnaartha',
+        initialSize: { width: 960, height: 640 },
+        initialPosition: { x: 80 + (windows.length % 5) * 25, y: 40 + (windows.length % 5) * 20 }
+      },
+      dino: {
+        title: 'chrome://dino — T-Rex Dinosaur Game',
+        icon: 'chrome_dino',
+        initialSize: { width: 840, height: 480 },
+        initialPosition: { x: 95 + (windows.length % 5) * 25, y: 45 + (windows.length % 5) * 20 }
       }
     };
 
@@ -484,6 +505,26 @@ export function App() {
       case 'whatsapp':
       case 'discord':
         return <WhatsAppApp onLaunchApp={launchApp} />;
+      case 'linkedin':
+        return <LinkedInApp onLaunchApp={launchApp} />;
+      case 'krisnaartha_site':
+        return (
+          <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', backgroundColor: '#0f172a', color: '#fff' }}>
+            <div style={{ height: '44px', backgroundColor: '#1e293b', borderBottom: '1px solid #334155', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 16px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', color: '#94a3b8' }}>
+                <span style={{ color: '#22c55e' }}>🔒</span>
+                <span style={{ color: '#f8fafc', fontWeight: 600 }}>https://krisnaartha.my.id</span>
+              </div>
+            </div>
+            <iframe 
+              src="https://krisnaartha.my.id" 
+              title="krisnaartha.my.id"
+              style={{ flex: 1, width: '100%', border: 'none', backgroundColor: '#ffffff' }}
+            />
+          </div>
+        );
+      case 'dino':
+        return <ChromeDinoGame />;
       case 'settings':
       case 'clock':
         return (
@@ -571,6 +612,10 @@ export function App() {
           else if (cmd === 'taskmgr') launchApp('taskmgr');
           else if (cmd === 'calc') launchApp('calculator');
           else if (cmd === 'settings') launchApp('settings');
+          else if (cmd === 'linkedin') launchApp('linkedin');
+          else if (cmd === 'wa' || cmd === 'whatsapp') launchApp('whatsapp');
+          else if (cmd === 'web' || cmd === 'krisnaartha' || cmd === 'krisnaartha.my.id') launchApp('krisnaartha_site');
+          else if (cmd === 'dino' || cmd === 'chrome://dino') launchApp('dino');
           else launchApp(cmd);
         }}
       />

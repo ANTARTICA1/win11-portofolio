@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <clipPath id="circleClip">
+      <circle cx="100" cy="100" r="86" />
+    </clipPath>
+    <linearGradient id="suitGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1e3a8a" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0284c7" />
+      <stop offset="100%" stop-color="#0369a1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Profile Image / Dummy Avatar Background -->
+  <g clip-path="url(#circleClip)">
+    <circle cx="100" cy="100" r="90" fill="url(#bgGrad)" />
+    <!-- Shoulders / Business Suit -->
+    <path d="M40 190 C40 145, 65 135, 100 135 C135 135, 160 145, 160 190 Z" fill="url(#suitGrad)" />
+    <!-- White Collared Shirt -->
+    <path d="M85 135 L100 160 L115 135 Z" fill="#ffffff" />
+    <!-- Dark Tie -->
+    <path d="M96 148 L104 148 L106 185 L100 192 L94 185 Z" fill="#0f172a" />
+    <!-- Neck -->
+    <rect x="88" y="115" width="24" height="24" rx="6" fill="#fcd34d" />
+    <!-- Head -->
+    <ellipse cx="100" cy="92" rx="30" ry="34" fill="#fcd34d" />
+    <!-- Hair -->
+    <path d="M70 82 C68 58, 82 46, 100 46 C118 46, 132 58, 130 82 C125 76, 116 70, 102 70 C88 70, 78 76, 70 82 Z" fill="#1e293b" />
+    <!-- Ears -->
+    <circle cx="70" cy="94" r="7" fill="#fcd34d" />
+    <circle cx="130" cy="94" r="7" fill="#fcd34d" />
+    <!-- Eyes -->
+    <ellipse cx="88" cy="90" rx="3.5" ry="4" fill="#0f172a" />
+    <circle cx="89" cy="89" r="1.2" fill="#ffffff" />
+    <ellipse cx="112" cy="90" rx="3.5" ry="4" fill="#0f172a" />
+    <circle cx="113" cy="89" r="1.2" fill="#ffffff" />
+    <!-- Eyebrows -->
+    <path d="M81 83 Q88 80 95 83" stroke="#1e293b" stroke-width="2.5" stroke-linecap="round" fill="none" />
+    <path d="M105 83 Q112 80 119 83" stroke="#1e293b" stroke-width="2.5" stroke-linecap="round" fill="none" />
+    <!-- Nose -->
+    <path d="M100 92 L98 99 L102 99" stroke="#b45309" stroke-width="1.8" stroke-linecap="round" fill="none" />
+    <!-- Warm Professional Smile -->
+    <path d="M91 106 Q100 113 109 106" stroke="#92400e" stroke-width="2.5" stroke-linecap="round" fill="none" />
+  </g>
+
+  <!-- #OPENTOWORK Green Ribbon Ring -->
+  <circle cx="100" cy="100" r="92" fill="none" stroke="#16a34a" stroke-width="14" />
+  <circle cx="100" cy="100" r="99.5" fill="none" stroke="#ffffff" stroke-width="2" />
+  <circle cx="100" cy="100" r="84.5" fill="none" stroke="#ffffff" stroke-width="2" />
+
+  <!-- Text path for #OPENTOWORK along the bottom-left curve -->
+  <path id="openToWorkPath" d="M 32 125 A 92 92 0 0 0 168 125" fill="none" />
+  <text fill="#ffffff" font-size="13" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-weight="800" letter-spacing="2">
+    <textPath href="#openToWorkPath" startOffset="16%">
+      #OPENTOWORK
+    </textPath>
+  </text>
+</svg>

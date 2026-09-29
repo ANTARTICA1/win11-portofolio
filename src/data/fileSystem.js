@@ -1,15 +1,19 @@
 export const INITIAL_USER = {
   name: "Agung Krisna",
-  handle: "agung",
+  fullName: "Anak Agung Ngurah Krisna Artha Wibawa",
+  handle: "krisnaartha",
   role: "Full-Stack Web & Mobile Developer",
   status: "Open to Work (Full-Time / Freelance)",
-  location: "Indonesia",
+  institution: "Institut Teknologi dan Bisnis STIKOM Bali",
+  degree: "Information Technology",
+  location: "Denpasar, Bali, Indonesia",
   email: "agungkrisna.dev@gmail.com",
   phone: "+62 812-3456-7890",
   whatsapp: "https://wa.me/6281234567890?text=Halo%20Agung,%20kami%20tertarik%20dengan%20profil%20portfolio%20Anda",
   github: "https://github.com/agungkrisna",
   linkedin: "https://linkedin.com/in/agungkrisna",
-  avatar: "https://api.dicebear.com/7.x/bottts/svg?seed=AgungKrisna"
+  website: "https://krisnaartha.my.id",
+  avatar: "/avatars/gungkrisna_avatar.svg"
 };
 
 export const RECRUITER_SUMMARY = {
@@ -829,6 +833,28 @@ export const DESKTOP_ITEMS = [
     type: "app",
     app: "whatsapp",
     icon: "whatsapp"
+  },
+  {
+    id: "linkedin",
+    name: "LinkedIn",
+    type: "app",
+    app: "linkedin",
+    icon: "linkedin"
+  },
+  {
+    id: "krisnaartha_site",
+    name: "krisnaartha.my.id",
+    type: "shortcut",
+    app: "krisnaartha_site",
+    url: "https://krisnaartha.my.id",
+    icon: "krisnaartha"
+  },
+  {
+    id: "chrome_dino",
+    name: "chrome://dino",
+    type: "app",
+    app: "dino",
+    icon: "chrome_dino"
   },
   {
     id: "calculator",

@@ -101,6 +101,10 @@ export const Desktop = ({
       onLaunchApp('chrome', { projectId: 'neurofly' });
     } else if (item.app === 'recycle_bin' || item.id === 'recycle_bin') {
       onLaunchApp('explorer', { path: 'Recycle Bin' });
+    } else if (item.app === 'dino' || item.id === 'chrome_dino') {
+      onLaunchApp('dino');
+    } else if (item.app === 'krisnaartha_site' || item.id === 'krisnaartha_site' || item.url) {
+      onLaunchApp('krisnaartha_site', { url: item.url || 'https://krisnaartha.my.id' });
     } else {
       onLaunchApp(item.app || 'explorer');
     }

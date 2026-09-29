@@ -9,6 +9,7 @@ import {
 import { WinIcon } from '../Common/WinIcon';
 import { playClickSound } from '../../utils/sound';
 import { useWindow } from '../Windows/WindowContext';
+import { ChromeDinoGame } from './ChromeDinoGame';
 import './BrowserApp.css';
 
 const PROJECTS_DATA = {
@@ -392,6 +393,42 @@ const PROJECTS_DATA = {
       }
     ],
     architecture: 'Dibangun di atas Next.js 14 App Router, TypeScript, dan integrasi streaming response OpenAI GPT-4 API dengan sanitasi teks ketat.'
+  },
+  dino: {
+    id: 'dino',
+    name: 'chrome://dino',
+    isDino: true,
+    tagline: 'T-Rex Offline Runner Game',
+    fullTitle: 'chrome://dino — Chrome T-Rex Dinosaur Game',
+    category: 'Built-in Mini Game',
+    status: 'Playable Arcade Game',
+    period: 'Arcade',
+    liveUrl: 'chrome://dino',
+    githubUrl: 'https://github.com/chromium/chromium',
+    stack: ['HTML5 Canvas', 'Vanilla JavaScript', 'Web Audio API', 'Retro Pixel Art'],
+    stats: [
+      { label: 'Kontrol', value: 'Spasi / Panah Atas / Bawah' },
+      { label: 'Mode', value: 'Siklus Siang & Malam' },
+      { label: 'Audio', value: '8-bit Synthesizer Sound' },
+      { label: 'Fisika', value: 'Gravitasi & Kecepatan Adaptif' }
+    ],
+    photos: []
+  },
+  krisnaartha: {
+    id: 'krisnaartha',
+    name: 'krisnaartha.my.id',
+    isExternalIframe: true,
+    iframeUrl: 'https://krisnaartha.my.id',
+    tagline: 'Personal Portfolio & Showcase',
+    fullTitle: 'krisnaartha.my.id — Personal Portfolio',
+    category: 'Live Portfolio Web',
+    status: 'Live Website',
+    period: '2024',
+    liveUrl: 'https://krisnaartha.my.id',
+    githubUrl: 'https://github.com/agungkrisna',
+    stack: ['Portfolio Web', 'Full Stack', 'Cloud & DevOps'],
+    stats: [],
+    photos: []
   }
 };
 
@@ -782,21 +819,36 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
   const [isBookmarked, setIsBookmarked] = useState(true);
   const [isReloading, setIsReloading] = useState(false);
   const [showTabSearch, setShowTabSearch] = useState(false);
+  const [omniboxVal, setOmniboxVal] = useState(() => {
+    return initialProject === 'dino' ? 'chrome://dino' : initialProject === 'krisnaartha' ? 'krisnaartha.my.id' : `agungkrisna.dev/projects/${initialProject || 'tatagih'}`;
+  });
 
   const projectKeys = Object.keys(PROJECTS_DATA);
 
   const [tabs, setTabs] = useState(() => {
     const initKey = initialProject || 'tatagih';
     const p = PROJECTS_DATA[initKey] || PROJECTS_DATA.tatagih;
+    const title = p.isDino ? 'chrome://dino' : p.isExternalIframe ? 'krisnaartha.my.id' : `${p.name} — Showcase`;
+    const icon = p.isDino ? 'dino' : p.isExternalIframe ? 'krisnaartha' : 'chrome';
     return [
       {
         id: p.id,
         projectId: p.id,
-        title: `${p.name} — Showcase`,
-        icon: 'chrome'
+        title,
+        icon
       }
     ];
   });
+
+  useEffect(() => {
+    if (activeProjectId === 'dino') {
+      setOmniboxVal('chrome://dino');
+    } else if (activeProjectId === 'krisnaartha') {
+      setOmniboxVal('krisnaartha.my.id');
+    } else if (PROJECTS_DATA[activeProjectId]) {
+      setOmniboxVal(`agungkrisna.dev/projects/${activeProjectId}`);
+    }
+  }, [activeProjectId]);
 
   const handleSelectProject = (projectId) => {
     playClickSound();
@@ -806,13 +858,15 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
       const exists = prev.find((t) => (t.projectId || t.id) === projectId);
       if (exists) return prev;
       const p = PROJECTS_DATA[projectId];
+      const title = p ? (p.isDino ? 'chrome://dino' : p.isExternalIframe ? 'krisnaartha.my.id' : `${p.name} — Showcase`) : 'New Tab';
+      const icon = p?.isDino ? 'dino' : p?.isExternalIframe ? 'krisnaartha' : 'chrome';
       return [
         ...prev,
         {
           id: projectId,
           projectId: projectId,
-          title: p ? `${p.name} — Showcase` : 'New Tab',
-          icon: 'chrome'
+          title,
+          icon
         }
       ];
     });
@@ -958,7 +1012,7 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
                   setActiveProjectId(tab.projectId || tab.id);
                 }}
               >
-                <WinIcon name="chrome" size={15} />
+                <WinIcon name={tab.icon || "chrome"} size={15} />
                 <span className="chrome-tab-title">{tab.title}</span>
                 <button
                   type="button"
@@ -1029,18 +1083,62 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
           <RotateCw size={14} />
         </button>
 
-        <div className="chrome-omnibox">
-          <Lock size={13} color="#22c55e" />
-          <span style={{ color: '#22c55e', fontWeight: 600 }}>https://</span>
-          <span className="chrome-url-text">agungkrisna.dev/projects/{currentProject.id}</span>
+        <form
+          className="chrome-omnibox"
+          onSubmit={(e) => {
+            e.preventDefault();
+            const val = (omniboxVal || '').trim().toLowerCase();
+            if (val.includes('dino')) {
+              handleSelectProject('dino');
+            } else if (val.includes('krisnaartha')) {
+              handleSelectProject('krisnaartha');
+            } else if (val.includes('tatagih')) {
+              handleSelectProject('tatagih');
+            } else if (val.includes('lintas')) {
+              handleSelectProject('lintas');
+            } else if (val.includes('neurofly')) {
+              handleSelectProject('neurofly');
+            } else if (val.includes('temuin')) {
+              handleSelectProject('temuin');
+            } else if (val.includes('makalah')) {
+              handleSelectProject('makalah');
+            }
+          }}
+        >
+          {currentProject?.isDino ? (
+            <WinIcon name="dino" size={14} />
+          ) : (
+            <Lock size={13} color="#22c55e" />
+          )}
+          <span style={{ color: currentProject?.isDino ? '#94a3b8' : '#22c55e', fontWeight: 600 }}>
+            {currentProject?.isDino ? 'chrome://' : 'https://'}
+          </span>
+          <input
+            type="text"
+            className="chrome-url-input"
+            value={omniboxVal}
+            onChange={(e) => setOmniboxVal(e.target.value)}
+            style={{
+              flex: 1,
+              background: 'transparent',
+              border: 'none',
+              outline: 'none',
+              color: '#ffffff',
+              fontSize: '12px',
+              fontFamily: 'inherit'
+            }}
+          />
           <Star
             size={15}
             color={isBookmarked ? '#f59e0b' : '#9ca3af'}
             fill={isBookmarked ? '#f59e0b' : 'none'}
-            style={{ cursor: 'pointer' }}
-            onClick={() => setIsBookmarked(!isBookmarked)}
+            style={{ cursor: 'pointer', flexShrink: 0 }}
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsBookmarked(!isBookmarked);
+            }}
           />
-        </div>
+        </form>
 
         <div
           style={{
@@ -1062,6 +1160,22 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
       </div>
 
       <div className="chrome-bookmarks-bar">
+        <div
+          className={`chrome-bookmark-item ${activeProjectId === 'dino' ? 'active' : ''}`}
+          onClick={() => handleSelectProject('dino')}
+          title="Play Chrome Dinosaur Game"
+        >
+          <WinIcon name="dino" size={13} />
+          <span>chrome://dino 🦖</span>
+        </div>
+        <div
+          className={`chrome-bookmark-item ${activeProjectId === 'krisnaartha' ? 'active' : ''}`}
+          onClick={() => handleSelectProject('krisnaartha')}
+          title="krisnaartha.my.id (Portfolio)"
+        >
+          <WinIcon name="krisnaartha" size={13} />
+          <span>krisnaartha.my.id</span>
+        </div>
         <div
           className={`chrome-bookmark-item ${activeProjectId === 'tatagih' ? 'active' : ''}`}
           onClick={() => handleSelectProject('tatagih')}
@@ -1095,29 +1209,40 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
         </a>
       </div>
 
-      <div className="chrome-content-area">
-        <div className="chrome-page-container">
-          {/* Top Project Selector (Flat Button Row) */}
-          <div className="project-nav-bar">
-            <span className="project-nav-label">PROYEK:</span>
-            {projectKeys.map((pKey) => {
-              const p = PROJECTS_DATA[pKey];
-              const isActive = pKey === activeProjectId;
-              return (
-                <button
-                  key={pKey}
-                  className={`project-nav-btn ${isActive ? 'active' : ''}`}
-                  onClick={() => {
-                    handleSelectProject(pKey);
-                    setActivePhotoIndex(0);
-                  }}
-                >
-                  <WinIcon name={p.id} size={14} />
-                  <span>{p.name}</span>
-                </button>
-              );
-            })}
+      <div className="chrome-content-area" style={currentProject?.isDino || currentProject?.isExternalIframe ? { padding: 0, overflow: 'hidden', display: 'flex', flexDirection: 'column' } : {}}>
+        {currentProject?.isDino ? (
+          <div style={{ flex: 1, width: '100%', height: '100%', overflow: 'hidden' }}>
+            <ChromeDinoGame isEmbedded={true} />
           </div>
+        ) : currentProject?.isExternalIframe ? (
+          <iframe
+            src={currentProject.iframeUrl}
+            title={currentProject.name}
+            style={{ flex: 1, width: '100%', height: '100%', border: 'none', backgroundColor: '#ffffff' }}
+          />
+        ) : (
+          <div className="chrome-page-container">
+            {/* Top Project Selector (Flat Button Row) */}
+            <div className="project-nav-bar">
+              <span className="project-nav-label">PROYEK:</span>
+              {projectKeys.filter(k => k !== 'dino' && k !== 'krisnaartha').map((pKey) => {
+                const p = PROJECTS_DATA[pKey];
+                const isActive = pKey === activeProjectId;
+                return (
+                  <button
+                    key={pKey}
+                    className={`project-nav-btn ${isActive ? 'active' : ''}`}
+                    onClick={() => {
+                      handleSelectProject(pKey);
+                      setActivePhotoIndex(0);
+                    }}
+                  >
+                    <WinIcon name={p.id} size={14} />
+                    <span>{p.name}</span>
+                  </button>
+                );
+              })}
+            </div>
 
           {/* 1. Project Header & Overview (FLAT, NO CARD) */}
           <header className="project-header">
@@ -1378,6 +1503,7 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
             </div>
           </footer>
         </div>
+        )}
       </div>
 
       {selectedPhotoModal && (

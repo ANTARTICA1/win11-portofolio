@@ -8,6 +8,10 @@ export const PhotosApp = ({
 }) => {
   const images = [
     { url: '/certificates/cert_fullstack.jpg', title: 'Certificate: Mobile & Full Stack Development', date: 'October 26, 2024', size: '612 KB' },
+    { url: '/projects/theotown.jpg', title: 'ITB STIKOM Bali — TheoTown Custom Building Plugin Gameplay', date: 'November 2024', size: '620 KB' },
+    { url: '/projects/lintas.jpg', title: 'Lintas — Cross-Device Productivity Ecosystem (Android & Windows)', date: 'November 2024', size: '610 KB' },
+    { url: '/projects/nenacare.jpg', title: 'NenaCare — AI-Powered K3 Incident Reporting & Monitoring System', date: 'October 2024', size: '580 KB' },
+    { url: '/projects/tatagih.jpg', title: 'Tatagih — Smart Subscription Manager Web App (Laravel 13 & AI)', date: 'November 2024', size: '540 KB' },
     { url: '/projects/dompetq.jpg', title: 'DompetQ Mobile App Dashboard', date: 'September 2024', size: '482 KB' },
     { url: '/projects/temuin.jpg', title: 'Temuin Crowdsourcing Mobile Interface', date: 'August 2024', size: '520 KB' },
     { url: '/projects/makalah.jpg', title: 'Makalah Generator Web Dashboard', date: 'July 2024', size: '410 KB' }

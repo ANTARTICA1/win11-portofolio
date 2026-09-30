@@ -123,8 +123,8 @@ export const Window = ({
   }, []);
 
   const handleTitlePointerDown = (e) => {
-    if (isMobile || isMaximized) return;
-    if (e.target.closest('.win-controls, button, .chrome-tab, .chrome-tab-close, .chrome-newtab-btn, .chrome-tab-search-btn, input, a')) return;
+    if (isMobile) return;
+    if (e.target.closest('.win-controls, button, .chrome-tab-close, .chrome-newtab-btn, .chrome-tab-search-btn, input, a')) return;
 
     onFocus();
     const target = e.currentTarget;
@@ -137,7 +137,9 @@ export const Window = ({
       startX: e.clientX,
       startY: e.clientY,
       initX: pos.x,
-      initY: pos.y
+      initY: pos.y,
+      isMaximizedStart: Boolean(isMaximized),
+      startedMaximized: Boolean(isMaximized)
     };
   };
 
@@ -145,6 +147,36 @@ export const Window = ({
     if (!dragRef.current.isDragging || isMobile) return;
     const dx = e.clientX - dragRef.current.startX;
     const dy = e.clientY - dragRef.current.startY;
+
+    if (dragRef.current.isMaximizedStart) {
+      // User started dragging while window was maximized
+      // Threshold of 3px to avoid unmaximizing on simple click or double click
+      if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
+        dragRef.current.isMaximizedStart = false;
+
+        const restoredW = Math.min(size.width || 840, window.innerWidth - 60);
+        const restoredH = Math.min(size.height || 560, window.innerHeight - 100);
+
+        // Keep cursor position proportional horizontally across the window width
+        const ratio = Math.max(0.08, Math.min(0.92, e.clientX / window.innerWidth));
+        const newX = Math.max(10, Math.min(window.innerWidth - restoredW - 10, e.clientX - ratio * restoredW));
+        const newY = Math.max(0, e.clientY - 15);
+
+        setPos({ x: newX, y: newY });
+
+        // Reset drag reference baseline to this new restored position
+        dragRef.current.initX = newX;
+        dragRef.current.initY = newY;
+        dragRef.current.startX = e.clientX;
+        dragRef.current.startY = e.clientY;
+
+        playWindowSound('open');
+        if (onMaximize) {
+          onMaximize();
+        }
+      }
+      return;
+    }
 
     const newX = Math.max(-size.width + 120, Math.min(window.innerWidth - 80, dragRef.current.initX + dx));
     const newY = Math.max(0, Math.min(window.innerHeight - 100, dragRef.current.initY + dy));
@@ -155,9 +187,18 @@ export const Window = ({
   const handleTitlePointerUp = (e) => {
     if (dragRef.current.isDragging) {
       dragRef.current.isDragging = false;
+      dragRef.current.isMaximizedStart = false;
+      dragRef.current.startedMaximized = false;
+
       try {
         e.currentTarget.releasePointerCapture(e.pointerId);
       } catch {}
+
+      // Snap to maximize if dragged to the very top edge of the screen
+      if (!isMobile && !isMaximized && e.clientY <= 8) {
+        playClickSound();
+        if (onMaximize) onMaximize();
+      }
     }
   };
 

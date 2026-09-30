@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" fill="none">
+  <!-- Shield Background Gradient -->
+  <defs>
+    <linearGradient id="shieldGrad" x1="6" y1="4" x2="42" y2="44" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="45%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#090d16" />
+    </linearGradient>
+    <linearGradient id="borderGrad" x1="4" y1="4" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="50%" stop-color="#ef4444" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </linearGradient>
+    <linearGradient id="phoneGrad" x1="16" y1="13" x2="32" y2="35" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+  </defs>
+
+  <!-- Outer Shield Outer Contour -->
+  <path d="M24 4L7 11V22C7 33.2 14.3 43.1 24 46C33.7 43.1 41 33.2 41 22V11L24 4Z" fill="url(#shieldGrad)" stroke="url(#borderGrad)" stroke-width="2.5" stroke-linejoin="round" />
+
+  <!-- Shield Glow Inset -->
+  <path d="M24 7L10 13V22C10 31.5 16 39.8 24 42.5C32 39.8 38 31.5 38 22V13L24 7Z" stroke="#38bdf8" stroke-width="0.8" stroke-opacity="0.35" fill="none" />
+
+  <!-- Mobile Smartphone Body inside Shield -->
+  <rect x="17" y="14" width="14" height="22" rx="3" fill="url(#phoneGrad)" stroke="#38bdf8" stroke-width="1.4" />
+  
+  <!-- Smartphone Screen Area -->
+  <rect x="19" y="17" width="10" height="15" rx="1.2" fill="#030712" />
+
+  <!-- Motion waves / sensor pulses on screen -->
+  <!-- Top Sensor Notch / Speaker -->
+  <line x1="22" y1="15.5" x2="26" y2="15.5" stroke="#94a3b8" stroke-width="1" stroke-linecap="round" />
+
+  <!-- Lock & Alert Symbol on screen -->
+  <path d="M22 23V21.5C22 20.4 22.9 19.5 24 19.5C25.1 19.5 26 20.4 26 21.5V23" stroke="#ef4444" stroke-width="1.2" stroke-linecap="round" />
+  <rect x="21" y="23" width="6" height="5" rx="1" fill="#ef4444" />
+  <circle cx="24" cy="25.2" r="0.8" fill="#ffffff" />
+
+  <!-- Sensor Motion Radial Pulse Waves (Sides of phone) -->
+  <path d="M13.5 21C12.5 23 12.5 27 13.5 29" stroke="#38bdf8" stroke-width="1.4" stroke-linecap="round" />
+  <path d="M34.5 21C35.5 23 35.5 27 34.5 29" stroke="#ef4444" stroke-width="1.4" stroke-linecap="round" />
+
+  <!-- Bottom Home Pill Indicator -->
+  <line x1="22" y1="34" x2="26" y2="34" stroke="#64748b" stroke-width="1" stroke-linecap="round" />
+</svg>

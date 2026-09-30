@@ -52,7 +52,6 @@ PENGALAMAN KERJA:
 
 PENDIDIKAN:
 - S1 Teknik Informatika (IPK: 3.84)
-  Prestasi: Juara 2 Hackathon Mobile Application Kampus 2023
 
 Status: TERSEDIA UNTUK PENAWARAN KERJA (Full-Time / Remote / Onsite)
 ================================================================`;

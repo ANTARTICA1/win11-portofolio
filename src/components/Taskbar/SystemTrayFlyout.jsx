@@ -1,8 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { 
-  ShieldCheck, Bluetooth, RefreshCw, Volume2, Zap, 
-  CheckCircle2, Box, Cpu, Headphones, ExternalLink, Sparkles
-} from 'lucide-react';
+import { ShieldCheck } from 'lucide-react';
 import { WinIcon } from '../Common/WinIcon';
 import { playClickSound } from '../../utils/sound';
 
@@ -55,28 +52,7 @@ export const SystemTrayFlyout = ({
       iconType: 'win',
       winIcon: 'onedrive',
       action: () => {
-        if (onLaunchApp) onLaunchApp('explorer', { path: 'OneDrive' });
-      }
-    },
-    {
-      id: 'bluetooth',
-      name: 'Bluetooth Devices',
-      status: 'Oppo A53 (Connected via Lintas)',
-      iconType: 'lucide',
-      lucideIcon: Bluetooth,
-      color: '#38bdf8',
-      action: () => {
-        if (onLaunchApp) onLaunchApp('chrome', { projectId: 'lintas' });
-      }
-    },
-    {
-      id: 'antigravity',
-      name: 'Antigravity AI Agent',
-      status: 'Agent Companion: Standing by',
-      iconType: 'win',
-      winIcon: 'antigravity',
-      action: () => {
-        if (onLaunchApp) onLaunchApp('antigravity');
+        if (onLaunchApp) onLaunchApp('explorer', { path: 'Projects' });
       }
     },
     {
@@ -87,50 +63,6 @@ export const SystemTrayFlyout = ({
       winIcon: 'whatsapp',
       action: () => {
         if (onLaunchApp) onLaunchApp('whatsapp');
-      }
-    },
-    {
-      id: 'audio',
-      name: 'Realtek HD Audio',
-      status: 'Stereo Output (100%)',
-      iconType: 'lucide',
-      lucideIcon: Headphones,
-      color: '#a855f7',
-      action: () => {
-        if (onOpenQuickSettings) onOpenQuickSettings();
-      }
-    },
-    {
-      id: 'update',
-      name: 'Windows Update',
-      status: "You're up to date",
-      iconType: 'lucide',
-      lucideIcon: CheckCircle2,
-      color: '#38bdf8',
-      action: () => {
-        if (onOpenSettings) onOpenSettings();
-      }
-    },
-    {
-      id: 'performance',
-      name: 'Power & Performance',
-      status: 'Mode: Best Performance (100%)',
-      iconType: 'lucide',
-      lucideIcon: Zap,
-      color: '#f59e0b',
-      action: () => {
-        if (onOpenSettings) onOpenSettings();
-      }
-    },
-    {
-      id: 'docker',
-      name: 'Docker Desktop Engine',
-      status: 'Engine Running (v4.32)',
-      iconType: 'lucide',
-      lucideIcon: Box,
-      color: '#0ea5e9',
-      action: () => {
-        if (onLaunchApp) onLaunchApp('terminal');
       }
     }
   ];
@@ -151,7 +83,7 @@ export const SystemTrayFlyout = ({
         position: 'fixed',
         bottom: 'calc(var(--taskbar-height) + 10px)',
         right: '128px',
-        width: '210px',
+        width: '185px',
         backgroundColor: 'rgba(32, 32, 32, 0.94)',
         backdropFilter: 'blur(30px) saturate(150%)',
         WebkitBackdropFilter: 'blur(30px) saturate(150%)',
@@ -183,7 +115,7 @@ export const SystemTrayFlyout = ({
                 alignItems: 'center',
                 justifyContent: 'center',
                 width: '100%',
-                height: '48px',
+                height: '46px',
                 borderRadius: '6px',
                 border: 'none',
                 backgroundColor: isHovered ? 'rgba(255, 255, 255, 0.12)' : 'transparent',
@@ -228,7 +160,7 @@ export const SystemTrayFlyout = ({
           </div>
         ) : (
           <span style={{ fontSize: '10.5px', color: '#64748b' }}>
-            Windows System Tray
+            System Tray
           </span>
         )}
       </div>

@@ -176,18 +176,26 @@ export const WhatsAppApp = ({ onLaunchApp }) => {
   };
 
   const generateBotReply = (userMsg) => {
-    const lower = userMsg.toLowerCase();
+    const lower = (userMsg || '').toLowerCase();
+
+    if (lower.includes('theotown') || lower.includes('stikom') || lower.includes('pixel art') || lower.includes('mod') || lower.includes('plugin') || lower.includes('bali')) {
+      return 'ITB STIKOM Bali Building Plugin for TheoTown adalah game plugin custom yang menambahkan gedung kampus ITB STIKOM Bali ke dalam game simulasi kota TheoTown! Menggunakan asset pixel art isometrik (StikomBali.png) dengan ornamen khas Bali (atap meru tumpang & candi bentar), gedung ini berfungsi nyata sebagai fasilitas pendidikan (kapasitas 2.500 mahasiswa, radius pengaruh 700 tile) melalui konfigurasi code.json dan plugin.manifest resmi. Coba buka demonya via shortcut ITB STIKOM TheoTown di desktop!';
+    }
+
+    if (lower.includes('nenacare') || lower.includes('k3') || lower.includes('keselamatan') || lower.includes('insiden') || lower.includes('nena cafe')) {
+      return 'NenaCare adalah sistem pelaporan dan monitoring keselamatan kerja (K3) terintegrasi untuk Nena Cafe. Didukung Google Gemini 2.5 Flash-Lite untuk analisis risiko otomatis, opsi pelaporan anonim demi privasi pelapor, integrasi Telegram Bot remote action ([Proses] / [Selesai]), visualisasi analitik Chart.js, serta ekspor dokumen PDF Dompdf. Coba langsung via shortcut NenaCare.exe di Desktop!';
+    }
 
     if (lower.includes('tatagih') || lower.includes('tagihan') || lower.includes('fintech') || lower.includes('langganan')) {
-      return 'Tatagih adalah aplikasi manajemen langganan dan finansial cerdas yang kubangun dengan React, Node.js, dan analitik visual. Kamu bisa buka langsung shortcut Tatagih.exe di desktop untuk mencoba demonya!';
+      return 'Tatagih adalah aplikasi web Smart Subscription Manager & AI Financial Assistant yang kubangun dengan Laravel 13, Tailwind CSS, Google Gemini AI, Chart.js, dan Telegram Bot API. Ada fitur Tata Asisten, pendeteksi kebocoran dana, serta patungan langganan (split bill)! Kamu bisa buka shortcut Tatagih.exe di desktop untuk mencoba demonya.';
     }
 
     if (lower.includes('temuin') || lower.includes('maps') || lower.includes('geofencing') || lower.includes('hilang')) {
       return 'Temuin merupakan platform crowdsourcing pencarian barang hilang berbasis geofencing Google Maps API. Dilengkapi sistem verifikasi kepemilikan dan chat terenkripsi.';
     }
 
-    if (lower.includes('lintas') || lower.includes('clipboard') || lower.includes('phone') || lower.includes('companion')) {
-      return 'Lintas adalah Phone-to-PC Companion Utility. Fitur unggulannya adalah sinkronisasi clipboard dua arah tanpa internet, kirim file instan lewat Wi-Fi lokal, dan integrasi notifikasi.';
+    if (lower.includes('lintas') || lower.includes('cross-device') || lower.includes('touchpad') || lower.includes('nearlock') || lower.includes('instant drop')) {
+      return 'Lintas adalah ekosistem produktivitas lintas perangkat yang menghubungkan smartphone Android dengan komputer Windows via Wi-Fi lokal (LAN) secara langsung! Menggunakan Flutter, C++ runner, Riverpod, serta server lokal HTTP & WebSocket port 8945. Dilengkapi Remote Touchpad berpresisi tinggi, Virtual Keyboard dengan tombol modifier, Instant Drop transfer berkas 2 arah dengan verifikasi integritas SHA-256, Universal Clipboard dengan URL detection, NearLock auto-lock PC saat ponsel menjauh, dan Presentation Mode remote. Coba demonya lewat shortcut Lintas di desktop!';
     }
 
     if (lower.includes('neurofly') || lower.includes('pong') || lower.includes('ai') || lower.includes('drosophila')) {

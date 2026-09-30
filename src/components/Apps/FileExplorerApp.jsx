@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { 
   ArrowLeft, ArrowRight, ArrowUp, RefreshCw, Search,
   Plus, ChevronRight, ChevronDown, LayoutGrid, List, RotateCcw, X
@@ -24,7 +24,7 @@ const getItemIconName = (item) => {
   return item.icon || 'notepad';
 };
 
-export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenFolder, onLaunchApp }) => {
+export const FileExplorerApp = ({ initialPath = 'This PC', onOpenFile, onOpenFolder, onLaunchApp }) => {
   const winCtx = useWindow();
   const [tabs, setTabs] = useState(() => [
     {
@@ -61,8 +61,7 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
     if (currentPath === 'This PC') {
       return [
         { name: 'Local Disk (C:)', type: 'drive', isDrive: true, total: '256 GB', free: '142 GB' },
-        { name: 'Data (D:)', type: 'drive', isDrive: true, total: '512 GB', free: '380 GB' },
-        { name: 'FTP.Handphone', type: 'network_drive', isDrive: true, total: '128 GB', free: '64 GB' }
+        { name: 'Data (D:)', type: 'drive', isDrive: true, total: '512 GB', free: '380 GB' }
       ];
     }
 
@@ -71,9 +70,8 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
         { name: 'Projects', type: 'folder', badge: 'Applications', size: `${PROJECTS_ITEMS.length} items` },
         { name: 'Downloads', type: 'folder', size: '3 items' },
         { name: 'Documents', type: 'folder', size: '3 items' },
-        { name: 'tatagih file', type: 'folder', size: '3 items' },
         { name: 'Curriculum_Vitae.pdf', type: 'file', extension: 'pdf', size: '240 KB' },
-        { name: 'README_RECRUITER.txt', type: 'file', extension: 'txt', size: '3.4 KB' }
+        { name: 'Pengantar.txt', type: 'file', extension: 'txt', size: '3.4 KB' }
       ];
     }
 
@@ -106,46 +104,9 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
       ];
     }
 
-    if (currentPath === 'tatagih file') {
-      return [
-        {
-          name: 'Tatagih.exe',
-          type: 'executable',
-          extension: 'exe',
-          appId: 'tatagih',
-          projectId: 'tatagih',
-          icon: 'tatagih',
-          fileType: 'Application',
-          size: '14.2 MB',
-          description: 'Tatagih Subscription Manager'
-        },
-        { name: 'invoice_client.pdf', type: 'file', extension: 'pdf', size: '120 KB' },
-        { name: 'rekap_pembayaran.txt', type: 'file', extension: 'txt', size: '1.4 KB' }
-      ];
-    }
-
-    if (currentPath === 'shortcut') {
-      return [
-        { name: 'Tatagih', type: 'file', extension: 'lnk', projectId: 'tatagih' },
-        { name: 'Temuin', type: 'file', extension: 'lnk', projectId: 'temuin' },
-        { name: 'Visual Studio Code', type: 'file', extension: 'lnk' },
-        { name: 'Google Chrome', type: 'file', extension: 'lnk' },
-        { name: 'Antigravity', type: 'file', extension: 'lnk' }
-      ];
-    }
-
-    if (currentPath === 'TikTok') {
-      return [
-        { name: 'content_script.txt', type: 'file', extension: 'txt', size: '4.2 KB' },
-        { name: 'video_teaser.mp4', type: 'file', extension: 'mp4', size: '14.8 MB' }
-      ];
-    }
-
     if (currentPath === 'Network') {
       return [
-        { name: 'FTP.Laptop', type: 'network_drive', isDrive: true, total: '512 GB', free: '210 GB' },
-        { name: '192.168.1.6', type: 'network_drive', isDrive: true, total: '1 TB', free: '620 GB' },
-        { name: 'FTP.Handphone', type: 'network_drive', isDrive: true, total: '128 GB', free: '64 GB' }
+        { name: 'LAN-PORTFOLIO-PC', type: 'network_drive', isDrive: true, total: '512 GB', free: '210 GB' }
       ];
     }
 
@@ -197,6 +158,14 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
     setSelectedItemName(null);
     setSearchQuery('');
   };
+
+  const prevInitialPathRef = useRef(initialPath);
+  useEffect(() => {
+    if (initialPath && initialPath !== prevInitialPathRef.current) {
+      prevInitialPathRef.current = initialPath;
+      navigateTo(initialPath);
+    }
+  }, [initialPath]);
 
   const handleBack = () => {
     if (historyIndex > 0) {
@@ -311,29 +280,40 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
       item.projectId || 
       item.type === 'executable' || 
       item.extension === 'exe' ||
+      item.appId === 'theotown' ||
+      item.appId === 'nenacare' ||
       item.appId === 'tatagih' ||
       item.appId === 'temuin' ||
       item.appId === 'lintas' ||
       item.appId === 'neurofly' ||
       item.appId === 'dompetq' ||
-      item.appId === 'makalah'
+      item.appId === 'makalah' ||
+      item.appId === 'sigap' ||
+      item.appId === 'bingkai'
     ) {
       const lower = (item.name || '').toLowerCase();
       let targetProj = item.projectId;
       if (!targetProj) {
-        if (lower.includes('tatagih')) targetProj = 'tatagih';
+        if (lower.includes('theotown') || lower.includes('stikom')) targetProj = 'theotown';
+        else if (lower.includes('nenacare')) targetProj = 'nenacare';
+        else if (lower.includes('tatagih')) targetProj = 'tatagih';
         else if (lower.includes('temuin')) targetProj = 'temuin';
         else if (lower.includes('lintas')) targetProj = 'lintas';
         else if (lower.includes('neurofly')) targetProj = 'neurofly';
         else if (lower.includes('dompetq')) targetProj = 'dompetq';
         else if (lower.includes('makalah')) targetProj = 'makalah';
-        else targetProj = 'tatagih';
+        else if (lower.includes('sigap')) targetProj = 'sigap';
+        else if (lower.includes('bingkai')) targetProj = 'bingkai';
+        else targetProj = 'nenacare';
       }
       if (onLaunchApp) {
         onLaunchApp('chrome', { projectId: targetProj });
       } else if (onOpenFile) {
         onOpenFile({ ...item, appId: 'chrome', projectId: targetProj });
       }
+    } else if (item.name && item.name.toLowerCase().includes('nenacare')) {
+      if (onLaunchApp) onLaunchApp('chrome', { projectId: 'nenacare' });
+      else if (onOpenFile) onOpenFile({ ...item, appId: 'chrome', projectId: 'nenacare' });
     } else if (item.name && item.name.toLowerCase().includes('tatagih')) {
       if (onLaunchApp) onLaunchApp('chrome', { projectId: 'tatagih' });
       else if (onOpenFile) onOpenFile({ ...item, appId: 'chrome', projectId: 'tatagih' });
@@ -352,6 +332,12 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
     } else if (item.name && item.name.toLowerCase().includes('makalah')) {
       if (onLaunchApp) onLaunchApp('chrome', { projectId: 'makalah' });
       else if (onOpenFile) onOpenFile({ ...item, appId: 'chrome', projectId: 'makalah' });
+    } else if (item.name && item.name.toLowerCase().includes('sigap')) {
+      if (onLaunchApp) onLaunchApp('chrome', { projectId: 'sigap' });
+      else if (onOpenFile) onOpenFile({ ...item, appId: 'chrome', projectId: 'sigap' });
+    } else if (item.name && item.name.toLowerCase().includes('bingkai')) {
+      if (onLaunchApp) onLaunchApp('chrome', { projectId: 'bingkai' });
+      else if (onOpenFile) onOpenFile({ ...item, appId: 'chrome', projectId: 'bingkai' });
     } else {
       if (onOpenFile) {
         onOpenFile(item);
@@ -687,43 +673,12 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
             <span>Downloads</span>
             <span className="sidebar-pin"><WinIcon name="pin" size={12} /></span>
           </div>
-          <div className="sidebar-item">
-            <WinIcon name="ftp-laptop" size={16} />
-            <span>FTP.Laptop</span>
-            <span className="sidebar-pin"><WinIcon name="pin" size={12} /></span>
-          </div>
-          <div className="sidebar-item">
-            <WinIcon name="shared-folder" size={16} />
-            <span>192.168.1.6</span>
-            <span className="sidebar-pin"><WinIcon name="pin" size={12} /></span>
-          </div>
           <div 
             className={`sidebar-item ${currentPath === 'Documents' ? 'selected' : ''}`}
             onClick={() => navigateTo('Documents')}
           >
             <WinIcon name="documents" size={16} />
             <span>Documents</span>
-          </div>
-          <div 
-            className={`sidebar-item ${currentPath === 'tatagih file' ? 'selected' : ''}`}
-            onClick={() => navigateTo('tatagih file')}
-          >
-            <WinIcon name="folder" size={16} />
-            <span>tatagih file</span>
-          </div>
-          <div 
-            className={`sidebar-item ${currentPath === 'shortcut' ? 'selected' : ''}`}
-            onClick={() => navigateTo('shortcut')}
-          >
-            <WinIcon name="folder" size={16} />
-            <span>shortcut</span>
-          </div>
-          <div 
-            className={`sidebar-item ${currentPath === 'TikTok' ? 'selected' : ''}`}
-            onClick={() => navigateTo('TikTok')}
-          >
-            <WinIcon name="folder" size={16} />
-            <span>TikTok</span>
           </div>
           <div 
             className={`sidebar-item ${currentPath === 'Recycle Bin' ? 'selected' : ''}`}
@@ -742,12 +697,6 @@ export const FileExplorerApp = ({ initialPath = 'Data (D:)', onOpenFile, onOpenF
             <span className="sidebar-chevron"><ChevronDown size={14} /></span>
             <WinIcon name="this-pc" size={16} />
             <span>This PC</span>
-          </div>
-
-          <div className="sidebar-item nested">
-            <span className="sidebar-chevron"><ChevronRight size={12} /></span>
-            <WinIcon name="shared-folder" size={16} />
-            <span>FTP.Handphone</span>
           </div>
           <div 
             className={`sidebar-item nested ${currentPath === 'Local Disk (C:)' ? 'selected' : ''}`}

@@ -10,13 +10,12 @@ export const TerminalApp = ({ onLaunchApp }) => {
   const [history, setHistory] = useState([
     {
       type: 'system',
-      text: `Windows PowerShell\nCopyright (C) Microsoft Corporation. All rights reserved.\n\nKetik 'help' untuk melihat daftar perintah portfolio interaktif.`
+      text: `Microsoft Windows [Version 10.0.26200.9457]\n(c) Microsoft Corporation. All rights reserved.\n`
     }
   ]);
   const [inputVal, setInputVal] = useState('');
   const [cmdHistory, setCmdHistory] = useState([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
-  const [isMatrixActive, setIsMatrixActive] = useState(false);
 
   const terminalEndRef = useRef(null);
   const inputRef = useRef(null);
@@ -56,7 +55,7 @@ export const TerminalApp = ({ onLaunchApp }) => {
 
   const executeCommand = (cmd) => {
     playClickSound();
-    const promptLine = `PS C:\\Users\\Agung> ${cmd}`;
+    const promptLine = `C:\\Users\\KRISNA> ${cmd}`;
     const cleanCmd = cmd.toLowerCase().trim();
 
     if (!cleanCmd) {
@@ -66,17 +65,6 @@ export const TerminalApp = ({ onLaunchApp }) => {
 
     if (cleanCmd === 'clear' || cleanCmd === 'cls') {
       setHistory([]);
-      return;
-    }
-
-    if (cleanCmd === 'matrix') {
-      setIsMatrixActive(true);
-      setTimeout(() => setIsMatrixActive(false), 8000);
-      setHistory(prev => [
-        ...prev,
-        { type: 'input', text: promptLine },
-        { type: 'output', text: 'Wake up, Neo... The Matrix has you. (Easter egg berjalan selama 8 detik)' }
-      ]);
       return;
     }
 
@@ -92,11 +80,9 @@ Daftar Perintah yang Tersedia:
   projects      : Daftar proyek unggulan yang telah diselesaikan
   resume        : Ringkasan kualifikasi kerja & pengalaman
   contact       : Kontak resmi (Email, WhatsApp, LinkedIn, GitHub)
-  neofetch      : Tampilan spesifikasi sistem & profil ASCII
   dir / ls      : Menampilkan daftar file dalam direktori saat ini
   cat <file>    : Membaca isi file (contoh: cat resume.txt)
   clear / cls   : Membersihkan layar terminal
-  matrix        : Easter egg efek Matrix falling green rain
 `;
         break;
 
@@ -128,19 +114,43 @@ KEAHLIAN TEKNIS (TECH STACK):
         output = `
 PROYEK UNGGULAN:
 --------------------------------------------------
-1. DompetQ (Fintech Mobile App)
+1. ITB STIKOM Bali — Building Plugin for TheoTown
+   - Tech  : TheoTown Plugin API, JSON (code.json), Plugin Manifest, Isometric Pixel Art (StikomBali.png), Android & PC
+   - Fitur : Representasi arsitektur kampus ITB STIKOM Bali Renon dengan ornamen Bali (atap meru tumpang & gerbang candi bentar), 5x5 tile isometric, fungsional bertipe education (kapasitas 2.500 mahasiswa, radius pengaruh 700 tile, aspect 1000-2500), ground rendering aktif (draw ground: true), plugin manifest resmi, dokumentasi bilingual ID/EN, cross-platform Android & PC.
+
+2. NenaCare (AI-Powered K3 Incident Reporting & Monitoring System)
+   - Tech  : PHP (OOP), MySQL & MySQLi, Google Gemini 2.5 Flash-Lite, Telegram Bot API, Chart.js, Dompdf
+   - Fitur : Pelaporan insiden K3 (Staf & Customer), Opsi Pelaporan 100% Anonim, AI Analyst evaluasi risiko & prioritas otomatis (Gemini 2.5 Flash-Lite), Notifikasi & Remote Action Telegram Bot (Proses/Selesai), Live Feed & Status Workflow, Admin Dashboard visualisasi Chart.js, Ekspor Dokumen Laporan Resmi PDF Dompdf.
+
+2. Tatagih (Smart Subscription Manager & AI Financial Assistant)
+   - Tech  : PHP, Laravel 13, Blade, Tailwind CSS, Vite, MySQL, Chart.js, Google Gemini API, Telegram Bot API
+   - Fitur : Tata Asisten (Health Score & Gemini AI), Tata AI Chat (Multi-sesi & offline fallback), Pendeteksi Kebocoran Dana, Fitur Patungan (Split Bill & verifikasi bukti transfer), Telegram Bot Reminder (Queue & Scheduler), Dashboard Kalender & Chart.js, Admin Dashboard.
+
+3. Lintas (Cross-Device Productivity Ecosystem)
+   - Tech  : Flutter, Dart, C++ Windows Runner, Riverpod, GoRouter, HTTP & WebSocket (Port 8945), SHA-256
+   - Fitur : Android Mobile Controller & Windows Companion, pairing QR Code dengan token expiration & nonce, LAN Auto-Discovery, Remote Touchpad & Virtual Keyboard (Windows SendInput API), Instant Drop transfer berkas 2 arah dengan verifikasi checksum SHA-256, Universal Clipboard dengan URL detection otomatis, NearLock auto-lock PC saat ponsel menjauh, Presentation Mode slide controller & timer.
+
+4. DompetQ (Fintech Mobile App)
    - Tech  : Flutter, Riverpod, Node.js, PostgreSQL
    - Fitur : E-Wallet, QRIS payment, grafik analitik keuangan, biometrik auth.
 
-2. Temuin (Lost and Found Crowdsourcing)
-   - Tech  : React Native, Node.js, Google Maps API, MongoDB
-   - Fitur : Geolocation mapping barang hilang, sistem verifikasi klaim, chat.
+2. Temuin (QR Code Lost & Found Platform)
+   - Tech  : Flutter, Dart, PHP Native, PDO, MySQL, Midtrans Snap
+   - Fitur : Identitas barang via QR code, snapshot GPS & foto bukti saat lapor temuan, notifikasi in-app pemilik, boost postingan Rp15.000.
 
 3. Makalah Generator (Academic AI Assistant)
    - Tech  : Next.js 14, TypeScript, OpenAI API, LaTeX Engine
    - Fitur : Pembuatan bab akademik terstruktur, manajemen sitasi otomatis APA.
 
-Ketik 'cat dompetq.txt' atau buka File Explorer untuk detail lengkap.
+4. SIGAP (Sistem Gerak Aman dari Pencurian)
+   - Tech  : Flutter, Dart, Provider, Sensors Plus, Battery Plus, Camera, GPS
+   - Fitur : Proteksi anti-angkat meja via accelerometer (threshold 2.0), charger unplug alert, volume watchdog 100%, snapshot GPS & kamera depan lokal.
+
+5. Bingkai (Galeri Foto Komputer Lokal)
+   - Tech  : Python, FastAPI, SQLite, Alpine.js, Tailwind CSS, Pillow-WebP
+   - Fitur : 100% Offline (Local-First), Rebahan Mode (Gamepad & HP Wi-Fi Remote), Tinder Swipe Mode, Deteksi Foto Kembar, Album Virtual, Tong Sampah Anti-Panik.
+
+Ketik 'projects' atau buka File Explorer untuk detail lengkap.
 `;
         break;
 
@@ -150,7 +160,6 @@ PENGALAMAN & KUALIFIKASI:
 --------------------------------------------------
 - Pengalaman : ${RECRUITER_SUMMARY.experienceYears}
 - Pendidikan : S1 Teknik Informatika (IPK 3.84)
-- Prestasi   : Juara 2 Hackathon Mobile App Kampus 2023
 - Hubungi WhatsApp untuk penawaran: ${INITIAL_USER.whatsapp}
 `;
         break;
@@ -169,35 +178,19 @@ LinkedIn : ${INITIAL_USER.linkedin}
       case 'dir':
       case 'ls':
         output = `
-Direktori: C:\\Users\\Agung
+ Direktori C:\\Users\\KRISNA
 
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-d-----         9/26/2026   9:45 PM                Documents
-d-----         9/26/2026   9:45 PM                Downloads
-d-----         9/26/2026   9:45 PM                Projects
--a----         9/26/2026   9:48 PM           3240 README_RECRUITER.txt
--a----         9/26/2026   9:48 PM           2150 biodata.txt
--a----         9/26/2026   9:48 PM           1890 skills.txt
--a----         9/26/2026   9:48 PM         245600 resume.pdf
-`;
-        break;
-
-      case 'neofetch':
-      case 'winfetch':
-        output = `
-         ,,..                     agung@windows11-portfolio
-      .ck000000kc.                -------------------------
-     .d0000000000d.               OS       : Windows 11 Pro 24H2 (Portfolio Edition)
-    .d000000000000d.              Host     : Developer Workstation
-   .d00000000000000d.             Kernel   : React 19.x + Vite 8.x
-  .d0000000000000000d.            Uptime   : 99.9% Always Ready to Work
- .d000000000000000000d.           Shell    : Windows PowerShell v7.4
-.d00000000000000000000d.          Role     : Full-Stack & Mobile Developer
-:0000000000000000000000:          Primary  : Flutter, React, TypeScript, Node.js
-:0000000000000000000000:          Memory   : 16384 MB / 32768 MB
-.d00000000000000000000d.          Status   : Open to Work (Hire Me!)
- .d000000000000000000d.           
+09/29/2026  03:45 PM    <DIR>          .
+09/29/2026  03:45 PM    <DIR>          ..
+09/29/2026  03:45 PM    <DIR>          Documents
+09/29/2026  03:45 PM    <DIR>          Downloads
+09/29/2026  03:45 PM    <DIR>          Projects
+09/29/2026  03:48 PM             3,240 Pengantar.txt
+09/29/2026  03:48 PM             2,150 biodata.txt
+09/29/2026  03:48 PM             1,890 skills.txt
+09/29/2026  03:48 PM           245,600 resume.pdf
+               4 File(s)        252,880 bytes
+               5 Dir(s)  380,412,985,344 bytes free
 `;
         break;
 
@@ -206,7 +199,7 @@ d-----         9/26/2026   9:45 PM                Projects
           const fileTarget = cleanCmd.replace('cat ', '').replace('type ', '').trim();
           output = `Isi file ${fileTarget}:\n${RECRUITER_SUMMARY.headline}\nSpesialisasi: ${RECRUITER_SUMMARY.specialization}\nSilakan buka aplikasi Notepad untuk membaca versi lengkap!`;
         } else {
-          output = `'${cmd}' tidak dikenali sebagai perintah internal atau eksternal. Ketik 'help' untuk bantuan.`;
+          output = `'${cmd}' is not recognized as an internal or external command,\noperable program or batch file. Ketik 'help' untuk daftar perintah.`;
         }
         break;
     }
@@ -224,15 +217,15 @@ d-----         9/26/2026   9:45 PM                Projects
       height: '100%',
       display: 'flex',
       flexDirection: 'column',
-      backgroundColor: '#0c1021',
+      backgroundColor: '#0c0c0c',
       overflow: 'hidden'
     }}>
-      {/* Windows 11 Terminal Titlebar (Tabs + Window Controls in 1 row) */}
+      {/* Windows 11 Command Prompt Titlebar */}
       <div
         style={{
           display: 'flex',
           alignItems: 'stretch',
-          backgroundColor: '#070a14',
+          backgroundColor: '#181818',
           height: '40px',
           padding: '0 0 0 8px',
           position: 'relative',
@@ -256,7 +249,7 @@ d-----         9/26/2026   9:45 PM                Projects
               display: 'flex',
               alignItems: 'center',
               gap: '8px',
-              backgroundColor: '#161b33',
+              backgroundColor: '#272727',
               color: '#ffffff',
               padding: '0 8px 0 12px',
               height: '34px',
@@ -270,8 +263,8 @@ d-----         9/26/2026   9:45 PM                Projects
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
-              <WinIcon name="powershell" size={15} />
-              <span>Windows PowerShell</span>
+              <WinIcon name="terminal" size={15} />
+              <span>Command Prompt</span>
             </div>
             <button
               type="button"
@@ -321,7 +314,7 @@ d-----         9/26/2026   9:45 PM                Projects
                 ...prev,
                 {
                   type: 'system',
-                  text: `Windows PowerShell\nKetik 'help' untuk melihat daftar perintah.`
+                  text: `Microsoft Windows [Version 10.0.26200.9457]\n(c) Microsoft Corporation. All rights reserved.\n`
                 }
               ]);
             }}
@@ -352,50 +345,29 @@ d-----         9/26/2026   9:45 PM                Projects
         style={{
           flex: 1,
           width: '100%',
-          backgroundColor: '#0c1021',
-          color: '#f8fafc',
-          fontFamily: 'Cascadia Code, Consolas, monospace',
-          fontSize: '13px',
-          padding: '16px',
+          backgroundColor: '#0c0c0c',
+          color: '#cccccc',
+          fontFamily: 'Consolas, "Lucida Console", "Cascadia Code", "Courier New", monospace',
+          fontSize: '13.5px',
+          lineHeight: '1.4',
+          padding: '14px',
           overflowY: 'auto',
           position: 'relative'
         }}
       >
-      {isMatrixActive && (
-        <div style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'rgba(0, 20, 0, 0.95)',
-          color: '#22c55e',
-          fontFamily: 'monospace',
-          fontSize: '12px',
-          padding: '20px',
-          overflow: 'hidden',
-          zIndex: 50,
-          pointerEvents: 'none',
-          whiteSpace: 'pre'
-        }}>
-          {Array.from({ length: 25 }).map((_, i) => (
-            <div key={i} style={{ opacity: Math.random() }}>
-              01010100 01100101 01101101 01110101 01101001 01101110 00100000 01000100 01101111 01101101 01110000 01100101 01110100 01010001 00100000 01000001 01100111 01110101 01101110 01100111
-            </div>
-          ))}
-        </div>
-      )}
-
       {history.map((item, idx) => (
-        <div key={idx} style={{ marginBottom: '8px', whiteSpace: 'pre-wrap', lineHeight: '1.45' }}>
+        <div key={idx} style={{ marginBottom: '6px', whiteSpace: 'pre-wrap', lineHeight: '1.4' }}>
           {item.type === 'input' ? (
-            <span style={{ color: '#60a5fa', fontWeight: 'bold' }}>{item.text}</span>
+            <span style={{ color: '#ffffff', fontWeight: 'normal' }}>{item.text}</span>
           ) : (
-            <span style={{ color: '#e2e8f0' }}>{item.text}</span>
+            <span style={{ color: '#cccccc' }}>{item.text}</span>
           )}
         </div>
       ))}
 
       <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-        <span style={{ color: '#60a5fa', fontWeight: 'bold', whiteSpace: 'nowrap' }}>
-          PS C:\Users\Agung&gt;
+        <span style={{ color: '#cccccc', fontWeight: 'normal', whiteSpace: 'nowrap' }}>
+          C:\Users\KRISNA&gt;
         </span>
         <input
           ref={inputRef}
@@ -411,22 +383,24 @@ d-----         9/26/2026   9:45 PM                Projects
             background: 'transparent',
             border: 'none',
             outline: 'none',
-            color: '#f8fafc',
+            color: '#ffffff',
             fontFamily: 'inherit',
-            fontSize: 'inherit'
+            fontSize: 'inherit',
+            caretColor: '#ffffff'
           }}
         />
       </div>
 
+      {/* Quick Command Shortcuts Footer */}
       <div style={{
         display: 'flex',
         flexWrap: 'wrap',
         gap: '6px',
-        marginTop: '16px',
-        paddingTop: '10px',
+        marginTop: '20px',
+        paddingTop: '12px',
         borderTop: '1px solid rgba(255, 255, 255, 0.08)'
       }}>
-        {['help', 'whoami', 'skills', 'projects', 'resume', 'contact', 'neofetch', 'matrix', 'clear'].map((cmd) => (
+        {['help', 'whoami', 'skills', 'projects', 'resume', 'contact', 'clear'].map((cmd) => (
           <button
             key={cmd}
             type="button"
@@ -435,11 +409,11 @@ d-----         9/26/2026   9:45 PM                Projects
               executeCommand(cmd);
             }}
             style={{
-              backgroundColor: 'rgba(96, 165, 250, 0.15)',
-              border: '1px solid rgba(96, 165, 250, 0.3)',
-              color: '#93c5fd',
+              backgroundColor: 'rgba(255, 255, 255, 0.08)',
+              border: '1px solid rgba(255, 255, 255, 0.16)',
+              color: '#e2e8f0',
               borderRadius: '4px',
-              padding: '3px 8px',
+              padding: '3px 9px',
               fontSize: '11px',
               fontFamily: 'inherit',
               cursor: 'pointer'

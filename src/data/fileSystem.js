@@ -11,7 +11,7 @@ export const INITIAL_USER = {
   phone: "+62 812-3456-7890",
   whatsapp: "https://wa.me/6281234567890?text=Halo%20Agung,%20kami%20tertarik%20dengan%20profil%20portfolio%20Anda",
   github: "https://github.com/agungkrisna",
-  linkedin: "https://linkedin.com/in/agungkrisna",
+  linkedin: "https://linkedin.com/in/krisnaartha",
   website: "https://krisnaartha.my.id",
   avatar: "/avatars/gungkrisna_avatar.svg"
 };
@@ -34,6 +34,30 @@ export const RECRUITER_SUMMARY = {
 
 export const PROJECTS_ITEMS = [
   {
+    name: "TheoTown_STIKOM.exe",
+    type: "executable",
+    extension: "exe",
+    appId: "theotown",
+    projectId: "theotown",
+    icon: "theotown",
+    fileType: "Application",
+    size: "8.4 MB",
+    modified: "11/12/2024 10:20",
+    description: "ITB STIKOM Bali - Building Plugin for TheoTown (Educational Mod)"
+  },
+  {
+    name: "NenaCare.exe",
+    type: "executable",
+    extension: "exe",
+    appId: "nenacare",
+    projectId: "nenacare",
+    icon: "nenacare",
+    fileType: "Application",
+    size: "16.8 MB",
+    modified: "10/30/2024 16:45",
+    description: "NenaCare - AI-Powered K3 Incident Reporting & Monitoring System"
+  },
+  {
     name: "Tatagih.exe",
     type: "executable",
     extension: "exe",
@@ -43,7 +67,7 @@ export const PROJECTS_ITEMS = [
     fileType: "Application",
     size: "14.2 MB",
     modified: "10/14/2024 14:28",
-    description: "Tatagih - Subscription and Bill Manager"
+    description: "Tatagih - Smart Subscription Manager & AI Financial Assistant (Laravel 13)"
   },
   {
     name: "Temuin.exe",
@@ -51,11 +75,11 @@ export const PROJECTS_ITEMS = [
     extension: "exe",
     appId: "temuin",
     projectId: "temuin",
-    icon: "home",
+    icon: "temuin",
     fileType: "Application",
     size: "18.5 MB",
     modified: "08/20/2024 11:10",
-    description: "Temuin - Lost & Found Crowdsourcing Platform"
+    description: "Temuin - QR Code Lost & Found Platform"
   },
   {
     name: "Lintas.exe",
@@ -104,6 +128,30 @@ export const PROJECTS_ITEMS = [
     size: "12.8 MB",
     modified: "09/01/2024 10:05",
     description: "Makalah Generator - AI Academic Assistant"
+  },
+  {
+    name: "Sigap.exe",
+    type: "executable",
+    extension: "exe",
+    appId: "sigap",
+    projectId: "sigap",
+    icon: "sigap",
+    fileType: "Application",
+    size: "16.8 MB",
+    modified: "11/20/2024 10:45",
+    description: "SIGAP - Sistem Gerak Aman dari Pencurian (Flutter)"
+  },
+  {
+    name: "Bingkai.exe",
+    type: "executable",
+    extension: "exe",
+    appId: "bingkai",
+    projectId: "bingkai",
+    icon: "bingkai",
+    fileType: "Application",
+    size: "14.2 MB",
+    modified: "10/15/2024 14:20",
+    description: "Bingkai - Galeri Foto Komputer Lokal (Python & Alpine.js)"
   }
 ];
 
@@ -116,11 +164,343 @@ export const DATA_D_ITEMS = [
     items: PROJECTS_ITEMS
   },
   {
+    name: "theotown",
+    type: "folder",
+    description: "ITB STIKOM Bali — Building Plugin for TheoTown",
+    badge: "Game Modding / Plugin",
+    items: [
+      {
+        name: "TheoTown_STIKOM.exe",
+        type: "executable",
+        extension: "exe",
+        appId: "theotown",
+        projectId: "theotown",
+        icon: "theotown",
+        fileType: "Application",
+        size: "8.4 MB",
+        description: "Buka ITB STIKOM Bali TheoTown Showcase"
+      },
+      {
+        name: "code.json",
+        type: "file",
+        extension: "json",
+        size: "1.2 KB",
+        content: `[
+  {
+    "id": "$stikom_bali_renon_01",
+    "type": "education",
+    "author": "Gekaaaaa",
+    "width": 5,
+    "height": 5,
+    "frames": [{ "bmp": "StikomBali.png" }],
+    "draw ground": true,
+    "title": "ITB STIKOM BALI",
+    "text": "Kampus ITB STIKOM Bali Renon - Gedung Pendidikan Tinggi",
+    "education influence low": 700,
+    "education influence high": 700,
+    "education aspect low": 1000,
+    "education aspect high": 2500,
+    "education capacity low": 2500,
+    "education capacity high": 2500,
+    "price": 85000,
+    "monthly price": 1200
+  }
+]`
+      },
+      {
+        name: "plugin.manifest",
+        type: "file",
+        extension: "manifest",
+        size: "340 B",
+        content: `id: $stikom_bali_renon_plugin
+version: 1.0.0
+title: ITB STIKOM BALI
+description: Plugin Gedung Stikom Bali Renon
+author: Gekaaaaa
+category: education
+min_game_version: 1.11.0`
+      },
+      {
+        name: "StikomBali.png",
+        type: "image",
+        extension: "png",
+        imageUrl: "/projects/theotown.jpg",
+        size: "48.2 KB",
+        description: "Custom Pixel Art Isometric Sprite Frame (160x160)"
+      },
+      {
+        name: "theotown_overview.txt",
+        type: "file",
+        extension: "txt",
+        size: "2.4 KB",
+        content: `=====================================================
+PROYEK: ITB STIKOM BALI PLUGIN FOR THEOTOWN
+=====================================================
+Nama Mod     : ITB STIKOM Bali Building Plugin
+Kategori     : Game Modding / Educational Building
+Game Target  : TheoTown (Android & PC)
+Author       : Gekaaaaa
+Dimensi      : 5 x 5 Tile Isometric Grid
+Tipe Objek   : Type: education
+
+DESKRIPSI:
+Plugin custom untuk game simulasi tata kota TheoTown yang menambahkan gedung
+kampus ITB STIKOM Bali ke dalam game sebagai fasilitas pendidikan fungsional.
+Dibuat dengan gaya pixel art isometrik yang memadukan arsitektur modern dan
+ornamen Bali (atap meru tumpang & gerbang candi bentar).
+
+FITUR GAMEPLAY & TEKNIS:
+1. Gedung Edukasi Fungsional (Kapasitas: 2.500 Mahasiswa)
+2. Radius Pengaruh Pendidikan (Influence: 700 Tile)
+3. Ground Rendering Terbuka (draw ground: true)
+4. Konfigurasi code.json & plugin.manifest standar engine
+5. Kompatibel Multiplatform (Android APK Data & PC Windows Steam)
+6. Dokumentasi Lengkap README.md dwibahasa (ID/EN)
+=====================================================`
+      }
+    ]
+  },
+  {
+    name: "bingkai",
+    type: "folder",
+    description: "Galeri Foto Komputer Lokal (Python & Alpine.js)",
+    badge: "Desktop App / Local-First",
+    items: [
+      {
+        name: "Bingkai.exe",
+        type: "executable",
+        extension: "exe",
+        appId: "bingkai",
+        projectId: "bingkai",
+        icon: "bingkai",
+        fileType: "Application",
+        size: "14.2 MB",
+        description: "Buka Bingkai Showcase di Chrome"
+      },
+      {
+        name: "bingkai_overview.txt",
+        type: "file",
+        extension: "txt",
+        size: "2.8 KB",
+        content: `=====================================================
+PROYEK: BINGKAI - GALERI FOTO KOMPUTER LOKAL
+=====================================================
+Tagline     : Membantu yang berserakan kembali beraturan.
+Platform    : Desktop (Local-First Windows/Linux/macOS)
+Tech Stack  : Python, FastAPI, SQLite, Alpine.js, Tailwind CSS, Pillow-WebP
+Kontrol     : Gamepad (PS/Xbox) & Smartphone Wi-Fi Remote
+
+DESKRIPSI:
+Aplikasi galeri foto lokal untuk komputer yang dirancang dengan privasi penuh.
+Kelola ribuan kenanganmu dengan cepat, dan nikmati dari layar monitor sambil
+rebahan menggunakan Smartphone atau Stick Gamepad.
+
+FITUR JAGOAN:
+1. Rebahan Mode (Gamepad & Remote Support)
+   Hubungkan Stick Game (PlayStation/Xbox) ke PC, atau buka IP komputermu di
+   browser HP (Wi-Fi). Kamu bisa menggeser foto, zoom, dan merapikan galeri di
+   layar monitor langsung dari sofa.
+2. Tinder untuk Foto (Swipe Mode)
+   Merapikan foto semudah main Tinder. Swipe kanan (atau tombol A gamepad) untuk
+   simpan ke Favorit. Swipe kiri untuk buang ke Tong Sampah.
+3. Pendeteksi Foto Kembar (Duplicate Finder)
+   Deteksi foto kembar identik secara otomatis untuk menghemat ruang penyimpanan.
+4. Album Virtual (Tanpa Makan Memori)
+   Kelompokkan foto ke album tanpa menggandakan atau memindahkan file aslinya.
+5. Tong Sampah Anti-Panik (Safe Trash)
+   Foto yang dihapus tidak langsung hilang. Salah hapus? Tinggal Restore kembali.
+6. Pemindaian Kilat (Pillow-WebP)
+   Membuat thumbnail kecil berformat WebP agar ribuan foto terbuka tanpa lag.
+=====================================================`
+      }
+    ]
+  },
+  {
+    name: "sigap",
+    type: "folder",
+    description: "Sistem Gerak Aman dari Pencurian (Flutter)",
+    badge: "Mobile Security / Flutter",
+    items: [
+      {
+        name: "Sigap.exe",
+        type: "executable",
+        extension: "exe",
+        appId: "sigap",
+        projectId: "sigap",
+        icon: "sigap",
+        fileType: "Application",
+        size: "16.8 MB",
+        description: "Buka SIGAP Showcase di Chrome"
+      },
+      {
+        name: "sigap_overview.txt",
+        type: "file",
+        extension: "txt",
+        size: "3.2 KB",
+        content: `=====================================================
+PROYEK: SIGAP - SISTEM GERAK AMAN DARI PENCURIAN
+=====================================================
+Platform    : Android Mobile Application
+Tech Stack  : Flutter, Dart, Provider
+Hardware    : Accelerometer, Battery Status, Front Camera, GPS, Vibration, Audio
+
+DESKRIPSI:
+SIGAP adalah sistem keamanan perangkat bergerak berbasis Flutter yang dirancang
+untuk melindungi smartphone dari pengambilan atau pemindahan tanpa izin ketika
+ditinggalkan di meja, ruangan, atau area publik.
+
+KONSEP UTAMA:
+Detect -> Alert -> Lock -> Record -> Review
+
+4 STATE SISTEM:
+1. Disarmed  : Sistem siaga/idle, sensor belum memicu alarm.
+2. Countdown : Hitung mundur 5 detik untuk penempatan stabil sebelum armed.
+3. Armed     : Sensor accelerometer dipantau (baseline awal, threshold 2.0),
+               status charger dipantau, wakelock aktif agar layar tidak tidur.
+4. Alert     : Pemicu (gerakan mencurigakan > 2.0, charger dicabut paksa,
+               atau PIN salah 3x). Respons darurat: alarm suara loop,
+               watchdog volume 100%, getaran, layar immersiveSticky,
+               snapshot GPS, foto kamera depan, dan log insiden lokal.
+
+PERSISTENSI & KEAMANAN:
+- Konfigurasi PIN lokal (4-8 digit) via SharedPreferences.
+- Bukti foto disimpan secara lokal di internal storage aplikasi.
+- Riwayat mencatat hingga 50 security event terbaru secara lokal.
+`
+      },
+      {
+        name: "sigap_architecture.txt",
+        type: "file",
+        extension: "txt",
+        size: "2.4 KB",
+        content: `STRUKTUR DIREKTORI & ARSITEKTUR KODE SIGAP:
+- lib/main.dart               : Entry point & konfigurasi MultiProvider
+- lib/models/security_event.dart : Model insiden keamanan (timestamp, trigger, GPS, foto)
+- lib/providers/security_provider.dart : Pusat state machine & orkestrasi hardware
+- lib/screens/                : Home, Alarm Lock, Evidence, Settings, Tutorial, PIN Dialog
+- lib/services/camera_evidence_service.dart   : Capture foto penyusup kamera depan
+- lib/services/emergency_location_service.dart: Snapshot koordinat GPS & Google Maps URL
+- lib/services/security_storage_service.dart  : Local storage SharedPreferences
+- lib/utils/                  : Constants, themes, motion threshold 2.0, countdown 5s
+`
+      }
+    ]
+  },
+  {
+    name: "nenacare",
+    type: "folder",
+    description: "AI-Powered K3 Incident Reporting & Monitoring System (PHP OOP & Gemini)",
+    previewImage: "/projects/nenacare.jpg",
+    badge: "Full-Stack Web App / AI Automation",
+    items: [
+      {
+        name: "NenaCare.exe",
+        type: "executable",
+        extension: "exe",
+        appId: "nenacare",
+        projectId: "nenacare",
+        icon: "nenacare",
+        fileType: "Application",
+        size: "16.8 MB",
+        description: "Buka NenaCare Showcase di Chrome"
+      },
+      {
+        name: "nenacare_overview.txt",
+        type: "file",
+        extension: "txt",
+        size: "3.6 KB",
+        content: `=====================================================
+PROYEK: NENACARE — AI-POWERED K3 INCIDENT REPORTING
+=====================================================
+Tagline     : Pelaporan, Analisis Risiko AI & Monitoring Keselamatan Kerja Kafe
+Tipe        : Full-Stack Web Application & K3 Safety Automation
+Tech Stack  : PHP (OOP), MySQL & MySQLi, Google Gemini 2.5 Flash-Lite, Telegram Bot API
+Pelaporan   : Form Publik + Opsi Pelaporan 100% Anonim
+Visualisasi : Chart.js (Doughnut & Bar Chart)
+Dokumen     : Dompdf (Cetak Laporan PDF A4 Landscape)
+
+DESKRIPSI LENGKAP:
+NenaCare adalah aplikasi web pelaporan dan monitoring keselamatan & kesehatan kerja (K3)
+di lingkungan Nena Cafe. Aplikasi ini mengubah proses pelaporan manual yang lambat
+dan enggan dilakukan staf menjadi workflow digital terstruktur:
+Pelaporan ──▶ Analisis AI ──▶ Penentuan Prioritas ──▶ Notifikasi Telegram ──▶ Remote Action ──▶ Monitoring ──▶ Reporting PDF.
+
+FITUR UTAMA:
+1. Pelaporan Insiden K3 Cepat:
+   - Input kategori insiden: Api & Gas, Kelistrikan, Lingkungan & Kebersihan, Ergonomi & APD.
+   - Pilihan tipe pelapor: Staf Kafe atau Customer (Pengunjung).
+2. Mode Laporan Anonim Berstandar Privasi:
+   - Pengguna dapat memilih "Laporkan Secara Anonim". Sistem benar-benar mengosongkan nama
+     dan tipe pelapor di database MySQL demi perlindungan privasi sejati.
+3. AI Analyst (Google Gemini 2.5 Flash-Lite):
+   - Bertindak sebagai auditor K3 spesialis F&B.
+   - Menganalisis risiko kejadian secara kontekstual (Kategori + Lokasi + Deskripsi).
+   - Menghasilkan tingkat prioritas (Tinggi, Normal, Rendah) dan rekomendasi langkah mitigasi.
+   - Format output JSON terstruktur yang otomatis diparsing backend PHP.
+4. Telegram Bot Integration & Remote Control:
+   - Notifikasi seketika ke ponsel admin saat laporan baru dibuat.
+   - Tombol inline [🚀 Proses] dan [✅ Selesai] memungkinkan admin mengubah status
+     laporan langsung dari Telegram tanpa membuka browser.
+5. Live Monitoring Feed & Status Workflow:
+   - Feed real-time transparan dengan badge status: Menunggu ──▶ Diproses ──▶ Selesai.
+6. Admin Dashboard & Visualisasi Chart.js:
+   - Doughnut Chart untuk distribusi status dan Bar Chart untuk kategori insiden.
+   - Indikator khusus untuk memantau akumulasi laporan Prioritas Tinggi.
+7. Query-Level Multi-Parameter Filter:
+   - Filter berdasarkan status, kategori, prioritas, dan rentang tanggal.
+8. Halaman Detail & Catatan Internal Admin:
+   - Timeline audit insiden dan form catatan investigasi tim operasional.
+9. Ekspor Laporan Resmi ke PDF (Dompdf):
+   - Dokumen format A4 landscape lengkap dengan header kafe, rekapitulasi, dan tabel audit.
+`
+      },
+      {
+        name: "nenacare_spec.txt",
+        type: "file",
+        extension: "txt",
+        size: "2.5 KB",
+        content: `SPESIFIKASI TEKNIS & ARSITEKTUR NENACARE:
+
+1. BASIS DATA (db_nena_k3):
+   - users         : id, username, password (hash), role ('admin', 'manajer')
+   - laporan_k3    : id, pelapor, tipe_pelapor, is_anonim, kategori, lokasi,
+                     deskripsi, prioritas, ai_saran, status, telegram_msg_id, created_at
+   - catatan_admin : id, laporan_id, user_id, isi_catatan, created_at
+
+2. STRUKTUR PROGRAM BERBASIS OOP (PHP):
+   - AuthManager   : Login, Session PHP, Password Hashing, Role Validation, Logout
+   - ReportManager : Input Validation, Gemini AI Client, Query Filtering,
+                     Statistics Aggregation, Status Workflow, Telegram Webhook/API
+   - Facility (Abstract Class):
+     * ElectronicFacility (mesin kopi espresso, grinder, chiller, blender, pos)
+     * FurnitureFacility (meja bar, kursi dining, kitchen counter, rak bahan)
+
+3. INTEGRASI API:
+   - Google Gemini 2.5 Flash-Lite: Temperature 0.2, structured JSON output
+   - Telegram Bot API: sendMessage, editMessageText, inline_keyboard callback_data
+   - Dompdf: Renderer HTML to PDF A4 Landscape support CSS print
+`
+      },
+      {
+        name: "laporan_k3_nena_cafe.csv",
+        type: "file",
+        extension: "csv",
+        size: "1.2 KB",
+        content: `ID,Tanggal,Kategori,Lokasi,Pelapor,Prioritas,Status,Saran AI
+2312,2024-10-30 12:15,Api & Gas,Dapur Utama,Anonim,Tinggi,Menunggu,"Cabut regulator LPG dan buka ventilasi"
+2311,2024-10-30 11:45,Kelistrikan,Area Bar POS,Staf Kafe,Normal,Diproses,"Bungkus isolasi karet dan matikan jalur listrik"
+2310,2024-10-30 10:20,Lingkungan,Selasar Depan,Customer,Rendah,Selesai,"Bersihkan tumpahan sirup dan pasang wet floor sign"
+2309,2024-10-29 18:30,Ergonomi & APD,Kitchen Cook,Staf Kafe,Normal,Selesai,"Sediakan sarung tangan tahan panas untuk oven"
+`
+      }
+    ]
+  },
+  {
     name: "tatagih",
     type: "folder",
-    description: "Subscription & Recurring Bill Manager",
+    description: "Smart Subscription Manager & AI Financial Assistant (Laravel 13)",
     previewImage: "/projects/tatagih.jpg",
-    badge: "Web App / SaaS",
+    badge: "Full-Stack Web App / AI SaaS",
     items: [
       {
         name: "Tatagih.exe",
@@ -137,42 +517,158 @@ export const DATA_D_ITEMS = [
         name: "tatagih_overview.txt",
         type: "file",
         extension: "txt",
-        size: "2.4 KB",
+        size: "3.8 KB",
         content: `=====================================================
-PROYEK: TATAGIH - SUBSCRIPTION & BILL MANAGER
+PROYEK: TATAGIH — SMART SUBSCRIPTION MANAGER
 =====================================================
-Platform   : Web App & Telegram Bot Integration
-Stack      : Laravel 10, PHP 8.2, MySQL, Bootstrap 5
-Notifikasi : Telegram Bot API, Cron Scheduler
+Tagline    : Kelola Langganan Lebih Cerdas, Temukan Kebocoran Finansial
+Tipe       : Full-Stack Web Application & Financial SaaS
+Tech Stack : PHP, Laravel 13, Laravel Blade, Tailwind CSS, Vite, JavaScript
+Database   : MySQL
+Visualisasi: Chart.js
+AI Engine  : Google Gemini API (dengan Local Fallback Engine)
+Notifikasi : Telegram Bot API (Webhook + Scheduler & Queue)
+Testing    : PHPUnit & Feature Test Suite
 
 DESKRIPSI:
-Tatagih adalah aplikasi manajemen pengeluaran rutin dan langganan digital
-(Netflix, Spotify, Cloud Server, Gym, Internet) dengan otomatisasi pengingat
-jatuh tempo via bot Telegram langsung ke ponsel pengguna.
+Tatagih adalah aplikasi web Smart Subscription Manager yang dibuat untuk membantu
+pengguna mengelola berbagai layanan berlangganan seperti streaming hiburan,
+aplikasi produktivitas, cloud storage, layanan AI, dan langganan digital lainnya.
 
-FITUR UTAMA:
-✓ Dashboard kalkulasi pengeluaran bulanan & tahunan secara otomatis
-✓ Pengingat cerdas H-3 dan H-1 sebelum tagihan jatuh tempo
-✓ Estimasi akumulasi biaya langganan per tahun
-✓ Dukungan konversi mata uang untuk tagihan multi-negara (IDR/USD)
+Tujuan utama project ini adalah membantu pengguna mengetahui berapa banyak uang
+yang mereka keluarkan untuk subscription, mengingatkan jadwal pembayaran,
+menemukan pengeluaran yang kurang efisien, serta memberikan insight mendalam
+agar pengguna dapat mengelola langganan dengan lebih bijak.
+
+FITUR-FITUR UTAMA:
+1. Manajemen Subscription
+   - Tambah, ubah, lihat, dan hapus data langganan.
+   - Field lengkap: nama layanan, kategori, harga, siklus pembayaran,
+     tanggal pembayaran, status, dan toggle auto-renewal.
+   - Catat pembayaran yang sudah diselesaikan.
+   - Pencarian instan dan filter berdasarkan kategori maupun status aktif/nonaktif.
+   - Ekspor data subscription ke format CSV.
+
+2. Dashboard Keuangan
+   - Menampilkan jumlah subscription aktif dan estimasi pengeluaran bulanan/tahunan.
+   - Menampilkan daftar pembayaran yang akan datang (upcoming bills).
+   - Menampilkan riwayat pengeluaran interaktif dalam bentuk grafik (Chart.js).
+   - Menampilkan distribusi pengeluaran berdasarkan proporsi kategori.
+   - Kalender visual yang membantu melihat jadwal jatuh tempo pembayaran.
+
+3. Tata Asisten — Analisis Keuangan Berbasis AI
+   - Menganalisis pola subscription dan pengeluaran pengguna.
+   - Menghasilkan Financial Health Score (skor kesehatan finansial).
+   - Memberikan rekomendasi cerdas berdasarkan kebiasaan berlangganan.
+   - Menghitung estimasi potensi penghematan.
+   - Mempertimbangkan jumlah layanan, biaya bulanan, kategori, penggunaan paket,
+     serta kemungkinan adanya subscription yang tumpang tindih.
+   - Menggunakan integrasi AI Google Gemini.
+
+4. Tata AI Chat
+   - Interaksi percakapan langsung dengan Tata AI asisten finansial.
+   - Context-aware: AI memahami konteks pengeluaran pengguna (total biaya,
+     daftar langganan aktif, biaya terbesar, financial health score, potensi hemat).
+   - Multi-session chat: percakapan dapat disimpan dalam beberapa sesi.
+   - Mekanisme fallback offline/lokal jika API AI sedang tidak tersedia.
+
+5. Pendeteksi Kebocoran Dana (Leak Detector)
+   - Deteksi Overlapping Subscription (layanan dengan fungsi serupa/mirip).
+   - Deteksi Vampire Spending (pengeluaran kecil yang sering terlupakan).
+   - Estimasi potensi penghematan dan rekomendasi tindakan solutif.
+
+6. Perbandingan Paket Subscription
+   - Membandingkan pilihan paket subscription sebelum memutuskan berlangganan.
+   - Menampilkan fitur, kuota, dan nilai dari masing-masing paket.
+
+7. Smart Subscription Templates
+   - Template siap pakai untuk layanan populer (Netflix, Spotify, ChatGPT Plus,
+     YouTube Premium, Google One, GitHub Copilot, dll.) untuk input cepat 1-klik.
+
+8. Fitur Patungan Subscription (Shared Bill)
+   - Kelola subscription bersama teman (misal: paket Family).
+   - Pembagian tagihan otomatis ke beberapa anggota.
+   - Monitoring status pembayaran masing-masing anggota.
+   - Anggota dapat mengunggah bukti pembayaran/transfer.
+   - Pemilik subscription dapat memeriksa, menerima, atau menolak bukti bayar.
+   - Sistem undangan grup patungan dan pembaruan siklus otomatis.
+
+9. Sistem Pertemanan
+   - Tambah teman via User Tag unik.
+   - Daftar teman, permintaan pertemanan, dan pengelolaan relasi untuk patungan.
+
+10. Notifikasi Telegram Bot
+    - Terhubung dengan akun Telegram pengguna melalui bot Tatagih.
+    - Reminder otomatis sebelum tanggal pembayaran (H-3 dan H-1).
+    - Informasi nama layanan, nominal, tanggal, dan status auto-renewal.
+    - Sistem webhook Telegram Bot API + background Laravel Scheduler & Queue.
+
+11. Riwayat Pembayaran
+    - Rekap seluruh transaksi pembayaran subscription.
+    - Analisis jumlah transaksi, total pengeluaran, waktu, dan kategori.
+    - Terintegrasi dengan statistik dan grafik keuangan.
+
+12. Autentikasi dan Pengelolaan Akun
+    - Sistem autentikasi Laravel (registrasi, login, lupa & reset password).
+    - Manajemen profil, ganti password, hubungkan akun Telegram & nomor rekening.
+
+13. Admin Dashboard
+    - Dashboard pemantauan statistik jumlah pengguna, total subscription,
+      subscription aktif, reminder terkirim, kategori populer, dan grafik pertumbuhan.
 `
-      },
-      {
-        name: "invoice_client.pdf",
-        type: "file",
-        extension: "pdf",
-        size: "120 KB"
       },
       {
         name: "tatagih_spec.txt",
         type: "file",
         extension: "txt",
+        size: "2.1 KB",
+        content: `SPESIFIKASI TEKNIS & ARSITEKTUR TATAGIH:
+=====================================================
+Framework    : Laravel 13 (PHP 8.3+)
+Frontend     : Laravel Blade, Tailwind CSS, Vite, JavaScript
+Database     : MySQL 8.0 Relational
+Visualisasi  : Chart.js
+AI Service   : Google Gemini API (REST) + Local Rule Fallback Engine
+Notifikasi   : Telegram Bot API (Webhook + Bot Secret)
+Background   : Laravel Scheduler (Cron) & Laravel Queue Worker
+Testing      : PHPUnit & Feature Test
+
+ASPEK TEKNIS & ARSITEKTUR:
+1. Controller Layer:
+   SubscriptionController, DashboardController, SharedBillController,
+   TataAiChatController, FriendController, TelegramWebhookController, AdminController.
+2. Service Layer:
+   - AiFinancialService: Engine analisis Gemini & contextual prompt injection.
+   - LeakDetectionService: Heuristik overlapping & vampire spending.
+   - TelegramNotificationService: Queue dispatcher notifikasi H-3 & H-1.
+   - BillSplitService: Kalkulasi pembagian biaya & transisi siklus periode baru.
+3. Middleware & Security:
+   - Laravel Authentication & Session Guards.
+   - AdminMiddleware untuk proteksi route Admin Dashboard.
+   - TelegramWebhookSignature middleware.
+4. Policy & Authorization:
+   - SubscriptionPolicy & SharedBillPolicy memastikan data isolation antar akun.
+5. Scheduled Jobs & Queue:
+   - CheckUpcomingBillsCommand: Dicek tiap pagi via Laravel Scheduler.
+   - SendSubscriptionReminderJob: Diproses di background queue.
+6. Local Fallback Mechanism:
+   - Saat Google Gemini API mengalami timeout/rate limit, sistem otomatis
+     menghasilkan analisis finansial berbasis engine analitik data lokal.
+`
+      },
+      {
+        name: "tatagih_subscriptions_export.csv",
+        type: "file",
+        extension: "csv",
         size: "1.2 KB",
-        content: `SPESIFIKASI TEKNIS TATAGIH:
-- Framework: Laravel 10 (MVC Architecture)
-- Database: MySQL with indexed recurring schedules
-- Bot: PHP Telegram SDK with webhook triggers
-- Security: CSRF protection, hashed passwords, rate limiting
+        content: `id,service_name,category,price,billing_cycle,due_date,auto_renewal,status,shared_group
+1,Netflix Premium,Entertainment,186000,monthly,2024-10-20,true,active,Family Group (4 Members)
+2,Spotify Family,Music & Audio,86900,monthly,2024-10-15,true,active,Teman Kampus (5 Members)
+3,ChatGPT Plus,AI & Productivity,310000,monthly,2024-10-25,true,active,Personal
+4,YouTube Premium,Entertainment,59000,monthly,2024-11-05,true,active,Personal
+5,Google One 2TB,Cloud Storage,135000,monthly,2024-11-12,true,active,Personal
+6,GitHub Copilot,Developer Tools,155000,monthly,2024-10-28,true,active,Personal
+7,Adobe Creative Cloud,Design & Creative,620000,monthly,2024-11-01,false,active,Personal
 `
       }
     ]
@@ -180,8 +676,8 @@ FITUR UTAMA:
   {
     name: "lintas",
     type: "folder",
-    description: "Phone-to-PC Companion Utility",
-    badge: "Desktop Utility",
+    description: "Cross-Device Productivity Ecosystem (Android & Windows)",
+    badge: "Cross-Device / Flutter",
     items: [
       {
         name: "Lintas.exe",
@@ -192,29 +688,86 @@ FITUR UTAMA:
         icon: "lintas",
         fileType: "Application",
         size: "28.6 MB",
-        description: "Buka Lintas Showcase di Chrome"
+        description: "Buka Lintas Cross-Device Showcase di Chrome"
       },
       {
         name: "lintas_overview.txt",
         type: "file",
         extension: "txt",
-        size: "2.1 KB",
+        size: "3.2 KB",
         content: `=====================================================
-PROYEK: LINTAS - PHONE-TO-PC COMPANION
+PROYEK: LINTAS - CROSS-DEVICE PRODUCTIVITY ECOSYSTEM
 =====================================================
-Platform   : Windows & Android
-Stack      : Tauri, Rust, React, WebSockets, mDNS ZeroConf
+Platform    : Android (Mobile Controller) & Windows (Companion Host)
+Tech Stack  : Flutter, Dart, C++ Runner, Riverpod, GoRouter
+Protokol    : Local HTTP & WebSocket Server (Port 8945)
+Keamanan    : QR Code (Nonce, Expiration, Fingerprint) & SHA-256 Checksum
 
 DESKRIPSI:
-Lintas menjembatani interaksi seamless antara smartphone Android dan PC Windows
-melalui jaringan lokal Wi-Fi tanpa memerlukan kabel USB atau koneksi internet cloud.
+Lintas adalah ekosistem produktivitas lintas perangkat yang menghubungkan smartphone
+Android dengan komputer Windows melalui jaringan lokal (LAN) secara langsung tanpa
+ketergantungan server cloud pihak ketiga.
 
 FITUR UTAMA:
-✓ Sinkronisasi clipboard dua arah secara instan
-✓ Transfer file berkecepatan tinggi via LAN WebSockets
-✓ Notifikasi mirroring dari ponsel ke desktop
-✓ Zero setup: deteksi perangkat otomatis menggunakan mDNS
-`
+1. Pairing Cepat via QR Code & LAN Auto-Discovery:
+   Windows Companion menampilkan dynamic QR Code ber-token expiration & nonce.
+   Ponsel Android memindai QR atau menggunakan auto-discovery jaringan lokal.
+2. Remote Touchpad & Virtual Keyboard:
+   Layar sentuh smartphone berubah menjadi trackpad presisi berlatensi ultra-rendah
+   (<5ms via WebSocket) dan keyboard virtual lengkap dengan modifier (Ctrl/Alt/Shift/Win).
+3. Instant Drop - Transfer File 2 Arah:
+   Kirim file instan antara Android dan Windows dalam subnet LAN berkecepatan tinggi,
+   dilengkapi Drop Zone Windows dan verifikasi integritas hash SHA-256 otomatis.
+4. Universal Clipboard & URL Detector:
+   Sinkronisasi teks clipboard dua arah secara real-time dengan pengenalan URL otomatis.
+5. NearLock Security:
+   Sistem penguncian PC otomatis ketika ponsel terdeteksi menjauh melewati grace period.
+6. Presentation Mode:
+   Remote kontrol slide nirkabel (Next, Prev, Black Screen, Timer) untuk kebutuhan meeting.
+=====================================================`
+      },
+      {
+        name: "lintas_spec.txt",
+        type: "file",
+        extension: "txt",
+        size: "2.5 KB",
+        content: `SPESIFIKASI TEKNIS & ARSITEKTUR LINTAS:
+=====================================================
+1. Core & Architecture:
+   - Framework  : Flutter (Dart) & Native C++ Windows Runner
+   - State Mgmt : Flutter Riverpod (StateNotifier & Provider)
+   - Navigation : GoRouter dengan deep-linking per platform
+   - Linting    : flutter_lints dengan standar static analysis ketat
+
+2. Network & Communications:
+   - Server Host: Windows Companion menjalankan server HTTP & WebSocket pada Port 8945
+   - Client     : Android Controller terhubung melalui persistent WebSocket
+   - Discovery  : UDP Broadcast lokal untuk Auto-Discovery tanpa ketik IP
+
+3. Native Windows Win32 API Integration:
+   - SendInput API : Menginjeksikan pergerakan mouse kursor dan ketukan keyboard
+   - LockWorkStation : Mengunci sesi Windows secara native saat NearLock aktif
+
+4. Security & Data Integrity:
+   - Dynamic QR Payload: Berisi token kedaluwarsa, nonce acak, dan device fingerprint
+   - File Hash Checksum: Verifikasi SHA-256 sebelum dan sesudah transfer
+   - Zero-Cloud: Seluruh transmisi terisolasi di dalam subnet Wi-Fi lokal pengguna
+=====================================================`
+      },
+      {
+        name: "lintas_activity_log.txt",
+        type: "file",
+        extension: "txt",
+        size: "1.4 KB",
+        content: `[2024-11-02 09:14:20] [SERVER] Windows Companion started on 192.168.1.12:8945
+[2024-11-02 09:14:22] [SECURITY] Generated Pairing QR Code (Nonce: x7f9a2, Exp: 15m)
+[2024-11-02 09:14:35] [PAIRING] Device detected: Oppo A53 (Android 13) via QR Scan
+[2024-11-02 09:14:36] [AUTH] Token verified. Device marked as TRUSTED client.
+[2024-11-02 09:14:37] [WS] WebSocket established. Roundtrip latency: 3.8 ms.
+[2024-11-02 09:16:10] [CLIPBOARD] Synced text from Android -> Windows clipboard.
+[2024-11-02 09:18:42] [DROP] Receiving "Project_Demo.mp4" (148.5 MB) via LAN.
+[2024-11-02 09:18:48] [DROP] SHA-256 Checksum MATCHED: e3b0c44298fc1c149afb...
+[2024-11-02 09:22:15] [NEARLOCK] Phone proximity checked: -42 dBm (State: DEKAT).`
       }
     ]
   },
@@ -324,7 +877,7 @@ FITUR UTAMA:
   {
     name: "project temuin",
     type: "folder",
-    description: "Lost & Found Crowdsourcing Platform",
+    description: "Lost & Found Platform Berbasis QR Code",
     previewImage: "/projects/temuin.jpg",
     badge: "Full-Stack Mobile",
     items: [
@@ -334,7 +887,7 @@ FITUR UTAMA:
         extension: "exe",
         appId: "temuin",
         projectId: "temuin",
-        icon: "home",
+        icon: "temuin",
         fileType: "Application",
         size: "18.5 MB",
         description: "Buka Temuin Showcase di Chrome"
@@ -345,20 +898,29 @@ FITUR UTAMA:
         extension: "txt",
         size: "2.8 KB",
         content: `=====================================================
-PROYEK: TEMUIN - TEMUKAN & LAPORKAN BARANG HILANG
+PROYEK: TEMUIN - IDENTIFIKASI & PENEMU BARANG HILANG
 =====================================================
-Kategori : Mobile & Cloud Crowdsourcing Platform
-Tech     : React Native (Expo), Node.js, Express, MongoDB, Google Maps API
+Kategori : Mobile Application / Lost & Found Platform
+Platform : Android & iOS (Flutter + Dart)
+Backend  : PHP Native + PDO (REST API HTTP/JSON)
+Database : MySQL / MariaDB (temuin_db)
+Payment  : Midtrans Snap API (Rp15.000 Boost Postingan)
+Auth     : BCRYPT + Custom HMAC-SHA256 Bearer Token
 
 DESKRIPSI:
-Platform komunitas berbasis lokasi untuk membantu masyarakat menemukan kembali
-barang bawaan yang tertinggal atau tercecer (seperti dompet, kunci, laptop, dll).
+Temuin menghubungkan pemilik barang dan penemu melalui identitas barang berbasis QR Code.
+Setiap barang memiliki stiker QR unik. Ketika ditemukan di area publik, QR dipindai
+untuk mengirim laporan penemuan lengkap dengan snapshot lokasi GPS dan foto bukti langsung
+ke notifikasi akun pemilik.
 
 HIGHLIGHTS:
-- Peta Interaktif (Google Maps): Memetakan lokasi barang hilang & barang ditemukan di sekitar pengguna
-- Sistem Verifikasi Kepemilikan: Kuis verifikasi ciri khusus barang sebelum klaim dibuka
-- Chat Terenkripsi: Komunikasi langsung antara penemu dan pemilik tanpa mengekspos nomor pribadi
-- Notifikasi Radius: Alert otomatis jika ada barang dilaporkan hilang di dekat Anda
+- QR Code Unik Tiap Item (qr_flutter & mobile_scanner)
+- Pencatatan Titik Lokasi GPS saat Laporan dibuat (geolocator)
+- Unggah Foto Bukti Penemuan Kamera Depan/Belakang (image_picker)
+- Siklus Status Barang: Safe -> Lost -> Found -> Claimed
+- Validasi Server Anti Self-Claim (Pemilik dilarang lapor temuan sendiri)
+- Monetisasi Boost Postingan Rp15.000 via Midtrans Snap (SHA-512 Webhook)
+- Web Admin Dashboard PHP untuk monitoring data pengguna & laporan
 `
       },
       {
@@ -367,7 +929,7 @@ HIGHLIGHTS:
         extension: "jpg",
         size: "520 KB",
         imageUrl: "/projects/temuin.jpg",
-        title: "Temuin Mobile Maps & Feed"
+        title: "Temuin Mobile QR & Found Report"
       }
     ]
   },
@@ -459,7 +1021,6 @@ PENGALAMAN:
         content: `RIWAYAT PENDIDIKAN & PRESTASI:
 - Sarjana Komputer (S.Kom) - Teknik Informatika
   Fokus Penelitian: Sistem Rekomendasi & Mobile Application Security
-- Juara 2 Hackathon Inovasi Aplikasi Mobile Kampus 2023
 - Juara Harapan Web Design Competition Nasional 2024
 `
       }
@@ -509,7 +1070,7 @@ PENGALAMAN:
 --------------------------------------------
 Email       : agungkrisna.dev@gmail.com
 WhatsApp    : +62 812-3456-7890
-LinkedIn    : https://linkedin.com/in/agungkrisna
+LinkedIn    : https://linkedin.com/in/krisnaartha
 GitHub      : https://github.com/agungkrisna
 Telegram    : @agungkrisna
 Portfolio   : https://agungkrisna.vercel.app
@@ -555,7 +1116,9 @@ saat perangkat memasuki atau meninggalkan zona geofencing yang telah ditentukan.
 3. Makalah Generator (Academic AI Suite)
 4. RadiusApp (Geofencing & Proximity Sensor)
 5. KuisMobile (Gamified Learning Quiz)
-6. Tatagih (Invoicing & Accounts Receivable SaaS)
+6. Tatagih (Smart Subscription Manager & AI Financial Assistant — Laravel 13)
+7. NenaCare (AI-Powered K3 Incident Reporting & Monitoring System — PHP OOP & Gemini)
+8. ITB STIKOM Bali Plugin for TheoTown (Custom Isometric Pixel Art Educational Building)
 `
       }
     ]
@@ -566,149 +1129,68 @@ saat perangkat memasuki atau meninggalkan zona geofencing yang telah ditentukan.
     description: "Galeri Tangkapan Layar Proyek",
     badge: "Gallery",
     items: [
+      { name: "lintas_screen.jpg", type: "file", extension: "jpg", size: "610 KB", imageUrl: "/projects/lintas.jpg", title: "Lintas Cross-Device Ecosystem" },
+      { name: "theotown_screen.jpg", type: "file", extension: "jpg", size: "620 KB", imageUrl: "/projects/theotown.jpg", title: "ITB STIKOM Bali TheoTown Gameplay" },
+      { name: "nenacare_screen.jpg", type: "file", extension: "jpg", size: "580 KB", imageUrl: "/projects/nenacare.jpg", title: "NenaCare K3 Incident Dashboard" },
+      { name: "tatagih_screen.jpg", type: "file", extension: "jpg", size: "540 KB", imageUrl: "/projects/tatagih.jpg", title: "Tatagih Web App Dashboard" },
       { name: "dompetq_screen.jpg", type: "file", extension: "jpg", size: "482 KB", imageUrl: "/projects/dompetq.jpg", title: "DompetQ Screen" },
       { name: "temuin_screen.jpg", type: "file", extension: "jpg", size: "520 KB", imageUrl: "/projects/temuin.jpg", title: "Temuin Screen" },
       { name: "makalah_screen.jpg", type: "file", extension: "jpg", size: "410 KB", imageUrl: "/projects/makalah.jpg", title: "Makalah Screen" }
     ]
-  },
-  {
-    name: "sensormobile",
-    type: "folder",
-    description: "Eksperimen Sensor Akselerometer & Giroskop",
-    badge: "Mobile IoT",
-    items: [
-      {
-        name: "sensor_notes.txt",
-        type: "file",
-        extension: "txt",
-        size: "1.1 KB",
-        content: `SENSOR MOBILE PROJECT:
-Eksperimen pemanfaatan hardware accelerometer, pedometer, dan barometer pada Android
-untuk penghitungan langkah kaki dan orientasi 3D real-time.
-`
-      }
-    ]
-  },
-  {
-    name: "kuismobile",
-    type: "folder",
-    description: "Gamified Quiz App Android",
-    badge: "Mobile App",
-    items: [
-      {
-        name: "kuis_info.txt",
-        type: "file",
-        extension: "txt",
-        size: "1.2 KB",
-        content: `KUIS MOBILE:
-Aplikasi kuis trivia interaktif dengan timer, papan skor (leaderboard) Firebase,
-dan animasi perayaan saat menjawab benar.
-`
-      }
-    ]
-  },
-  {
-    name: "UTS_240040075",
-    type: "folder",
-    description: "Proyek Ujian Tengah Semester & Riset Akademik",
-    badge: "Academic",
-    items: [
-      {
-        name: "laporan_uts.txt",
-        type: "file",
-        extension: "txt",
-        size: "2.3 KB",
-        content: `LAPORAN UTS KOMPUTASI MOBILE:
-Analisis perbandingan performa antara Flutter vs Native Kotlin dalam pemrosesan grafis 60fps.
-Hasil: Flutter mencapai frame render 59.4 fps dengan konsumsi memori optimal.
-`
-      }
-    ]
-  },
-  {
-    name: "tugas4",
-    type: "folder",
-    description: "Tugas Pengembangan Web Lanjutan",
-    items: [
-      { name: "readme.txt", type: "file", extension: "txt", size: "850 B", content: "Implementasi REST API & Microservice Authentication." }
-    ]
-  },
-  {
-    name: "latihan",
-    type: "folder",
-    description: "Latihan & Algoritma Dasar",
-    items: [
-      { name: "algoritma.txt", type: "file", extension: "txt", size: "750 B", content: "Koleksi algoritma sorting, binary search, dan dynamic programming." }
-    ]
-  },
-  {
-    name: "latihan3",
-    type: "folder",
-    description: "Eksplorasi State Management",
-    items: [
-      { name: "state_comparison.txt", type: "file", extension: "txt", size: "900 B", content: "Perbandingan Zustand, Redux Toolkit, dan MobX." }
-    ]
-  },
-  {
-    name: "utsmobile",
-    type: "folder",
-    description: "Source Code Aplikasi Mobile UTS",
-    items: [
-      { name: "main.dart", type: "file", extension: "txt", size: "3.5 KB", content: "void main() => runApp(const MobileUTSApp());" }
-    ]
-  },
-  {
-    name: "LDPlayer",
-    type: "folder",
-    description: "Konfigurasi Android Virtual Emulator",
-    items: [
-      { name: "devices.cfg", type: "file", extension: "txt", size: "400 B", content: "Device profile: Pixel 7 Pro, Android 13, API 33" }
-    ]
-  },
-  {
-    name: "Riot Games",
-    type: "folder",
-    description: "Game Folder & Gaming Benchmarks",
-    items: [
-      { name: "gaming_profile.txt", type: "file", extension: "txt", size: "620 B", content: "Competitive gamer hobbyist: Valorant Diamond Rank, Team Strategy Enthusiast." }
-    ]
-  },
-  {
-    name: "Steam",
-    type: "folder",
-    description: "Steam Client Assets & Game Mods",
-    items: [
-      { name: "steam_apps.txt", type: "file", extension: "txt", size: "500 B", content: "Game library & development sandbox." }
-    ]
-  },
-  {
-    name: "SteamLibrary",
-    type: "folder",
-    description: "Secondary Game Library Drive",
-    items: [
-      { name: "library_cache.txt", type: "file", extension: "txt", size: "300 B", content: "Steam cache & config files." }
-    ]
-  },
-  {
-    name: "SPOTIFY",
-    type: "folder",
-    description: "Coding Playlist & Music Preferences",
-    items: [
-      {
-        name: "coding_playlist.txt",
-        type: "file",
-        extension: "txt",
-        size: "1.1 KB",
-        content: `CODING & DEEP WORK PLAYLIST:
-- Synthwave / Retrowave Chill
-- Lofi Beats to Code / Relax to
-- Hans Zimmer Film Scores
-- Neo-Classical Piano
-`
-      }
-    ]
   }
 ];
+
+export const INTRO_NOTE_CONTENT = `======================================================================
+  SELAMAT DATANG DI PORTOFOLIO INTERAKTIF SAYA (WINDOWS 11 EDITION)
+======================================================================
+
+Halo! 
+Terima kasih banyak sudah meluangkan waktu untuk berkunjung.
+
+Saya Anak Agung Ngurah Krisna Artha Wibawa (Agung Krisna), seorang 
+Full-Stack Web & Mobile Developer asal Bali, Indonesia.
+Pendidikan: Institut Teknologi dan Bisnis STIKOM Bali (Teknologi Informasi).
+
+Aplikasi portofolio ini dirancang menyerupai antarmuka desktop Windows 11 
+agar Anda dapat mengeksplorasi riwayat karya, proyek komersial, dan 
+kemampuan teknis saya dengan cara yang lebih interaktif dan menyenangkan.
+
+----------------------------------------------------------------------
+ PANDUAN EKSPLORASI PORTOFOLIO:
+----------------------------------------------------------------------
+1.  Google Chrome & Project Showcase
+   - Buka Google Chrome di desktop atau taskbar untuk melihat demo interaktif 
+     aplikasi unggulan saya (Tatagih, Temuin, Lintas, NeuroFly, DompetQ, dll).
+   - Ingin hiburan ringan? Ketik 'chrome://dino' di browser atau klik icon 
+     Dino di desktop untuk memainkan T-Rex game offline!
+
+2.  File Explorer (This PC)
+   - Buka 'This PC' atau 'File Explorer' untuk melihat susunan berkas, 
+     dokumentasi arsitektur tiap proyek, serta berkas sertifikat keahlian.
+
+3.  LinkedIn & WhatsApp
+   - Ingin terkoneksi atau menawarkan peluang kerja sama? 
+     Klik icon LinkedIn atau WhatsApp untuk langsung terhubung dengan saya.
+
+4.  Website Portofolio Utama
+   - Klik shortcut 'krisnaartha.my.id' di desktop untuk langsung mengakses 
+     website portofolio personal saya.
+
+5.  Easter Egg & Kustomisasi
+   - Buka Calculator dan ketik kode rahasia: 6969 lalu tekan '=' untuk membuka kejutan video rahasia!
+   - Buka Settings untuk mengubah wallpaper Windows 11 sesuai preferensi Anda.
+
+----------------------------------------------------------------------
+ INFORMASI KONTAK RESMI:
+----------------------------------------------------------------------
+• Email     : agungkrisna.dev@gmail.com
+• WhatsApp  : +62 812-3456-7890
+• LinkedIn  : https://linkedin.com/in/krisnaartha
+• Website   : https://krisnaartha.my.id
+• Status    : Open for Full-Time (Onsite / Remote / Hybrid) & Freelance
+
+Selamat menjelajah, semoga Anda menikmati pengalaman interaktif ini! ✨
+======================================================================`;
 
 export const DESKTOP_ITEMS = [
   {
@@ -720,14 +1202,6 @@ export const DESKTOP_ITEMS = [
     icon: "computer"
   },
   {
-    id: "user_files",
-    name: "User Files",
-    type: "system",
-    app: "explorer",
-    path: "Documents",
-    icon: "folder"
-  },
-  {
     id: "file_explorer",
     name: "File Explorer",
     type: "app",
@@ -736,12 +1210,62 @@ export const DESKTOP_ITEMS = [
     icon: "explorer"
   },
   {
-    id: "projects_folder",
-    name: "Projects",
+    id: "theotown_app",
+    name: "ITB STIKOM TheoTown",
     type: "app",
-    app: "explorer",
-    path: "Projects",
-    icon: "folder"
+    app: "theotown",
+    icon: "theotown"
+  },
+  {
+    id: "nenacare_app",
+    name: "NenaCare (K3 Incident AI)",
+    type: "app",
+    app: "nenacare",
+    icon: "nenacare"
+  },
+  {
+    id: "tatagih_app",
+    name: "Tatagih (Subscription)",
+    type: "app",
+    app: "tatagih",
+    icon: "tatagih"
+  },
+  {
+    id: "lintas_app",
+    name: "Lintas (Cross-Device)",
+    type: "app",
+    app: "lintas",
+    icon: "lintas"
+  },
+  {
+    id: "sigap_app",
+    name: "SIGAP (Keamanan HP)",
+    type: "app",
+    app: "sigap",
+    icon: "sigap"
+  },
+  {
+    id: "temuin_app",
+    name: "Temuin (Lost & Found)",
+    type: "app",
+    app: "temuin",
+    icon: "temuin"
+  },
+  {
+    id: "bingkai_app",
+    name: "Bingkai (Galeri Foto)",
+    type: "app",
+    app: "bingkai",
+    icon: "bingkai"
+  },
+  {
+    id: "notepad",
+    name: "Pengantar.txt",
+    type: "file",
+    extension: "txt",
+    app: "notepad",
+    icon: "notepad",
+    content: INTRO_NOTE_CONTENT
   },
   {
     id: "chrome_app",
@@ -749,97 +1273,6 @@ export const DESKTOP_ITEMS = [
     type: "app",
     app: "chrome",
     icon: "chrome"
-  },
-  {
-    id: "recycle_bin",
-    name: "Recycle Bin",
-    type: "system",
-    app: "recycle_bin",
-    icon: "trash"
-  },
-  {
-    id: "tatagih_app",
-    name: "Tatagih.exe",
-    type: "executable",
-    app: "tatagih",
-    icon: "tatagih"
-  },
-  {
-    id: "lintas_app",
-    name: "Lintas.exe",
-    type: "executable",
-    app: "lintas",
-    icon: "lintas"
-  },
-  {
-    id: "neurofly_app",
-    name: "NeuroFly.exe",
-    type: "executable",
-    app: "neurofly",
-    icon: "neurofly"
-  },
-  {
-    id: "edge_browser",
-    name: "Projects Showcase",
-    type: "app",
-    app: "browser",
-    icon: "edge"
-  },
-  {
-    id: "powershell",
-    name: "PowerShell",
-    type: "app",
-    app: "terminal",
-    icon: "terminal"
-  },
-  {
-    id: "notepad",
-    name: "Notepad",
-    type: "app",
-    app: "notepad",
-    icon: "notepad"
-  },
-  {
-    id: "certificates",
-    name: "Certificates",
-    type: "app",
-    app: "photos",
-    icon: "image"
-  },
-  {
-    id: "settings",
-    name: "Settings",
-    type: "app",
-    app: "settings",
-    icon: "settings"
-  },
-  {
-    id: "antigravity",
-    name: "Antigravity AI",
-    type: "app",
-    app: "terminal",
-    icon: "antigravity"
-  },
-  {
-    id: "vscode",
-    name: "Visual Studio Code",
-    type: "app",
-    app: "terminal",
-    icon: "vscode"
-  },
-  {
-    id: "whatsapp",
-    name: "WhatsApp",
-    type: "app",
-    app: "whatsapp",
-    icon: "whatsapp"
-  },
-  {
-    id: "linkedin",
-    name: "LinkedIn",
-    type: "app",
-    app: "linkedin",
-    icon: "linkedin"
   },
   {
     id: "krisnaartha_site",
@@ -850,6 +1283,21 @@ export const DESKTOP_ITEMS = [
     icon: "krisnaartha"
   },
   {
+    id: "linkedin",
+    name: "LinkedIn",
+    type: "shortcut",
+    app: "linkedin",
+    url: "https://linkedin.com/in/krisnaartha",
+    icon: "linkedin"
+  },
+  {
+    id: "whatsapp",
+    name: "WhatsApp",
+    type: "app",
+    app: "whatsapp",
+    icon: "whatsapp"
+  },
+  {
     id: "chrome_dino",
     name: "chrome://dino",
     type: "app",
@@ -857,11 +1305,39 @@ export const DESKTOP_ITEMS = [
     icon: "chrome_dino"
   },
   {
+    id: "certificates",
+    name: "Certificates",
+    type: "app",
+    app: "photos",
+    icon: "image"
+  },
+  {
     id: "calculator",
     name: "Calculator",
     type: "app",
     app: "calculator",
     icon: "calculator"
+  },
+  {
+    id: "settings",
+    name: "Settings",
+    type: "app",
+    app: "settings",
+    icon: "settings"
+  },
+  {
+    id: "terminal",
+    name: "Command Prompt",
+    type: "app",
+    app: "terminal",
+    icon: "terminal"
+  },
+  {
+    id: "recycle_bin",
+    name: "Recycle Bin",
+    type: "system",
+    app: "recycle_bin",
+    icon: "recycle-bin-full"
   }
 ];
 
@@ -883,14 +1359,14 @@ Prioritas: Rahasia
 
 Catatan:
 Jangan sampai lupa kode rahasia untuk membuka 
-Developer Secret Vault & Easter Egg!
+Easter Egg & Kejutan Spesial!
 
 Petunjuk:
 1. Buka aplikasi Kalkulator (Calculator) di desktop / taskbar.
 2. Masukkan angka kode: 6969
 3. Tekan '=' (atau tombol Enter).
 
-Akan terbuka brankas rahasia & dossier pengembang!
+Akan terbuka kejutan video rahasia pengembang!
 =======================================================`
   },
   {

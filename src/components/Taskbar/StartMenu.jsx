@@ -42,7 +42,7 @@ export const StartMenu = ({ isOpen, onClose, onLaunchApp, onOpenFile, onRestart,
     { id: 'onenote', name: 'OneNote', icon: 'onenote' },
     { id: 'explorer', name: 'File Explorer', icon: 'explorer' },
     { id: 'chrome', name: 'Google Chrome', icon: 'chrome' },
-    { id: 'antigravity', name: 'Antigravity', icon: 'antigravity' },
+    { id: 'terminal', name: 'Command Prompt', icon: 'terminal' },
     { id: 'ldplayer', name: 'LDPlayer 14', icon: 'ldplayer' }
   ];
 
@@ -64,8 +64,8 @@ export const StartMenu = ({ isOpen, onClose, onLaunchApp, onOpenFile, onRestart,
     },
     {
       name: 'Developer',
-      icons: ['antigravity', 'mail', 'vscode', 'terminal'],
-      appToLaunch: 'antigravity'
+      icons: ['terminal', 'mail', 'vscode', 'powershell'],
+      appToLaunch: 'terminal'
     },
     {
       name: 'Coding & Terminal',

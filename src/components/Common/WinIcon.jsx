@@ -72,9 +72,9 @@ const ICON_MAP = {
   'rename': '/icons/rename.png',
   'share': '/icons/share.png',
   'delete': '/icons/delete.png',
-  'trash': '/icons/bin1.png',
-  'recycle-bin': '/icons/bin1.png',
-  'bin': '/icons/bin1.png',
+  'trash': '/icons/bin0.png',
+  'recycle-bin': '/icons/bin0.png',
+  'bin': '/icons/bin0.png',
   'bin0': '/icons/bin0.png',
   'bin1': '/icons/bin1.png',
   'recycle-bin-full': '/icons/bin0.png',
@@ -88,12 +88,18 @@ const ICON_MAP = {
   'pdf': '/icons/documents.png',
   'briefcase': '/icons/store.png',
   'recruiter': '/icons/store.png',
-  'tatagih': '/icons/chrome.svg',
-  'temuin': '/icons/home.svg',
-  'lintas': '/icons/chrome.svg',
+  'tatagih': '/icons/tatagih.svg',
+  'temuin': '/icons/temuin.svg',
+  'lintas': '/icons/lintas.svg',
   'neurofly': '/icons/antigravity.svg',
   'dompetq': '/icons/code.png',
-  'makalah': '/icons/notepad.png'
+  'makalah': '/icons/notepad.png',
+  'sigap': '/icons/sigap.svg',
+  'bingkai': '/icons/bingkai.svg',
+  'nenacare': '/icons/nenacare.svg',
+  'theotown': '/icons/theotown.svg',
+  'theotown-stikom': '/icons/theotown.svg',
+  'stikom': '/icons/theotown.svg'
 };
 
 export const WinIcon = ({ name, size = 32, className = '' }) => {

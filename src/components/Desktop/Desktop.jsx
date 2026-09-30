@@ -90,19 +90,40 @@ export const Desktop = ({
     } else if (item.app === 'pdf_viewer') {
       onLaunchApp('recruiter');
     } else if (item.app === 'explorer') {
-      onLaunchApp('explorer', item.path || 'Data (D:)');
+      const targetPath = item.id === 'this_pc' 
+        ? 'This PC' 
+        : (item.id === 'file_explorer' ? 'Projects' : (item.path || 'This PC'));
+      onLaunchApp('explorer', { path: targetPath });
     } else if (item.projectId) {
       onLaunchApp('chrome', { projectId: item.projectId });
-    } else if (item.app === 'tatagih' || (item.name && item.name.toLowerCase().includes('tatagih'))) {
+    } else if (['theotown', 'nenacare', 'tatagih', 'temuin', 'lintas', 'neurofly', 'dompetq', 'makalah', 'sigap', 'bingkai'].includes(item.app)) {
+      onLaunchApp('chrome', { projectId: item.app });
+    } else if (item.name && (item.name.toLowerCase().includes('theotown') || item.name.toLowerCase().includes('stikom'))) {
+      onLaunchApp('chrome', { projectId: 'theotown' });
+    } else if (item.name && item.name.toLowerCase().includes('nenacare')) {
+      onLaunchApp('chrome', { projectId: 'nenacare' });
+    } else if (item.name && item.name.toLowerCase().includes('tatagih')) {
       onLaunchApp('chrome', { projectId: 'tatagih' });
-    } else if (item.app === 'lintas' || (item.name && item.name.toLowerCase().includes('lintas'))) {
+    } else if (item.name && item.name.toLowerCase().includes('temuin')) {
+      onLaunchApp('chrome', { projectId: 'temuin' });
+    } else if (item.name && item.name.toLowerCase().includes('lintas')) {
       onLaunchApp('chrome', { projectId: 'lintas' });
-    } else if (item.app === 'neurofly' || (item.name && item.name.toLowerCase().includes('neurofly'))) {
+    } else if (item.name && item.name.toLowerCase().includes('neurofly')) {
       onLaunchApp('chrome', { projectId: 'neurofly' });
+    } else if (item.name && item.name.toLowerCase().includes('dompetq')) {
+      onLaunchApp('chrome', { projectId: 'dompetq' });
+    } else if (item.name && item.name.toLowerCase().includes('makalah')) {
+      onLaunchApp('chrome', { projectId: 'makalah' });
+    } else if (item.name && item.name.toLowerCase().includes('sigap')) {
+      onLaunchApp('chrome', { projectId: 'sigap' });
+    } else if (item.name && item.name.toLowerCase().includes('bingkai')) {
+      onLaunchApp('chrome', { projectId: 'bingkai' });
     } else if (item.app === 'recycle_bin' || item.id === 'recycle_bin') {
       onLaunchApp('explorer', { path: 'Recycle Bin' });
     } else if (item.app === 'dino' || item.id === 'chrome_dino') {
       onLaunchApp('dino');
+    } else if (item.app === 'linkedin' || item.id === 'linkedin') {
+      window.open(item.url || 'https://linkedin.com/in/krisnaartha', '_blank', 'noopener,noreferrer');
     } else if (item.app === 'krisnaartha_site' || item.id === 'krisnaartha_site' || item.url) {
       onLaunchApp('krisnaartha_site', { url: item.url || 'https://krisnaartha.my.id' });
     } else {

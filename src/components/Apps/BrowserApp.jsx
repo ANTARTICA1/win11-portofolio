@@ -19,7 +19,7 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
   const [isReloading, setIsReloading] = useState(false);
   const [showTabSearch, setShowTabSearch] = useState(false);
   const [omniboxVal, setOmniboxVal] = useState(() => {
-    return initialProject === 'dino' ? 'chrome://dino' : initialProject === 'krisnaartha' ? 'krisnaartha.my.id' : `agungkrisna.dev/projects/${initialProject || 'tatagih'}`;
+    return initialProject === 'dino' ? 'chrome://dino' : initialProject === 'krisnaartha' ? 'portofolio.krisnaartha.my.id' : `agungkrisna.dev/projects/${initialProject || 'tatagih'}`;
   });
 
   const projectKeys = Object.keys(PROJECTS_DATA);
@@ -27,7 +27,7 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
   const [tabs, setTabs] = useState(() => {
     const initKey = initialProject || 'tatagih';
     const p = PROJECTS_DATA[initKey] || PROJECTS_DATA.tatagih;
-    const title = p.isDino ? 'chrome://dino' : p.isExternalIframe ? 'krisnaartha.my.id' : `${p.name} — Showcase`;
+    const title = p.isDino ? 'chrome://dino' : p.isExternalIframe ? 'portofolio.krisnaartha.my.id' : `${p.name} — Showcase`;
     const icon = p.isDino ? 'dino' : p.isExternalIframe ? 'krisnaartha' : 'chrome';
     return [
       {
@@ -43,7 +43,7 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
     if (activeProjectId === 'dino') {
       setOmniboxVal('chrome://dino');
     } else if (activeProjectId === 'krisnaartha') {
-      setOmniboxVal('krisnaartha.my.id');
+      setOmniboxVal('portofolio.krisnaartha.my.id');
     } else if (PROJECTS_DATA[activeProjectId]) {
       setOmniboxVal(`agungkrisna.dev/projects/${activeProjectId}`);
     }
@@ -57,7 +57,7 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
       const exists = prev.find((t) => (t.projectId || t.id) === projectId);
       if (exists) return prev;
       const p = PROJECTS_DATA[projectId];
-      const title = p ? (p.isDino ? 'chrome://dino' : p.isExternalIframe ? 'krisnaartha.my.id' : `${p.name} — Showcase`) : 'New Tab';
+      const title = p ? (p.isDino ? 'chrome://dino' : p.isExternalIframe ? 'portofolio.krisnaartha.my.id' : `${p.name} — Showcase`) : 'New Tab';
       const icon = p?.isDino ? 'dino' : p?.isExternalIframe ? 'krisnaartha' : 'chrome';
       return [
         ...prev,
@@ -293,7 +293,7 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
             const val = (omniboxVal || '').trim().toLowerCase();
             if (val.includes('dino')) {
               handleSelectProject('dino');
-            } else if (val.includes('krisnaartha')) {
+            } else if (val.includes('krisnaartha') || val.includes('portofolio')) {
               handleSelectProject('krisnaartha');
             } else if (val.includes('theotown') || val.includes('stikom')) {
               handleSelectProject('theotown');
@@ -382,10 +382,10 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
         <div
           className={`chrome-bookmark-item ${activeProjectId === 'krisnaartha' ? 'active' : ''}`}
           onClick={() => handleSelectProject('krisnaartha')}
-          title="krisnaartha.my.id (Portfolio)"
+          title="portofolio.krisnaartha.my.id (Portfolio)"
         >
           <WinIcon name="krisnaartha" size={13} />
-          <span>krisnaartha.my.id</span>
+          <span>portofolio.krisnaartha.my.id</span>
         </div>
         <div
           className={`chrome-bookmark-item ${activeProjectId === 'theotown' ? 'active' : ''}`}

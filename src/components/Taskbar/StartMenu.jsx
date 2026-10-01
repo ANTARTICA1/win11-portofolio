@@ -30,7 +30,7 @@ export const StartMenu = ({ isOpen, onClose, onLaunchApp, onOpenFile, onRestart,
   const pinnedApps = [
     { id: 'linkedin', name: 'LinkedIn', icon: 'linkedin' },
     { id: 'whatsapp', name: 'WhatsApp', icon: 'whatsapp' },
-    { id: 'krisnaartha_site', name: 'krisnaartha.my.id', icon: 'krisnaartha' },
+    { id: 'krisnaartha_site', name: 'portofolio.krisnaartha.my.id', icon: 'krisnaartha' },
     { id: 'dino', name: 'chrome://dino', icon: 'chrome_dino' },
     { id: 'browser', name: 'Microsoft Edge', icon: 'edge' },
     { id: 'ms-store', name: 'Microsoft Store', icon: 'ms-store' },

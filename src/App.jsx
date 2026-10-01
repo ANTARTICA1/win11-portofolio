@@ -52,14 +52,14 @@ const getInitialWindows = () => {
     {
       id: 'win-krisnaartha-initial',
       appId: 'krisnaartha_site',
-      title: 'krisnaartha.my.id — Personal Portfolio Website',
+      title: 'portofolio.krisnaartha.my.id — Personal Portfolio Website',
       icon: 'krisnaartha',
       isMinimized: false,
       isMaximized: false,
       zIndex: 101,
       initialPosition: { x: posX, y: posY },
       initialSize: { width: winW, height: winH },
-      data: { url: 'https://krisnaartha.my.id' }
+      data: { url: 'https://portofolio.krisnaartha.my.id' }
     }
   ];
 };
@@ -337,7 +337,7 @@ export function App() {
       },
 
       krisnaartha_site: {
-        title: 'krisnaartha.my.id — Personal Portfolio Website',
+        title: 'portofolio.krisnaartha.my.id — Personal Portfolio Website',
         icon: 'krisnaartha',
         initialSize: { 
           width: typeof window !== 'undefined' ? Math.max(900, window.innerWidth - 200) : 1200, 
@@ -602,12 +602,12 @@ export function App() {
           <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', backgroundColor: '#0f172a', color: '#fff' }}>
             <div style={{ height: '44px', backgroundColor: '#1e293b', borderBottom: '1px solid #334155', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 16px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', color: '#94a3b8' }}>
-                <span style={{ color: '#f8fafc', fontWeight: 600 }}>https://krisnaartha.my.id</span>
+                <span style={{ color: '#f8fafc', fontWeight: 600 }}>https://portofolio.krisnaartha.my.id</span>
               </div>
             </div>
             <iframe 
-              src="https://krisnaartha.my.id" 
-              title="krisnaartha.my.id"
+              src="https://portofolio.krisnaartha.my.id" 
+              title="portofolio.krisnaartha.my.id"
               style={{ flex: 1, width: '100%', border: 'none', backgroundColor: '#ffffff' }}
             />
           </div>
@@ -707,7 +707,7 @@ export function App() {
           else if (cmd === 'settings') launchApp('settings');
           else if (cmd === 'linkedin') launchApp('linkedin');
           else if (cmd === 'wa' || cmd === 'whatsapp') launchApp('whatsapp');
-          else if (cmd === 'web' || cmd === 'krisnaartha' || cmd === 'krisnaartha.my.id') launchApp('krisnaartha_site');
+          else if (cmd === 'web' || cmd === 'krisnaartha' || cmd === 'krisnaartha.my.id' || cmd === 'portofolio.krisnaartha.my.id' || cmd === 'porto') launchApp('krisnaartha_site');
           else if (cmd === 'dino' || cmd === 'chrome://dino') launchApp('dino');
           else launchApp(cmd);
         }}

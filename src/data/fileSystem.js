@@ -12,7 +12,7 @@ export const INITIAL_USER = {
   whatsapp: "https://wa.me/6281234567890?text=Halo%20Agung,%20kami%20tertarik%20dengan%20profil%20portfolio%20Anda",
   github: "https://github.com/agungkrisna",
   linkedin: "https://linkedin.com/in/krisnaartha",
-  website: "https://krisnaartha.my.id",
+  website: "https://portofolio.krisnaartha.my.id",
   avatar: "/avatars/gungkrisna_avatar.svg"
 };
 
@@ -1173,7 +1173,7 @@ kemampuan teknis saya dengan cara yang lebih interaktif dan menyenangkan.
      Klik icon LinkedIn atau WhatsApp untuk langsung terhubung dengan saya.
 
 4.  Website Portofolio Utama
-   - Klik shortcut 'krisnaartha.my.id' di desktop untuk langsung mengakses 
+   - Klik shortcut 'portofolio.krisnaartha.my.id' di desktop untuk langsung mengakses 
      website portofolio personal saya.
 
 5.  Easter Egg & Kustomisasi
@@ -1186,7 +1186,7 @@ kemampuan teknis saya dengan cara yang lebih interaktif dan menyenangkan.
 • Email     : agungkrisna.dev@gmail.com
 • WhatsApp  : +62 812-3456-7890
 • LinkedIn  : https://linkedin.com/in/krisnaartha
-• Website   : https://krisnaartha.my.id
+• Website   : https://portofolio.krisnaartha.my.id
 • Status    : Open for Full-Time (Onsite / Remote / Hybrid) & Freelance
 
 Selamat menjelajah, semoga Anda menikmati pengalaman interaktif ini! ✨
@@ -1276,10 +1276,10 @@ export const DESKTOP_ITEMS = [
   },
   {
     id: "krisnaartha_site",
-    name: "krisnaartha.my.id",
+    name: "portofolio.krisnaartha.my.id",
     type: "shortcut",
     app: "krisnaartha_site",
-    url: "https://krisnaartha.my.id",
+    url: "https://portofolio.krisnaartha.my.id",
     icon: "krisnaartha"
   },
   {

@@ -125,7 +125,7 @@ export const Desktop = ({
     } else if (item.app === 'linkedin' || item.id === 'linkedin') {
       window.open(item.url || 'https://linkedin.com/in/krisnaartha', '_blank', 'noopener,noreferrer');
     } else if (item.app === 'krisnaartha_site' || item.id === 'krisnaartha_site' || item.url) {
-      onLaunchApp('krisnaartha_site', { url: item.url || 'https://krisnaartha.my.id' });
+      onLaunchApp('krisnaartha_site', { url: item.url || 'https://portofolio.krisnaartha.my.id' });
     } else {
       onLaunchApp(item.app || 'explorer');
     }

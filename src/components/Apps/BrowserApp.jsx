@@ -140,20 +140,19 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
 
   return (
     <div className="chrome-browser">
-      {/* 1. Combined Chrome Titlebar (Tabs + Window Controls in the EXACT SAME ROW) */}
       <div
         className="chrome-titlebar"
         onPointerDown={winCtx?.handleTitlePointerDown}
         onPointerMove={winCtx?.handleTitlePointerMove}
         onPointerUp={winCtx?.handleTitlePointerUp}
-        onDoubleClick={() => {
+        onDoubleClick={(e) => {
+          if (e.target.closest('.chrome-tab, .chrome-tabstrip, button, input, a')) return;
           if (!winCtx?.isMobile && winCtx?.onMaximize) {
             playClickSound();
             winCtx.onMaximize();
           }
         }}
       >
-        {/* Tab Search Chevron button */}
         <div className="chrome-tab-search-wrapper" onPointerDown={(e) => e.stopPropagation()}>
           <button
             type="button"
@@ -197,18 +196,26 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
           )}
         </div>
 
-        {/* Tabstrip */}
-        <div className="chrome-tabstrip">
+        <div className="chrome-tabstrip" onPointerDown={(e) => e.stopPropagation()}>
           {tabs.map((tab) => {
             const isTabActive = (tab.projectId || tab.id) === activeProjectId;
             return (
               <div
                 key={tab.id}
                 className={`chrome-tab ${isTabActive ? 'active' : ''}`}
-                onClick={() => {
+                onPointerDown={(e) => {
+                  e.stopPropagation();
                   playClickSound();
                   setActiveProjectId(tab.projectId || tab.id);
+                  setActivePhotoIndex(0);
                 }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  playClickSound();
+                  setActiveProjectId(tab.projectId || tab.id);
+                  setActivePhotoIndex(0);
+                }}
+                onDoubleClick={(e) => e.stopPropagation()}
               >
                 <WinIcon name={tab.icon || "chrome"} size={15} />
                 <span className="chrome-tab-title">{tab.title}</span>
@@ -239,10 +246,8 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
           </button>
         </div>
 
-        {/* Empty draggable area between tabs and window controls */}
         <div className="chrome-titlebar-drag-spacer" />
 
-        {/* Window Controls (Minimize, Maximize, Close) in the SAME ROW */}
         {winCtx?.WindowControls && (
           <winCtx.WindowControls
             onMinimize={winCtx.onMinimize}
@@ -313,7 +318,7 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
         >
           {currentProject?.isDino ? (
             <WinIcon name="dino" size={14} />
-          ) : (
+          ) : currentProject?.id === 'krisnaartha' ? null : (
             <Lock size={13} color="#22c55e" />
           )}
           <span style={{ color: currentProject?.isDino ? '#94a3b8' : '#22c55e', fontWeight: 600 }}>
@@ -463,7 +468,6 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
           />
         ) : (
           <div className="chrome-page-container">
-            {/* Top Project Selector (Flat Button Row) */}
             <div className="project-nav-bar">
               <span className="project-nav-label">PROYEK:</span>
               {projectKeys.filter(k => k !== 'dino' && k !== 'krisnaartha').map((pKey) => {
@@ -485,7 +489,6 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
               })}
             </div>
 
-            {/* 1. Project Hero Header */}
             <header className="project-header">
               <div className="project-hero-main">
                 <h1 className="project-main-title">{currentProject.fullTitle}</h1>
@@ -520,7 +523,6 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
               </div>
             </header>
 
-            {/* 2. Interactive System Interface Previewer (Flat, Wide Canvas Showcase) */}
             <section className="preview-showcase-section">
               <div className="preview-card-header">
                 <div className="preview-header-left">
@@ -530,7 +532,6 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
                   </span>
                 </div>
 
-                {/* Tab Switcher */}
                 <div className="preview-header-actions">
                   {currentProject.photos.length > 1 && (
                     <div className="preview-tab-row">
@@ -552,7 +553,6 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
                 </div>
               </div>
 
-              {/* Main Featured Photo Viewport */}
               <div
                 className="preview-viewport-container"
                 onClick={() => setSelectedPhotoModal(activePhoto)}
@@ -571,14 +571,12 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
                 </div>
               </div>
 
-              {/* Brief Explanation Underneath (Penjelasan Sekilas) */}
               <div className="preview-caption-bar">
                 <div className="preview-caption-tag">Penjelasan Sekilas:</div>
                 <div className="preview-caption-title">{activePhoto?.title}</div>
                 <p className="preview-caption-text">{activePhoto?.caption}</p>
               </div>
 
-              {/* Several Photos Reel (Koleksi Beberapa Foto Lengkap Dengan Ringkasan) */}
               {currentProject.photos.length > 1 && (
                 <div className="preview-thumbnails-container">
                   <div className="preview-thumbnails-label">
@@ -613,7 +611,6 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
               )}
             </section>
 
-            {/* 3. Problem & Solution Context (FLAT, NO CARD - Editorial 2-column) */}
             <section className="editorial-context-section">
               <div className="editorial-col">
                 <h2 className="editorial-heading">Latar Belakang & Masalah</h2>
@@ -625,7 +622,6 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
               </div>
             </section>
 
-            {/* 4. Key Features (FLAT, NO CARD - Clean responsive wide multi-column checklist) */}
             <section className="key-features-section">
               <h2 className="editorial-heading" style={{ marginBottom: '16px' }}>Fitur-Fitur Utama</h2>
               <div className="features-checklist">
@@ -641,8 +637,6 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
               </div>
             </section>
 
-
-            {/* 6. Bottom Navigation (FLAT, NO CARD) */}
             <footer className="project-footer-nav">
               <div className="footer-nav-label">Jelajahi Proyek Lainnya:</div>
               <div className="footer-nav-links">

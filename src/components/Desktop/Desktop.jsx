@@ -87,7 +87,7 @@ export const Desktop = ({
         extension: item.extension || 'txt',
         content: item.content
       });
-    } else if (item.app === 'pdf_viewer') {
+    } else if (item.app === 'pdf_viewer' || item.app === 'recruiter' || item.id === 'curriculum_vitae') {
       onLaunchApp('recruiter');
     } else if (item.app === 'explorer') {
       const targetPath = item.id === 'this_pc' 
@@ -135,7 +135,6 @@ export const Desktop = ({
     e.stopPropagation();
     setSelectedIconId(item.id);
 
-    // Di HP (Mobile): 1x klik langsung membuka aplikasi/file
     if (isMobileDevice()) {
       handleOpenItem(item);
     }
@@ -143,7 +142,6 @@ export const Desktop = ({
 
   const handleIconDoubleClick = (e, item) => {
     e.stopPropagation();
-    // Di Windows / Desktop: butuh double click untuk membuka
     if (!isMobileDevice()) {
       handleOpenItem(item);
     }

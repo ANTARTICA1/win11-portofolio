@@ -124,7 +124,7 @@ export const Window = ({
 
   const handleTitlePointerDown = (e) => {
     if (isMobile) return;
-    if (e.target.closest('.win-controls, button, .chrome-tab-close, .chrome-newtab-btn, .chrome-tab-search-btn, input, a')) return;
+    if (e.target.closest('.win-controls, button, .chrome-tab, .chrome-tabstrip, .explorer-tab, .explorer-tabstrip, .chrome-tab-close, .chrome-newtab-btn, .chrome-tab-search-btn, input, a')) return;
 
     onFocus();
     const target = e.currentTarget;
@@ -149,22 +149,18 @@ export const Window = ({
     const dy = e.clientY - dragRef.current.startY;
 
     if (dragRef.current.isMaximizedStart) {
-      // User started dragging while window was maximized
-      // Threshold of 3px to avoid unmaximizing on simple click or double click
       if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
         dragRef.current.isMaximizedStart = false;
 
         const restoredW = Math.min(size.width || 840, window.innerWidth - 60);
         const restoredH = Math.min(size.height || 560, window.innerHeight - 100);
 
-        // Keep cursor position proportional horizontally across the window width
         const ratio = Math.max(0.08, Math.min(0.92, e.clientX / window.innerWidth));
         const newX = Math.max(10, Math.min(window.innerWidth - restoredW - 10, e.clientX - ratio * restoredW));
         const newY = Math.max(0, e.clientY - 15);
 
         setPos({ x: newX, y: newY });
 
-        // Reset drag reference baseline to this new restored position
         dragRef.current.initX = newX;
         dragRef.current.initY = newY;
         dragRef.current.startX = e.clientX;
@@ -194,7 +190,6 @@ export const Window = ({
         e.currentTarget.releasePointerCapture(e.pointerId);
       } catch {}
 
-      // Snap to maximize if dragged to the very top edge of the screen
       if (!isMobile && !isMaximized && e.clientY <= 8) {
         playClickSound();
         if (onMaximize) onMaximize();

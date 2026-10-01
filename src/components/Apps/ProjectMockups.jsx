@@ -720,7 +720,6 @@ const renderBingkaiMockup = (type) => {
       case 'bingkai-home':
         return (
           <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: '8px' }}>
-            {/* Top Toolbar */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#0f172a', padding: '6px 10px', borderRadius: '6px', border: '1px solid #1e293b' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', color: '#94a3b8' }}>
                 <Search size={13} color="#38bdf8" />
@@ -733,7 +732,6 @@ const renderBingkaiMockup = (type) => {
               </div>
             </div>
 
-            {/* Photo Grid */}
             <div style={{ flex: 1, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px', overflow: 'hidden' }}>
               {[
                 { title: 'Pantai Kuta Sunset', date: '14 Jul 2024', size: '4.2 MB', fav: true, color: 'linear-gradient(135deg, #f97316, #db2777)' },
@@ -777,7 +775,6 @@ const renderBingkaiMockup = (type) => {
               ))}
             </div>
 
-            {/* Bottom Bar */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#0b1120', padding: '5px 8px', borderRadius: '4px', fontSize: '9px', color: '#94a3b8' }}>
               <span style={{ color: '#10b981' }}>● 100% Offline (Local-First) • Tidak ada foto yang diunggah ke cloud</span>
               <span style={{ color: '#f59e0b', fontWeight: 600 }}>Tekan [A] di Gamepad untuk Rebahan Mode 🎮</span>
@@ -788,14 +785,12 @@ const renderBingkaiMockup = (type) => {
       case 'bingkai-rebahan':
         return (
           <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: '8px' }}>
-            {/* Monitor Large Viewport with HUD overlay */}
             <div style={{ flex: 1, backgroundColor: '#020617', borderRadius: '8px', border: '1px solid #1e293b', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '10px' }}>
               <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at bottom, #ea580c 0%, #7c2d12 40%, #0c0a09 100%)', opacity: 0.9 }}></div>
               <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: 0.15, pointerEvents: 'none' }}>
                 <Gamepad2 size={160} color="#ffffff" />
               </div>
 
-              {/* Top HUD */}
               <div style={{ position: 'relative', zIndex: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px', backgroundColor: 'rgba(15, 23, 42, 0.85)', backdropFilter: 'blur(6px)', padding: '4px 10px', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.1)' }}>
                   <Gamepad2 size={13} color="#38bdf8" />
@@ -807,13 +802,11 @@ const renderBingkaiMockup = (type) => {
                 </div>
               </div>
 
-              {/* Photo Title Overlay */}
               <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', margin: 'auto 0' }}>
                 <div style={{ fontSize: '14px', fontWeight: 800, color: '#ffffff', textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}>Sunset di Pantai Kuta, Bali</div>
                 <div style={{ fontSize: '10px', color: '#cbd5e1', textShadow: '0 1px 4px rgba(0,0,0,0.8)', marginTop: '2px' }}>D:/Photos/Liburan/IMG_0842.JPG • 4000 × 3000 • 4.2 MB</div>
               </div>
 
-              {/* Bottom HUD: Controller Hints */}
               <div style={{ position: 'relative', zIndex: 2, display: 'flex', justifyContent: 'center', gap: '8px', flexWrap: 'wrap' }}>
                 <div style={{ backgroundColor: 'rgba(15, 23, 42, 0.9)', border: '1px solid rgba(255,255,255,0.15)', padding: '3px 8px', borderRadius: '14px', fontSize: '9px', color: '#e2e8f0', display: 'flex', alignItems: 'center', gap: '4px' }}>
                   <span style={{ backgroundColor: '#22c55e', color: '#000', borderRadius: '50%', width: '13px', height: '13px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: '8.5px' }}>A</span>
@@ -834,7 +827,6 @@ const renderBingkaiMockup = (type) => {
               </div>
             </div>
 
-            {/* Remote HP Companion Banner */}
             <div style={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '6px', padding: '6px 10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '9.5px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#cbd5e1' }}>
                 <Smartphone size={13} color="#10b981" />
@@ -858,7 +850,6 @@ const renderBingkaiMockup = (type) => {
               </span>
             </div>
 
-            {/* Tinder Stack Mockup */}
             <div style={{ position: 'relative', width: '220px', height: '170px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <div style={{ position: 'absolute', width: '190px', height: '140px', backgroundColor: '#1e293b', borderRadius: '12px', border: '1px solid #334155', transform: 'rotate(5deg) translateY(-8px)', opacity: 0.4 }}></div>
               <div style={{ position: 'absolute', width: '200px', height: '150px', backgroundColor: '#1e293b', borderRadius: '12px', border: '1px solid #334155', transform: 'rotate(-3deg) translateY(-4px)', opacity: 0.7 }}></div>
@@ -887,7 +878,6 @@ const renderBingkaiMockup = (type) => {
               </div>
             </div>
 
-            {/* Action Buttons */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '3px' }}>
                 <button type="button" style={{ width: '42px', height: '42px', borderRadius: '50%', backgroundColor: '#ef4444', border: 'none', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', boxShadow: '0 4px 12px rgba(239, 68, 68, 0.4)' }}>
@@ -927,9 +917,7 @@ const renderBingkaiMockup = (type) => {
               </span>
             </div>
 
-            {/* Side-by-Side Comparison */}
             <div style={{ flex: 1, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
-              {/* File 1: Original */}
               <div style={{ backgroundColor: '#0f172a', border: '1px solid #22c55e', borderRadius: '8px', padding: '8px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <span style={{ fontSize: '9px', backgroundColor: '#064e3b', color: '#6ee7b7', padding: '1px 6px', borderRadius: '3px', fontWeight: 700 }}>File Asli (Pertahankan)</span>
@@ -948,7 +936,6 @@ const renderBingkaiMockup = (type) => {
                 </div>
               </div>
 
-              {/* File 2: Duplicate to delete */}
               <div style={{ backgroundColor: '#0f172a', border: '1px solid #ef4444', borderRadius: '8px', padding: '8px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <span style={{ fontSize: '9px', backgroundColor: '#7f1d1d', color: '#fca5a5', padding: '1px 6px', borderRadius: '3px', fontWeight: 700 }}>Salinan Duplikat</span>
@@ -990,7 +977,6 @@ const renderBingkaiMockup = (type) => {
               </button>
             </div>
 
-            {/* Virtual Albums Grid */}
             <div style={{ flex: 1, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
               {[
                 { title: 'Liburan Bali 2024', count: '124 Foto', icon: '🏖️', color: 'linear-gradient(135deg, #0284c7, #0369a1)', badge: '0 KB Duplikasi' },
@@ -1012,7 +998,6 @@ const renderBingkaiMockup = (type) => {
               ))}
             </div>
 
-            {/* Storage Savings Note */}
             <div style={{ backgroundColor: '#0b1120', border: '1px solid #1e293b', borderRadius: '6px', padding: '8px 10px', fontSize: '9px', color: '#cbd5e1', display: 'flex', gap: '8px', alignItems: 'center' }}>
               <Sparkles size={16} color="#10b981" style={{ flexShrink: 0 }} />
               <div>
@@ -1035,7 +1020,6 @@ const renderBingkaiMockup = (type) => {
               </button>
             </div>
 
-            {/* Trash Items List */}
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '6px', overflowY: 'auto' }}>
               {[
                 { name: 'IMG_0412_Blur.jpg', origin: 'D:/Photos/Liburan/2024', time: '2 menit lalu', size: '3.4 MB' },
@@ -1060,7 +1044,6 @@ const renderBingkaiMockup = (type) => {
               ))}
             </div>
 
-            {/* Safe Notice */}
             <div style={{ backgroundColor: '#0b1120', border: '1px solid #065f46', borderRadius: '6px', padding: '6px 10px', fontSize: '9px', color: '#a7f3d0', display: 'flex', alignItems: 'center', gap: '6px' }}>
               <span>🛡️</span>
               <span><b>Bebas Rasa Panik:</b> Salah pencet tombol hapus? File tidak langsung lenyap dari komputermu. Cukup klik Restore dan foto akan kembali ke folder aslinya dalam sekejap!</span>
@@ -1088,7 +1071,6 @@ const renderBingkaiMockup = (type) => {
       userSelect: 'none',
       fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
     }}>
-      {/* Titlebar */}
       <div style={{
         height: '32px',
         backgroundColor: '#0f172a',
@@ -1113,9 +1095,7 @@ const renderBingkaiMockup = (type) => {
         </div>
       </div>
 
-      {/* Main Body */}
       <div style={{ display: 'flex', minHeight: '340px' }}>
-        {/* Left Mini Sidebar */}
         <div style={{
           width: '135px',
           backgroundColor: '#0b1120',
@@ -1152,7 +1132,6 @@ const renderBingkaiMockup = (type) => {
           </div>
         </div>
 
-        {/* Screen View */}
         <div style={{ flex: 1, padding: '10px 12px', backgroundColor: '#090d16', display: 'flex', flexDirection: 'column' }}>
           {renderScreen()}
         </div>
@@ -1167,7 +1146,6 @@ const renderTatagihMockup = (type) => {
       case 'tatagih-dashboard':
         return (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', height: '100%', overflowY: 'auto' }}>
-            {/* 4 Stat Cards */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '6px' }}>
               <div style={{ backgroundColor: '#131b2e', border: '1px solid #1e293b', borderRadius: '6px', padding: '8px' }}>
                 <div style={{ fontSize: '8.5px', color: '#94a3b8', textTransform: 'uppercase', display: 'flex', justifyContent: 'space-between' }}>
@@ -1193,9 +1171,7 @@ const renderTatagihMockup = (type) => {
               </div>
             </div>
 
-            {/* Split Row: Chart.js Line Trend & Spending Distribution */}
             <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: '6px', flex: 1, minHeight: '120px' }}>
-              {/* Chart.js SVG Line graph */}
               <div style={{ backgroundColor: '#131b2e', border: '1px solid #1e293b', borderRadius: '6px', padding: '8px', display: 'flex', flexDirection: 'column' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
                   <div style={{ fontSize: '9.5px', fontWeight: 700, color: '#f1f5f9', display: 'flex', alignItems: 'center', gap: '4px' }}>
@@ -1229,7 +1205,6 @@ const renderTatagihMockup = (type) => {
                 </div>
               </div>
 
-              {/* Category Breakdown */}
               <div style={{ backgroundColor: '#131b2e', border: '1px solid #1e293b', borderRadius: '6px', padding: '8px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
                 <div style={{ fontSize: '9.5px', fontWeight: 700, color: '#f1f5f9', display: 'flex', alignItems: 'center', gap: '4px' }}>
                   <PieChart size={11} color="#a855f7" />
@@ -1276,7 +1251,6 @@ const renderTatagihMockup = (type) => {
               </div>
             </div>
 
-            {/* Bottom Row: Upcoming Calendar Strip */}
             <div style={{ backgroundColor: '#131b2e', border: '1px solid #1e293b', borderRadius: '6px', padding: '6px 10px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <Calendar size={13} color="#f59e0b" />
@@ -1295,7 +1269,6 @@ const renderTatagihMockup = (type) => {
       case 'tatagih-ai-assistant':
         return (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', height: '100%', overflowY: 'auto' }}>
-            {/* Top Score Banner */}
             <div style={{ backgroundColor: '#131b2e', border: '1px solid rgba(168, 85, 247, 0.4)', borderRadius: '8px', padding: '10px 12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                 <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: 'conic-gradient(#10b981 0% 88%, #334155 88% 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '4px' }}>
@@ -1320,7 +1293,6 @@ const renderTatagihMockup = (type) => {
               </div>
             </div>
 
-            {/* AI Insights & Recommendations */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', flex: 1 }}>
               <div style={{ fontSize: '9.5px', fontWeight: 700, color: '#c084fc', display: 'flex', alignItems: 'center', gap: '4px' }}>
                 <Sparkles size={11} color="#c084fc" />
@@ -1361,7 +1333,6 @@ const renderTatagihMockup = (type) => {
               </div>
             </div>
 
-            {/* Bottom Button */}
             <div style={{ backgroundColor: '#4f46e5', color: '#ffffff', padding: '6px', borderRadius: '6px', textAlign: 'center', fontSize: '9.5px', fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
               <Sparkles size={12} />
               <span>Terapkan Rekomendasi Efisiensi &amp; Sinkronkan Jadwal</span>
@@ -1372,7 +1343,6 @@ const renderTatagihMockup = (type) => {
       case 'tatagih-ai-chat':
         return (
           <div style={{ display: 'grid', gridTemplateColumns: '110px 1fr', gap: '8px', height: '100%', overflow: 'hidden' }}>
-            {/* Sidebar Sessions */}
             <div style={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '6px', padding: '6px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
               <div style={{ fontSize: '8px', color: '#64748b', textTransform: 'uppercase', fontWeight: 700 }}>Sesi Percakapan</div>
               <div style={{ padding: '4px 6px', borderRadius: '4px', backgroundColor: '#1e293b', borderLeft: '2px solid #818cf8', fontSize: '8px', color: '#f8fafc', fontWeight: 700 }}>
@@ -1389,7 +1359,6 @@ const renderTatagihMockup = (type) => {
               </div>
             </div>
 
-            {/* Chat Body */}
             <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: '6px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #1e293b', paddingBottom: '4px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
@@ -1399,14 +1368,11 @@ const renderTatagihMockup = (type) => {
                 <span style={{ fontSize: '8px', backgroundColor: '#064e3b', color: '#86efac', padding: '1px 5px', borderRadius: '3px' }}>● Gemini Connected</span>
               </div>
 
-              {/* Chat bubbles */}
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '6px', overflowY: 'auto' }}>
-                {/* User msg */}
                 <div style={{ alignSelf: 'flex-end', maxWidth: '85%', backgroundColor: '#312e81', color: '#e0e7ff', padding: '6px 8px', borderRadius: '8px 8px 0 8px', fontSize: '8.5px', lineHeight: 1.35 }}>
                   Berapa total pengeluaran streaming saya dan bagaimana cara optimasinya?
                 </div>
 
-                {/* AI response */}
                 <div style={{ alignSelf: 'flex-start', maxWidth: '92%', backgroundColor: '#131b2e', border: '1px solid #1e293b', color: '#f1f5f9', padding: '7px 9px', borderRadius: '8px 8px 8px 0', fontSize: '8.5px', lineHeight: 1.4 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '4px', marginBottom: '3px', color: '#c084fc', fontWeight: 700, fontSize: '8px' }}>
                     <Sparkles size={9} />
@@ -1420,7 +1386,6 @@ const renderTatagihMockup = (type) => {
                 </div>
               </div>
 
-              {/* Input row */}
               <div style={{ display: 'flex', gap: '4px' }}>
                 <input
                   type="text"
@@ -1447,7 +1412,6 @@ const renderTatagihMockup = (type) => {
               <span style={{ fontSize: '8.5px', backgroundColor: '#991b1b', color: '#fee2e2', padding: '2px 6px', borderRadius: '4px', fontWeight: 700 }}>Potensi Hemat Rp 145.000/bln</span>
             </div>
 
-            {/* Overlapping Card */}
             <div style={{ backgroundColor: '#131b2e', border: '1px solid #334155', borderRadius: '6px', padding: '8px 10px', display: 'flex', flexDirection: 'column', gap: '5px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <span style={{ fontSize: '10px', fontWeight: 700, color: '#f59e0b' }}>1. Overlapping Subscription (Fungsi Mirip)</span>
@@ -1466,7 +1430,6 @@ const renderTatagihMockup = (type) => {
               </div>
             </div>
 
-            {/* Vampire Spending Card */}
             <div style={{ backgroundColor: '#131b2e', border: '1px solid #334155', borderRadius: '6px', padding: '8px 10px', display: 'flex', flexDirection: 'column', gap: '5px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <span style={{ fontSize: '10px', fontWeight: 700, color: '#ec4899' }}>2. Vampire Spending (Pengeluaran Mikro Tak Disadari)</span>
@@ -1490,7 +1453,6 @@ const renderTatagihMockup = (type) => {
       case 'tatagih-patungan':
         return (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', height: '100%', overflowY: 'auto' }}>
-            {/* Header info */}
             <div style={{ backgroundColor: '#131b2e', border: '1px solid #1e293b', borderRadius: '6px', padding: '8px 10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>
                 <div style={{ fontSize: '11px', fontWeight: 800, color: '#f8fafc' }}>Spotify Family Kost Melati</div>
@@ -1499,7 +1461,6 @@ const renderTatagihMockup = (type) => {
               <span style={{ fontSize: '8px', backgroundColor: '#1e293b', color: '#38bdf8', padding: '2px 6px', borderRadius: '4px', fontWeight: 600 }}>Siklus Otomatis Aktif</span>
             </div>
 
-            {/* Members List */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '5px', flex: 1 }}>
               {[
                 { tag: '@krisna#2024', role: 'Pemilik (Host)', status: 'Lunas', color: '#10b981', action: null },
@@ -1533,7 +1494,6 @@ const renderTatagihMockup = (type) => {
               ))}
             </div>
 
-            {/* Bottom Actions */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px' }}>
               <div style={{ backgroundColor: '#4f46e5', color: '#ffffff', textAlign: 'center', padding: '6px', borderRadius: '4px', fontSize: '9px', fontWeight: 700 }}>
                 + Undang Teman via User Tag
@@ -1553,7 +1513,6 @@ const renderTatagihMockup = (type) => {
               <span style={{ fontSize: '8px', color: '#38bdf8' }}>Smart Templates</span>
             </div>
 
-            {/* Template Buttons */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '4px' }}>
               {[
                 { name: 'Netflix', price: '186k', color: '#e50914' },
@@ -1571,7 +1530,6 @@ const renderTatagihMockup = (type) => {
               ))}
             </div>
 
-            {/* Form Fields Simulation */}
             <div style={{ backgroundColor: '#131b2e', border: '1px solid #1e293b', borderRadius: '6px', padding: '8px', display: 'flex', flexDirection: 'column', gap: '6px', flex: 1 }}>
               <div style={{ fontSize: '9.5px', fontWeight: 700, color: '#38bdf8' }}>Form Tambah / Edit Subscription</div>
               <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '6px' }}>
@@ -1620,7 +1578,6 @@ const renderTatagihMockup = (type) => {
               <span style={{ fontSize: '8px', color: '#38bdf8' }}>Smart Comparison Matrix</span>
             </div>
 
-            {/* Matrix comparison */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px' }}>
               <div style={{ backgroundColor: '#131b2e', border: '1px solid #1e293b', borderRadius: '6px', padding: '8px' }}>
                 <div style={{ fontSize: '9px', fontWeight: 700, color: '#94a3b8' }}>Mobile Plan</div>
@@ -1654,7 +1611,6 @@ const renderTatagihMockup = (type) => {
               </div>
             </div>
 
-            {/* Recent Transaction Log */}
             <div style={{ backgroundColor: '#131b2e', border: '1px solid #1e293b', borderRadius: '6px', padding: '8px', display: 'flex', flexDirection: 'column', gap: '4px', flex: 1 }}>
               <div style={{ fontSize: '9px', fontWeight: 700, color: '#f8fafc' }}>Riwayat Pembayaran Terbaru:</div>
               {[
@@ -1694,7 +1650,6 @@ const renderTatagihMockup = (type) => {
               <span style={{ fontSize: '7.5px', backgroundColor: '#182533', color: '#38bdf8', padding: '2px 5px', borderRadius: '3px' }}>Queue Worker: Active</span>
             </div>
 
-            {/* Telegram Message Bubble */}
             <div style={{ alignSelf: 'flex-start', maxWidth: '92%', backgroundColor: '#182533', padding: '9px 11px', borderRadius: '8px 8px 8px 0', border: '1px solid #2b5278' }}>
               <div style={{ fontSize: '9.5px', color: '#f59e0b', fontWeight: 700, marginBottom: '3px' }}>🔔 Peringatan Tagihan H-3 (Tatagih Reminder)</div>
               <div style={{ fontSize: '9px', color: '#e2e8f0', lineHeight: 1.4 }}>
@@ -1705,7 +1660,6 @@ const renderTatagihMockup = (type) => {
               <div style={{ fontSize: '7.5px', color: '#64748b', textAlign: 'right', marginTop: '4px' }}>08:00 WIB • Dispatched via Laravel Queue Job</div>
             </div>
 
-            {/* Telegram Inline Buttons */}
             <div style={{ display: 'flex', gap: '6px', marginTop: 'auto' }}>
               <div style={{ flex: 1, backgroundColor: '#2b5278', color: '#ffffff', textAlign: 'center', padding: '6px', borderRadius: '4px', fontSize: '9px', fontWeight: 600 }}>
                 Sudah Dibayar ✓
@@ -1723,7 +1677,6 @@ const renderTatagihMockup = (type) => {
       case 'tatagih-admin':
         return (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', height: '100%', overflowY: 'auto' }}>
-            {/* Top Admin Stats */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '6px' }}>
               <div style={{ backgroundColor: '#131b2e', border: '1px solid #1e293b', borderRadius: '6px', padding: '7px' }}>
                 <div style={{ fontSize: '8px', color: '#94a3b8', textTransform: 'uppercase' }}>Total Pengguna</div>
@@ -1743,7 +1696,6 @@ const renderTatagihMockup = (type) => {
               </div>
             </div>
 
-            {/* Recent Users Table */}
             <div style={{ backgroundColor: '#131b2e', border: '1px solid #1e293b', borderRadius: '6px', padding: '8px', display: 'flex', flexDirection: 'column', gap: '4px', flex: 1 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2px' }}>
                 <span style={{ fontSize: '9px', fontWeight: 700, color: '#f8fafc' }}>Pendaftaran Pengguna Terbaru (Admin Audit):</span>
@@ -1789,7 +1741,6 @@ const renderTatagihMockup = (type) => {
       userSelect: 'none',
       fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
     }}>
-      {/* SaaS Window Titlebar */}
       <div style={{
         height: '32px',
         backgroundColor: '#0f172a',
@@ -1817,7 +1768,6 @@ const renderTatagihMockup = (type) => {
         </div>
       </div>
 
-      {/* Main SaaS Canvas View */}
       <div style={{ padding: '10px 12px', backgroundColor: '#0b0f19', minHeight: '340px', display: 'flex', flexDirection: 'column' }}>
         {renderScreen()}
       </div>
@@ -2257,7 +2207,6 @@ const renderTheoTownMockup = (type) => {
       case 'theotown-ingame':
         return (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', height: '100%' }}>
-            {/* Top Game HUD Bar */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#0f172a', padding: '6px 12px', borderRadius: '6px', border: '1px solid #1e293b', fontSize: '11px', fontFamily: 'monospace' }}>
               <div style={{ display: 'flex', gap: '12px', color: '#94a3b8' }}>
                 <span>🕒 10:30 AM</span>
@@ -2271,16 +2220,12 @@ const renderTheoTownMockup = (type) => {
               </div>
             </div>
 
-            {/* In-Game World & Isometric Building Canvas */}
             <div style={{ position: 'relative', height: '240px', backgroundColor: '#14532d', borderRadius: '8px', overflow: 'hidden', border: '2px solid #1e293b', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              {/* Isometric Grass Tile Grid Pattern */}
               <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle at 50% 50%, rgba(22, 163, 74, 0.4) 0%, rgba(20, 83, 45, 0.9) 100%)', opacity: 0.9 }} />
               
-              {/* Simulated Isometric Asphalt Roads */}
               <div style={{ position: 'absolute', width: '140%', height: '36px', backgroundColor: '#334155', transform: 'rotate(-26.5deg) translateY(-40px)', borderTop: '2px dashed #94a3b8', borderBottom: '2px solid #1e293b' }} />
               <div style={{ position: 'absolute', width: '140%', height: '36px', backgroundColor: '#334155', transform: 'rotate(26.5deg) translateY(60px)', borderTop: '2px dashed #94a3b8', borderBottom: '2px solid #1e293b' }} />
 
-              {/* 5x5 Isometric Plot Highlighting */}
               <div style={{ position: 'absolute', width: '180px', height: '110px', backgroundColor: 'rgba(14, 165, 233, 0.25)', border: '2px solid #38bdf8', transform: 'rotateX(60deg) rotateZ(45deg)', borderRadius: '4px', boxShadow: '0 0 25px rgba(56, 189, 248, 0.4)' }}>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gridTemplateRows: 'repeat(5, 1fr)', width: '100%', height: '100%' }}>
                   {Array.from({ length: 25 }).map((_, i) => (
@@ -2289,7 +2234,6 @@ const renderTheoTownMockup = (type) => {
                 </div>
               </div>
 
-              {/* Center Building Graphic Overlay */}
               <div style={{ position: 'relative', zIndex: 10, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <div style={{ width: '84px', height: '84px', backgroundColor: 'rgba(15, 23, 42, 0.85)', backdropFilter: 'blur(4px)', border: '2px solid #f59e0b', borderRadius: '12px', padding: '6px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', boxShadow: '0 8px 24px rgba(0,0,0,0.6)' }}>
                   <img src="/icons/theotown.svg" alt="ITB STIKOM" style={{ width: '48px', height: '48px', objectFit: 'contain' }} />
@@ -2300,7 +2244,6 @@ const renderTheoTownMockup = (type) => {
                 </div>
               </div>
 
-              {/* Floating Building HUD Info Box (Bottom Right) */}
               <div style={{ position: 'absolute', bottom: '10px', right: '10px', zIndex: 20, backgroundColor: 'rgba(15, 23, 42, 0.95)', border: '1px solid #38bdf8', borderRadius: '8px', padding: '10px 12px', width: '220px', boxShadow: '0 6px 20px rgba(0,0,0,0.7)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #334155', paddingBottom: '4px', marginBottom: '6px' }}>
                   <span style={{ fontSize: '11px', fontWeight: 800, color: '#f8fafc' }}>🏛️ ITB STIKOM BALI</span>
@@ -2327,7 +2270,6 @@ const renderTheoTownMockup = (type) => {
               </div>
             </div>
 
-            {/* Bottom TheoTown Control Palette */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '8px' }}>
               <div style={{ backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: '6px', padding: '8px', textAlign: 'center' }}>
                 <div style={{ fontSize: '10px', color: '#94a3b8' }}>Status Ground</div>
@@ -2361,13 +2303,10 @@ const renderTheoTownMockup = (type) => {
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '10px' }}>
-              {/* Pixel Art Canvas Inspector */}
               <div style={{ backgroundColor: '#020617', border: '1px solid #334155', borderRadius: '8px', padding: '12px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
                 <div style={{ width: '160px', height: '160px', border: '1px solid #475569', borderRadius: '8px', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'radial-gradient(circle at 50% 50%, #1e293b 0%, #0f172a 100%)' }}>
-                  {/* Subtle pixel grid lines */}
                   <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px)', backgroundSize: '8px 8px' }} />
                   
-                  {/* Pixel art preview badge */}
                   <img src="/icons/theotown.svg" alt="Pixel Sprite Preview" style={{ width: '100px', height: '100px', objectFit: 'contain', zIndex: 2, imageRendering: 'pixelated' }} />
                 </div>
                 <div style={{ marginTop: '8px', fontSize: '10px', color: '#94a3b8', textAlign: 'center' }}>
@@ -2375,7 +2314,6 @@ const renderTheoTownMockup = (type) => {
                 </div>
               </div>
 
-              {/* Architectural & Cultural Features Breakdown */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <div style={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '6px', padding: '10px' }}>
                   <div style={{ fontSize: '11px', fontWeight: 700, color: '#f59e0b', marginBottom: '4px' }}>🏛️ Atap Bertingkat Khas Bali (Meru Tumpang)</div>
@@ -2391,7 +2329,6 @@ const renderTheoTownMockup = (type) => {
                   </div>
                 </div>
 
-                {/* Color Palette Swatch */}
                 <div style={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '6px', padding: '10px' }}>
                   <div style={{ fontSize: '10px', color: '#94a3b8', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Palet Warna Terkurasi:</div>
                   <div style={{ display: 'flex', gap: '6px' }}>
@@ -2425,7 +2362,6 @@ const renderTheoTownMockup = (type) => {
               <span style={{ fontSize: '10px', color: '#4ade80', backgroundColor: '#064e3b', padding: '2px 8px', borderRadius: '4px', fontWeight: 600 }}>JSON Schema Validated</span>
             </div>
 
-            {/* Code Block */}
             <div style={{ backgroundColor: '#020617', border: '1px solid #334155', borderRadius: '8px', padding: '12px', fontFamily: 'Consolas, monospace', fontSize: '11px', color: '#e2e8f0', lineHeight: '1.5', overflowX: 'auto' }}>
               <div><span style={{ color: '#94a3b8' }}>[</span></div>
               <div style={{ paddingLeft: '16px' }}><span style={{ color: '#94a3b8' }}>{'{'}</span></div>
@@ -2500,7 +2436,6 @@ const renderTheoTownMockup = (type) => {
               <span style={{ fontSize: '10px', color: '#38bdf8', backgroundColor: '#0c4a6e', padding: '2px 8px', borderRadius: '4px', fontWeight: 600 }}>TheoTown Plugin Manager Compatible</span>
             </div>
 
-            {/* Manifest Card Overview */}
             <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '10px' }}>
               <div style={{ backgroundColor: '#020617', border: '1px solid #334155', borderRadius: '8px', padding: '14px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #1e293b', paddingBottom: '8px' }}>
@@ -2523,7 +2458,6 @@ const renderTheoTownMockup = (type) => {
                 </div>
               </div>
 
-              {/* Package Structure Verification */}
               <div style={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '8px', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <div style={{ fontSize: '11px', fontWeight: 700, color: '#cbd5e1', borderBottom: '1px solid #334155', paddingBottom: '4px' }}>
                   📦 Struktur Berkas Plugin:
@@ -2591,7 +2525,6 @@ const renderTheoTownMockup = (type) => {
               </div>
             </div>
 
-            {/* Impact Highlights */}
             <div style={{ backgroundColor: '#020617', border: '1px solid #334155', borderRadius: '8px', padding: '12px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
               <div style={{ fontSize: '10.5px', fontWeight: 700, color: '#e2e8f0', marginBottom: '2px' }}>Dampak Nyata terhadap Gameplay Simulasi:</div>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '9.5px', padding: '4px 8px', backgroundColor: '#0f172a', borderRadius: '4px' }}>
@@ -2622,7 +2555,6 @@ const renderTheoTownMockup = (type) => {
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
-              {/* Android Card */}
               <div style={{ backgroundColor: '#020617', border: '1px solid #334155', borderRadius: '8px', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', fontWeight: 800, color: '#4ade80' }}>
                   <span>📱</span>
@@ -2638,7 +2570,6 @@ const renderTheoTownMockup = (type) => {
                 </div>
               </div>
 
-              {/* PC Windows Card */}
               <div style={{ backgroundColor: '#020617', border: '1px solid #334155', borderRadius: '8px', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', fontWeight: 800, color: '#38bdf8' }}>
                   <span>💻</span>
@@ -2655,7 +2586,6 @@ const renderTheoTownMockup = (type) => {
               </div>
             </div>
 
-            {/* Bilingual Documentation Preview */}
             <div style={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '6px', padding: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <span style={{ fontSize: '14px' }}>🌐</span>
@@ -2683,7 +2613,6 @@ const renderTheoTownMockup = (type) => {
       display: 'flex',
       flexDirection: 'column'
     }}>
-      {/* Top Header Bar */}
       <div style={{
         height: '38px',
         backgroundColor: '#0c1424',
@@ -2725,7 +2654,6 @@ const renderLintasMockup = (type) => {
       case 'lintas-dash':
         return (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', height: '100%' }}>
-            {/* Companion Server Status Bar */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#0f172a', padding: '6px 12px', borderRadius: '6px', border: '1px solid #1e293b', fontSize: '11px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#22c55e', boxShadow: '0 0 8px #22c55e' }} />
@@ -2738,12 +2666,9 @@ const renderLintasMockup = (type) => {
               </div>
             </div>
 
-            {/* Main Companion 3-Col Layout */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.3fr 1.1fr', gap: '10px' }}>
-              {/* Col 1: Dynamic QR Code Pairing */}
               <div style={{ backgroundColor: '#020617', border: '1px solid #334155', borderRadius: '8px', padding: '12px', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
                 <div style={{ fontSize: '10.5px', fontWeight: 700, color: '#f8fafc', marginBottom: '6px' }}>Scan to Pair (Android)</div>
-                {/* Simulated QR Code box */}
                 <div style={{ width: '110px', height: '110px', backgroundColor: '#ffffff', borderRadius: '6px', padding: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 12px rgba(0,0,0,0.5)' }}>
                   <div style={{ width: '100%', height: '100%', border: '2px solid #0f172a', display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gridTemplateRows: 'repeat(5, 1fr)', gap: '2px', padding: '2px' }}>
                     {Array.from({ length: 25 }).map((_, i) => (
@@ -2757,7 +2682,6 @@ const renderLintasMockup = (type) => {
                 <div style={{ fontSize: '8.5px', color: '#64748b', marginTop: '2px' }}>Auto-Discovery broadcast running</div>
               </div>
 
-              {/* Col 2: Connected Device & NearLock Status */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <div style={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '6px', padding: '10px' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
@@ -2786,7 +2710,6 @@ const renderLintasMockup = (type) => {
                 </div>
               </div>
 
-              {/* Col 3: Windows Drop Zone */}
               <div style={{ backgroundColor: '#020617', border: '2px dashed #0284c7', borderRadius: '8px', padding: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
                 <span style={{ fontSize: '20px' }}>📥</span>
                 <span style={{ fontSize: '10.5px', fontWeight: 700, color: '#f8fafc', marginTop: '4px' }}>Lintas Drop Zone</span>
@@ -2797,7 +2720,6 @@ const renderLintasMockup = (type) => {
               </div>
             </div>
 
-            {/* Bottom Quick Feature Badges */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '6px', fontSize: '9.5px', textAlign: 'center' }}>
               <div style={{ backgroundColor: '#0f172a', padding: '6px', borderRadius: '4px', border: '1px solid #1e293b', color: '#cbd5e1' }}>
                 🖱️ Touchpad Latency: <b>&lt; 5ms</b>
@@ -2818,7 +2740,6 @@ const renderLintasMockup = (type) => {
       case 'lintas-touchpad':
         return (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', height: '100%' }}>
-            {/* Phone Top Header */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#0f172a', padding: '6px 12px', borderRadius: '6px', border: '1px solid #1e293b' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <span style={{ fontSize: '12px' }}>📱</span>
@@ -2827,7 +2748,6 @@ const renderLintasMockup = (type) => {
               <span style={{ fontSize: '9.5px', color: '#4ade80', backgroundColor: '#064e3b', padding: '1px 6px', borderRadius: '3px' }}>Connected (3ms)</span>
             </div>
 
-            {/* Touch Surface Area */}
             <div style={{ height: '180px', backgroundColor: '#020617', border: '1px solid #334155', borderRadius: '8px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', position: 'relative', cursor: 'crosshair' }}>
               <div style={{ width: '48px', height: '48px', borderRadius: '50%', border: '2px dashed #38bdf8', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#38bdf8', opacity: 0.6 }}>
                 👆
@@ -2841,7 +2761,6 @@ const renderLintasMockup = (type) => {
                 <span>Tahan: Drag</span>
               </div>
 
-              {/* Bottom Mouse Buttons Simulation */}
               <div style={{ position: 'absolute', bottom: '6px', width: '92%', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px' }}>
                 <div style={{ backgroundColor: '#1e293b', border: '1px solid #334155', padding: '6px', borderRadius: '4px', textAlign: 'center', fontSize: '9.5px', color: '#e2e8f0', fontWeight: 700 }}>
                   KLIK KIRI
@@ -2852,7 +2771,6 @@ const renderLintasMockup = (type) => {
               </div>
             </div>
 
-            {/* Virtual Keyboard Modifier Quick Bar */}
             <div style={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '6px', padding: '8px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
               <div style={{ fontSize: '9.5px', color: '#94a3b8', display: 'flex', justifyContent: 'space-between' }}>
                 <span>Tombol Pintas Modifier Windows:</span>
@@ -2880,7 +2798,6 @@ const renderLintasMockup = (type) => {
               <span style={{ fontSize: '10px', color: '#38bdf8', backgroundColor: '#0c4a6e', padding: '2px 8px', borderRadius: '4px', fontWeight: 600 }}>Kecepatan: 28.4 MB/s</span>
             </div>
 
-            {/* File Transfer Card */}
             <div style={{ backgroundColor: '#020617', border: '1px solid #334155', borderRadius: '8px', padding: '14px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -2898,12 +2815,10 @@ const renderLintasMockup = (type) => {
                 </div>
               </div>
 
-              {/* Progress bar */}
               <div style={{ width: '100%', height: '8px', backgroundColor: '#1e293b', borderRadius: '4px', overflow: 'hidden' }}>
                 <div style={{ width: '78%', height: '100%', backgroundColor: '#0284c7', borderRadius: '4px' }} />
               </div>
 
-              {/* SHA-256 Checksum Card */}
               <div style={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '6px', padding: '10px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <span style={{ fontSize: '10px', fontWeight: 700, color: '#facc15' }}>🔒 Verifikasi Integritas SHA-256:</span>
@@ -2935,7 +2850,6 @@ const renderLintasMockup = (type) => {
               <span style={{ fontSize: '10px', color: '#4ade80', backgroundColor: '#064e3b', padding: '2px 8px', borderRadius: '4px', fontWeight: 600 }}>Auto-Sync ON</span>
             </div>
 
-            {/* Active Clipboard Item */}
             <div style={{ backgroundColor: '#020617', border: '1px solid #334155', borderRadius: '8px', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <span style={{ fontSize: '10px', color: '#94a3b8' }}>Clipboard Aktif (Tersinkronisasi ke Windows &amp; Android):</span>
@@ -2952,7 +2866,6 @@ const renderLintasMockup = (type) => {
               </div>
             </div>
 
-            {/* Clipboard History List */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
               <div style={{ fontSize: '10px', color: '#94a3b8', fontWeight: 700 }}>Riwayat Clipboard Terakhir:</div>
               <div style={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '4px', padding: '6px 10px', fontSize: '9.5px', color: '#cbd5e1', display: 'flex', justifyContent: 'space-between' }}>
@@ -2978,13 +2891,11 @@ const renderLintasMockup = (type) => {
               <span style={{ fontSize: '10px', color: '#4ade80', backgroundColor: '#064e3b', padding: '2px 8px', borderRadius: '4px', fontWeight: 600 }}>Status: ARMED</span>
             </div>
 
-            {/* NearLock Visual Distance Meter */}
             <div style={{ backgroundColor: '#020617', border: '1px solid #334155', borderRadius: '8px', padding: '16px', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
               <div style={{ fontSize: '11px', color: '#94a3b8', marginBottom: '8px' }}>Jarak Smartphone ke Komputer Windows:</div>
               <div style={{ fontSize: '24px', fontWeight: 800, color: '#4ade80', letterSpacing: '0.5px' }}>~1.2 Meter</div>
               <div style={{ fontSize: '10px', color: '#38bdf8', marginTop: '2px' }}>Ponsel Terdeteksi Dekat (Sinyal Wi-Fi: -42 dBm)</div>
 
-              {/* 5-Step Security Progression Bar */}
               <div style={{ width: '100%', maxWidth: '380px', margin: '14px 0 6px 0' }}>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '4px' }}>
                   <div style={{ height: '8px', backgroundColor: '#22c55e', borderRadius: '2px' }} title="Dekat" />
@@ -3003,7 +2914,6 @@ const renderLintasMockup = (type) => {
               </div>
             </div>
 
-            {/* Config & Safety Info */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', fontSize: '9.5px' }}>
               <div style={{ backgroundColor: '#0f172a', padding: '8px 10px', borderRadius: '6px', border: '1px solid #1e293b' }}>
                 <span style={{ color: '#facc15', fontWeight: 700 }}>Grace Period: 15 Detik</span>
@@ -3029,13 +2939,11 @@ const renderLintasMockup = (type) => {
               <span style={{ fontSize: '10px', color: '#facc15', backgroundColor: '#713f12', padding: '2px 8px', borderRadius: '4px', fontWeight: 600 }}>Slide 14 / 28</span>
             </div>
 
-            {/* Presentation Timer & Slide State */}
             <div style={{ backgroundColor: '#020617', border: '1px solid #334155', borderRadius: '8px', padding: '14px', textAlign: 'center' }}>
               <div style={{ fontSize: '10px', color: '#94a3b8' }}>DURASI PRESENTASI BERJALAN:</div>
               <div style={{ fontSize: '26px', fontWeight: 800, color: '#f8fafc', fontFamily: 'monospace', margin: '4px 0' }}>12:45 <span style={{ fontSize: '14px', color: '#64748b' }}>/ 20:00</span></div>
               <div style={{ fontSize: '9.5px', color: '#4ade80' }}>● Kecepatan Ideal (On Pace)</div>
 
-              {/* Big Slide Nav Buttons */}
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginTop: '14px' }}>
                 <button style={{ backgroundColor: '#1e293b', border: '1px solid #475569', color: '#ffffff', padding: '14px', borderRadius: '6px', fontSize: '12px', fontWeight: 700, cursor: 'pointer' }}>
                   ◀ Slide Sebelumnya
@@ -3046,7 +2954,6 @@ const renderLintasMockup = (type) => {
               </div>
             </div>
 
-            {/* Quick Actions */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
               <button style={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', color: '#e2e8f0', padding: '8px', borderRadius: '4px', fontSize: '9.5px', fontWeight: 600, cursor: 'pointer' }}>
                 ▶️ Mulai Show (F5)
@@ -3078,7 +2985,6 @@ const renderLintasMockup = (type) => {
       display: 'flex',
       flexDirection: 'column'
     }}>
-      {/* Top Header Bar */}
       <div style={{
         height: '38px',
         backgroundColor: '#0c1424',

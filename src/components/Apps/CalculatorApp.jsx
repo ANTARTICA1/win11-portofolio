@@ -79,7 +79,6 @@ export const CalculatorApp = () => {
     }
   };
 
-  // Keyboard navigation support
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (['0','1','2','3','4','5','6','7','8','9'].includes(e.key)) {

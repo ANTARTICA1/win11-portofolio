@@ -43,12 +43,9 @@ const getInitialWindows = () => {
   const screenW = typeof window !== 'undefined' ? window.innerWidth : 1280;
   const screenH = typeof window !== 'undefined' ? window.innerHeight : 800;
 
-  // Di laptop: posisi x pas di sebelah kanan 2 kolom icon desktop (~180px)
   const posX = Math.max(178, Math.min(195, Math.floor(screenW * 0.125)));
   const posY = Math.max(22, Math.min(36, Math.floor(screenH * 0.035)));
-  // Lebar membentang penuh ke kanan layar (menyisakan margin tipis ~18px di kanan)
   const winW = Math.max(900, screenW - posX - 18);
-  // Tinggi proporsional hingga di atas taskbar
   const winH = Math.max(540, screenH - posY - 60);
 
   return [
@@ -205,9 +202,9 @@ export function App() {
         initialPosition: { x: 100 + (windows.length % 5) * 25, y: 50 + (windows.length % 5) * 20 }
       },
       recruiter: {
-        title: 'Recruiter Hub ⚡ — Fast-Track Portfolio & Resume',
-        icon: 'briefcase',
-        initialSize: { width: 840, height: 560 },
+        title: 'Curriculum Vitae (CV) — Agung Krisna',
+        icon: 'pdf',
+        initialSize: { width: 860, height: 600 },
         initialPosition: { x: 90 + (windows.length % 5) * 25, y: 45 + (windows.length % 5) * 20 }
       },
       settings: {
@@ -605,7 +602,6 @@ export function App() {
           <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', backgroundColor: '#0f172a', color: '#fff' }}>
             <div style={{ height: '44px', backgroundColor: '#1e293b', borderBottom: '1px solid #334155', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 16px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', color: '#94a3b8' }}>
-                <span style={{ color: '#22c55e' }}>🔒</span>
                 <span style={{ color: '#f8fafc', fontWeight: 600 }}>https://krisnaartha.my.id</span>
               </div>
             </div>

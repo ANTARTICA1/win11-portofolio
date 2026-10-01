@@ -253,7 +253,6 @@ export const FileExplorerApp = ({ initialPath = 'This PC', onOpenFile, onOpenFol
 
   const handleItemClick = (item) => {
     setSelectedItemName(item.name);
-    // Di HP (Mobile): 1x klik langsung membuka folder/file
     if (isMobileDevice()) {
       handleItemDoubleClick(item);
     }
@@ -383,20 +382,20 @@ export const FileExplorerApp = ({ initialPath = 'This PC', onOpenFile, onOpenFol
 
   return (
     <div className="explorer-container">
-      {/* 1. Combined Windows 11 Tabs & Titlebar (Tabs + Window Controls in the EXACT SAME ROW) */}
       <div
         className="explorer-tabs-bar"
         onPointerDown={winCtx?.handleTitlePointerDown}
         onPointerMove={winCtx?.handleTitlePointerMove}
         onPointerUp={winCtx?.handleTitlePointerUp}
-        onDoubleClick={() => {
+        onDoubleClick={(e) => {
+          if (e.target.closest('.explorer-tab, .explorer-tabstrip, button, input, a')) return;
           if (!winCtx?.isMobile && winCtx?.onMaximize) {
             playClickSound();
             winCtx.onMaximize();
           }
         }}
       >
-        <div className="explorer-tabstrip">
+        <div className="explorer-tabstrip" onPointerDown={(e) => e.stopPropagation()}>
           {tabs.map((tab) => {
             const isTabActive = tab.id === activeTabId;
             const tabName = tab.path.includes(' > ') ? tab.path.split(' > ').pop() : tab.path;
@@ -404,10 +403,17 @@ export const FileExplorerApp = ({ initialPath = 'This PC', onOpenFile, onOpenFol
               <div
                 key={tab.id}
                 className={`explorer-tab ${isTabActive ? 'active' : 'inactive'}`}
-                onClick={() => {
+                onPointerDown={(e) => {
+                  e.stopPropagation();
                   playClickSound();
                   setActiveTabId(tab.id);
                 }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  playClickSound();
+                  setActiveTabId(tab.id);
+                }}
+                onDoubleClick={(e) => e.stopPropagation()}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: 7, overflow: 'hidden' }}>
                   <WinIcon name={getTabIcon(tab.path)} size={16} />
@@ -437,10 +443,8 @@ export const FileExplorerApp = ({ initialPath = 'This PC', onOpenFile, onOpenFol
           </button>
         </div>
 
-        {/* Empty draggable space */}
         <div className="explorer-titlebar-drag-spacer" />
 
-        {/* Window controls (Minimize, Maximize, Close) in the SAME ROW */}
         {winCtx?.WindowControls && (
           <winCtx.WindowControls
             onMinimize={winCtx.onMinimize}
@@ -456,7 +460,6 @@ export const FileExplorerApp = ({ initialPath = 'This PC', onOpenFile, onOpenFol
         )}
       </div>
 
-      {/* 2. Navigation & Address Bar Row */}
       <div className="explorer-address-bar-row">
         <div className="nav-buttons">
           <button 
@@ -521,7 +524,6 @@ export const FileExplorerApp = ({ initialPath = 'This PC', onOpenFile, onOpenFol
         </div>
       </div>
 
-      {/* 3. Command Bar */}
       <div className="explorer-command-bar">
         <div className="command-bar-left">
           <button className="cmd-btn" onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)} style={{ backgroundColor: mobileSidebarOpen ? 'rgba(0,120,212,0.25)' : 'transparent' }}>

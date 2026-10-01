@@ -539,7 +539,6 @@
   }
 }
 
-/* Details List Table (Windows 11 Details View / Recycle Bin) */
 .explorer-details-table {
   display: flex;
   flex-direction: column;

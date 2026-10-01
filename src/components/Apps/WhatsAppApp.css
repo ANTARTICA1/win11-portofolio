@@ -1,4 +1,3 @@
-/* WhatsApp Web Dark Mode Theme Styles */
 .wa-container {
   display: flex;
   flex-direction: column;
@@ -12,7 +11,6 @@
   user-select: text;
 }
 
-/* Header */
 .wa-header {
   height: 60px;
   background-color: #202c33;
@@ -105,7 +103,6 @@
   background-color: rgba(255, 255, 255, 0.14);
 }
 
-/* Chat Body */
 .wa-chat-body {
   flex: 1;
   overflow-y: auto;
@@ -127,7 +124,6 @@
   }
 }
 
-/* Date Pill Badge */
 .wa-date-pill-container {
   display: flex;
   justify-content: center;
@@ -149,7 +145,6 @@
   text-transform: uppercase;
 }
 
-/* Message Rows */
 .wa-message-row {
   display: flex;
   width: 100%;
@@ -165,7 +160,6 @@
   justify-content: flex-end;
 }
 
-/* Bubble */
 .wa-bubble {
   max-width: 65%;
   min-width: 80px;
@@ -196,7 +190,6 @@
   border-top-right-radius: 0px;
 }
 
-/* Reply Action Button on Bubble Hover */
 .wa-bubble:hover .wa-bubble-actions {
   opacity: 1;
 }
@@ -228,7 +221,6 @@
   background: rgba(32, 44, 51, 0.95);
 }
 
-/* Quoted Block inside Bubble */
 .wa-quoted-container {
   background-color: rgba(17, 27, 33, 0.65);
   border-left: 4px solid #00a884;
@@ -255,7 +247,6 @@
   max-width: 260px;
 }
 
-/* Message Text & Meta */
 .wa-message-text {
   margin-right: 4px;
   white-space: pre-wrap;
@@ -277,7 +268,6 @@
   color: #53bdeb;
 }
 
-/* Typing Indicator Bubble */
 .wa-typing-bubble {
   display: inline-flex;
   align-items: center;
@@ -317,7 +307,6 @@
   }
 }
 
-/* Scroll to Bottom Button */
 .wa-scroll-btn {
   position: absolute;
   right: 24px;
@@ -343,7 +332,6 @@
   transform: translateY(-2px);
 }
 
-/* Quoted message bar above input */
 .wa-replying-bar {
   background-color: #1f2c34;
   padding: 8px 16px;
@@ -375,7 +363,6 @@
   max-width: 480px;
 }
 
-/* Quick Topic Suggestion Chips */
 .wa-quick-topics {
   display: flex;
   align-items: center;
@@ -411,7 +398,6 @@
   transform: translateY(-1px);
 }
 
-/* Footer / Input Bar */
 .wa-footer {
   min-height: 62px;
   background-color: #202c33;
@@ -474,7 +460,6 @@
   transform: scale(0.95);
 }
 
-/* Menu Dropdown */
 .wa-menu-dropdown {
   position: absolute;
   top: 55px;
@@ -503,7 +488,6 @@
   background-color: #182229;
 }
 
-/* Call Modal Simulation */
 .wa-call-modal {
   position: absolute;
   inset: 0;

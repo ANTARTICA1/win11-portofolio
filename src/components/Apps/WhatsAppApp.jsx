@@ -228,7 +228,7 @@ export const WhatsAppApp = ({ onLaunchApp }) => {
     }
 
     if (lower.includes('cv') || lower.includes('resume') || lower.includes('download cv') || lower.includes('berkas')) {
-      return `Kamu bisa download Curriculum Vitae (CV) terbaruku langsung lewat tombol di aplikasi "Recruiter Hub" atau buka file "README_RECRUITER.txt" di Notepad desktop! Mau aku bantu bukakan aplikasinya?`;
+      return `Kamu bisa download Curriculum Vitae (CV) terbaruku langsung lewat aplikasi "Lihat CV" atau buka file "README_RECRUITER.txt" di Notepad desktop! Mau aku bantu bukakan aplikasinya?`;
     }
 
     if (lower.includes('rekrut') || lower.includes('hire') || lower.includes('kerja') || lower.includes('loker') || lower.includes('gaji') || lower.includes('kontak') || lower.includes('email') || lower.includes('hubungi') || lower.includes('wa')) {
@@ -249,7 +249,7 @@ export const WhatsAppApp = ({ onLaunchApp }) => {
 
     const defaultReplies = [
       'Pertanyaan yang menarik! Sebagai Full-Stack & Mobile Developer, aku selalu memprioritaskan clean code, performa andal, dan user experience yang memukau.',
-      'Boleh banget! Jangan ragu jelajahi aplikasi lainnya di Desktop seperti Projects Showcase, Terminal, atau Recruiter Hub ya.',
+      'Boleh banget! Jangan ragu jelajahi aplikasi lainnya di Desktop seperti Projects Showcase, Terminal, atau Curriculum Vitae (CV) ya.',
       `Kalau ada tawaran kolaborasi atau project, kamu juga bisa langsung email ke ${INITIAL_USER.email} ya!`,
       'Siap! Ada aspek teknis atau fitur lain dari proyekku yang ingin kita diskusikan?'
     ];
@@ -482,14 +482,7 @@ export const WhatsAppApp = ({ onLaunchApp }) => {
             if (onLaunchApp) onLaunchApp('recruiter');
             setShowMenu(false);
           }}>
-            <User size={16} /> Buka Recruiter Hub
-          </div>
-          <div className="wa-menu-item" onClick={() => {
-            playClickSound();
-            window.open(INITIAL_USER.whatsapp, '_blank');
-            setShowMenu(false);
-          }}>
-            <ExternalLink size={16} /> Hubungi WhatsApp Asli
+            <FileText size={16} /> Lihat CV (Curriculum Vitae)
           </div>
           <div className="wa-menu-item" onClick={handleResetChat}>
             <CornerUpLeft size={16} /> Reset Percakapan

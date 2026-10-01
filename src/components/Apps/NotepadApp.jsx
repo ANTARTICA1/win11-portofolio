@@ -36,7 +36,6 @@ export const NotepadApp = ({ initialContent = '', fileName = 'Untitled.txt' }) =
       color: '#ffffff',
       fontFamily: 'Segoe UI, sans-serif'
     }}>
-      {/* Windows 11 Notepad Titlebar (Tabs + Window Controls in 1 row) */}
       <div
         style={{
           display: 'flex',

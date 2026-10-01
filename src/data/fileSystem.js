@@ -1305,6 +1305,14 @@ export const DESKTOP_ITEMS = [
     icon: "chrome_dino"
   },
   {
+    id: "curriculum_vitae",
+    name: "Curriculum Vitae.pdf",
+    type: "file",
+    extension: "pdf",
+    app: "recruiter",
+    icon: "pdf"
+  },
+  {
     id: "certificates",
     name: "Certificates",
     type: "app",

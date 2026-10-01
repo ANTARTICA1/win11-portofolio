@@ -421,7 +421,6 @@
   font-weight: 600;
 }
 
-/* 1. Flat Editorial Project Header & Expansive Hero Grid (FLAT, NO CARD) */
 .project-header {
   margin-bottom: 28px;
   padding-bottom: 24px;
@@ -625,7 +624,6 @@
   border-color: #3b82f6;
 }
 
-/* 2. Flat Key Metrics Row (FLAT, NO CARD) */
 .project-metrics-row {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -665,7 +663,6 @@
   color: #f8fafc;
 }
 
-/* Flat Showcase Section (EXPANSIVE, NO BULKY CARD) */
 .preview-showcase-section {
   margin-bottom: 34px;
   padding-bottom: 28px;
@@ -768,7 +765,6 @@
   font-weight: 600;
 }
 
-/* Viewport Stages (Full-Width Responsive Stage) */
 .preview-viewport-container {
   background-color: #0b0d13;
   border-left: 1px solid #232733;
@@ -830,7 +826,6 @@
   box-sizing: border-box;
 }
 
-/* Brief Explanation Bar */
 .preview-caption-bar {
   padding: 16px 20px;
   background-color: #151822;
@@ -862,7 +857,6 @@
   margin: 0;
 }
 
-/* Several Photos Reel (Koleksi Beberapa Foto) */
 .preview-thumbnails-container {
   padding: 14px 20px 18px 20px;
   background-color: #12141c;
@@ -970,7 +964,6 @@
   overflow: hidden;
 }
 
-/* 4. Problem & Solution Context (FLAT, NO CARD) */
 .editorial-context-section {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -999,7 +992,6 @@
   margin: 0;
 }
 
-/* 4. Key Features (FLAT, NO CARD - Expansive Multi-Column Grid) */
 .key-features-section {
   margin-bottom: 32px;
   padding-bottom: 8px;
@@ -1039,7 +1031,6 @@
 }
 
 
-/* 7. Flat Bottom Navigation (FLAT, NO CARD) */
 .project-footer-nav {
   display: flex;
   align-items: center;
@@ -1082,7 +1073,6 @@
   border-color: #3b82f6;
 }
 
-/* Lightbox Modal (Clean, Solid, No Gradients) */
 .lightbox-overlay {
   position: fixed;
   inset: 0;
@@ -1186,9 +1176,6 @@
   }
 }
 
-/* ==========================================================================
-   Smartphone Mockup (Mockup HP) for Mobile Security Project
-   ========================================================================== */
 .sigap-phone-frame {
   width: 270px;
   height: 480px;
@@ -1264,7 +1251,6 @@
   opacity: 0.6;
 }
 
-/* State Flow Banner */
 .state-flow-banner {
   margin: -16px 0 28px 0;
   padding: 10px 14px;
@@ -1314,7 +1300,6 @@
 }
 
 
-/* Challenges Card (CARD 3) */
 .challenges-spec-card {
   margin-bottom: 36px;
 }

@@ -220,7 +220,6 @@ LinkedIn : ${INITIAL_USER.linkedin}
       backgroundColor: '#0c0c0c',
       overflow: 'hidden'
     }}>
-      {/* Windows 11 Command Prompt Titlebar */}
       <div
         style={{
           display: 'flex',
@@ -391,7 +390,6 @@ LinkedIn : ${INITIAL_USER.linkedin}
         />
       </div>
 
-      {/* Quick Command Shortcuts Footer */}
       <div style={{
         display: 'flex',
         flexWrap: 'wrap',

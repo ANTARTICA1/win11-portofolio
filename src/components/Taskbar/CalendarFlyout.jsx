@@ -152,7 +152,7 @@ export const CalendarFlyout = ({ isOpen, onClose, accentColor }) => {
       }}>
         <Bell size={15} color="#22c55e" />
         <span style={{ fontSize: '11.5px', color: '#cbd5e1' }}>
-          🟢 Siap untuk sesi wawancara (Interview Ready)
+          Siap untuk sesi wawancara (Interview Ready)
         </span>
       </div>
     </div>

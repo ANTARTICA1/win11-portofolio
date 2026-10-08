@@ -114,7 +114,7 @@ KEAHLIAN TEKNIS (TECH STACK):
         output = `
 PROYEK UNGGULAN:
 --------------------------------------------------
-1. ITB STIKOM Bali — Building Plugin for TheoTown
+1. ITB STIKOM Bali - Building Plugin for TheoTown
    - Tech  : TheoTown Plugin API, JSON (code.json), Plugin Manifest, Isometric Pixel Art (StikomBali.png), Android & PC
    - Fitur : Representasi arsitektur kampus ITB STIKOM Bali Renon dengan ornamen Bali (atap meru tumpang & gerbang candi bentar), 5x5 tile isometric, fungsional bertipe education (kapasitas 2.500 mahasiswa, radius pengaruh 700 tile, aspect 1000-2500), ground rendering aktif (draw ground: true), plugin manifest resmi, dokumentasi bilingual ID/EN, cross-platform Android & PC.
 

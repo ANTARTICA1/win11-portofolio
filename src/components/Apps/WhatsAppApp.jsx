@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { 
-  Video, Phone, Search, MoreVertical, Paperclip, Smile, 
+  Video, Phone, Search, MoreVertical, Paperclip, 
   Send, Mic, ChevronDown, CornerUpLeft, X, Check, CheckCheck,
   FileText, Image, User, BarChart2, PhoneOff, ExternalLink
 } from 'lucide-react';
@@ -23,28 +23,28 @@ const INITIAL_MESSAGES = [
   {
     id: 2,
     sender: 'gungkrisna',
-    text: `Aku Gungkrisna (${INITIAL_USER.name}), ${INITIAL_USER.role} dengan ${RECRUITER_SUMMARY.experienceYears} pengalaman.`,
+    text: `Aku Gungkrisna (${INITIAL_USER.name}), ${INITIAL_USER.role}`,
     time: '09.15',
     status: 'read'
   },
   {
     id: 3,
     sender: 'gungkrisna',
-    text: 'Di portofolio interaktif ini kamu bisa coba langsung aplikasi buatanku: Tatagih, Temuin, dan Lintas.',
+    text: 'Di portofolio ini kamu bisa coba langsung aplikasi yang sudah aku buat.',
     time: '09.16',
     status: 'read'
   },
   {
     id: 4,
     sender: 'me',
-    text: 'Halo Gungkrisna! Menarik banget konsep portofolio Windows 11 ini 👏',
+    text: 'Halo Gungkrisna!',
     time: '09.18',
     status: 'read'
   },
   {
     id: 5,
     sender: 'me',
-    text: 'Tech stack utama yang biasa kamu pake untuk web & mobile apa aja gung?',
+    text: 'Tech stack utama yang biasa kamu pake untuk web & mobile apa saja gung?',
     time: '09.18',
     status: 'read'
   },
@@ -58,21 +58,21 @@ const INITIAL_MESSAGES = [
   {
     id: 7,
     sender: 'gungkrisna',
-    text: 'Kalau Web & Backend: React.js, Next.js 14, TypeScript, Node.js, Go/Golang, dan PostgreSQL.',
+    text: 'Kalau Web & Backend: Laravel, PHP, MySQL dan Next.JS',
     time: '09.20',
     status: 'read'
   },
   {
     id: 8,
     sender: 'gungkrisna',
-    text: 'Semua project dibangun dengan clean architecture, UI responsif, dan performa tinggi.',
+    text: 'Semua project dibangun dengan UI responsif.',
     time: '09.21',
     status: 'read'
   },
   {
     id: 9,
     sender: 'me',
-    text: 'Keren! Kalau proyek unggulan yang paling kompleks apa ya gung?',
+    text: 'Keren! Kalau proyek unggulan kamu apa ya gung?',
     time: '09.23',
     status: 'read'
   },
@@ -86,7 +86,7 @@ const INITIAL_MESSAGES = [
   {
     id: 11,
     sender: 'gungkrisna',
-    text: 'Ada Tatagih (Fintech Subscription Manager dengan analitik QRIS) dan Temuin (Platform Geofencing Google Maps API)!',
+    text: 'Ada Temuin yaitu aplikasi untuk menemukan barang yang hilang',
     time: '09.25',
     status: 'read'
   },
@@ -97,7 +97,7 @@ const INITIAL_MESSAGES = [
       sender: 'Anda',
       text: 'Dan status kamu sekarang open untuk rekrutmen / project?'
     },
-    text: 'Yes! Saat ini aku berstatus OPEN TO WORK untuk Full-Time, Remote, maupun Project Freelance 🚀',
+    text: 'Yes, Saat ini aku berstatus OPEN TO WORK untuk Full-Time, Remote, maupun Project Freelance',
     time: '09.26',
     status: 'read'
   },
@@ -120,7 +120,7 @@ const SUGGESTED_TOPICS = [
 
 export const WhatsAppApp = ({ onLaunchApp }) => {
   const [messages, setMessages] = useState(() => {
-    const saved = localStorage.getItem('wa_chat_history_gk_v2');
+    const saved = localStorage.getItem('wa_chat_history_gk_v3');
     if (saved) {
       try { return JSON.parse(saved); } catch {}
     }
@@ -142,7 +142,7 @@ export const WhatsAppApp = ({ onLaunchApp }) => {
   const inputRef = useRef(null);
 
   useEffect(() => {
-    localStorage.setItem('wa_chat_history_gk_v2', JSON.stringify(messages));
+    localStorage.setItem('wa_chat_history_gk_v3', JSON.stringify(messages));
   }, [messages]);
 
   const scrollToBottom = (smooth = true) => {
@@ -179,34 +179,33 @@ export const WhatsAppApp = ({ onLaunchApp }) => {
     const lower = (userMsg || '').toLowerCase();
 
     if (lower.includes('theotown') || lower.includes('stikom') || lower.includes('pixel art') || lower.includes('mod') || lower.includes('plugin') || lower.includes('bali')) {
-      return 'ITB STIKOM Bali Building Plugin for TheoTown adalah game plugin custom yang menambahkan gedung kampus ITB STIKOM Bali ke dalam game simulasi kota TheoTown! Menggunakan asset pixel art isometrik (StikomBali.png) dengan ornamen khas Bali (atap meru tumpang & candi bentar), gedung ini berfungsi nyata sebagai fasilitas pendidikan (kapasitas 2.500 mahasiswa, radius pengaruh 700 tile) melalui konfigurasi code.json dan plugin.manifest resmi. Coba buka demonya via shortcut ITB STIKOM TheoTown di desktop!';
+      return 'ITB STIKOM Bali Building Plugin for TheoTown adalah game plugin custom yang menambahkan gedung kampus ITB STIKOM Bali ke dalam game simulasi kota TheoTown! Menggunakan asset pixel art, gedung ini berfungsi nyata sebagai fasilitas pendidikan melalui konfigurasi code.json dan plugin.manifest resmi. Coba buka demonya via shortcut ITB STIKOM TheoTown di desktop!';
     }
 
     if (lower.includes('nenacare') || lower.includes('k3') || lower.includes('keselamatan') || lower.includes('insiden') || lower.includes('nena cafe')) {
-      return 'NenaCare adalah sistem pelaporan dan monitoring keselamatan kerja (K3) terintegrasi untuk Nena Cafe. Didukung Google Gemini 2.5 Flash-Lite untuk analisis risiko otomatis, opsi pelaporan anonim demi privasi pelapor, integrasi Telegram Bot remote action ([Proses] / [Selesai]), visualisasi analitik Chart.js, serta ekspor dokumen PDF Dompdf. Coba langsung via shortcut NenaCare.exe di Desktop!';
+      return 'NenaCare adalah sistem pelaporan dan monitoring keselamatan kerja (K3) terintegrasi untuk Nena Cafe. Didukung Google Gemini 2.5 Flash-Lite untuk analisis risiko otomatis, opsi pelaporan anonim demi privasi pelapor, integrasi Telegram Bot remote action ([Proses] / [Selesai]), visualisasi analitik Chart.js, serta ekspor dokumen PDF Dompdf. Coba lihat detailnya via shortcut NenaCare.exe di Desktop!';
     }
 
     if (lower.includes('tatagih') || lower.includes('tagihan') || lower.includes('fintech') || lower.includes('langganan')) {
-      return 'Tatagih adalah aplikasi web Smart Subscription Manager & AI Financial Assistant yang kubangun dengan Laravel 13, Tailwind CSS, Google Gemini AI, Chart.js, dan Telegram Bot API. Ada fitur Tata Asisten, pendeteksi kebocoran dana, serta patungan langganan (split bill)! Kamu bisa buka shortcut Tatagih.exe di desktop untuk mencoba demonya.';
+      return 'Tatagih adalah aplikasi manajemen langganan yang kubangun dengan Laravel 13, Tailwind CSS, Intergrasi Gemini AI, Chart.js, dan Telegram Bot API. Ada fitur Tata Asisten, pendeteksi kebocoran dana, serta patungan langganan (split bill)! Kamu bisa buka shortcut Tatagih.exe di desktop untuk membaca lebih detail.';
     }
 
     if (lower.includes('temuin') || lower.includes('maps') || lower.includes('geofencing') || lower.includes('hilang')) {
-      return 'Temuin merupakan platform crowdsourcing pencarian barang hilang berbasis geofencing Google Maps API. Dilengkapi sistem verifikasi kepemilikan dan chat terenkripsi.';
+      return 'Temuin merupakan aplikasi pencarian barang hilang penemu barang cukup melakukan scan qr pada barang yang ditemukan untuk menemukan dan menghubungi pemilik barang tersebut.';
     }
 
     if (lower.includes('lintas') || lower.includes('cross-device') || lower.includes('touchpad') || lower.includes('nearlock') || lower.includes('instant drop')) {
-      return 'Lintas adalah ekosistem produktivitas lintas perangkat yang menghubungkan smartphone Android dengan komputer Windows via Wi-Fi lokal (LAN) secara langsung! Menggunakan Flutter, C++ runner, Riverpod, serta server lokal HTTP & WebSocket port 8945. Dilengkapi Remote Touchpad berpresisi tinggi, Virtual Keyboard dengan tombol modifier, Instant Drop transfer berkas 2 arah dengan verifikasi integritas SHA-256, Universal Clipboard dengan URL detection, NearLock auto-lock PC saat ponsel menjauh, dan Presentation Mode remote. Coba demonya lewat shortcut Lintas di desktop!';
+      return 'Lintas adalah ekosistem produktivitas lintas perangkat yang menghubungkan smartphone Android dengan komputer Windows via Wi-Fi secara langsung. Dilengkapi Remote Touchpad, Virtual Keyboard dengan tombol modifier, Instant Drop transfer berkas, auto-lock PC saat ponsel menjauh, dan Presentation Mode remote. Baca kebih detail lewat shortcut Lintas di desktop!';
     }
 
     if (lower.includes('neurofly') || lower.includes('pong') || lower.includes('ai') || lower.includes('drosophila')) {
-      return 'NeuroFly mengintegrasikan neural connectome lalat buah (Drosophila) dengan game Pong klasik. Membuktikan bagaimana jaringan saraf biologis dapat mengendalikan respons real-time!';
+      return 'NeuroFly mengintegrasikan neural connectome lalat buah dengan game Pong untuk melihat bagaimana jaringan saraf dapat mengendalikan respons';
     }
 
     if (lower.includes('proyek') || lower.includes('project') || lower.includes('portfolio') || lower.includes('karya') || lower.includes('aplikasi')) {
       const replies = [
-        'Proyek unggulanku meliputi: 1) Tatagih (Fintech), 2) Temuin (Crowdsourcing Maps), 3) Lintas (Phone-to-PC), dan 4) Makalah AI Generator. Semuanya bisa kamu buka via icon di Desktop atau Google Chrome di sini!',
-        'Setiap proyek di portofolio ini dirancang dengan standar industri: TypeScript untuk type-safety, clean architecture, automated testing, dan UI responsif.',
-        'Kamu bisa melihat preview detail dan kode masing-masing proyek di File Explorer folder "Projects" gung!'
+        'Proyek unggulanku meliputi: 1) Tatagih, 2) Temuin, 3) Lintas, dan 4) Bingkai. Semuanya bisa kamu buka via icon di Desktop atau Google Chrome di sini!',
+        'Kamu bisa melihat preview detail dan kode masing-masing proyek di File Explorer folder "Projects"'
       ];
       return replies[Math.floor(Math.random() * replies.length)];
     }
@@ -221,10 +220,6 @@ export const WhatsAppApp = ({ onLaunchApp }) => {
 
     if (lower.includes('backend') || lower.includes('database') || lower.includes('node') || lower.includes('golang') || lower.includes('postgres') || lower.includes('api')) {
       return 'Untuk backend, aku menguasai Node.js (Express/NestJS).';
-    }
-
-    if (lower.includes('pengalaman') || lower.includes('karir') || lower.includes('kuliah') || lower.includes('pendidikan') || lower.includes('lulusan') || lower.includes('ipk')) {
-      return `Aku memiliki ${RECRUITER_SUMMARY.experienceYears} pengalaman sebagai Full-Stack & Mobile Developer. Lulusan S1 Teknik Informatika (IPK 3.90).`;
     }
 
     if (lower.includes('cv') || lower.includes('resume') || lower.includes('download cv') || lower.includes('berkas')) {
@@ -244,7 +239,7 @@ export const WhatsAppApp = ({ onLaunchApp }) => {
     }
 
     if (lower.includes('keren') || lower.includes('mantap') || lower.includes('hebat') || lower.includes('bagus') || lower.includes('wow') || lower.includes('suka')) {
-      return 'Terima kasih banyak atas apresiasinya! Semoga portofolio ini memberikan gambaran jelas mengenai standar kualitas dan dedikasi kodingku 🙌';
+      return 'Terima kasih banyak atas apresiasinya! Semoga portofolio ini memberikan gambaran jelas mengenai standar kualitas dan dedikasi kodingku';
     }
 
     const defaultReplies = [
@@ -369,7 +364,7 @@ export const WhatsAppApp = ({ onLaunchApp }) => {
         }} title="Lihat Profil Gungkrisna">
           <div className="wa-avatar-wrap">
             <img 
-              src="/avatars/gungkrisna_avatar.svg" 
+              src="/avatars/gungkrisna_avatar.jpg" 
               alt="Gungkrisna" 
               className="wa-avatar-img"
             />
@@ -664,46 +659,6 @@ export const WhatsAppApp = ({ onLaunchApp }) => {
         </div>
       )}
 
-      {showEmojiPicker && (
-        <div 
-          style={{
-            position: 'absolute',
-            bottom: '70px',
-            left: '50px',
-            backgroundColor: '#202c33',
-            borderRadius: '10px',
-            padding: '12px',
-            boxShadow: '0 4px 20px rgba(0,0,0,0.5)',
-            zIndex: 40,
-            border: '1px solid rgba(255,255,255,0.06)',
-            display: 'grid',
-            gridTemplateColumns: 'repeat(6, 1fr)',
-            gap: '8px',
-            fontSize: '22px'
-          }}
-          onClick={(e) => e.stopPropagation()}
-        >
-          {['👋', '🚀', '💻', '✨', '🔥', '👏', '🤝', '💼', '⚡', '💯', '📱', '🛠️', '🎯', '💡', '👍', '😊', '☕', '❤️'].map((emoji, i) => (
-            <button
-              key={i}
-              style={{
-                background: 'transparent',
-                border: 'none',
-                cursor: 'pointer',
-                fontSize: '22px',
-                padding: '4px',
-                borderRadius: '6px'
-              }}
-              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.1)'}
-              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
-              onClick={() => handleSelectEmoji(emoji)}
-            >
-              {emoji}
-            </button>
-          ))}
-        </div>
-      )}
-
       <div className="wa-footer">
         <button 
           className="wa-icon-btn" 
@@ -712,23 +667,9 @@ export const WhatsAppApp = ({ onLaunchApp }) => {
             e.stopPropagation();
             playClickSound();
             setShowAttachmentMenu(!showAttachmentMenu);
-            setShowEmojiPicker(false);
           }}
         >
-          <Paperclip size={22} />
-        </button>
-
-        <button 
-          className="wa-icon-btn" 
-          title="Pilih Emoji"
-          onClick={(e) => {
-            e.stopPropagation();
-            playClickSound();
-            setShowEmojiPicker(!showEmojiPicker);
-            setShowAttachmentMenu(false);
-          }}
-        >
-          <Smile size={22} />
+          <Paperclip size={20} />
         </button>
 
         <div className="wa-input-container">
@@ -768,13 +709,13 @@ export const WhatsAppApp = ({ onLaunchApp }) => {
       {callModal && (
         <div className="wa-call-modal">
           <img 
-            src="/avatars/gungkrisna_avatar.svg" 
+            src="/avatars/gungkrisna_avatar.jpg" 
             alt="Gungkrisna" 
             className="wa-call-avatar"
           />
           <div className="wa-call-name">Gungkrisna</div>
           <div className="wa-call-status">
-            {callModal === 'video' ? 'Memanggil Panggilan Video...' : 'Memanggil...'} (Sedang dalam sesi koding)
+            {callModal === 'video' ? 'Memanggil Panggilan Video...' : 'Memanggil...'} (Sedang melakukan coding)
           </div>
           <div className="wa-call-actions">
             <button 

@@ -7,17 +7,17 @@ export const INITIAL_USER = {
   institution: "Institut Teknologi dan Bisnis STIKOM Bali",
   degree: "Information Technology",
   location: "Denpasar, Bali, Indonesia",
-  email: "agungkrisna.dev@gmail.com",
+  email: "anakagungarthawibawa22@gmail.com",
   phone: "+62 812-3456-7890",
   whatsapp: "https://wa.me/6281234567890?text=Halo%20Agung,%20kami%20tertarik%20dengan%20profil%20portfolio%20Anda",
   github: "https://github.com/agungkrisna",
   linkedin: "https://linkedin.com/in/krisnaartha",
   website: "https://portofolio.krisnaartha.my.id",
-  avatar: "/avatars/gungkrisna_avatar.svg"
+  avatar: "/avatars/gungkrisna_avatar.jpg"
 };
 
 export const RECRUITER_SUMMARY = {
-  headline: "Agung Krisna — Full-Stack & Mobile Developer",
+  headline: "Agung Krisna - Full-Stack & Mobile Developer",
   experienceYears: "3+ Tahun",
   specialization: "Mobile Development (Flutter, React Native) & Modern Web (React, Next.js, Node.js)",
   highlights: [
@@ -166,7 +166,7 @@ export const DATA_D_ITEMS = [
   {
     name: "theotown",
     type: "folder",
-    description: "ITB STIKOM Bali — Building Plugin for TheoTown",
+    description: "ITB STIKOM Bali - Building Plugin for TheoTown",
     badge: "Game Modding / Plugin",
     items: [
       {
@@ -410,7 +410,7 @@ PERSISTENSI & KEAMANAN:
         extension: "txt",
         size: "3.6 KB",
         content: `=====================================================
-PROYEK: NENACARE — AI-POWERED K3 INCIDENT REPORTING
+PROYEK: NENACARE - AI-POWERED K3 INCIDENT REPORTING
 =====================================================
 Tagline     : Pelaporan, Analisis Risiko AI & Monitoring Keselamatan Kerja Kafe
 Tipe        : Full-Stack Web Application & K3 Safety Automation
@@ -439,7 +439,7 @@ FITUR UTAMA:
    - Format output JSON terstruktur yang otomatis diparsing backend PHP.
 4. Telegram Bot Integration & Remote Control:
    - Notifikasi seketika ke ponsel admin saat laporan baru dibuat.
-   - Tombol inline [🚀 Proses] dan [✅ Selesai] memungkinkan admin mengubah status
+   - Tombol inline [Proses] dan [Selesai] memungkinkan admin mengubah status
      laporan langsung dari Telegram tanpa membuka browser.
 5. Live Monitoring Feed & Status Workflow:
    - Feed real-time transparan dengan badge status: Menunggu ──▶ Diproses ──▶ Selesai.
@@ -519,7 +519,7 @@ FITUR UTAMA:
         extension: "txt",
         size: "3.8 KB",
         content: `=====================================================
-PROYEK: TATAGIH — SMART SUBSCRIPTION MANAGER
+PROYEK: TATAGIH - SMART SUBSCRIPTION MANAGER
 =====================================================
 Tagline    : Kelola Langganan Lebih Cerdas, Temukan Kebocoran Finansial
 Tipe       : Full-Stack Web Application & Financial SaaS
@@ -556,7 +556,7 @@ FITUR-FITUR UTAMA:
    - Menampilkan distribusi pengeluaran berdasarkan proporsi kategori.
    - Kalender visual yang membantu melihat jadwal jatuh tempo pembayaran.
 
-3. Tata Asisten — Analisis Keuangan Berbasis AI
+3. Tata Asisten - Analisis Keuangan Berbasis AI
    - Menganalisis pola subscription dan pengeluaran pengguna.
    - Menghasilkan Financial Health Score (skor kesehatan finansial).
    - Memberikan rekomendasi cerdas berdasarkan kebiasaan berlangganan.
@@ -1027,19 +1027,19 @@ PENGALAMAN:
     ]
   },
   {
-    name: "Sertifikat",
+    name: "Foto",
     type: "folder",
-    description: "Sertifikasi Resmi & Penghargaan",
-    previewImage: "/certificates/cert_fullstack.jpg",
-    badge: "Certificates",
+    description: "Foto Prestasi & Sertifikasi",
+    previewImage: "/certificates/foto_krisna.jpg",
+    badge: "Photos",
     items: [
       {
-        name: "sertifikat_fullstack.jpg",
+        name: "foto_prestasi_krisna.jpg",
         type: "file",
         extension: "jpg",
-        size: "612 KB",
-        imageUrl: "/certificates/cert_fullstack.jpg",
-        title: "Certificate: Mobile & Full Stack Development"
+        size: "116 KB",
+        imageUrl: "/certificates/foto_krisna.jpg",
+        title: "Foto Prestasi & Penghargaan - Agung Krisna"
       },
       {
         name: "daftar_sertifikasi.txt",
@@ -1116,8 +1116,8 @@ saat perangkat memasuki atau meninggalkan zona geofencing yang telah ditentukan.
 3. Makalah Generator (Academic AI Suite)
 4. RadiusApp (Geofencing & Proximity Sensor)
 5. KuisMobile (Gamified Learning Quiz)
-6. Tatagih (Smart Subscription Manager & AI Financial Assistant — Laravel 13)
-7. NenaCare (AI-Powered K3 Incident Reporting & Monitoring System — PHP OOP & Gemini)
+6. Tatagih (Smart Subscription Manager & AI Financial Assistant - Laravel 13)
+7. NenaCare (AI-Powered K3 Incident Reporting & Monitoring System - PHP OOP & Gemini)
 8. ITB STIKOM Bali Plugin for TheoTown (Custom Isometric Pixel Art Educational Building)
 `
       }
@@ -1140,57 +1140,40 @@ saat perangkat memasuki atau meninggalkan zona geofencing yang telah ditentukan.
   }
 ];
 
-export const INTRO_NOTE_CONTENT = `======================================================================
-  SELAMAT DATANG DI PORTOFOLIO INTERAKTIF SAYA (WINDOWS 11 EDITION)
-======================================================================
+export const INTRO_NOTE_CONTENT = `SELAMAT DATANG DI PORTOFOLIO SAYA
 
 Halo! 
 Terima kasih banyak sudah meluangkan waktu untuk berkunjung.
 
-Saya Anak Agung Ngurah Krisna Artha Wibawa (Agung Krisna), seorang 
-Full-Stack Web & Mobile Developer asal Bali, Indonesia.
+Saya Anak Agung Ngurah Krisna Artha Wibawa,  
 Pendidikan: Institut Teknologi dan Bisnis STIKOM Bali (Teknologi Informasi).
 
-Aplikasi portofolio ini dirancang menyerupai antarmuka desktop Windows 11 
-agar Anda dapat mengeksplorasi riwayat karya, proyek komersial, dan 
-kemampuan teknis saya dengan cara yang lebih interaktif dan menyenangkan.
+portofolio ini dirancang menyerupai antarmuka desktop Windows 11 
+agar Anda dapat mengeksplorasi karya dengan lebih menyenangkan.
 
-----------------------------------------------------------------------
- PANDUAN EKSPLORASI PORTOFOLIO:
-----------------------------------------------------------------------
+
+PANDUAN SINGKAT:
 1.  Google Chrome & Project Showcase
-   - Buka Google Chrome di desktop atau taskbar untuk melihat demo interaktif 
-     aplikasi unggulan saya (Tatagih, Temuin, Lintas, NeuroFly, DompetQ, dll).
+   - Buka Google Chrome di desktop atau taskbar untuk melihat project saya
    - Ingin hiburan ringan? Ketik 'chrome://dino' di browser atau klik icon 
-     Dino di desktop untuk memainkan T-Rex game offline!
+     Dino di desktop untuk memainkan T-Rex game.
 
-2.  File Explorer (This PC)
+2.  File Explorer & This PC
    - Buka 'This PC' atau 'File Explorer' untuk melihat susunan berkas, 
-     dokumentasi arsitektur tiap proyek, serta berkas sertifikat keahlian.
+     dokumentasi tiap proyek serta file lainnya.
 
 3.  LinkedIn & WhatsApp
    - Ingin terkoneksi atau menawarkan peluang kerja sama? 
-     Klik icon LinkedIn atau WhatsApp untuk langsung terhubung dengan saya.
+     Klik icon LinkedIn untuk langsung terhubung dengan saya.
 
 4.  Website Portofolio Utama
    - Klik shortcut 'portofolio.krisnaartha.my.id' di desktop untuk langsung mengakses 
-     website portofolio personal saya.
+     website portofolio saya.
 
-5.  Easter Egg & Kustomisasi
-   - Buka Calculator dan ketik kode rahasia: 6969 lalu tekan '=' untuk membuka kejutan video rahasia!
-   - Buka Settings untuk mengubah wallpaper Windows 11 sesuai preferensi Anda.
 
-----------------------------------------------------------------------
- INFORMASI KONTAK RESMI:
-----------------------------------------------------------------------
-• Email     : agungkrisna.dev@gmail.com
-• WhatsApp  : +62 812-3456-7890
+• Email     : anakagungarthawibawa22@gmail.com
 • LinkedIn  : https://linkedin.com/in/krisnaartha
-• Website   : https://portofolio.krisnaartha.my.id
-• Status    : Open for Full-Time (Onsite / Remote / Hybrid) & Freelance
-
-Selamat menjelajah, semoga Anda menikmati pengalaman interaktif ini! ✨
-======================================================================`;
+• Website   : https://portofolio.krisnaartha.my.id`;
 
 export const DESKTOP_ITEMS = [
   {
@@ -1313,8 +1296,8 @@ export const DESKTOP_ITEMS = [
     icon: "pdf"
   },
   {
-    id: "certificates",
-    name: "Certificates",
+    id: "photos",
+    name: "Foto",
     type: "app",
     app: "photos",
     icon: "image"
@@ -1351,34 +1334,21 @@ export const DESKTOP_ITEMS = [
 
 export const RECYCLE_BIN_ITEMS = [
   {
-    name: 'catatan_rahasia_terbuang.txt',
+    name: 'FILE RAHASIA.txt',
     type: 'file',
     extension: 'txt',
     size: '1.2 KB',
     originalLocation: 'C:\\Users\\KRISNA\\Documents',
     dateDeleted: '9/27/2026 11:42 PM',
     itemType: 'Text Document',
-    content: `=======================================================
-           [CATATAN RAHASIA // DEVELOPER HINT]
-=======================================================
+    content: `CATATAN RAHASIA:
+Jangan sampai lupa kode rahasia
 
-Status: Dibuang ke Recycle Bin
-Prioritas: Rahasia
-
-Catatan:
-Jangan sampai lupa kode rahasia untuk membuka 
-Easter Egg & Kejutan Spesial!
-
-Petunjuk:
-1. Buka aplikasi Kalkulator (Calculator) di desktop / taskbar.
-2. Masukkan angka kode: 6969
-3. Tekan '=' (atau tombol Enter).
-
-Akan terbuka kejutan video rahasia pengembang!
-=======================================================`
+1. Buka aplikasi Kalkulator di desktop.
+2. Masukkan angka kode: 6969`
   },
   {
-    name: '1. topologi.png',
+    name: '.trashed-1788291042-1. topologi.png',
     type: 'file',
     extension: 'png',
     size: '87 KB',
@@ -1398,7 +1368,7 @@ Akan terbuka kejutan video rahasia pengembang!
     imageUrl: '/wallpapers/win11_bloom_dark.jpg'
   },
   {
-    name: 'draft_desain_portofolio_v1.jpg',
+    name: '.trashed-1790184712-draft_desain_portofolio_v1.jpg',
     type: 'file',
     extension: 'jpg',
     size: '505 KB',

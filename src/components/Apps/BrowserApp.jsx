@@ -27,7 +27,7 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
   const [tabs, setTabs] = useState(() => {
     const initKey = initialProject || 'tatagih';
     const p = PROJECTS_DATA[initKey] || PROJECTS_DATA.tatagih;
-    const title = p.isDino ? 'chrome://dino' : p.isExternalIframe ? 'portofolio.krisnaartha.my.id' : `${p.name} — Showcase`;
+    const title = p.isDino ? 'chrome://dino' : p.isExternalIframe ? 'portofolio.krisnaartha.my.id' : `${p.name} - Showcase`;
     const icon = p.isDino ? 'dino' : p.isExternalIframe ? 'krisnaartha' : 'chrome';
     return [
       {
@@ -57,7 +57,7 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
       const exists = prev.find((t) => (t.projectId || t.id) === projectId);
       if (exists) return prev;
       const p = PROJECTS_DATA[projectId];
-      const title = p ? (p.isDino ? 'chrome://dino' : p.isExternalIframe ? 'portofolio.krisnaartha.my.id' : `${p.name} — Showcase`) : 'New Tab';
+      const title = p ? (p.isDino ? 'chrome://dino' : p.isExternalIframe ? 'portofolio.krisnaartha.my.id' : `${p.name} - Showcase`) : 'New Tab';
       const icon = p?.isDino ? 'dino' : p?.isExternalIframe ? 'krisnaartha' : 'chrome';
       return [
         ...prev,
@@ -91,7 +91,7 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
         {
           id: newId,
           projectId: p.id,
-          title: `${p.name} — Showcase`,
+          title: `${p.name} - Showcase`,
           icon: 'chrome'
         }
       ]);
@@ -185,7 +185,7 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
                     >
                       <WinIcon name={p.id} size={16} />
                       <div className="tab-search-item-info">
-                        <span className="tab-search-item-title">{p.name} — Showcase</span>
+                        <span className="tab-search-item-title">{p.name} - Showcase</span>
                         <span className="tab-search-item-sub">{p.category}</span>
                       </div>
                     </div>
@@ -377,7 +377,7 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
           title="Play Chrome Dinosaur Game"
         >
           <WinIcon name="dino" size={13} />
-          <span>chrome://dino 🦖</span>
+          <span>chrome://dino </span>
         </div>
         <div
           className={`chrome-bookmark-item ${activeProjectId === 'krisnaartha' ? 'active' : ''}`}

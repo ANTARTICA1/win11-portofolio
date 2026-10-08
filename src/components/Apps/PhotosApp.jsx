@@ -3,15 +3,15 @@ import { ZoomIn, ZoomOut, RotateCw, Download, ChevronLeft, ChevronRight, Info } 
 import { playClickSound } from '../../utils/sound';
 
 export const PhotosApp = ({ 
-  initialImage = '/certificates/cert_fullstack.jpg',
-  initialTitle = 'Certificate: Mobile & Full Stack Development'
+  initialImage = '/certificates/foto_krisna.jpg',
+  initialTitle = 'Foto Prestasi & Penghargaan - Agung Krisna'
 }) => {
   const images = [
-    { url: '/certificates/cert_fullstack.jpg', title: 'Certificate: Mobile & Full Stack Development', date: 'October 26, 2024', size: '612 KB' },
-    { url: '/projects/theotown.jpg', title: 'ITB STIKOM Bali — TheoTown Custom Building Plugin Gameplay', date: 'November 2024', size: '620 KB' },
-    { url: '/projects/lintas.jpg', title: 'Lintas — Cross-Device Productivity Ecosystem (Android & Windows)', date: 'November 2024', size: '610 KB' },
-    { url: '/projects/nenacare.jpg', title: 'NenaCare — AI-Powered K3 Incident Reporting & Monitoring System', date: 'October 2024', size: '580 KB' },
-    { url: '/projects/tatagih.jpg', title: 'Tatagih — Smart Subscription Manager Web App (Laravel 13 & AI)', date: 'November 2024', size: '540 KB' },
+    { url: '/certificates/foto_krisna.jpg', title: 'Foto Prestasi & Penghargaan - Agung Krisna', date: '2024', size: '116 KB' },
+    { url: '/projects/theotown.jpg', title: 'ITB STIKOM Bali - TheoTown Custom Building Plugin Gameplay', date: 'November 2024', size: '620 KB' },
+    { url: '/projects/lintas.jpg', title: 'Lintas - Cross-Device Productivity Ecosystem (Android & Windows)', date: 'November 2024', size: '610 KB' },
+    { url: '/projects/nenacare.jpg', title: 'NenaCare - AI-Powered K3 Incident Reporting & Monitoring System', date: 'October 2024', size: '580 KB' },
+    { url: '/projects/tatagih.jpg', title: 'Tatagih - Smart Subscription Manager Web App (Laravel 13 & AI)', date: 'November 2024', size: '540 KB' },
     { url: '/projects/dompetq.jpg', title: 'DompetQ Mobile App Dashboard', date: 'September 2024', size: '482 KB' },
     { url: '/projects/temuin.jpg', title: 'Temuin Crowdsourcing Mobile Interface', date: 'August 2024', size: '520 KB' },
     { url: '/projects/makalah.jpg', title: 'Makalah Generator Web Dashboard', date: 'July 2024', size: '410 KB' }
@@ -120,7 +120,7 @@ export const PhotosApp = ({
         alignItems: 'center',
         justifyContent: 'center',
         overflow: 'hidden',
-        padding: '20px',
+        padding: '12px 16px',
         backgroundColor: '#121212'
       }}>
         <button
@@ -168,12 +168,12 @@ export const PhotosApp = ({
         <div style={{
           transition: 'transform 0.15s ease-out',
           transform: `scale(${zoom}) rotate(${rotation}deg)`,
-          maxWidth: '90%',
-          maxHeight: '85%',
+          width: '100%',
+          height: '100%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          boxShadow: '0 8px 30px rgba(0, 0, 0, 0.8)'
+          overflow: 'hidden'
         }}>
           <img
             src={currentImg.url}
@@ -182,7 +182,8 @@ export const PhotosApp = ({
               maxWidth: '100%',
               maxHeight: '100%',
               objectFit: 'contain',
-              borderRadius: '6px'
+              borderRadius: '4px',
+              boxShadow: '0 8px 30px rgba(0, 0, 0, 0.7)'
             }}
           />
         </div>

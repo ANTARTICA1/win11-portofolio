@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Wifi, Volume2, Battery, ChevronUp, Sun, CloudSun,
-  LayoutGrid, Activity, Sliders, Monitor
+  LayoutGrid, Sliders, Monitor
 } from 'lucide-react';
 import { WinIcon } from '../Common/WinIcon';
 import { StartMenu } from './StartMenu';
@@ -104,7 +104,7 @@ export const Taskbar = ({
             className="weather-widget"
             onClick={() => {
               playClickSound();
-              alert('Cuaca: 79°F (26°C) Berawan Sebagian — Lokasi: Indonesia. Siap untuk produktivitas!');
+              alert('Cuaca: 79°F (26°C) Berawan Sebagian - Lokasi: Indonesia. Siap untuk produktivitas!');
             }}
           >
             <CloudSun size={20} color="#f59e0b" />
@@ -217,20 +217,6 @@ export const Taskbar = ({
           }}
           onClick={(e) => e.stopPropagation()}
         >
-          <div
-            onClick={() => {
-              playClickSound();
-              onLaunchApp('taskmgr');
-              setTaskbarMenu(null);
-            }}
-            style={{ padding: '6px 12px', display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', borderRadius: '4px' }}
-            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)'}
-            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
-          >
-            <Activity size={15} color="#38bdf8" />
-            <span>Task Manager</span>
-          </div>
-
           <div
             onClick={() => {
               playClickSound();

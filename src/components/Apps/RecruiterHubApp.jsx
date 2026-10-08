@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { 
-  FileText, Download, Printer, Copy, Check, Send, 
+  FileText, Download, Copy, Check, Send, 
   ExternalLink, ZoomIn, ZoomOut, Mail, Phone, MapPin, 
   Globe, Award, Briefcase, GraduationCap, 
   Code, Layers, CheckCircle
@@ -28,10 +28,6 @@ export const RecruiterHubApp = () => {
     setZoom(100);
   };
 
-  const handlePrint = () => {
-    playClickSound();
-    window.print();
-  };
 
   const handleCopySummary = () => {
     playClickSound();
@@ -44,7 +40,7 @@ export const RecruiterHubApp = () => {
   const handleDownloadCV = () => {
     playClickSound();
     const cvText = `================================================================================
-CURRICULUM VITAE — ${INITIAL_USER.fullName.toUpperCase()}
+CURRICULUM VITAE - ${INITIAL_USER.fullName.toUpperCase()}
 ${INITIAL_USER.role}
 ================================================================================
 
@@ -79,28 +75,28 @@ tinggi, dan pengalaman pengguna (UI/UX) yang intuitif.
 --------------------------------------------------------------------------------
 3. PENGALAMAN PROYEK REKAYASA SISTEM
 --------------------------------------------------------------------------------
-1. Tatagih — Smart Subscription Manager & AI Financial Assistant (2024)
+1. Tatagih - Smart Subscription Manager & AI Financial Assistant (2024)
    - Merancang platform SaaS manajemen langganan dan deteksi kebocoran dana (vampire spending) berbasis Laravel 13, Tailwind CSS, dan Chart.js.
    - Mengintegrasikan analisis kesehatan finansial berbasis Google Gemini AI dan notifikasi proaktif via Telegram Bot.
    - Mengembangkan sistem pembagian tagihan (split-bill) dengan upload dan verifikasi bukti bayar otomatis.
 
-2. Lintas — Cross-Device Productivity Ecosystem (2024)
+2. Lintas - Cross-Device Productivity Ecosystem (2024)
    - Membangun ekosistem nirkabel lokal berlatensi rendah (<12ms) yang menghubungkan Android (Flutter) dan Windows (C++/Win32 API) via WebSocket port 8945.
    - Mengembangkan fitur NearLock (auto-lock laptop saat ponsel menjauh), transfer berkas lokal 2 arah berkecepatan tinggi dengan verifikasi hash SHA-256, dan remote trackpad/presenter.
 
-3. SIGAP — Sistem Gerak Aman dari Pencurian (2024)
+3. SIGAP - Sistem Gerak Aman dari Pencurian (2024)
    - Merancang aplikasi keamanan smartphone anti-maling dengan siklus Detect -> Alert -> Lock -> Record -> Review.
    - Memanfaatkan stream akselerometer sumbu XYZ dan status charger baterai, sirine darurat, penguncian volume 100%, serta snapshot kamera depan dan koordinat GPS.
 
-4. Temuin — Platform Pelacak & Penemu Barang Hilang Berbasis QR Code (2024)
+4. Temuin - Platform Pelacak & Penemu Barang Hilang Berbasis QR Code (2024)
    - Mengembangkan platform pelacakan barang berharga berbasis QR Code unik tanpa mengekspos data pribadi pemilik.
    - Mengintegrasikan pemindaian kamera instan, pencatatan koordinat GPS, foto bukti barang, dan sistem Boost Listing via Midtrans Snap.
 
-5. NenaCare — AI-Powered K3 Incident Reporting & Monitoring System (2024)
+5. NenaCare - AI-Powered K3 Incident Reporting & Monitoring System (2024)
    - Mengembangkan platform pelaporan K3 dengan opsi 100% anonim dan analisis risiko otomatis bertenaga Google Gemini 2.5 Flash-Lite.
    - Mengintegrasikan bot Telegram untuk notifikasi dan remote control darurat serta ekspor audit report ke PDF berformat A4 landscape.
 
-6. ITB STIKOM Bali — Building Plugin for TheoTown (2024)
+6. ITB STIKOM Bali - Building Plugin for TheoTown (2024)
    - Merancang gedung kampus 5x5 tile dengan aset seni piksel isometrik 2.5D khas arsitektur Bali.
    - Mengonfigurasi engine simulasi pendidikan berkapasitas 2.500 mahasiswa dan radius pengaruh 700 tile untuk versi Android dan PC.
 
@@ -264,26 +260,6 @@ Status: Terbuka untuk Penawaran Kerja (Full-Time / Remote / Onsite / Hybrid)
             <span>{copied ? 'Tersalin' : 'Salin Info'}</span>
           </button>
 
-          <button
-            onClick={handlePrint}
-            title="Cetak CV"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              backgroundColor: 'rgba(255, 255, 255, 0.08)',
-              color: '#e2e8f0',
-              border: '1px solid rgba(255, 255, 255, 0.12)',
-              borderRadius: '6px',
-              padding: '6px 10px',
-              fontSize: '12px',
-              fontWeight: 500,
-              cursor: 'pointer'
-            }}
-          >
-            <Printer size={14} />
-            <span>Cetak</span>
-          </button>
 
           <button
             onClick={handleDownloadCV}
@@ -517,7 +493,7 @@ Status: Terbuka untuk Penawaran Kerja (Full-Time / Remote / Onsite / Hybrid)
               <div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
                   <span style={{ fontWeight: 700, color: '#0f172a', fontSize: `${12.5 * (zoom / 100)}px` }}>
-                    Tatagih — Smart Subscription Manager & AI Financial Assistant
+                    Tatagih - Smart Subscription Manager & AI Financial Assistant
                   </span>
                   <span style={{ color: '#64748b', fontSize: `${11 * (zoom / 100)}px`, fontWeight: 500 }}>2024</span>
                 </div>
@@ -534,7 +510,7 @@ Status: Terbuka untuk Penawaran Kerja (Full-Time / Remote / Onsite / Hybrid)
               <div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
                   <span style={{ fontWeight: 700, color: '#0f172a', fontSize: `${12.5 * (zoom / 100)}px` }}>
-                    Lintas — Cross-Device Productivity Ecosystem (Android × Windows)
+                    Lintas - Cross-Device Productivity Ecosystem (Android × Windows)
                   </span>
                   <span style={{ color: '#64748b', fontSize: `${11 * (zoom / 100)}px`, fontWeight: 500 }}>2024</span>
                 </div>
@@ -551,7 +527,7 @@ Status: Terbuka untuk Penawaran Kerja (Full-Time / Remote / Onsite / Hybrid)
               <div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
                   <span style={{ fontWeight: 700, color: '#0f172a', fontSize: `${12.5 * (zoom / 100)}px` }}>
-                    SIGAP — Sistem Gerak Aman dari Pencurian (Mobile Security)
+                    SIGAP - Sistem Gerak Aman dari Pencurian (Mobile Security)
                   </span>
                   <span style={{ color: '#64748b', fontSize: `${11 * (zoom / 100)}px`, fontWeight: 500 }}>2024</span>
                 </div>
@@ -568,7 +544,7 @@ Status: Terbuka untuk Penawaran Kerja (Full-Time / Remote / Onsite / Hybrid)
               <div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
                   <span style={{ fontWeight: 700, color: '#0f172a', fontSize: `${12.5 * (zoom / 100)}px` }}>
-                    Temuin — Platform Pelacak & Penemu Barang Hilang Berbasis QR Code
+                    Temuin - Platform Pelacak & Penemu Barang Hilang Berbasis QR Code
                   </span>
                   <span style={{ color: '#64748b', fontSize: `${11 * (zoom / 100)}px`, fontWeight: 500 }}>2024</span>
                 </div>
@@ -585,7 +561,7 @@ Status: Terbuka untuk Penawaran Kerja (Full-Time / Remote / Onsite / Hybrid)
               <div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
                   <span style={{ fontWeight: 700, color: '#0f172a', fontSize: `${12.5 * (zoom / 100)}px` }}>
-                    NenaCare — AI-Powered K3 Incident Reporting & Monitoring System
+                    NenaCare - AI-Powered K3 Incident Reporting & Monitoring System
                   </span>
                   <span style={{ color: '#64748b', fontSize: `${11 * (zoom / 100)}px`, fontWeight: 500 }}>2024</span>
                 </div>
@@ -602,7 +578,7 @@ Status: Terbuka untuk Penawaran Kerja (Full-Time / Remote / Onsite / Hybrid)
               <div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
                   <span style={{ fontWeight: 700, color: '#0f172a', fontSize: `${12.5 * (zoom / 100)}px` }}>
-                    ITB STIKOM Bali — Building Plugin for TheoTown (Educational Mod)
+                    ITB STIKOM Bali - Building Plugin for TheoTown (Educational Mod)
                   </span>
                   <span style={{ color: '#64748b', fontSize: `${11 * (zoom / 100)}px`, fontWeight: 500 }}>2024</span>
                 </div>

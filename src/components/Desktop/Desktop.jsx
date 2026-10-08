@@ -193,7 +193,7 @@ export const Desktop = ({
               title={item.name}
             >
               <div className="desktop-icon-img">
-                <WinIcon name={item.icon} size={36} />
+                <WinIcon name={item.icon} size={38} />
               </div>
               <span className="desktop-icon-label">{item.name}</span>
             </div>

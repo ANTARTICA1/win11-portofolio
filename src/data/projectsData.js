@@ -3,7 +3,7 @@ export const PROJECTS_DATA = {
     id: 'theotown',
     name: 'ITB STIKOM Bali TheoTown',
     tagline: 'Custom Isometric Pixel Art Educational Building Plugin for TheoTown',
-    fullTitle: 'ITB STIKOM Bali — Building Plugin for TheoTown (Educational Mod)',
+    fullTitle: 'ITB STIKOM Bali TheoTown',
     category: 'Game Modding / Plugin Development / Isometric Pixel Art & Simulation',
     status: 'Game Plugin Showcase',
     period: '2024',
@@ -79,7 +79,7 @@ export const PROJECTS_DATA = {
         desc: 'Menyimpan identitas resmi mod: Title "ITB STIKOM BALI", Author "Gekaaaaa", Versioning, dan deskripsi mod untuk integrasi ke Plugin Manager game.'
       },
       {
-        title: 'Simulasi Aspek Edukasi Dinamis (Aspect 1000–2500)',
+        title: 'Simulasi Aspek Edukasi Dinamis (Aspect 1000-2500)',
         desc: 'Parameter education aspect dinamis yang mempengaruhi efisiensi penyerapan ilmu dan kepuasan warga terhadap fasilitas pendidikan perkotaan.'
       },
       {
@@ -96,7 +96,7 @@ export const PROJECTS_DATA = {
     id: 'nenacare',
     name: 'NenaCare',
     tagline: 'AI-Powered K3 Incident Reporting & Monitoring System',
-    fullTitle: 'NenaCare — AI-Powered K3 Incident Reporting & Monitoring System',
+    fullTitle: 'NenaCare',
     category: 'Full-Stack Web App / AI Automation / K3 Safety & Incident Management',
     status: 'Production Showcase',
     period: '2024',
@@ -128,7 +128,7 @@ export const PROJECTS_DATA = {
         imageUrl: '/projects/nenacare.jpg'
       }
     ],
-    problem: 'Di lingkungan kafe dan industri F&B yang dinamis (seperti Nena Cafe), potensi bahaya keselamatan kerja (K3)—mulai dari kebocoran gas LPG, kompor dapur, kabel kelistrikan terbuka, lantai licin, hingga isu ergonomi—sering kali terlambat dilaporkan karena proses manual yang rumit. Selain itu, staf maupun pelanggan kerap enggan melapor karena khawatir identitasnya terekspos, sementara pihak pengelola kesulitan memilah mana insiden berisiko tinggi yang membutuhkan penanganan darurat tanpa adanya standarisasi prioritas.',
+    problem: 'Di lingkungan kafe dan industri F&B yang dinamis (seperti Nena Cafe), potensi bahaya keselamatan kerja (K3)-mulai dari kebocoran gas LPG, kompor dapur, kabel kelistrikan terbuka, lantai licin, hingga isu ergonomi-sering kali terlambat dilaporkan karena proses manual yang rumit. Selain itu, staf maupun pelanggan kerap enggan melapor karena khawatir identitasnya terekspos, sementara pihak pengelola kesulitan memilah mana insiden berisiko tinggi yang membutuhkan penanganan darurat tanpa adanya standarisasi prioritas.',
     solution: 'NenaCare mentransformasi penanganan keselamatan kerja menjadi sistem digital terpadu end-to-end: Pelaporan Mudah & Opsional Anonim → Analisis Risiko Otomatis berbasis Google Gemini 2.5 Flash-Lite → Notifikasi Cepat & Remote Control Status via Telegram Bot → Live Monitoring Dashboard dengan Visualisasi Chart.js → Dokumentasi Audit & Ekspor PDF Dompdf. Pengelola kafe mendapatkan peringatan dini seketika dengan rekomendasi tindakan mitigasi terukur, meminimalkan downtime dan menjaga keamanan operasional kafe secara proaktif.',
     keyFeatures: [
       {
@@ -173,7 +173,7 @@ export const PROJECTS_DATA = {
       },
       {
         title: 'Telegram Bot Notification & Remote Control Action',
-        desc: 'Integrasi Telegram Bot dua arah: mengirim notifikasi instan laporan baru ke ponsel admin dan menerima respon tombol inline (🚀 Proses & ✅ Selesai) untuk mengubah status tanpa harus membuka web.'
+        desc: 'Integrasi Telegram Bot dua arah: mengirim notifikasi instan laporan baru ke ponsel admin dan menerima respon tombol inline (Proses & Selesai) untuk mengubah status tanpa harus membuka web.'
       },
       {
         title: 'Ekspor Dokumen Laporan Resmi ke PDF (Dompdf)',
@@ -193,7 +193,7 @@ export const PROJECTS_DATA = {
     id: 'tatagih',
     name: 'Tatagih',
     tagline: 'Smart Subscription Manager & AI Financial Assistant',
-    fullTitle: 'Tatagih — Smart Subscription Manager & AI Financial Assistant',
+    fullTitle: 'Tatagih',
     category: 'Financial SaaS / AI Financial Analytics / Full-Stack Web App',
     status: 'Full-Stack Showcase',
     period: '2024',
@@ -228,7 +228,7 @@ export const PROJECTS_DATA = {
         imageUrl: '/projects/tatagih.jpg'
       }
     ],
-    problem: 'Di era digital modern, hampir setiap orang memiliki banyak layanan berlangganan: streaming film dan musik, aplikasi produktivitas, cloud storage, layanan AI, software pekerjaan, hingga gym. Masalah utama yang sering dialami pengguna adalah:\\n1. Terlalu banyak subscription aktif yang tersebar sehingga sulit mengetahui total riil uang yang dikeluarkan setiap bulan maupun setahun.\\n2. Sulit mengingat tanggal pembayaran beragam layanan yang berbeda-beda, berisiko saldo rekening/kartu terpotong otomatis tanpa persiapan dana atau kelupaan membatalkan masa uji coba (trial).\\n3. Terjadinya inefisiensi finansial yang tersembunyi: overlapping subscriptions (memiliki beberapa layanan dengan fungsi serupa, seperti berlangganan 2-3 platform video streaming sekaligus padahal jam tonton sedikit) dan vampire spending (pengeluaran langganan kecil Rp20.000–Rp40.000 yang terasa sepele namun membengkak jika diakumulasikan bertahun-tahun).\\n4. Kerumitan mengelola langganan yang dipakai bersama teman (Family Plan), mulai dari pembagian tagihan yang sering manual, menagih satu per satu, memeriksa bukti transfer, hingga memperbarui siklus tiap bulan.',
+    problem: 'Di era digital modern, hampir setiap orang memiliki banyak layanan berlangganan: streaming film dan musik, aplikasi produktivitas, cloud storage, layanan AI, software pekerjaan, hingga gym. Masalah utama yang sering dialami pengguna adalah:\\n1. Terlalu banyak subscription aktif yang tersebar sehingga sulit mengetahui total riil uang yang dikeluarkan setiap bulan maupun setahun.\\n2. Sulit mengingat tanggal pembayaran beragam layanan yang berbeda-beda, berisiko saldo rekening/kartu terpotong otomatis tanpa persiapan dana atau kelupaan membatalkan masa uji coba (trial).\\n3. Terjadinya inefisiensi finansial yang tersembunyi: overlapping subscriptions (memiliki beberapa layanan dengan fungsi serupa, seperti berlangganan 2-3 platform video streaming sekaligus padahal jam tonton sedikit) dan vampire spending (pengeluaran langganan kecil Rp20.000-Rp40.000 yang terasa sepele namun membengkak jika diakumulasikan bertahun-tahun).\\n4. Kerumitan mengelola langganan yang dipakai bersama teman (Family Plan), mulai dari pembagian tagihan yang sering manual, menagih satu per satu, memeriksa bukti transfer, hingga memperbarui siklus tiap bulan.',
     solution: 'Tatagih hadir sebagai Smart Subscription Manager berbasis web yang komprehensif untuk mengubah cara pengguna mengelola pengeluaran digital:\\n1. Sentralisasi Manajemen Subscription: Menyimpan seluruh langganan di satu tempat rapi dengan siklus bulanan/tahunan, status auto-renewal, pencatatan pembayaran, filter kategori, serta ekspor CSV.\\n2. Dashboard Finansial & Kalender: Visualisasi real-time pengeluaran bulanan dan tahunan, grafik riwayat pengeluaran Chart.js, distribusi kategori, serta kalender tanggal jatuh tempo.\\n3. Tata Asisten Berbasis AI Gemini: Menganalisis pola kebiasaan berlangganan, mengkalkulasi Financial Health Score, dan memberikan rekomendasi penghematan konkret hingga ratusan ribu rupiah.\\n4. Tata AI Chat Multi-Sesi: Chat interaktif yang paham konteks keuangan pengguna (total pengeluaran, tagihan termahal, skor kesehatan), dengan sesi percakapan tersimpan dan fallback lokal jika API AI gangguan.\\n5. Pendeteksi Kebocoran Dana: Algoritma cerdas yang mendeteksi overlapping services dan vampire spending secara otomatis dengan rekomendasi aksi.\\n6. Fitur Patungan & Split Bill: Membagi tagihan otomatis ke anggota, verifikasi bukti transfer pembayaran oleh pemilik, undangan via User Tag, dan auto-renewal siklus baru.\\n7. Notifikasi Proaktif Telegram Bot: Otomatisasi pengingat tagihan H-3 dan H-1 ke Telegram pengguna melalui Laravel Scheduler dan Queue tanpa membebani server.',
     keyFeatures: [
       {
@@ -240,7 +240,7 @@ export const PROJECTS_DATA = {
         desc: 'Menampilkan total langganan aktif, estimasi biaya bulanan/tahunan, upcoming bills, visualisasi tren pengeluaran 6 bulan via Chart.js, proporsi kategori, serta kalender tanggal jatuh tempo.'
       },
       {
-        title: 'Tata Asisten — Analisis AI Gemini & Financial Health Score',
+        title: 'Tata Asisten - Analisis AI Gemini & Financial Health Score',
         desc: 'Menganalisis kebiasaan berlangganan untuk menghasilkan Financial Health Score (0-100), menghitung potensi penghematan dana, dan memberikan rekomendasi cerdas berbasis Google Gemini API.'
       },
       {
@@ -351,7 +351,7 @@ export const PROJECTS_DATA = {
     id: 'lintas',
     name: 'Lintas',
     tagline: 'Cross-Device Productivity Ecosystem (Android Mobile & Windows Companion)',
-    fullTitle: 'Lintas — Cross-Device Productivity Ecosystem',
+    fullTitle: 'Lintas',
     category: 'Cross-Device System / Local Networking / Flutter & Native Windows Integration',
     status: 'Production Showcase',
     period: '2024',
@@ -378,7 +378,7 @@ export const PROJECTS_DATA = {
     photos: [
       {
         id: 'lintas-companion',
-        title: 'Windows Companion Host — Status Server Port 8945, Pairing QR Code & Drop Zone',
+        title: 'Windows Companion Host - Status Server Port 8945, Pairing QR Code & Drop Zone',
         caption: 'Dashboard pusat kendali Lintas di Windows 11. Menampilkan status local server aktif pada port 8945 (HTTP & WebSocket), alamat IP lokal 192.168.1.12, dynamic QR Code ber-token expiration untuk pairing cepat Android, daftar trusted client yang terhubung, indikator status NearLock, serta Drop Zone pengiriman berkas langsung dari PC.',
         imageUrl: '/projects/lintas.jpg'
       }
@@ -403,8 +403,8 @@ export const PROJECTS_DATA = {
         desc: 'Keyboard virtual ponsel yang mendukung input teks, Enter, Backspace, Tab, tombol panah navigasi, serta kombinasi modifier Ctrl, Alt, Shift, dan Windows Key.'
       },
       {
-        title: 'Instant Drop — Transfer File 2 Arah Jaringan Lokal',
-        desc: 'Transfer file dua arah (Android ➔ Windows & Windows ➔ Android) melalui jaringan lokal tanpa internet, dilengkapi Drop Zone dan informasi speed serta ETA.'
+        title: 'Instant Drop - Transfer File 2 Arah Jaringan Lokal',
+        desc: 'Transfer file dua arah (Android -> Windows & Windows -> Android) melalui jaringan lokal tanpa internet, dilengkapi Drop Zone dan informasi speed serta ETA.'
       },
       {
         title: 'Verifikasi Integritas File Berbasis Hash SHA-256',
@@ -415,7 +415,7 @@ export const PROJECTS_DATA = {
         desc: 'Sinkronisasi riwayat clipboard dua arah secara real-time antar perangkat dengan kemampuan mendeteksi tautan web (URL) untuk dibuka langsung di browser.'
       },
       {
-        title: 'NearLock — Penguncian PC Otomatis Berdasarkan Jarak',
+        title: 'NearLock - Penguncian PC Otomatis Berdasarkan Jarak',
         desc: 'Memantau kedekatan smartphone pengguna dan secara otomatis mengunci sistem Windows (LockWorkStation) saat ponsel terdeteksi menjauh melewati grace period.'
       },
       {
@@ -449,7 +449,7 @@ export const PROJECTS_DATA = {
     id: 'neurofly',
     name: 'NeuroFly',
     tagline: 'Drosophila Visual Connectome × Pong System',
-    fullTitle: 'NeuroFly — Drosophila Visual Neural Circuit in Pong Control',
+    fullTitle: 'NeuroFly',
     category: 'Computational Neuroscience & Experimental Systems',
     status: 'Research & Experimental Showcase',
     period: '2024',
@@ -522,7 +522,7 @@ export const PROJECTS_DATA = {
     id: 'temuin',
     name: 'Temuin',
     tagline: 'Platform Pelacak & Penemu Barang Hilang Berbasis QR Code',
-    fullTitle: 'Temuin — Aplikasi Pelacak & Penemu Barang Hilang Berbasis QR Code',
+    fullTitle: 'Temuin',
     category: 'Mobile Application / Lost & Found Platform / Full-Stack Application',
     status: 'Production Prototype',
     period: '2024',
@@ -552,7 +552,7 @@ export const PROJECTS_DATA = {
     photos: [
       {
         id: 'temuin-home',
-        title: 'Home Screen — Feed Barang & Manajemen Inventaris',
+        title: 'Home Screen - Feed Barang & Manajemen Inventaris',
         caption: 'Halaman utama menampilkan daftar barang milik pengguna beserta status keamanannya (Safe / Lost), ringkasan laporan aktif, tombol tambah barang baru, dan akses cepat ke pemindai QR.',
         imageUrl: '/projects/temuin.jpg'
       }
@@ -646,7 +646,7 @@ export const PROJECTS_DATA = {
     id: 'dompetq',
     name: 'DompetQ',
     tagline: 'Fintech E-Wallet Mobile Application',
-    fullTitle: 'DompetQ — Secure Digital Wallet & Financial Tracker',
+    fullTitle: 'DompetQ',
     category: 'Mobile Application & Fintech',
     status: 'Portfolio Project Showcase',
     period: '2023',
@@ -689,7 +689,7 @@ export const PROJECTS_DATA = {
     id: 'makalah',
     name: 'Makalah Generator',
     tagline: 'AI Academic Draft & Citation Assistant',
-    fullTitle: 'Makalah Generator — Smart Research & Paper Assistant',
+    fullTitle: 'Makalah Generator',
     category: 'Web Application & Generative AI',
     status: 'Portfolio Project Showcase',
     period: '2024',
@@ -728,7 +728,7 @@ export const PROJECTS_DATA = {
     id: 'sigap',
     name: 'SIGAP',
     tagline: 'Sistem Gerak Aman dari Pencurian',
-    fullTitle: 'SIGAP — Sistem Gerak Aman dari Pencurian (Mobile Security)',
+    fullTitle: 'SIGAP',
     category: 'Mobile Application / Mobile Security / Flutter',
     status: 'Production Prototype',
     period: '2024',
@@ -759,7 +759,7 @@ export const PROJECTS_DATA = {
     photos: [
       {
         id: 'sigap-home',
-        title: 'Home Screen — Status Keamanan & Kontrol Utama',
+        title: 'Home Screen - Status Keamanan & Kontrol Utama',
         caption: 'Dashboard interaktif menampilkan status keamanan terkini (Disarmed / Armed), sakelar proteksi gerak & charger, tombol aktivasi utama, serta menu riwayat dan pengaturan.',
         imageUrl: '/projects/sigap.jpg'
       }
@@ -861,7 +861,7 @@ SecurityProvider (State Management & Orchestration)
     id: 'bingkai',
     name: 'Bingkai',
     tagline: 'Membantu yang berserakan kembali beraturan.',
-    fullTitle: 'Bingkai — Aplikasi Galeri Foto Komputer Lokal (Privasi Penuh)',
+    fullTitle: 'Bingkai',
     category: 'Desktop Utility / Local-First Photo Gallery / Python & Alpine.js',
     status: 'Production Prototype',
     period: '2024',
@@ -886,13 +886,13 @@ SecurityProvider (State Management & Orchestration)
     photos: [
       {
         id: 'bingkai-home',
-        title: 'Galeri Utama — Tampilan Foto Cepat & Folder Lokal Terhubung',
+        title: 'Galeri Utama - Tampilan Foto Cepat & Folder Lokal Terhubung',
         caption: 'Halaman beranda Bingkai menyajikan seluruh foto dari folder D:/Photos dalam grid modern yang rapi. Foto dimuat secepat kilat berkat caching thumbnail WebP tanpa membebani memori laptop.',
         imageUrl: '/projects/bingkai.jpg'
       }
     ],
     problem: 'Kita semua punya folder D:/Photos atau Pictures di laptop yang isinya ribuan foto tak beraturan. Merapikannya terasa melelahkan karena harus klik satu per satu di depan meja kerja. Ingin pakai layanan Cloud seperti Google Photos, tapi takut privasi bocor atau malas menunggu upload berjam-jam untuk file bergiga-giga. Ditambah lagi, melihat foto di depan monitor pakai mouse terasa kaku dan kurang santai.',
-    solution: 'Bingkai bekerja 100% di dalam komputer pengguna secara offline (Local-First). Foto tidak dipindah, tidak diduplikasi, dan sama sekali tidak diunggah ke internet. Bingkai hanya "membaca" folder tersebut dan menyajikannya dalam tampilan galeri modern yang super cepat. Pengguna juga bisa mengontrol galeri foto komputernya dari jarak jauh—cukup rebahan di sofa sambil menikmati kenangan menggunakan Smartphone atau Stick Gamepad (PlayStation/Xbox).',
+    solution: 'Bingkai bekerja 100% di dalam komputer pengguna secara offline (Local-First). Foto tidak dipindah, tidak diduplikasi, dan sama sekali tidak diunggah ke internet. Bingkai hanya "membaca" folder tersebut dan menyajikannya dalam tampilan galeri modern yang super cepat. Pengguna juga bisa mengontrol galeri foto komputernya dari jarak jauh-cukup rebahan di sofa sambil menikmati kenangan menggunakan Smartphone atau Stick Gamepad (PlayStation/Xbox).',
     keyFeatures: [
       {
         title: 'Rebahan Mode (Gamepad & Remote Support)',
@@ -951,7 +951,7 @@ SecurityProvider (State Management & Orchestration)
     name: 'chrome://dino',
     isDino: true,
     tagline: 'T-Rex Offline Runner Game',
-    fullTitle: 'chrome://dino — Chrome T-Rex Dinosaur Game',
+    fullTitle: 'chrome://dino',
     category: 'Built-in Mini Game',
     status: 'Playable Arcade Game',
     period: 'Arcade',
@@ -972,7 +972,7 @@ SecurityProvider (State Management & Orchestration)
     isExternalIframe: true,
     iframeUrl: 'https://portofolio.krisnaartha.my.id',
     tagline: 'Personal Portfolio & Showcase',
-    fullTitle: 'portofolio.krisnaartha.my.id — Personal Portfolio',
+    fullTitle: 'portofolio.krisnaartha.my.id',
     category: 'Live Portfolio Web',
     status: 'Live Website',
     period: '2024',

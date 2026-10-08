@@ -10,7 +10,6 @@ import { PhotosApp } from './components/Apps/PhotosApp';
 import { RecruiterHubApp } from './components/Apps/RecruiterHubApp';
 import { SettingsApp } from './components/Apps/SettingsApp';
 import { CalculatorApp } from './components/Apps/CalculatorApp';
-import { TaskManagerApp } from './components/Apps/TaskManagerApp';
 import { WhatsAppApp } from './components/Apps/WhatsAppApp';
 import { ChromeDinoGame } from './components/Apps/ChromeDinoGame';
 import { ExternalLink } from 'lucide-react';
@@ -23,16 +22,16 @@ import { isMobileDevice } from './utils/device';
 import { playWindowSound, playStartupChime, playClickSound } from './utils/sound';
 
 const PROJECT_TITLES = {
-  theotown: 'ITB STIKOM Bali — Building Plugin for TheoTown',
-  nenacare: 'NenaCare — AI-Powered K3 Incident Reporting System',
-  tatagih: 'Tatagih — Subscription & Bill Manager',
-  temuin: 'Temuin — Lost & Found Platform',
-  lintas: 'Lintas — Phone-to-PC Companion Utility',
-  neurofly: 'NeuroFly — Drosophila Connectome x Pong',
-  dompetq: 'DompetQ — Fintech E-Wallet Mobile App',
-  makalah: 'Makalah Generator — AI Academic Assistant',
-  sigap: 'SIGAP — Sistem Gerak Aman dari Pencurian',
-  bingkai: 'Bingkai — Galeri Foto Komputer Lokal'
+  theotown: 'ITB STIKOM Bali - Building Plugin for TheoTown',
+  nenacare: 'NenaCare - AI-Powered K3 Incident Reporting System',
+  tatagih: 'Tatagih - Subscription & Bill Manager',
+  temuin: 'Temuin - Lost & Found Platform',
+  lintas: 'Lintas - Phone-to-PC Companion Utility',
+  neurofly: 'NeuroFly - Drosophila Connectome x Pong',
+  dompetq: 'DompetQ - Fintech E-Wallet Mobile App',
+  makalah: 'Makalah Generator - AI Academic Assistant',
+  sigap: 'SIGAP - Sistem Gerak Aman dari Pencurian',
+  bingkai: 'Bingkai - Galeri Foto Komputer Lokal'
 };
 
 const getInitialWindows = () => {
@@ -52,7 +51,7 @@ const getInitialWindows = () => {
     {
       id: 'win-krisnaartha-initial',
       appId: 'krisnaartha_site',
-      title: 'portofolio.krisnaartha.my.id — Personal Portfolio Website',
+      title: 'portofolio.krisnaartha.my.id - Personal Portfolio Website',
       icon: 'krisnaartha',
       isMinimized: false,
       isMaximized: false,
@@ -92,9 +91,6 @@ export function App() {
       if ((e.altKey && e.key.toLowerCase() === 'r') || (e.metaKey && e.key.toLowerCase() === 'r')) {
         e.preventDefault();
         setRunDialogOpen(prev => !prev);
-      } else if (e.ctrlKey && e.shiftKey && e.key === 'Escape') {
-        e.preventDefault();
-        launchApp('taskmgr');
       }
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -190,19 +186,25 @@ export function App() {
         initialPosition: { x: 140 + (windows.length % 5) * 25, y: 70 + (windows.length % 5) * 20 }
       },
       browser: {
-        title: 'Agung Krisna — Projects Showcase - Microsoft Edge',
+        title: 'Agung Krisna - Projects Showcase - Microsoft Edge',
         icon: 'edge',
         initialSize: { width: 920, height: 600 },
         initialPosition: { x: 60 + (windows.length % 5) * 25, y: 30 + (windows.length % 5) * 20 }
       },
       photos: {
-        title: customData?.title || 'Photos - Certificate & Gallery',
+        title: customData?.title || 'Photos - Gallery',
         icon: 'image',
-        initialSize: { width: 780, height: 540 },
-        initialPosition: { x: 100 + (windows.length % 5) * 25, y: 50 + (windows.length % 5) * 20 }
+        initialSize: {
+          width: typeof window !== 'undefined' ? Math.min(680, Math.max(480, window.innerWidth - 180)) : 680,
+          height: typeof window !== 'undefined' ? Math.min(760, Math.max(520, window.innerHeight - 85)) : 740
+        },
+        initialPosition: {
+          x: 140 + (windows.length % 5) * 20,
+          y: typeof window !== 'undefined' ? Math.max(30, Math.floor((window.innerHeight - 760 - 50) / 2)) : 38
+        }
       },
       recruiter: {
-        title: 'Curriculum Vitae (CV) — Agung Krisna',
+        title: 'Curriculum Vitae (CV) - Agung Krisna',
         icon: 'pdf',
         initialSize: { width: 860, height: 600 },
         initialPosition: { x: 90 + (windows.length % 5) * 25, y: 45 + (windows.length % 5) * 20 }
@@ -219,12 +221,6 @@ export function App() {
         initialSize: { width: 340, height: 460 },
         initialPosition: { x: 200 + (windows.length % 5) * 25, y: 80 + (windows.length % 5) * 20 }
       },
-      taskmgr: {
-        title: 'Task Manager',
-        icon: 'calculator',
-        initialSize: { width: 680, height: 460 },
-        initialPosition: { x: 130 + (windows.length % 5) * 25, y: 65 + (windows.length % 5) * 20 }
-      },
       antigravity: {
         title: 'Antigravity AI Agent Terminal',
         icon: 'antigravity',
@@ -232,7 +228,7 @@ export function App() {
         initialPosition: { x: 150 + (windows.length % 5) * 25, y: 75 + (windows.length % 5) * 20 }
       },
       theotown: {
-        title: 'ITB STIKOM Bali — Building Plugin for TheoTown',
+        title: 'ITB STIKOM Bali - Building Plugin for TheoTown',
         icon: 'theotown',
         initialSize: { width: 960, height: 620 },
         initialPosition: { x: 60 + (windows.length % 5) * 25, y: 25 + (windows.length % 5) * 20 }
@@ -262,13 +258,13 @@ export function App() {
         initialPosition: { x: 80 + (windows.length % 5) * 25, y: 40 + (windows.length % 5) * 20 }
       },
       sigap: {
-        title: 'SIGAP — Sistem Gerak Aman dari Pencurian',
+        title: 'SIGAP - Sistem Gerak Aman dari Pencurian',
         icon: 'sigap',
         initialSize: { width: 980, height: 640 },
         initialPosition: { x: 70 + (windows.length % 5) * 25, y: 35 + (windows.length % 5) * 20 }
       },
       bingkai: {
-        title: 'Bingkai — Galeri Foto Komputer Lokal',
+        title: 'Bingkai - Galeri Foto Komputer Lokal',
         icon: 'bingkai',
         initialSize: { width: 980, height: 640 },
         initialPosition: { x: 75 + (windows.length % 5) * 25, y: 35 + (windows.length % 5) * 20 }
@@ -337,7 +333,7 @@ export function App() {
       },
 
       krisnaartha_site: {
-        title: 'portofolio.krisnaartha.my.id — Personal Portfolio Website',
+        title: 'portofolio.krisnaartha.my.id - Personal Portfolio Website',
         icon: 'krisnaartha',
         initialSize: { 
           width: typeof window !== 'undefined' ? Math.max(900, window.innerWidth - 200) : 1200, 
@@ -349,7 +345,7 @@ export function App() {
         }
       },
       dino: {
-        title: 'chrome://dino — T-Rex Dinosaur Game',
+        title: 'chrome://dino - T-Rex Dinosaur Game',
         icon: 'chrome_dino',
         initialSize: { width: 840, height: 480 },
         initialPosition: { x: 95 + (windows.length % 5) * 25, y: 45 + (windows.length % 5) * 20 }
@@ -586,8 +582,8 @@ export function App() {
       case 'paint':
         return (
           <PhotosApp
-            initialImage={win.data?.imageUrl || '/certificates/cert_fullstack.jpg'}
-            initialTitle={win.data?.title || (win.appId === 'paint' ? 'Paint Studio Showcase' : 'Photos - Certificate & Gallery')}
+            initialImage={win.data?.imageUrl || '/certificates/foto_krisna.jpg'}
+            initialTitle={win.data?.title || (win.appId === 'paint' ? 'Paint Studio Showcase' : 'Photos - Gallery')}
           />
         );
       case 'recruiter':
@@ -628,8 +624,6 @@ export function App() {
         );
       case 'calculator':
         return <CalculatorApp onLaunchApp={launchApp} />;
-      case 'taskmgr':
-        return <TaskManagerApp />;
       default:
         return (
           <div style={{ padding: '24px', color: '#fff' }}>
@@ -669,7 +663,7 @@ export function App() {
           hideTitlebar={[
             'chrome', 'browser', 'theotown', 'nenacare', 'tatagih', 'temuin', 'lintas',
             'neurofly', 'dompetq', 'makalah', 'sigap', 'bingkai', 'ldplayer',
-            'explorer', 'recycle_bin', 'notepad', 'todo', 'onenote', 'terminal', 'antigravity', 'dino'
+            'explorer', 'recycle_bin', 'notepad', 'todo', 'onenote', 'terminal', 'antigravity'
           ].includes(win.appId) || Boolean(win.data?.projectId)}
         >
           {renderAppContent(win)}
@@ -702,7 +696,6 @@ export function App() {
           else if (cmd === 'cmd' || cmd === 'powershell') launchApp('terminal');
           else if (cmd === 'explorer') launchApp('explorer');
           else if (cmd === 'notepad') launchApp('notepad');
-          else if (cmd === 'taskmgr') launchApp('taskmgr');
           else if (cmd === 'calc') launchApp('calculator');
           else if (cmd === 'settings') launchApp('settings');
           else if (cmd === 'linkedin') launchApp('linkedin');

@@ -151,7 +151,7 @@ const renderSigapPhoneMockup = (type) => {
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '9px', color: '#94a3b8' }}>
                 <span>Status Charger:</span>
-                <span style={{ color: '#38bdf8', fontWeight: 600 }}>Terhubung (98% ⚡)</span>
+                <span style={{ color: '#38bdf8', fontWeight: 600 }}>Terhubung (98% )</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '9px', color: '#94a3b8' }}>
                 <span>Watchdog Volume:</span>
@@ -172,7 +172,7 @@ const renderSigapPhoneMockup = (type) => {
           <div style={{ display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between', textAlign: 'center', background: 'radial-gradient(circle, rgba(239,68,68,0.2) 0%, rgba(15,23,42,0) 80%)' }}>
             <div style={{ paddingTop: '6px' }}>
               <div style={{ backgroundColor: '#ef4444', color: '#ffffff', padding: '4px 10px', borderRadius: '6px', fontSize: '11px', fontWeight: 900, letterSpacing: '0.8px', display: 'inline-block' }}>
-                🚨 PERINGATAN ALARM!
+                PERINGATAN ALARM!
               </div>
               <div style={{ fontSize: '11px', fontWeight: 700, color: '#fca5a5', marginTop: '6px' }}>
                 GERAKAN MENCURIGAKAN TERDETEKSI
@@ -199,9 +199,9 @@ const renderSigapPhoneMockup = (type) => {
             </div>
 
             <div style={{ backgroundColor: 'rgba(15, 23, 42, 0.8)', border: '1px solid #ef4444', borderRadius: '8px', padding: '8px', textAlign: 'left', display: 'flex', flexDirection: 'column', gap: '3px' }}>
-              <div style={{ fontSize: '9px', color: '#cbd5e1' }}>📸 Kamera Depan: <b style={{ color: '#4ade80' }}>Foto Tertangkap</b></div>
-              <div style={{ fontSize: '9px', color: '#cbd5e1' }}>📍 GPS Darurat: <b style={{ color: '#4ade80' }}>-6.2088, 106.8456</b></div>
-              <div style={{ fontSize: '9px', color: '#cbd5e1' }}>🔒 Immersive Mode: <b style={{ color: '#38bdf8' }}>Navigasi Diblokir</b></div>
+              <div style={{ fontSize: '9px', color: '#cbd5e1' }}>Kamera Depan: <b style={{ color: '#4ade80' }}>Foto Tertangkap</b></div>
+              <div style={{ fontSize: '9px', color: '#cbd5e1' }}>GPS Darurat: <b style={{ color: '#4ade80' }}>-6.2088, 106.8456</b></div>
+              <div style={{ fontSize: '9px', color: '#cbd5e1' }}>Immersive Mode: <b style={{ color: '#38bdf8' }}>Navigasi Diblokir</b></div>
             </div>
 
             <div>
@@ -314,7 +314,7 @@ const renderSigapPhoneMockup = (type) => {
                   <span style={{ fontSize: '8.5px', color: '#64748b' }}>Hari ini, 10:24 WIB</span>
                 </div>
                 <div style={{ fontSize: '8.5px', color: '#94a3b8', marginTop: '3px' }}>
-                  📍 -6.2088, 106.8456 • Foto Tersimpan
+                  -6.2088, 106.8456 • Foto Tersimpan
                 </div>
                 <div style={{ display: 'flex', gap: '4px', marginTop: '4px' }}>
                   <span style={{ fontSize: '8px', backgroundColor: '#1e3a8a', color: '#93c5fd', padding: '2px 5px', borderRadius: '3px' }}>Buka Maps</span>
@@ -328,7 +328,7 @@ const renderSigapPhoneMockup = (type) => {
                   <span style={{ fontSize: '8.5px', color: '#64748b' }}>Kemarin, 15:40 WIB</span>
                 </div>
                 <div style={{ fontSize: '8.5px', color: '#94a3b8', marginTop: '3px' }}>
-                  📍 -6.2101, 106.8402 • Foto Gagal (Ditolak)
+                  -6.2101, 106.8402 • Foto Gagal (Ditolak)
                 </div>
                 <div style={{ display: 'flex', gap: '4px', marginTop: '4px' }}>
                   <span style={{ fontSize: '8px', backgroundColor: '#1e3a8a', color: '#93c5fd', padding: '2px 5px', borderRadius: '3px' }}>Buka Maps</span>
@@ -389,7 +389,7 @@ const renderSigapPhoneMockup = (type) => {
         <span>09:41</span>
         <div className="sigap-statusbar-right">
           <span>4G</span>
-          <span>98% ⚡</span>
+          <span>98% </span>
         </div>
       </div>
       <div className="sigap-phone-body">
@@ -580,13 +580,13 @@ const renderTemuinPhoneMockup = (type) => {
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
               <div style={{ backgroundColor: '#111827', padding: '6px 8px', borderRadius: '6px', border: '1px solid #1f2937' }}>
-                <div style={{ fontSize: '8.5px', color: '#94a3b8' }}>📍 Titik GPS (geolocator):</div>
+                <div style={{ fontSize: '8.5px', color: '#94a3b8' }}>Titik GPS (geolocator):</div>
                 <div style={{ fontSize: '9.5px', fontWeight: 700, color: '#38bdf8' }}>-6.2088, 106.8456 (Akurat)</div>
                 <div style={{ fontSize: '7.5px', color: '#64748b' }}>Tercatat saat laporan dibuat</div>
               </div>
 
               <div style={{ backgroundColor: '#111827', padding: '6px 8px', borderRadius: '6px', border: '1px solid #1f2937' }}>
-                <div style={{ fontSize: '8.5px', color: '#94a3b8' }}>📸 Foto Bukti (image_picker):</div>
+                <div style={{ fontSize: '8.5px', color: '#94a3b8' }}>Foto Bukti (image_picker):</div>
                 <div style={{ fontSize: '9px', color: '#4ade80', fontWeight: 600 }}>1 Foto Terlampir (bukti.jpg)</div>
               </div>
 
@@ -647,7 +647,7 @@ const renderTemuinPhoneMockup = (type) => {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
               <div style={{ height: '70px', backgroundColor: '#1e293b', borderRadius: '6px', border: '1px solid #334155', position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <div style={{ position: 'absolute', top: '4px', left: '6px', fontSize: '8px', color: '#38bdf8', fontWeight: 700 }}>
-                  📍 GPS: -6.2088, 106.8456
+                  GPS: -6.2088, 106.8456
                 </div>
                 <div style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: '#ef4444', border: '2px solid #ffffff' }}></div>
               </div>
@@ -754,7 +754,7 @@ const renderBingkaiMockup = (type) => {
                   }}
                 >
                   <div style={{ flex: 1, background: item.color, minHeight: '62px', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <span style={{ fontSize: '20px', opacity: 0.85 }}>📷</span>
+                    <span style={{ fontSize: '20px', opacity: 0.85 }}></span>
                     {item.fav && (
                       <div style={{ position: 'absolute', top: '4px', right: '4px', backgroundColor: 'rgba(0,0,0,0.6)', borderRadius: '50%', width: '18px', height: '18px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <Heart size={10} color="#f43f5e" fill="#f43f5e" />
@@ -777,7 +777,7 @@ const renderBingkaiMockup = (type) => {
 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#0b1120', padding: '5px 8px', borderRadius: '4px', fontSize: '9px', color: '#94a3b8' }}>
               <span style={{ color: '#10b981' }}>● 100% Offline (Local-First) • Tidak ada foto yang diunggah ke cloud</span>
-              <span style={{ color: '#f59e0b', fontWeight: 600 }}>Tekan [A] di Gamepad untuk Rebahan Mode 🎮</span>
+              <span style={{ color: '#f59e0b', fontWeight: 600 }}>Tekan [A] di Gamepad untuk Rebahan Mode </span>
             </div>
           </div>
         );
@@ -842,7 +842,7 @@ const renderBingkaiMockup = (type) => {
           <div style={{ display: 'flex', flexDirection: 'column', height: '100%', alignItems: 'center', justifyContent: 'space-between', gap: '6px' }}>
             <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #1e293b', paddingBottom: '6px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <span style={{ fontSize: '13px' }}>⚡</span>
+                <span style={{ fontSize: '13px' }}></span>
                 <span style={{ fontSize: '11px', fontWeight: 700, color: '#f1f5f9' }}>Mode Swipe Kurasi (Tinder untuk Foto)</span>
               </div>
               <span style={{ fontSize: '9.5px', color: '#fbbf24', backgroundColor: 'rgba(251, 191, 36, 0.1)', padding: '2px 6px', borderRadius: '4px', border: '1px solid rgba(251, 191, 36, 0.2)' }}>
@@ -866,7 +866,7 @@ const renderBingkaiMockup = (type) => {
                 background: 'linear-gradient(145deg, #1e3a8a, #0f172a)'
               }}>
                 <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
-                  <span style={{ fontSize: '36px' }}>🏖️</span>
+                  <span style={{ fontSize: '36px' }}></span>
                   <div style={{ position: 'absolute', top: '8px', left: '8px', backgroundColor: 'rgba(16, 185, 129, 0.9)', color: '#ffffff', fontSize: '9px', fontWeight: 800, padding: '2px 6px', borderRadius: '4px', textTransform: 'uppercase' }}>
                     FAVORIT →
                   </div>
@@ -899,7 +899,7 @@ const renderBingkaiMockup = (type) => {
             </div>
 
             <div style={{ fontSize: '9px', color: '#94a3b8', backgroundColor: '#0f172a', padding: '4px 8px', borderRadius: '4px', textAlign: 'center', width: '100%' }}>
-              💡 <b>Tips Santai:</b> Bersihkan puluhan foto sambil rebahan di sofa menggunakan Stick Gamepad atau usap layar HP.
+              <b>Tips Santai:</b> Bersihkan puluhan foto sambil rebahan di sofa menggunakan Stick Gamepad atau usap layar HP.
             </div>
           </div>
         );
@@ -924,7 +924,7 @@ const renderBingkaiMockup = (type) => {
                   <span style={{ fontSize: '8.5px', color: '#94a3b8' }}>3.8 MB</span>
                 </div>
                 <div style={{ flex: 1, backgroundColor: '#1e293b', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '80px', background: 'linear-gradient(135deg, #1e3a8a, #0369a1)' }}>
-                  <span style={{ fontSize: '28px' }}>🏔️</span>
+                  <span style={{ fontSize: '28px' }}></span>
                 </div>
                 <div style={{ fontSize: '9px', color: '#cbd5e1' }}>
                   <div style={{ fontWeight: 600, color: '#f1f5f9' }}>IMG_2024_Bromo.jpg</div>
@@ -942,7 +942,7 @@ const renderBingkaiMockup = (type) => {
                   <span style={{ fontSize: '8.5px', color: '#94a3b8' }}>3.8 MB</span>
                 </div>
                 <div style={{ flex: 1, backgroundColor: '#1e293b', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '80px', background: 'linear-gradient(135deg, #1e3a8a, #0369a1)' }}>
-                  <span style={{ fontSize: '28px' }}>🏔️</span>
+                  <span style={{ fontSize: '28px' }}></span>
                 </div>
                 <div style={{ fontSize: '9px', color: '#cbd5e1' }}>
                   <div style={{ fontWeight: 600, color: '#f1f5f9' }}>IMG_2024_Bromo (1).jpg</div>
@@ -957,7 +957,7 @@ const renderBingkaiMockup = (type) => {
             </div>
 
             <div style={{ fontSize: '9px', color: '#94a3b8', backgroundColor: '#0b1120', padding: '5px 8px', borderRadius: '4px', display: 'flex', justifyContent: 'space-between' }}>
-              <span>🛡️ File yang dihapus dipindahkan ke Tong Sampah Bingkai, tidak langsung hilang permanen.</span>
+              <span>File yang dihapus dipindahkan ke Tong Sampah Bingkai, tidak langsung hilang permanen.</span>
               <span style={{ color: '#38bdf8', cursor: 'pointer', fontWeight: 600 }}>Hapus Duplikat &rarr;</span>
             </div>
           </div>
@@ -979,9 +979,9 @@ const renderBingkaiMockup = (type) => {
 
             <div style={{ flex: 1, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
               {[
-                { title: 'Liburan Bali 2024', count: '124 Foto', icon: '🏖️', color: 'linear-gradient(135deg, #0284c7, #0369a1)', badge: '0 KB Duplikasi' },
-                { title: 'Wisuda & Kuliah', count: '85 Foto', icon: '🎓', color: 'linear-gradient(135deg, #7c3aed, #581c87)', badge: '0 KB Duplikasi' },
-                { title: 'Keluarga Besar', count: '210 Foto', icon: '👨‍👩‍👧‍👦', color: 'linear-gradient(135deg, #059669, #065f46)', badge: '0 KB Duplikasi' }
+                { title: 'Liburan Bali 2024', count: '124 Foto', icon: '', color: 'linear-gradient(135deg, #0284c7, #0369a1)', badge: '0 KB Duplikasi' },
+                { title: 'Wisuda & Kuliah', count: '85 Foto', icon: '', color: 'linear-gradient(135deg, #7c3aed, #581c87)', badge: '0 KB Duplikasi' },
+                { title: 'Keluarga Besar', count: '210 Foto', icon: '', color: 'linear-gradient(135deg, #059669, #065f46)', badge: '0 KB Duplikasi' }
               ].map((album, idx) => (
                 <div key={idx} style={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '8px', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
                   <div style={{ flex: 1, background: album.color, display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '80px', position: 'relative' }}>
@@ -1029,8 +1029,7 @@ const renderBingkaiMockup = (type) => {
                 <div key={idx} style={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '6px', padding: '6px 10px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <div style={{ width: '28px', height: '28px', backgroundColor: '#1e293b', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px' }}>
-                      🖼️
-                    </div>
+                      </div>
                     <div>
                       <div style={{ fontSize: '9.5px', fontWeight: 600, color: '#f1f5f9' }}>{item.name}</div>
                       <div style={{ fontSize: '8px', color: '#64748b' }}>Asal: {item.origin} • {item.size} • Dihapus {item.time}</div>
@@ -1045,7 +1044,7 @@ const renderBingkaiMockup = (type) => {
             </div>
 
             <div style={{ backgroundColor: '#0b1120', border: '1px solid #065f46', borderRadius: '6px', padding: '6px 10px', fontSize: '9px', color: '#a7f3d0', display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <span>🛡️</span>
+              <span></span>
               <span><b>Bebas Rasa Panik:</b> Salah pencet tombol hapus? File tidak langsung lenyap dari komputermu. Cukup klik Restore dan foto akan kembali ke folder aslinya dalam sekejap!</span>
             </div>
           </div>
@@ -1086,11 +1085,11 @@ const renderBingkaiMockup = (type) => {
           <div style={{ width: '9px', height: '9px', borderRadius: '50%', backgroundColor: '#ef4444' }}></div>
           <div style={{ width: '9px', height: '9px', borderRadius: '50%', backgroundColor: '#f59e0b' }}></div>
           <div style={{ width: '9px', height: '9px', borderRadius: '50%', backgroundColor: '#10b981' }}></div>
-          <span style={{ marginLeft: '6px', fontWeight: 600, color: '#f1f5f9' }}>Bingkai — D:/Photos</span>
+          <span style={{ marginLeft: '6px', fontWeight: 600, color: '#f1f5f9' }}>Bingkai - D:/Photos</span>
           <span style={{ fontSize: '9px', backgroundColor: '#064e3b', color: '#6ee7b7', padding: '1px 6px', borderRadius: '4px', fontWeight: 600 }}>100% Offline</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '10px' }}>
-          <span style={{ color: '#38bdf8' }}>🎮 Gamepad Siap</span>
+          <span style={{ color: '#38bdf8' }}>Gamepad Siap</span>
           <span style={{ color: '#64748b' }}>v1.2</span>
         </div>
       </div>
@@ -1108,22 +1107,22 @@ const renderBingkaiMockup = (type) => {
         }}>
           <div style={{ fontSize: '8.5px', color: '#64748b', textTransform: 'uppercase', padding: '2px 6px', fontWeight: 700 }}>Menu Galeri</div>
           <div style={{ padding: '5px 7px', borderRadius: '5px', backgroundColor: type === 'bingkai-home' ? '#1e293b' : 'transparent', color: type === 'bingkai-home' ? '#38bdf8' : '#94a3b8', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '5px' }}>
-            <span>📷</span> Semua Foto
+            <span></span> Semua Foto
           </div>
           <div style={{ padding: '5px 7px', borderRadius: '5px', backgroundColor: type === 'bingkai-rebahan' ? '#1e293b' : 'transparent', color: type === 'bingkai-rebahan' ? '#f59e0b' : '#94a3b8', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '5px' }}>
-            <span>🎮</span> Rebahan Mode
+            <span></span> Rebahan Mode
           </div>
           <div style={{ padding: '5px 7px', borderRadius: '5px', backgroundColor: type === 'bingkai-swipe' ? '#1e293b' : 'transparent', color: type === 'bingkai-swipe' ? '#ec4899' : '#94a3b8', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '5px' }}>
-            <span>⚡</span> Swipe Kurasi
+            <span></span> Swipe Kurasi
           </div>
           <div style={{ padding: '5px 7px', borderRadius: '5px', backgroundColor: type === 'bingkai-duplicate' ? '#1e293b' : 'transparent', color: type === 'bingkai-duplicate' ? '#a855f7' : '#94a3b8', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '5px' }}>
-            <span>🔍</span> Foto Kembar
+            <span></span> Foto Kembar
           </div>
           <div style={{ padding: '5px 7px', borderRadius: '5px', backgroundColor: type === 'bingkai-album' ? '#1e293b' : 'transparent', color: type === 'bingkai-album' ? '#10b981' : '#94a3b8', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '5px' }}>
-            <span>📁</span> Album Virtual
+            <span></span> Album Virtual
           </div>
           <div style={{ padding: '5px 7px', borderRadius: '5px', backgroundColor: type === 'bingkai-trash' ? '#1e293b' : 'transparent', color: type === 'bingkai-trash' ? '#ef4444' : '#94a3b8', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '5px' }}>
-            <span>🗑️</span> Tong Sampah
+            <span></span> Tong Sampah
           </div>
 
           <div style={{ marginTop: 'auto', padding: '6px', backgroundColor: '#030712', borderRadius: '6px', fontSize: '8.5px', color: '#64748b', textAlign: 'center' }}>
@@ -1300,7 +1299,7 @@ const renderTatagihMockup = (type) => {
               </div>
 
               <div style={{ backgroundColor: '#131b2e', border: '1px solid #1e293b', borderRadius: '6px', padding: '7px 9px', display: 'flex', gap: '8px', alignItems: 'flex-start' }}>
-                <span style={{ fontSize: '12px' }}>💡</span>
+                <span style={{ fontSize: '12px' }}></span>
                 <div style={{ flex: 1 }}>
                   <div style={{ fontSize: '9.5px', fontWeight: 700, color: '#f8fafc' }}>Optimasi Paket Patungan Spotify Family</div>
                   <div style={{ fontSize: '8.5px', color: '#94a3b8', lineHeight: 1.35, marginTop: '2px' }}>
@@ -1311,7 +1310,7 @@ const renderTatagihMockup = (type) => {
               </div>
 
               <div style={{ backgroundColor: '#131b2e', border: '1px solid #7f1d1d', borderRadius: '6px', padding: '7px 9px', display: 'flex', gap: '8px', alignItems: 'flex-start' }}>
-                <span style={{ fontSize: '12px' }}>⚠️</span>
+                <span style={{ fontSize: '12px' }}></span>
                 <div style={{ flex: 1 }}>
                   <div style={{ fontSize: '9.5px', fontWeight: 700, color: '#fca5a5' }}>Overlapping Video Streaming (Netflix &amp; Disney+)</div>
                   <div style={{ fontSize: '8.5px', color: '#94a3b8', lineHeight: 1.35, marginTop: '2px' }}>
@@ -1322,7 +1321,7 @@ const renderTatagihMockup = (type) => {
               </div>
 
               <div style={{ backgroundColor: '#131b2e', border: '1px solid #1e293b', borderRadius: '6px', padding: '7px 9px', display: 'flex', gap: '8px', alignItems: 'flex-start' }}>
-                <span style={{ fontSize: '12px' }}>🩸</span>
+                <span style={{ fontSize: '12px' }}></span>
                 <div style={{ flex: 1 }}>
                   <div style={{ fontSize: '9.5px', fontWeight: 700, color: '#f8fafc' }}>Vampire Spending: 3 Layanan Mikro Terakumulasi</div>
                   <div style={{ fontSize: '8.5px', color: '#94a3b8', lineHeight: 1.35, marginTop: '2px' }}>
@@ -1651,7 +1650,7 @@ const renderTatagihMockup = (type) => {
             </div>
 
             <div style={{ alignSelf: 'flex-start', maxWidth: '92%', backgroundColor: '#182533', padding: '9px 11px', borderRadius: '8px 8px 8px 0', border: '1px solid #2b5278' }}>
-              <div style={{ fontSize: '9.5px', color: '#f59e0b', fontWeight: 700, marginBottom: '3px' }}>🔔 Peringatan Tagihan H-3 (Tatagih Reminder)</div>
+              <div style={{ fontSize: '9.5px', color: '#f59e0b', fontWeight: 700, marginBottom: '3px' }}>Peringatan Tagihan H-3 (Tatagih Reminder)</div>
               <div style={{ fontSize: '9px', color: '#e2e8f0', lineHeight: 1.4 }}>
                 Halo <b>Krisna</b>! Langganan <b>Netflix Premium</b> sebesar <b>Rp 186.000</b> akan jatuh tempo dalam 3 hari (<b>20 Oktober 2024</b>).<br />
                 Status Auto-Renewal: <span style={{ color: '#4ade80', fontWeight: 700 }}>Aktif (Debit Mandiri)</span><br />
@@ -2028,7 +2027,7 @@ const renderNenaCareMockup = (type) => {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #1e293b', paddingBottom: '4px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <Bot size={14} color="#38bdf8" />
-                <span style={{ fontSize: '10.5px', fontWeight: 700, color: '#f8fafc' }}>Telegram Bot Integration — NenaCare HSE Alert</span>
+                <span style={{ fontSize: '10.5px', fontWeight: 700, color: '#f8fafc' }}>Telegram Bot Integration - NenaCare HSE Alert</span>
               </div>
               <span style={{ fontSize: '8px', color: '#38bdf8' }}>Webhook &amp; Inline Keyboard Callback</span>
             </div>
@@ -2036,22 +2035,22 @@ const renderNenaCareMockup = (type) => {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', flex: 1, backgroundColor: '#0e1621', borderRadius: '8px', padding: '10px', border: '1px solid #17212b' }}>
               <div style={{ backgroundColor: '#182533', padding: '10px 12px', borderRadius: '8px 8px 8px 0', border: '1px solid #243547', maxWidth: '85%' }}>
                 <div style={{ fontSize: '10px', fontWeight: 700, color: '#ef4444', marginBottom: '4px' }}>
-                  🚨 LAPORAN K3 BARU MASUK! #2312
+                  LAPORAN K3 BARU MASUK! #2312
                 </div>
                 <div style={{ fontSize: '8.5px', color: '#e2e8f0', lineHeight: 1.45 }}>
-                  📍 <b>Lokasi:</b> Dapur / Kitchen Nena Cafe<br />
-                  🏷️ <b>Kategori:</b> Api &amp; Gas (Anonim)<br />
-                  📝 <b>Deskripsi:</b> Tercium bau gas menyengat di dekat kompor utama.<br />
-                  🤖 <b>Analisis AI Gemini:</b> <span style={{ color: '#ef4444', fontWeight: 700 }}>PRIORITAS TINGGI</span><br />
-                  💡 <b>Saran Mitigasi:</b> Segera matikan kompor, cabut regulator LPG, dan evakuasi dapur.
+                  <b>Lokasi:</b> Dapur / Kitchen Nena Cafe<br />
+                  <b>Kategori:</b> Api &amp; Gas (Anonim)<br />
+                  <b>Deskripsi:</b> Tercium bau gas menyengat di dekat kompor utama.<br />
+                  <b>Analisis AI Gemini:</b> <span style={{ color: '#ef4444', fontWeight: 700 }}>PRIORITAS TINGGI</span><br />
+                  <b>Saran Mitigasi:</b> Segera matikan kompor, cabut regulator LPG, dan evakuasi dapur.
                 </div>
 
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px', marginTop: '8px' }}>
                   <div style={{ backgroundColor: '#2b5278', color: '#ffffff', textAlign: 'center', padding: '4px', borderRadius: '4px', fontSize: '8px', fontWeight: 700 }}>
-                    🚀 Proses
+                    Proses
                   </div>
                   <div style={{ backgroundColor: '#1e3b2e', color: '#86efac', textAlign: 'center', padding: '4px', borderRadius: '4px', fontSize: '8px', fontWeight: 700 }}>
-                    ✅ Selesai
+                    Selesai
                   </div>
                 </div>
               </div>
@@ -2109,14 +2108,14 @@ const renderNenaCareMockup = (type) => {
         return (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', height: '100%', overflowY: 'auto' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #1e293b', paddingBottom: '4px' }}>
-              <div style={{ fontSize: '10.5px', fontWeight: 800, color: '#ffffff' }}>Generator Dokumen Laporan K3 — Ekspor PDF (Dompdf)</div>
+              <div style={{ fontSize: '10.5px', fontWeight: 800, color: '#ffffff' }}>Generator Dokumen Laporan K3 - Ekspor PDF (Dompdf)</div>
               <span style={{ fontSize: '8px', backgroundColor: '#065f46', color: '#a7f3d0', padding: '2px 6px', borderRadius: '3px' }}>A4 Landscape</span>
             </div>
 
             <div style={{ backgroundColor: '#f8fafc', color: '#0f172a', borderRadius: '6px', padding: '10px 14px', flex: 1, border: '1px solid #cbd5e1', display: 'flex', flexDirection: 'column', gap: '6px', fontFamily: 'serif' }}>
               <div style={{ borderBottom: '2px solid #0f172a', paddingBottom: '4px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
-                  <div style={{ fontSize: '11px', fontWeight: 900, letterSpacing: '0.5px' }}>NENA CAFE — HSE &amp; K3 INCIDENT AUDIT REPORT</div>
+                  <div style={{ fontSize: '11px', fontWeight: 900, letterSpacing: '0.5px' }}>NENA CAFE - HSE &amp; K3 INCIDENT AUDIT REPORT</div>
                   <div style={{ fontSize: '7.5px', color: '#475569' }}>Laporan Resmi Rekapitulasi Keselamatan &amp; Kesehatan Kerja</div>
                 </div>
                 <div style={{ fontSize: '7.5px', textAlign: 'right', color: '#475569' }}>
@@ -2209,13 +2208,13 @@ const renderTheoTownMockup = (type) => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', height: '100%' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#0f172a', padding: '6px 12px', borderRadius: '6px', border: '1px solid #1e293b', fontSize: '11px', fontFamily: 'monospace' }}>
               <div style={{ display: 'flex', gap: '12px', color: '#94a3b8' }}>
-                <span>🕒 10:30 AM</span>
-                <span>📅 Oct 12, 2024</span>
-                <span style={{ color: '#38bdf8' }}>👥 Pop: 14,870</span>
+                <span>10:30 AM</span>
+                <span>Oct 12, 2024</span>
+                <span style={{ color: '#38bdf8' }}>Pop: 14,870</span>
               </div>
               <div style={{ display: 'flex', gap: '14px' }}>
-                <span style={{ color: '#22c55e', fontWeight: 700 }}>💵 §235,100</span>
-                <span style={{ color: '#fbbf24' }}>😊 Happ: 85%</span>
+                <span style={{ color: '#22c55e', fontWeight: 700 }}>§235,100</span>
+                <span style={{ color: '#fbbf24' }}>Happ: 85%</span>
                 <span style={{ backgroundColor: '#0284c7', color: '#fff', padding: '1px 6px', borderRadius: '3px', fontSize: '10px' }}>Speed: 1x</span>
               </div>
             </div>
@@ -2246,7 +2245,7 @@ const renderTheoTownMockup = (type) => {
 
               <div style={{ position: 'absolute', bottom: '10px', right: '10px', zIndex: 20, backgroundColor: 'rgba(15, 23, 42, 0.95)', border: '1px solid #38bdf8', borderRadius: '8px', padding: '10px 12px', width: '220px', boxShadow: '0 6px 20px rgba(0,0,0,0.7)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #334155', paddingBottom: '4px', marginBottom: '6px' }}>
-                  <span style={{ fontSize: '11px', fontWeight: 800, color: '#f8fafc' }}>🏛️ ITB STIKOM BALI</span>
+                  <span style={{ fontSize: '11px', fontWeight: 800, color: '#f8fafc' }}>ITB STIKOM BALI</span>
                   <span style={{ fontSize: '8.5px', backgroundColor: '#0369a1', color: '#e0f2fe', padding: '1px 5px', borderRadius: '3px' }}>LVL 4</span>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '3px', fontSize: '9.5px' }}>
@@ -2277,7 +2276,7 @@ const renderTheoTownMockup = (type) => {
               </div>
               <div style={{ backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: '6px', padding: '8px', textAlign: 'center' }}>
                 <div style={{ fontSize: '10px', color: '#94a3b8' }}>Education Aspect</div>
-                <div style={{ fontSize: '11px', fontWeight: 700, color: '#38bdf8', marginTop: '2px' }}>1000 — 2500</div>
+                <div style={{ fontSize: '11px', fontWeight: 700, color: '#38bdf8', marginTop: '2px' }}>1000 - 2500</div>
               </div>
               <div style={{ backgroundColor: '#1e293b', border: '1px solid #334155', borderRadius: '6px', padding: '8px', textAlign: 'center' }}>
                 <div style={{ fontSize: '10px', color: '#94a3b8' }}>Ukuran Lot</div>
@@ -2296,8 +2295,8 @@ const renderTheoTownMockup = (type) => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', height: '100%' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#0f172a', padding: '8px 12px', borderRadius: '6px', border: '1px solid #1e293b' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{ fontSize: '14px' }}>🎨</span>
-                <span style={{ fontSize: '12px', fontWeight: 700, color: '#f8fafc' }}>StikomBali.png — Isometric Pixel Art Sprite Studio</span>
+                <span style={{ fontSize: '14px' }}></span>
+                <span style={{ fontSize: '12px', fontWeight: 700, color: '#f8fafc' }}>StikomBali.png - Isometric Pixel Art Sprite Studio</span>
               </div>
               <span style={{ fontSize: '10px', backgroundColor: '#0369a1', color: '#bae6fd', padding: '2px 8px', borderRadius: '4px', fontWeight: 600 }}>Proyeksi Isometrik 2:1 (26.565°)</span>
             </div>
@@ -2316,14 +2315,14 @@ const renderTheoTownMockup = (type) => {
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <div style={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '6px', padding: '10px' }}>
-                  <div style={{ fontSize: '11px', fontWeight: 700, color: '#f59e0b', marginBottom: '4px' }}>🏛️ Atap Bertingkat Khas Bali (Meru Tumpang)</div>
+                  <div style={{ fontSize: '11px', fontWeight: 700, color: '#f59e0b', marginBottom: '4px' }}>Atap Bertingkat Khas Bali (Meru Tumpang)</div>
                   <div style={{ fontSize: '10px', color: '#cbd5e1', lineHeight: '1.4' }}>
                     Struktur atap tradisional berlapis yang mencerminkan identitas arsitektur kampus ITB STIKOM Bali Renon, disesuaikan dengan kemiringan atap 2.5D.
                   </div>
                 </div>
 
                 <div style={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '6px', padding: '10px' }}>
-                  <div style={{ fontSize: '11px', fontWeight: 700, color: '#38bdf8', marginBottom: '4px' }}>⛩️ Gerbang Candi Bentar &amp; Fasad Bata Merah</div>
+                  <div style={{ fontSize: '11px', fontWeight: 700, color: '#38bdf8', marginBottom: '4px' }}>Gerbang Candi Bentar &amp; Fasad Bata Merah</div>
                   <div style={{ fontSize: '10px', color: '#cbd5e1', lineHeight: '1.4' }}>
                     Detail gerbang masuk terbelah khas Bali dengan tekstur bata merah terakota dan jendela kaca perkuliahan yang modern.
                   </div>
@@ -2356,8 +2355,8 @@ const renderTheoTownMockup = (type) => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', height: '100%' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#0f172a', padding: '8px 12px', borderRadius: '6px', border: '1px solid #1e293b' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{ fontSize: '13px', color: '#38bdf8' }}>📄</span>
-                <span style={{ fontSize: '12px', fontWeight: 700, color: '#f8fafc' }}>code.json — Engine Plugin Object Specification</span>
+                <span style={{ fontSize: '13px', color: '#38bdf8' }}></span>
+                <span style={{ fontSize: '12px', fontWeight: 700, color: '#f8fafc' }}>code.json - Engine Plugin Object Specification</span>
               </div>
               <span style={{ fontSize: '10px', color: '#4ade80', backgroundColor: '#064e3b', padding: '2px 8px', borderRadius: '4px', fontWeight: 600 }}>JSON Schema Validated</span>
             </div>
@@ -2430,8 +2429,8 @@ const renderTheoTownMockup = (type) => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', height: '100%' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#0f172a', padding: '8px 12px', borderRadius: '6px', border: '1px solid #1e293b' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{ fontSize: '13px', color: '#c084fc' }}>🏷️</span>
-                <span style={{ fontSize: '12px', fontWeight: 700, color: '#f8fafc' }}>plugin.manifest — Metadata Mod Resmi TheoTown</span>
+                <span style={{ fontSize: '13px', color: '#c084fc' }}></span>
+                <span style={{ fontSize: '12px', fontWeight: 700, color: '#f8fafc' }}>plugin.manifest - Metadata Mod Resmi TheoTown</span>
               </div>
               <span style={{ fontSize: '10px', color: '#38bdf8', backgroundColor: '#0c4a6e', padding: '2px 8px', borderRadius: '4px', fontWeight: 600 }}>TheoTown Plugin Manager Compatible</span>
             </div>
@@ -2453,14 +2452,14 @@ const renderTheoTownMockup = (type) => {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                   <span style={{ fontSize: '11px', color: '#94a3b8' }}>Description:</span>
                   <span style={{ fontSize: '11px', color: '#e2e8f0', backgroundColor: '#0f172a', padding: '8px 10px', borderRadius: '4px', border: '1px solid #1e293b' }}>
-                    Plugin Gedung Stikom Bali Renon — Menambahkan bangunan edukasi kampus ITB STIKOM Bali ke dalam game TheoTown.
+                    Plugin Gedung Stikom Bali Renon - Menambahkan bangunan edukasi kampus ITB STIKOM Bali ke dalam game TheoTown.
                   </span>
                 </div>
               </div>
 
               <div style={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '8px', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <div style={{ fontSize: '11px', fontWeight: 700, color: '#cbd5e1', borderBottom: '1px solid #334155', paddingBottom: '4px' }}>
-                  📦 Struktur Berkas Plugin:
+                  Struktur Berkas Plugin:
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '5px', fontSize: '10px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#4ade80' }}>
@@ -2499,7 +2498,7 @@ const renderTheoTownMockup = (type) => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', height: '100%' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#0f172a', padding: '8px 12px', borderRadius: '6px', border: '1px solid #1e293b' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{ fontSize: '13px', color: '#4ade80' }}>📊</span>
+                <span style={{ fontSize: '13px', color: '#4ade80' }}></span>
                 <span style={{ fontSize: '12px', fontWeight: 700, color: '#f8fafc' }}>Simulasi Dampak Edukasi &amp; Ekosistem Perkotaan</span>
               </div>
               <span style={{ fontSize: '10px', color: '#fde047', backgroundColor: '#713f12', padding: '2px 8px', borderRadius: '4px', fontWeight: 600 }}>In-Game City Stats</span>
@@ -2548,7 +2547,7 @@ const renderTheoTownMockup = (type) => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', height: '100%' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#0f172a', padding: '8px 12px', borderRadius: '6px', border: '1px solid #1e293b' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{ fontSize: '13px', color: '#38bdf8' }}>📥</span>
+                <span style={{ fontSize: '13px', color: '#38bdf8' }}></span>
                 <span style={{ fontSize: '12px', fontWeight: 700, color: '#f8fafc' }}>Panduan Instalasi Multiplatform &amp; Dokumentasi Bilingual</span>
               </div>
               <span style={{ fontSize: '10px', color: '#4ade80', backgroundColor: '#064e3b', padding: '2px 8px', borderRadius: '4px', fontWeight: 600 }}>Android &amp; PC Ready</span>
@@ -2557,7 +2556,7 @@ const renderTheoTownMockup = (type) => {
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
               <div style={{ backgroundColor: '#020617', border: '1px solid #334155', borderRadius: '8px', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', fontWeight: 800, color: '#4ade80' }}>
-                  <span>📱</span>
+                  <span></span>
                   <span>Instalasi di Android (Mobile)</span>
                 </div>
                 <div style={{ backgroundColor: '#0f172a', padding: '8px', borderRadius: '4px', fontSize: '9px', fontFamily: 'monospace', color: '#94a3b8', wordBreak: 'break-all', border: '1px solid #1e293b' }}>
@@ -2572,7 +2571,7 @@ const renderTheoTownMockup = (type) => {
 
               <div style={{ backgroundColor: '#020617', border: '1px solid #334155', borderRadius: '8px', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', fontWeight: 800, color: '#38bdf8' }}>
-                  <span>💻</span>
+                  <span></span>
                   <span>Instalasi di PC Windows (Steam/Standalone)</span>
                 </div>
                 <div style={{ backgroundColor: '#0f172a', padding: '8px', borderRadius: '4px', fontSize: '9px', fontFamily: 'monospace', color: '#94a3b8', wordBreak: 'break-all', border: '1px solid #1e293b' }}>
@@ -2588,7 +2587,7 @@ const renderTheoTownMockup = (type) => {
 
             <div style={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '6px', padding: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{ fontSize: '14px' }}>🌐</span>
+                <span style={{ fontSize: '14px' }}></span>
                 <span style={{ fontSize: '10.5px', color: '#e2e8f0' }}>Dokumentasi README tersedia dalam <b>Bahasa Indonesia</b> &amp; <b>English</b></span>
               </div>
               <span style={{ fontSize: '9.5px', color: '#38bdf8', fontWeight: 700 }}>README.md Terverifikasi</span>
@@ -2626,7 +2625,7 @@ const renderTheoTownMockup = (type) => {
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#0284c7' }} />
           <span style={{ fontSize: '12px', fontWeight: 800, color: '#f8fafc', letterSpacing: '0.4px' }}>
-            ITB STIKOM Bali — TheoTown Plugin Studio
+            ITB STIKOM Bali - TheoTown Plugin Studio
           </span>
           <span style={{ fontSize: '9.5px', backgroundColor: '#0369a1', color: '#e0f2fe', padding: '1px 6px', borderRadius: '4px', fontWeight: 600 }}>
             Isometric Mod
@@ -2685,7 +2684,7 @@ const renderLintasMockup = (type) => {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <div style={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '6px', padding: '10px' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
-                    <span style={{ fontSize: '11px', fontWeight: 700, color: '#f8fafc' }}>📱 Oppo A53 (Android 13)</span>
+                    <span style={{ fontSize: '11px', fontWeight: 700, color: '#f8fafc' }}>Oppo A53 (Android 13)</span>
                     <span style={{ fontSize: '9px', backgroundColor: '#14532d', color: '#86efac', padding: '1px 6px', borderRadius: '3px', fontWeight: 600 }}>TRUSTED</span>
                   </div>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4px', fontSize: '9px', color: '#94a3b8' }}>
@@ -2698,8 +2697,8 @@ const renderLintasMockup = (type) => {
 
                 <div style={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '6px', padding: '10px' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
-                    <span style={{ fontSize: '10.5px', fontWeight: 700, color: '#38bdf8' }}>🛡️ NearLock Proximity Status</span>
-                    <span style={{ fontSize: '9px', color: '#4ade80', fontWeight: 700 }}>🟢 DEKAT (~1.2m)</span>
+                    <span style={{ fontSize: '10.5px', fontWeight: 700, color: '#38bdf8' }}>NearLock Proximity Status</span>
+                    <span style={{ fontSize: '9px', color: '#4ade80', fontWeight: 700 }}>DEKAT (~1.2m)</span>
                   </div>
                   <div style={{ width: '100%', height: '6px', backgroundColor: '#1e293b', borderRadius: '3px', overflow: 'hidden', margin: '4px 0' }}>
                     <div style={{ width: '85%', height: '100%', backgroundColor: '#22c55e', borderRadius: '3px' }} />
@@ -2711,7 +2710,7 @@ const renderLintasMockup = (type) => {
               </div>
 
               <div style={{ backgroundColor: '#020617', border: '2px dashed #0284c7', borderRadius: '8px', padding: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
-                <span style={{ fontSize: '20px' }}>📥</span>
+                <span style={{ fontSize: '20px' }}></span>
                 <span style={{ fontSize: '10.5px', fontWeight: 700, color: '#f8fafc', marginTop: '4px' }}>Lintas Drop Zone</span>
                 <span style={{ fontSize: '9px', color: '#94a3b8', margin: '2px 0 6px 0' }}>Tarik berkas PC ke sini untuk kirim instan ke smartphone</span>
                 <button style={{ backgroundColor: '#0284c7', color: '#ffffff', border: 'none', padding: '4px 10px', borderRadius: '4px', fontSize: '9px', fontWeight: 600, cursor: 'pointer' }}>
@@ -2722,16 +2721,16 @@ const renderLintasMockup = (type) => {
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '6px', fontSize: '9.5px', textAlign: 'center' }}>
               <div style={{ backgroundColor: '#0f172a', padding: '6px', borderRadius: '4px', border: '1px solid #1e293b', color: '#cbd5e1' }}>
-                🖱️ Touchpad Latency: <b>&lt; 5ms</b>
+                Touchpad Latency: <b>&lt; 5ms</b>
               </div>
               <div style={{ backgroundColor: '#0f172a', padding: '6px', borderRadius: '4px', border: '1px solid #1e293b', color: '#cbd5e1' }}>
-                📋 Clipboard: <b>Bidirectional Sync</b>
+                Clipboard: <b>Bidirectional Sync</b>
               </div>
               <div style={{ backgroundColor: '#0f172a', padding: '6px', borderRadius: '4px', border: '1px solid #1e293b', color: '#cbd5e1' }}>
-                🔐 File Hash: <b>SHA-256 Validated</b>
+                File Hash: <b>SHA-256 Validated</b>
               </div>
               <div style={{ backgroundColor: '#0f172a', padding: '6px', borderRadius: '4px', border: '1px solid #1e293b', color: '#cbd5e1' }}>
-                🌐 Zero-Cloud: <b>Subnet LAN Only</b>
+                Zero-Cloud: <b>Subnet LAN Only</b>
               </div>
             </div>
           </div>
@@ -2742,7 +2741,7 @@ const renderLintasMockup = (type) => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', height: '100%' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#0f172a', padding: '6px 12px', borderRadius: '6px', border: '1px solid #1e293b' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <span style={{ fontSize: '12px' }}>📱</span>
+                <span style={{ fontSize: '12px' }}></span>
                 <span style={{ fontSize: '11px', fontWeight: 700, color: '#f8fafc' }}>Remote Touchpad &amp; Keyboard</span>
               </div>
               <span style={{ fontSize: '9.5px', color: '#4ade80', backgroundColor: '#064e3b', padding: '1px 6px', borderRadius: '3px' }}>Connected (3ms)</span>
@@ -2750,8 +2749,7 @@ const renderLintasMockup = (type) => {
 
             <div style={{ height: '180px', backgroundColor: '#020617', border: '1px solid #334155', borderRadius: '8px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', position: 'relative', cursor: 'crosshair' }}>
               <div style={{ width: '48px', height: '48px', borderRadius: '50%', border: '2px dashed #38bdf8', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#38bdf8', opacity: 0.6 }}>
-                👆
-              </div>
+                </div>
               <span style={{ fontSize: '10.5px', color: '#cbd5e1', fontWeight: 600, marginTop: '8px' }}>Area Sentuh Trackpad Nirkabel</span>
               <div style={{ display: 'flex', gap: '12px', marginTop: '6px', fontSize: '9px', color: '#64748b' }}>
                 <span>1 Jari: Klik Kiri</span>
@@ -2792,8 +2790,8 @@ const renderLintasMockup = (type) => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', height: '100%' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#0f172a', padding: '8px 12px', borderRadius: '6px', border: '1px solid #1e293b' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{ fontSize: '14px' }}>⚡</span>
-                <span style={{ fontSize: '12px', fontWeight: 700, color: '#f8fafc' }}>Instant Drop — Transfer File Berkecepatan Tinggi (LAN)</span>
+                <span style={{ fontSize: '14px' }}></span>
+                <span style={{ fontSize: '12px', fontWeight: 700, color: '#f8fafc' }}>Instant Drop - Transfer File Berkecepatan Tinggi (LAN)</span>
               </div>
               <span style={{ fontSize: '10px', color: '#38bdf8', backgroundColor: '#0c4a6e', padding: '2px 8px', borderRadius: '4px', fontWeight: 600 }}>Kecepatan: 28.4 MB/s</span>
             </div>
@@ -2802,8 +2800,7 @@ const renderLintasMockup = (type) => {
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                   <div style={{ width: '36px', height: '36px', backgroundColor: '#1e293b', borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '18px' }}>
-                    🎬
-                  </div>
+                    </div>
                   <div>
                     <div style={{ fontSize: '11.5px', fontWeight: 700, color: '#f8fafc' }}>Recording_Project_Demo.mp4</div>
                     <div style={{ fontSize: '9.5px', color: '#94a3b8' }}>148.5 MB • Mengirim: <b>Android ➔ Windows PC</b></div>
@@ -2821,7 +2818,7 @@ const renderLintasMockup = (type) => {
 
               <div style={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '6px', padding: '10px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ fontSize: '10px', fontWeight: 700, color: '#facc15' }}>🔒 Verifikasi Integritas SHA-256:</span>
+                  <span style={{ fontSize: '10px', fontWeight: 700, color: '#facc15' }}>Verifikasi Integritas SHA-256:</span>
                   <span style={{ fontSize: '9px', color: '#4ade80', fontWeight: 700 }}>✓ MATCHED &amp; VERIFIED</span>
                 </div>
                 <div style={{ fontSize: '9px', fontFamily: 'monospace', color: '#94a3b8', wordBreak: 'break-all', backgroundColor: '#020617', padding: '4px 6px', borderRadius: '3px' }}>
@@ -2844,8 +2841,8 @@ const renderLintasMockup = (type) => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', height: '100%' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#0f172a', padding: '8px 12px', borderRadius: '6px', border: '1px solid #1e293b' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{ fontSize: '13px' }}>📋</span>
-                <span style={{ fontSize: '12px', fontWeight: 700, color: '#f8fafc' }}>Universal Clipboard — Sinkronisasi Teks &amp; Deteksi URL</span>
+                <span style={{ fontSize: '13px' }}></span>
+                <span style={{ fontSize: '12px', fontWeight: 700, color: '#f8fafc' }}>Universal Clipboard - Sinkronisasi Teks &amp; Deteksi URL</span>
               </div>
               <span style={{ fontSize: '10px', color: '#4ade80', backgroundColor: '#064e3b', padding: '2px 8px', borderRadius: '4px', fontWeight: 600 }}>Auto-Sync ON</span>
             </div>
@@ -2859,7 +2856,7 @@ const renderLintasMockup = (type) => {
                 https://github.com/agungkrisna/lintas-cross-device
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontSize: '9px', color: '#4ade80', fontWeight: 600 }}>🌐 Tautan Web Terdeteksi (Bisa langsung dibuka di Chrome PC)</span>
+                <span style={{ fontSize: '9px', color: '#4ade80', fontWeight: 600 }}>Tautan Web Terdeteksi (Bisa langsung dibuka di Chrome PC)</span>
                 <button style={{ backgroundColor: '#0284c7', color: '#fff', border: 'none', padding: '3px 8px', borderRadius: '3px', fontSize: '9px', cursor: 'pointer' }}>
                   Buka di PC
                 </button>
@@ -2885,8 +2882,8 @@ const renderLintasMockup = (type) => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', height: '100%' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#0f172a', padding: '8px 12px', borderRadius: '6px', border: '1px solid #1e293b' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{ fontSize: '14px' }}>🛡️</span>
-                <span style={{ fontSize: '12px', fontWeight: 700, color: '#f8fafc' }}>NearLock — Penguncian PC Otomatis Berdasarkan Jarak Ponsel</span>
+                <span style={{ fontSize: '14px' }}></span>
+                <span style={{ fontSize: '12px', fontWeight: 700, color: '#f8fafc' }}>NearLock - Penguncian PC Otomatis Berdasarkan Jarak Ponsel</span>
               </div>
               <span style={{ fontSize: '10px', color: '#4ade80', backgroundColor: '#064e3b', padding: '2px 8px', borderRadius: '4px', fontWeight: 600 }}>Status: ARMED</span>
             </div>
@@ -2933,7 +2930,7 @@ const renderLintasMockup = (type) => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', height: '100%' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#0f172a', padding: '8px 12px', borderRadius: '6px', border: '1px solid #1e293b' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{ fontSize: '13px' }}>📽️</span>
+                <span style={{ fontSize: '13px' }}></span>
                 <span style={{ fontSize: '12px', fontWeight: 700, color: '#f8fafc' }}>Presentation Remote &amp; Speaker Timer</span>
               </div>
               <span style={{ fontSize: '10px', color: '#facc15', backgroundColor: '#713f12', padding: '2px 8px', borderRadius: '4px', fontWeight: 600 }}>Slide 14 / 28</span>
@@ -2998,7 +2995,7 @@ const renderLintasMockup = (type) => {
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#06b6d4' }} />
           <span style={{ fontSize: '12px', fontWeight: 800, color: '#f8fafc', letterSpacing: '0.4px' }}>
-            Lintas — Cross-Device Ecosystem
+            Lintas - Cross-Device Ecosystem
           </span>
           <span style={{ fontSize: '9.5px', backgroundColor: '#0891b2', color: '#e0f2fe', padding: '1px 6px', borderRadius: '4px', fontWeight: 600 }}>
             LAN Port 8945
@@ -3088,7 +3085,7 @@ export const renderMockupVisual = (type) => {
     case 'makalah-dash':
       return (
         <div style={{ width: '92%', height: '88%', backgroundColor: '#1c1917', borderRadius: '6px', border: '1px solid #44403c', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          <div style={{ fontSize: '11px', fontWeight: 700, color: '#fbbf24' }}>Makalah Generator — AI Research Assistant</div>
+          <div style={{ fontSize: '11px', fontWeight: 700, color: '#fbbf24' }}>Makalah Generator - AI Research Assistant</div>
           <div style={{ backgroundColor: '#292524', padding: '8px 10px', borderRadius: '4px', fontSize: '9.5px', color: '#e7e5e4' }}>
             Topik: <b>Implementasi Convolutional Neural Network pada Citra Medis</b>
           </div>

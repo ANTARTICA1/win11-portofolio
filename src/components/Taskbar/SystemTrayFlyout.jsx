@@ -37,7 +37,6 @@ export const SystemTrayFlyout = ({
     {
       id: 'security',
       name: 'Windows Security',
-      status: 'No actions needed - Protected',
       iconType: 'lucide',
       lucideIcon: ShieldCheck,
       color: '#22c55e',
@@ -48,7 +47,6 @@ export const SystemTrayFlyout = ({
     {
       id: 'onedrive',
       name: 'Microsoft OneDrive',
-      status: 'Up to date - Cloud Synced',
       iconType: 'win',
       winIcon: 'onedrive',
       action: () => {
@@ -58,7 +56,6 @@ export const SystemTrayFlyout = ({
     {
       id: 'whatsapp',
       name: 'WhatsApp',
-      status: 'Online — Chat with Gungkrisna',
       iconType: 'win',
       winIcon: 'whatsapp',
       action: () => {
@@ -127,7 +124,7 @@ export const SystemTrayFlyout = ({
               onMouseEnter={() => setHoveredItem(item)}
               onMouseLeave={() => setHoveredItem(null)}
               onClick={() => handleIconClick(item)}
-              title={`${item.name} — ${item.status}`}
+              title={item.name}
             >
               {item.iconType === 'win' ? (
                 <WinIcon name={item.winIcon} size={22} />
@@ -137,32 +134,6 @@ export const SystemTrayFlyout = ({
             </button>
           );
         })}
-      </div>
-
-      <div style={{
-        borderTop: '1px solid rgba(255, 255, 255, 0.08)',
-        paddingTop: '6px',
-        minHeight: '28px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        fontSize: '11px',
-        color: '#94a3b8',
-        paddingLeft: '4px',
-        paddingRight: '4px'
-      }}>
-        {hoveredItem ? (
-          <div style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis', width: '100%' }}>
-            <span style={{ color: '#ffffff', fontWeight: 600 }}>{hoveredItem.name}</span>
-            <div style={{ fontSize: '10px', color: '#94a3b8', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-              {hoveredItem.status}
-            </div>
-          </div>
-        ) : (
-          <span style={{ fontSize: '10.5px', color: '#64748b' }}>
-            System Tray
-          </span>
-        )}
       </div>
     </div>
   );

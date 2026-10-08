@@ -7,7 +7,7 @@ export const ChromeDinoGame = ({ isEmbedded = false }) => {
 
   const handleRestart = () => {
     if (iframeRef.current) {
-      iframeRef.current.src = '/dino/index.html';
+      iframeRef.current.src = '/dino/index.html?v=' + Date.now();
     }
   };
 
@@ -15,18 +15,19 @@ export const ChromeDinoGame = ({ isEmbedded = false }) => {
     <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', backgroundColor: '#f7f7f7', color: '#333' }}>
       {!isEmbedded && (
         <div style={{
-          height: '40px',
-          backgroundColor: '#ebebeb',
-          borderBottom: '1px solid #d4d4d4',
+          height: '38px',
+          backgroundColor: '#f1f3f4',
+          borderBottom: '1px solid #e0e0e0',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          padding: '0 14px'
+          padding: '0 14px',
+          flexShrink: 0
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', color: '#555' }}>
-            <WinIcon name="dino" size={16} />
-            <span style={{ fontWeight: 600, color: '#222' }}>chrome://dino</span>
-            <span style={{ fontSize: '11px', color: '#888' }}>— Chromium T-Rex Runner (Official Engine)</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12.5px', color: '#5f6368' }}>
+            <WinIcon name="dino" size={15} />
+            <span style={{ fontWeight: 600, color: '#202124' }}>chrome://dino</span>
+            <span style={{ fontSize: '11px', color: '#80868b' }}>- Chromium T-Rex Runner (Official Engine)</span>
           </div>
           <button
             onClick={handleRestart}
@@ -35,11 +36,11 @@ export const ChromeDinoGame = ({ isEmbedded = false }) => {
               alignItems: 'center',
               gap: '6px',
               backgroundColor: '#ffffff',
-              border: '1px solid #d4d4d4',
+              border: '1px solid #dadce0',
               borderRadius: '4px',
               padding: '4px 10px',
               fontSize: '12px',
-              color: '#333',
+              color: '#3c4043',
               cursor: 'pointer'
             }}
             title="Muat Ulang Game"
@@ -51,7 +52,7 @@ export const ChromeDinoGame = ({ isEmbedded = false }) => {
       )}
       <iframe
         ref={iframeRef}
-        src="/dino/index.html"
+        src="/dino/index.html?v=3"
         title="chrome://dino"
         style={{
           flex: 1,

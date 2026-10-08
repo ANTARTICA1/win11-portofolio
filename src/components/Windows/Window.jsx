@@ -16,6 +16,29 @@ export const WindowControls = ({
   snapWindow,
   className = ''
 }) => {
+  const hideTimerRef = useRef(null);
+
+  const handleMouseEnter = () => {
+    if (hideTimerRef.current) {
+      clearTimeout(hideTimerRef.current);
+      hideTimerRef.current = null;
+    }
+    setShowSnapLayouts(true);
+  };
+
+  const handleMouseLeave = () => {
+    if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
+    hideTimerRef.current = setTimeout(() => {
+      setShowSnapLayouts(false);
+    }, 400);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
+    };
+  }, []);
+
   return (
     <div className={`win-controls ${className}`}>
       <button
@@ -36,8 +59,8 @@ export const WindowControls = ({
       {!isMobile && (
         <div
           style={{ position: 'relative', height: '100%' }}
-          onMouseEnter={() => setShowSnapLayouts(true)}
-          onMouseLeave={() => setShowSnapLayouts(false)}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
           <button
             type="button"
@@ -48,6 +71,7 @@ export const WindowControls = ({
               e.preventDefault();
               e.stopPropagation();
               playClickSound();
+              if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
               setShowSnapLayouts(false);
               onMaximize();
             }}
@@ -56,12 +80,37 @@ export const WindowControls = ({
           </button>
 
           {showSnapLayouts && (
-            <div className="snap-layouts-flyout anim-flyout">
-              <div className="snap-card" title="Snap Left 50%" onClick={() => snapWindow('left')}>
+            <div 
+              className="snap-layouts-flyout anim-flyout"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+              onPointerDown={(e) => e.stopPropagation()}
+            >
+              <div 
+                className="snap-card" 
+                title="Snap Kiri 50%" 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  playClickSound();
+                  if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
+                  setShowSnapLayouts(false);
+                  snapWindow('left');
+                }}
+              >
                 <div className="snap-zone" />
                 <div style={{ flex: 1 }} />
               </div>
-              <div className="snap-card" title="Snap Right 50%" onClick={() => snapWindow('right')}>
+              <div 
+                className="snap-card" 
+                title="Snap Kanan 50%" 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  playClickSound();
+                  if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
+                  setShowSnapLayouts(false);
+                  snapWindow('right');
+                }}
+              >
                 <div style={{ flex: 1 }} />
                 <div className="snap-zone" />
               </div>

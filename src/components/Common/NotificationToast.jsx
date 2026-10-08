@@ -148,7 +148,7 @@ export const NotificationToast = ({ onOpenRecruiter, onOpenExplorer }) => {
             e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)';
           }}
         >
-          Jelajahi Proyek
+          Lihat Proyek
         </button>
       </div>
     </div>

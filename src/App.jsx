@@ -12,6 +12,7 @@ import { SettingsApp } from './components/Apps/SettingsApp';
 import { CalculatorApp } from './components/Apps/CalculatorApp';
 import { WhatsAppApp } from './components/Apps/WhatsAppApp';
 import { ChromeDinoGame } from './components/Apps/ChromeDinoGame';
+import { NeuroFlyApp } from './components/Apps/NeuroFlyApp';
 import { ExternalLink } from 'lucide-react';
 
 import { NotificationToast } from './components/Common/NotificationToast';
@@ -27,7 +28,7 @@ const PROJECT_TITLES = {
   tatagih: 'Tatagih - Subscription & Bill Manager',
   temuin: 'Temuin - Lost & Found Platform',
   lintas: 'Lintas - Phone-to-PC Companion Utility',
-  neurofly: 'NeuroFly - Drosophila Connectome x Pong',
+  neurofly: 'NeuroFly - 3D Pong vs Drosophila MaleCNS v1.0',
   dompetq: 'DompetQ - Fintech E-Wallet Mobile App',
   makalah: 'Makalah Generator - AI Academic Assistant',
   sigap: 'SIGAP - Sistem Gerak Aman dari Pencurian',
@@ -186,8 +187,8 @@ export function App() {
         initialPosition: { x: 140 + (windows.length % 5) * 25, y: 70 + (windows.length % 5) * 20 }
       },
       browser: {
-        title: 'Agung Krisna - Projects Showcase - Microsoft Edge',
-        icon: 'edge',
+        title: 'Agung Krisna - Projects Showcase - Google Chrome',
+        icon: 'chrome',
         initialSize: { width: 920, height: 600 },
         initialPosition: { x: 60 + (windows.length % 5) * 25, y: 30 + (windows.length % 5) * 20 }
       },
@@ -252,10 +253,10 @@ export function App() {
         initialPosition: { x: 90 + (windows.length % 5) * 25, y: 45 + (windows.length % 5) * 20 }
       },
       neurofly: {
-        title: 'NeuroFly',
+        title: 'NeuroFly - 3D Pong vs Drosophila MaleCNS v1.0',
         icon: 'neurofly',
-        initialSize: { width: 920, height: 620 },
-        initialPosition: { x: 80 + (windows.length % 5) * 25, y: 40 + (windows.length % 5) * 20 }
+        initialSize: { width: 1040, height: 680 },
+        initialPosition: { x: 60 + (windows.length % 5) * 25, y: 30 + (windows.length % 5) * 20 }
       },
       sigap: {
         title: 'SIGAP - Sistem Gerak Aman dari Pencurian',
@@ -377,6 +378,13 @@ export function App() {
   };
 
   const openFile = (fileItem) => {
+    if (fileItem.extension === 'jpg' || fileItem.extension === 'png' || (fileItem.type === 'file' && fileItem.imageUrl)) {
+      launchApp('photos', {
+        imageUrl: fileItem.imageUrl || fileItem.previewImage,
+        title: fileItem.title || fileItem.name
+      });
+      return;
+    }
     if (fileItem.projectId) {
       launchApp('chrome', { projectId: fileItem.projectId });
       return;
@@ -557,12 +565,23 @@ export function App() {
       case 'terminal':
       case 'antigravity':
         return <TerminalApp onLaunchApp={launchApp} />;
+      case 'neurofly':
+        if (win.data?.openInBrowser) {
+          return (
+            <BrowserApp
+              onOpenFile={openFile}
+              initialProject="neurofly"
+              initialUrl={win.data?.url}
+              onLaunchApp={launchApp}
+            />
+          );
+        }
+        return <NeuroFlyApp onLaunchApp={launchApp} />;
       case 'theotown':
       case 'nenacare':
       case 'tatagih':
       case 'temuin':
       case 'lintas':
-      case 'neurofly':
       case 'dompetq':
       case 'makalah':
       case 'sigap':

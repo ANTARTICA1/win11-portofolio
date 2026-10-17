@@ -94,9 +94,11 @@ export const Desktop = ({
         ? 'This PC' 
         : (item.id === 'file_explorer' ? 'Projects' : (item.path || 'This PC'));
       onLaunchApp('explorer', { path: targetPath });
+    } else if (item.app === 'neurofly' || (item.name && item.name.toLowerCase().includes('neurofly'))) {
+      onLaunchApp('neurofly');
     } else if (item.projectId) {
       onLaunchApp('chrome', { projectId: item.projectId });
-    } else if (['theotown', 'nenacare', 'tatagih', 'temuin', 'lintas', 'neurofly', 'dompetq', 'makalah', 'sigap', 'bingkai'].includes(item.app)) {
+    } else if (['theotown', 'nenacare', 'tatagih', 'temuin', 'lintas', 'dompetq', 'makalah', 'sigap', 'bingkai'].includes(item.app)) {
       onLaunchApp('chrome', { projectId: item.app });
     } else if (item.name && (item.name.toLowerCase().includes('theotown') || item.name.toLowerCase().includes('stikom'))) {
       onLaunchApp('chrome', { projectId: 'theotown' });
@@ -108,8 +110,6 @@ export const Desktop = ({
       onLaunchApp('chrome', { projectId: 'temuin' });
     } else if (item.name && item.name.toLowerCase().includes('lintas')) {
       onLaunchApp('chrome', { projectId: 'lintas' });
-    } else if (item.name && item.name.toLowerCase().includes('neurofly')) {
-      onLaunchApp('chrome', { projectId: 'neurofly' });
     } else if (item.name && item.name.toLowerCase().includes('dompetq')) {
       onLaunchApp('chrome', { projectId: 'dompetq' });
     } else if (item.name && item.name.toLowerCase().includes('makalah')) {

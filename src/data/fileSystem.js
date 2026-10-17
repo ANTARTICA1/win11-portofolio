@@ -383,6 +383,30 @@ PERSISTENSI & KEAMANAN:
 - lib/services/security_storage_service.dart  : Local storage SharedPreferences
 - lib/utils/                  : Constants, themes, motion threshold 2.0, countdown 5s
 `
+      },
+      {
+        name: "sigap_dashboard.png",
+        type: "file",
+        extension: "png",
+        size: "90 KB",
+        imageUrl: "/projects/sigap_dashboard.png",
+        title: "SIGAP Dashboard Utama (Terkunci & Aktif)"
+      },
+      {
+        name: "sigap_lockscreen.png",
+        type: "file",
+        extension: "png",
+        size: "122 KB",
+        imageUrl: "/projects/sigap_lockscreen.png",
+        title: "SIGAP Layar Darurat & Kunci PIN"
+      },
+      {
+        name: "sigap_intruder_logs.png",
+        type: "file",
+        extension: "png",
+        size: "102 KB",
+        imageUrl: "/projects/sigap_intruder_logs.png",
+        title: "SIGAP Bukti Penyusup & Log Insiden"
       }
     ]
   },
@@ -768,6 +792,22 @@ FITUR UTAMA:
 [2024-11-02 09:18:42] [DROP] Receiving "Project_Demo.mp4" (148.5 MB) via LAN.
 [2024-11-02 09:18:48] [DROP] SHA-256 Checksum MATCHED: e3b0c44298fc1c149afb...
 [2024-11-02 09:22:15] [NEARLOCK] Phone proximity checked: -42 dBm (State: DEKAT).`
+      },
+      {
+        name: "lintas_devices_mobile.png",
+        type: "file",
+        extension: "png",
+        size: "104 KB",
+        imageUrl: "/projects/lintas_devices.png",
+        title: "Tangkapan Layar: Manajemen Perangkat Lintas (Android)"
+      },
+      {
+        name: "lintas_activity_mobile.png",
+        type: "file",
+        extension: "png",
+        size: "130 KB",
+        imageUrl: "/projects/lintas_activity.png",
+        title: "Tangkapan Layar: Riwayat Aktivitas & Transfer SHA-256 Lintas (Android)"
       }
     ]
   },
@@ -794,14 +834,18 @@ FITUR UTAMA:
         extension: "txt",
         size: "2.3 KB",
         content: `=====================================================
-PROYEK: NEUROFLY - CONNECTOME BIOLOGICAL AI
+PROYEK: NEUROFLY - CONNECTOME BIOLOGICAL AI × 3D PONG
 =====================================================
-Platform   : Web & WebGL
-Stack      : TypeScript, Three.js, Leaky Integrate-and-Fire (LIF) Network
+Platform   : Web, HTML5 3D Canvas, Leaky Integrate-and-Fire
+Dataset    : Janelia MaleCNS v1.0 (600 Neurons / 4.297 Synapses)
+Kontrol    : [W/S atau Panah: Geser] [A/D: Ketinggian] [Drag: Orbit 3D]
 
 DESKRIPSI:
-Simulasi biologis interaktif yang menghubungkan arsitektur sirkuit saraf mata
-lalat buah (Drosophila Melanogaster) dengan gameplay Pong retro secara real-time.
+Simulasi biologis interaktif 3D yang menghubungkan arsitektur sirkuit saraf mata
+lalat buah (Drosophila Melanogaster) dengan gameplay 3D Pong secara real-time.
+Pemain manusia (P2: YOU) dapat bertanding langsung melawan kecerdasan saraf
+biologis lalat buah (P1: Fly Brain) yang ditenagai oleh 600 neuron visual dan
+motorik aktif, dilengkapi pemantau 3D Fly Brain Monitor dan telemetri osiloskop.
 `
       }
     ]
@@ -924,12 +968,20 @@ HIGHLIGHTS:
 `
       },
       {
-        name: "temuin_mockup.jpg",
+        name: "temuin_qrcode.png",
         type: "file",
-        extension: "jpg",
-        size: "520 KB",
-        imageUrl: "/projects/temuin.jpg",
-        title: "Temuin Mobile QR & Found Report"
+        extension: "png",
+        size: "69 KB",
+        imageUrl: "/projects/temuin_qrcode.png",
+        title: "Temuin Detail Barang & QR Code"
+      },
+      {
+        name: "temuin_notification.png",
+        type: "file",
+        extension: "png",
+        size: "96 KB",
+        imageUrl: "/projects/temuin_notification.png",
+        title: "Temuin Notifikasi Barang Ditemukan"
       }
     ]
   },
@@ -1129,12 +1181,18 @@ saat perangkat memasuki atau meninggalkan zona geofencing yang telah ditentukan.
     description: "Galeri Tangkapan Layar Proyek",
     badge: "Gallery",
     items: [
-      { name: "lintas_screen.jpg", type: "file", extension: "jpg", size: "610 KB", imageUrl: "/projects/lintas.jpg", title: "Lintas Cross-Device Ecosystem" },
+      { name: "lintas_screen.jpg", type: "file", extension: "jpg", size: "610 KB", imageUrl: "/projects/lintas.jpg", title: "Lintas Cross-Device Ecosystem (Host)" },
+      { name: "lintas_devices.png", type: "file", extension: "png", size: "104 KB", imageUrl: "/projects/lintas_devices.png", title: "Lintas Mobile Manajemen Perangkat" },
+      { name: "lintas_activity.png", type: "file", extension: "png", size: "130 KB", imageUrl: "/projects/lintas_activity.png", title: "Lintas Mobile Riwayat Aktivitas & Transfer" },
       { name: "theotown_screen.jpg", type: "file", extension: "jpg", size: "620 KB", imageUrl: "/projects/theotown.jpg", title: "ITB STIKOM Bali TheoTown Gameplay" },
       { name: "nenacare_screen.jpg", type: "file", extension: "jpg", size: "580 KB", imageUrl: "/projects/nenacare.jpg", title: "NenaCare K3 Incident Dashboard" },
       { name: "tatagih_screen.jpg", type: "file", extension: "jpg", size: "540 KB", imageUrl: "/projects/tatagih.jpg", title: "Tatagih Web App Dashboard" },
       { name: "dompetq_screen.jpg", type: "file", extension: "jpg", size: "482 KB", imageUrl: "/projects/dompetq.jpg", title: "DompetQ Screen" },
-      { name: "temuin_screen.jpg", type: "file", extension: "jpg", size: "520 KB", imageUrl: "/projects/temuin.jpg", title: "Temuin Screen" },
+      { name: "temuin_qrcode.png", type: "file", extension: "png", size: "69 KB", imageUrl: "/projects/temuin_qrcode.png", title: "Temuin Detail QR Code" },
+      { name: "temuin_notification.png", type: "file", extension: "png", size: "96 KB", imageUrl: "/projects/temuin_notification.png", title: "Temuin Notifikasi Penemuan" },
+      { name: "sigap_dashboard.png", type: "file", extension: "png", size: "90 KB", imageUrl: "/projects/sigap_dashboard.png", title: "SIGAP Dashboard Utama" },
+      { name: "sigap_lockscreen.png", type: "file", extension: "png", size: "122 KB", imageUrl: "/projects/sigap_lockscreen.png", title: "SIGAP Layar Kunci Darurat" },
+      { name: "sigap_intruder_logs.png", type: "file", extension: "png", size: "102 KB", imageUrl: "/projects/sigap_intruder_logs.png", title: "SIGAP Log Bukti Penyusup" },
       { name: "makalah_screen.jpg", type: "file", extension: "jpg", size: "410 KB", imageUrl: "/projects/makalah.jpg", title: "Makalah Screen" }
     ]
   }

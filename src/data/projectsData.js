@@ -4,11 +4,12 @@ export const PROJECTS_DATA = {
     name: 'ITB STIKOM Bali TheoTown',
     tagline: 'Custom Isometric Pixel Art Educational Building Plugin for TheoTown',
     fullTitle: 'ITB STIKOM Bali TheoTown',
+    description: 'Plugin kustom TheoTown yang menghadirkan gedung kampus ITB STIKOM Bali dengan grafis pixel art isometrik 2.5D serta fungsi simulasi edukasi kota.',
     category: 'Game Modding / Plugin Development / Isometric Pixel Art & Simulation',
     status: 'Game Plugin Showcase',
     period: '2024',
     liveUrl: 'https://forum.theotown.com',
-    githubUrl: 'https://github.com/agungkrisna/theotown-stikom-bali',
+    githubUrl: 'https://github.com/ANTARTICA1/PLUGIN-STIKOM-BALI-THEOTOWN',
     stack: [
       'TheoTown Plugin API',
       'JSON (code.json)',
@@ -28,15 +29,9 @@ export const PROJECTS_DATA = {
     photos: [
       {
         id: 'theo-ingame',
-        title: 'Gameplay TheoTown: Penempatan Gedung Kampus ITB STIKOM Bali di Tengah Kota',
-        caption: 'Representasi gedung kampus ITB STIKOM Bali Renon yang berdiri megah di atas lahan 5 × 5 tile dalam game simulasi kota TheoTown. Bangunan menyatu secara harmonis dengan jaringan jalan raya isometrik, pepohonan tropis, kendaraan piksel, dan pejalan kaki mahasiswa. Dilengkapi HUD info panel game yang menampilkan status aktif, tipe pendidikan tingkat universitas, kapasitas 2.500 mahasiswa, dan radius pengaruh edukasi 700 tile.',
+        title: 'Gameplay TheoTown: Gedung Kampus ITB STIKOM Bali di Tengah Kota Virtual',
+        caption: 'Tangkapan layar gameplay simulasi kota TheoTown yang menampilkan gedung kampus ITB STIKOM Bali Renon berdiri di kawasan perkotaan dengan jalan raya isometrik dan gedung pencakar langit sekitarnya.',
         imageUrl: '/projects/theotown.jpg'
-      },
-      {
-        id: 'theo-pixelart',
-        title: 'Desain Asset Pixel Art Isometrik & Detail Arsitektur Bali (StikomBali.png)',
-        caption: 'Asset visual utama StikomBali.png yang dibuat dengan pendekatan pixel art presisi sesuai standar proyeksi isometrik 2.5D TheoTown. Memadukan arsitektur modern kampus dengan ornamen tradisional Bali (atap tumpang bergaya kukul/meru, gerbang candi bentar, dan detail fasad jendela), dirancang proporsional agar tidak mengalami distorsi visual saat diputar atau diperbesar di dalam game.',
-        imageUrl: '/projects/theotown-stikom.jpg'
       }
     ],
     problem: 'Dalam game simulasi tata kota TheoTown, katalog bangunan institusi pendidikan tinggi default sangat terbatas dan didominasi arsitektur bergaya barat generik. Permasalahan yang melatarbelakangi pembuatan plugin ini:\\n1. Minimnya Representasi Arsitektur Indonesia: Pemain yang ingin membangun kota virtual bernuansa Indonesia tidak memiliki gedung universitas lokal yang khas dengan ornamen arsitektur nusantara (seperti gaya Bali).\\n2. Kebanyakan Mod Sekadar Objek Dekorasi Pasif: Banyak modder hanya membuat bangunan bertipe dekorasi ("park" atau "decoration") yang bersifat kosmetik tanpa fungsi gameplay, sehingga tidak berkontribusi terhadap kebutuhan simulasi pendidikan kota.\\n3. Ketiadaan Panduan Cross-Platform yang Rapi: Komunitas pemain TheoTown terbagi antara pengguna Android (mobile) dan PC Windows. Banyak mod tidak menyertakan struktur manifest yang tepat atau dokumentasi instalasi yang jelas, menyebabkan mod gagal dimuat atau crash.',
@@ -97,11 +92,12 @@ export const PROJECTS_DATA = {
     name: 'NenaCare',
     tagline: 'AI-Powered K3 Incident Reporting & Monitoring System',
     fullTitle: 'NenaCare',
+    description: 'Sistem manajemen keselamatan kerja (K3) berbasis AI Gemini dan integrasi Telegram Bot untuk pelaporan insiden, analisis risiko otomatis, dan monitoring real-time industri F&B.',
     category: 'Full-Stack Web App / AI Automation / K3 Safety & Incident Management',
     status: 'Production Showcase',
     period: '2024',
     liveUrl: 'https://nenacare.demo.agungkrisna.dev',
-    githubUrl: 'https://github.com/agungkrisna/nenacare',
+    githubUrl: 'https://github.com/ANTARTICA1/NenaCare',
     stack: [
       'PHP (OOP)',
       'MySQL & MySQLi',
@@ -194,11 +190,12 @@ export const PROJECTS_DATA = {
     name: 'Tatagih',
     tagline: 'Smart Subscription Manager & AI Financial Assistant',
     fullTitle: 'Tatagih',
+    description: 'Smart subscription manager berbasis web dengan asisten AI Gemini untuk memantau tagihan digital, mendeteksi pemborosan dana, dan mengelola split bill otomatis.',
     category: 'Financial SaaS / AI Financial Analytics / Full-Stack Web App',
     status: 'Full-Stack Showcase',
     period: '2024',
     liveUrl: 'https://tatagih.demo.agungkrisna.dev',
-    githubUrl: 'https://github.com/agungkrisna/tatagih',
+    githubUrl: 'https://github.com/ANTARTICA1/Subscription-Guard',
     stack: [
       'PHP',
       'Laravel 13',
@@ -215,17 +212,35 @@ export const PROJECTS_DATA = {
       'PHPUnit & Feature Test'
     ],
     stats: [
-      { label: 'Langganan Aktif', value: 'Streaming, AI, Cloud & Tools' },
-      { label: 'Tata Asisten AI', value: 'Financial Health Score (Gemini)' },
-      { label: 'Deteksi Kebocoran', value: 'Overlapping & Vampire Spending' },
-      { label: 'Patungan / Split Bill', value: 'Auto-Split & Verifikasi Bukti' }
+      { label: 'Langganan Aktif', value: '13 Layanan Terkelola' },
+      { label: 'Pengeluaran Bulanan', value: 'Rp 3.075.000 / bln' },
+      { label: 'Proyeksi Tahunan', value: 'Rp 36.900.000 / thn' },
+      { label: 'Tata Asisten AI', value: 'Subscription Health (Gemini)' }
     ],
     photos: [
       {
-        id: 'tatagih-dash',
-        title: 'Dashboard Keuangan, Visualisasi Chart.js & Kalender Pembayaran',
-        caption: 'Halaman dashboard utama menampilkan ringkasan subscription aktif, total pengeluaran bulanan (Rp 320.000) dan tahunan, daftar pembayaran terdekat (Netflix H-3, YouTube, ChatGPT), visualisasi grafik riwayat pengeluaran 6 bulan menggunakan Chart.js, diagram distribusi pengeluaran per kategori, serta kalender interaktif jadwal pembayaran.',
-        imageUrl: '/projects/tatagih.jpg'
+        id: 'tatagih-landing',
+        title: 'Landing Page Resmi Tatagih — Solusi Penghematan Langganan Digital',
+        caption: 'Halaman beranda resmi Tatagih dengan tajuk "Jangan Biarkan Tagihan Berulang Menggerus Saldomu", memaparkan integrasi Telegram reminder, deteksi pemborosan dana, dan ringkasan interaktif langganan aktif pengguna (Netflix, Spotify, YouTube).',
+        imageUrl: '/projects/tatagih_landing.png'
+      },
+      {
+        id: 'tatagih-dashboard',
+        title: 'Dashboard Finansial & Subscription Health — Analitik & Kalender Tagihan',
+        caption: 'Antarmuka dashboard utama pengguna ("Halo, Geka!") menampilkan metrik 13 subscription aktif, total pengeluaran bulanan Rp3.075.000, proyeksi tahunan Rp36.900.000, visualisasi kurva tren 6 bulan, skor kesehatan langganan (Subscription Health 65 - Perlu Perhatian), diagram distribusi kategori, dan kalender tagihan terdekat (iQIYI VIP).',
+        imageUrl: '/projects/tatagih_dashboard.png'
+      },
+      {
+        id: 'tatagih-chatbot',
+        title: 'TATA Chatbot AI — Asisten Finansial Berbasis Google Gemini',
+        caption: 'Fitur asisten cerdas TATA AI yang menganalisis pengeluaran langganan pengguna dan memberikan saran perbandingan ekonomis secara objektif (kalkulasi Paket Bulanan Rp75.000 vs Paket Tahunan Rp720.000) dengan riwayat percakapan tersimpan rapi.',
+        imageUrl: '/projects/tatagih_chatbot.png'
+      },
+      {
+        id: 'tatagih-splitbill',
+        title: 'Cari Teman Patungan — Grup Publik Berbagi Biaya Langganan Digital',
+        caption: 'Fitur komunitas patungan dan split bill publik (seperti grup Xbox Game Pass Ultimate seharga Rp56.333/bln per anggota) yang mempermudah pengguna membagi beban biaya langganan legal bersama teman.',
+        imageUrl: '/projects/tatagih_splitbill.png'
       }
     ],
     problem: 'Di era digital modern, hampir setiap orang memiliki banyak layanan berlangganan: streaming film dan musik, aplikasi produktivitas, cloud storage, layanan AI, software pekerjaan, hingga gym. Masalah utama yang sering dialami pengguna adalah:\\n1. Terlalu banyak subscription aktif yang tersebar sehingga sulit mengetahui total riil uang yang dikeluarkan setiap bulan maupun setahun.\\n2. Sulit mengingat tanggal pembayaran beragam layanan yang berbeda-beda, berisiko saldo rekening/kartu terpotong otomatis tanpa persiapan dana atau kelupaan membatalkan masa uji coba (trial).\\n3. Terjadinya inefisiensi finansial yang tersembunyi: overlapping subscriptions (memiliki beberapa layanan dengan fungsi serupa, seperti berlangganan 2-3 platform video streaming sekaligus padahal jam tonton sedikit) dan vampire spending (pengeluaran langganan kecil Rp20.000-Rp40.000 yang terasa sepele namun membengkak jika diakumulasikan bertahun-tahun).\\n4. Kerumitan mengelola langganan yang dipakai bersama teman (Family Plan), mulai dari pembagian tagihan yang sering manual, menagih satu per satu, memeriksa bukti transfer, hingga memperbarui siklus tiap bulan.',
@@ -352,11 +367,12 @@ export const PROJECTS_DATA = {
     name: 'Lintas',
     tagline: 'Cross-Device Productivity Ecosystem (Android Mobile & Windows Companion)',
     fullTitle: 'Lintas',
+    description: 'Ekosistem produktivitas lintas perangkat yang menghubungkan smartphone Android dan PC Windows via Wi-Fi lokal untuk remote trackpad, transfer berkas instan, dan auto-lock PC.',
     category: 'Cross-Device System / Local Networking / Flutter & Native Windows Integration',
     status: 'Production Showcase',
     period: '2024',
     liveUrl: 'https://lintas.demo.agungkrisna.dev',
-    githubUrl: 'https://github.com/agungkrisna/lintas',
+    githubUrl: 'https://github.com/ANTARTICA1/lintas-flutter',
     stack: [
       'Flutter & Dart',
       'C++ / Windows Runner',
@@ -377,8 +393,22 @@ export const PROJECTS_DATA = {
     ],
     photos: [
       {
+        id: 'lintas-devices',
+        title: 'Manajemen Perangkat Komputer: Perangkat Terpercaya & Auto-Discovery',
+        caption: 'Antarmuka mobile aplikasi Lintas (Flutter Android) untuk manajemen koneksi multi-perangkat. Menampilkan daftar perangkat terpercaya (KRISNA-PC Windows 11 Pro aktif dengan latensi rendah 3 ms dan tombol aksi "Sambungkan", LAPTOP-KRISNA berstatus offline), pemindaian otomatis perangkat sekitar (DESKTOP-A12 via LAN & Bluetooth dengan tombol "Pasangkan"), serta navigasi Beranda, Perangkat, Aktivitas, dan Pengaturan.',
+        imageUrl: '/projects/lintas_devices.png',
+        isMobile: true
+      },
+      {
+        id: 'lintas-activity',
+        title: 'Riwayat Aktivitas: Sesi LAN, Transfer Berkas SHA-256 & Proteksi NearLock',
+        caption: 'Catatan log aktivitas real-time di aplikasi smartphone Lintas. Merekam sesi koneksi aman terenkripsi ke KRISNA-PC via LAN (latensi 3 ms), riwayat pengiriman berkas "Laporan_Keuangan_Q3.pdf" (12.4 MB) dengan verifikasi integritas hash SHA-256, penerimaan teks clipboard instan, log remote touchpad, log keamanan NearLock yang otomatis mengunci PC saat sinyal Bluetooth melemah di luar jangkauan, serta bukti otorisasi kunci pairing.',
+        imageUrl: '/projects/lintas_activity.png',
+        isMobile: true
+      },
+      {
         id: 'lintas-companion',
-        title: 'Windows Companion Host - Status Server Port 8945, Pairing QR Code & Drop Zone',
+        title: 'Windows Companion Host: Dashboard Server Port 8945, Pairing QR Code & Drop Zone',
         caption: 'Dashboard pusat kendali Lintas di Windows 11. Menampilkan status local server aktif pada port 8945 (HTTP & WebSocket), alamat IP lokal 192.168.1.12, dynamic QR Code ber-token expiration untuk pairing cepat Android, daftar trusted client yang terhubung, indikator status NearLock, serta Drop Zone pengiriman berkas langsung dari PC.',
         imageUrl: '/projects/lintas.jpg'
       }
@@ -448,72 +478,80 @@ export const PROJECTS_DATA = {
   neurofly: {
     id: 'neurofly',
     name: 'NeuroFly',
-    tagline: 'Drosophila Visual Connectome × Pong System',
-    fullTitle: 'NeuroFly',
-    category: 'Computational Neuroscience & Experimental Systems',
-    status: 'Research & Experimental Showcase',
+    tagline: 'Drosophila Connectome (MaleCNS v1.0) × 3D Pong Simulation System',
+    fullTitle: 'NeuroFly - 3D Pong vs Drosophila Biological Connectome',
+    description: 'Sistem simulasi biologis & komputasi saraf 3D yang menghubungkan konektom visual lalat buah (Drosophila MaleCNS v1.0, 600 neuron, 4.297 sinapsis) dengan gameplay 3D Pong retro real-time di mana manusia dapat bertanding langsung melawan kecerdasan saraf biologis lalat.',
+    category: 'Computational Neuroscience / 3D Simulation / Neuromorphic Computing',
+    status: 'Interactive 3D Simulation & Research Showcase',
     period: '2024',
     liveUrl: 'https://neurofly.agungkrisna.dev',
     githubUrl: 'https://github.com/agungkrisna/neurofly',
-    stack: ['Python', 'neuPrint API', 'Janelia MaleCNS v1.0', 'NumPy', 'NetworkX', 'HTML5 Canvas'],
+    stack: [
+      'Drosophila MaleCNS v1.0',
+      'neuPrint API',
+      'Leaky Integrate-and-Fire (LIF)',
+      'Hassenstein-Reichardt Correlators',
+      'HTML5 3D Canvas Projection',
+      'Oscilloscope Telemetry',
+      'NetworkX Graph Topology',
+      'NumPy & SciPy'
+    ],
     stats: [
-      { label: 'Referensi Dataset', value: 'Janelia MaleCNS v1.0' },
-      { label: 'Neuron Visual Lobe', value: '438 Teridentifikasi' },
-      { label: 'Koneksi Sinaptik Terarah', value: '2.199 Terverifikasi' },
-      { label: 'Kontak Sinapsis Total', value: '12.282 Hubungan' }
+      { label: 'Connectome Dataset', value: 'MaleCNS v1.0 Janelia' },
+      { label: 'Neuron Aktif & Sinapsis', value: '600 Neurons / 4.297 Synapses' },
+      { label: 'Sensory & Motion Pools', value: 'Mi1, Tm, T4/T5, VS, DNs' },
+      { label: 'Gameplay Mode', value: '3D Pong: Human vs Fly Brain' }
     ],
     photos: [
       {
-        id: 'neurofly-circuit',
-        title: 'Topologi Graf Konektom Visual Lobe Drosophila',
-        caption: 'Visualisasi interkoneksi 438 neuron visual Drosophila beserta bobot kontak sinaptik hasil ekstraksi langsung dari database Janelia Research Campus via platform neuPrint.',
-        mockupType: 'neurofly-graph',
-        imageUrl: 'https://images.unsplash.com/photo-1507413245164-6160d8298b31?auto=format&fit=crop&w=1200&q=80'
+        id: 'neurofly-gameplay',
+        title: '3D Pong Arena & Fly Brain Monitor Real-Time',
+        caption: 'Antarmuka simulasi 3D interaktif yang menampilkan pertarungan Pong antara pemain manusia (P2: YOU) melawan model saraf lalat buah (P1: Fly) bersanding dengan visualisasi 3D konektom MaleCNS v1.0 dan telemetri sinyal osiloskop real-time.',
+        imageUrl: '/projects/neurofly_gameplay.png'
       },
       {
-        id: 'neurofly-pathway',
-        title: 'Sirkuit Deteksi Gerak Elementer (T4, T5, Mi1, Tm3)',
-        caption: 'Pemodelan skema interneuron medula (Mi1, Tm3) yang menyediakan delay temporal untuk sel deteksi gerak terarah T4 dan T5 sebelum menuju lobula.',
-        mockupType: 'neurofly-circuit',
-        imageUrl: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=1200&q=80'
+        id: 'neurofly-brain',
+        title: 'Topologi Konektom 3D Drosophila (MaleCNS v1.0)',
+        caption: 'Visualisasi 3D 600 neuron Drosophila yang terbagi atas pool sensorik (Mi1, Tm1-3), UP motion (T4c, T5c), DOWN motion (T4d, T5d, VS), dan descending motor neurons (DNs) dengan status firing dinamis.',
+        imageUrl: '/projects/neurofly_gameplay.png'
       },
       {
-        id: 'neurofly-pong',
-        title: 'Simulasi Autopilot Pong Berbasis Sinyal Neuromorfik',
-        caption: 'Antarmuka simulasi Pong interaktif di mana paddle dikendalikan oleh akumulasi potensial aksi dari sirkuit saraf visual biologis untuk melacak posisi bola.',
-        mockupType: 'neurofly-sim',
-        imageUrl: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80'
-      },
-      {
-        id: 'neurofly-metrics',
-        title: 'Matriks Bobot Sinapsis & Pelacakan Objek LC11',
-        caption: 'Distribusi kuantitatif kekuatan sinapsis dan vektor pemrosesan neuron proyeksi lobula LC11 dalam mendeteksi objek kecil yang bergerak cepat.',
-        mockupType: 'neurofly-matrix',
-        imageUrl: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80'
+        id: 'neurofly-telemetry',
+        title: 'Telemetri Sinyal Osiloskop & Evaluasi Pengontrol',
+        caption: 'Grafik sinyal real-time multi-kanal yang melacak posisi vertikal bola (Ball Y/Z), posisi paddle pemain (Paddle Y), serta keluaran potensial aksi saraf motorik lalat (Neural Drive) pada 60 FPS.',
+        imageUrl: '/projects/neurofly.png'
       }
     ],
-    problem: 'Model kecerdasan buatan komersial saat ini memerlukan komputasi tensor berat dan energi yang sangat besar untuk mengenali gerak visual dan mengambil keputusan kontrol sederhana. Sebaliknya, sistem visual biologis serangga seperti lalat buah (Drosophila melanogaster) mampu mendeteksi gerak dan bermanuver secara lincah dalam hitungan milidetik dengan konsumsi daya hanya beberapa mikrowatt.',
-    solution: 'NeuroFly mengeksplorasi representasi sirkuit saraf visual biologis Drosophila dari dataset konektom MaleCNS v1.0 Janelia Research Campus untuk mengendalikan paddle pada permainan klasik Pong. Dengan memetakan sirkuit deteksi gerak alami (T4, T5, LC11), proyek ini membuktikan bahwa jalur konektom terstruktur dapat memandu agen reaktif secara efisien tanpa memerlukan training artificial neural network berat.',
+    problem: 'Model AI modern seperti Deep Reinforcement Learning memerlukan jutaan parameter tensor berat dan komputasi GPU berdaya tinggi untuk menyelesaikan tugas sensorimotorik sederhana. Di alam, serangga kecil seperti lalat buah (Drosophila melanogaster) memiliki volume otak berukuran kurang dari 1 mm³ dengan konsumsi daya hanya beberapa mikrowatt, namun mampu mendeteksi arah pergerakan objek dan bermanuver secara instan dalam hitungan milidetik.',
+    solution: 'NeuroFly merekonstruksi sirkuit optik biologis Drosophila dari dataset konektom MaleCNS v1.0 Janelia Research Campus (600 neuron visual dan motorik) untuk mengendalikan agen lalat secara otonom dalam permainan 3D Pong. Melalui pemodelan Hassenstein-Reichardt correlator pada neuron T4/T5 dan jalur descending motor neurons (DNs), lalat mampu melihat trajektori bola dan menggerakkan sayapnya untuk memukul bola secara presisi, menghadirkan simulasi di mana pengguna dapat langsung bertanding melawan agen biologis tersebut.',
     keyFeatures: [
       {
-        title: 'Konektom Biologis Riil',
-        desc: 'Menggunakan dataset MaleCNS v1.0 hasil rekonstruksi mikroskop elektron Janelia dengan 438 neuron visual lobe kanan dan 12.282 kontak sinaptik.'
+        title: 'Arena 3D Pong Interaktif (Lawan Lalat Buah)',
+        desc: 'Pengguna dapat mengendalikan paddle 3D dengan keyboard (W/S/A/D atau tombol panah) maupun drag kursor untuk bertanding melawan kecerdasan saraf biologis lalat buah secara real-time.'
       },
       {
-        title: 'Model Deteksi Gerak (EMD)',
-        desc: 'Menerapkan komputasi Hassenstein-Reichardt correlator berdasarkan jalur neuron T4 (on-motion) dan T5 (off-motion).'
+        title: 'Model Saraf Drosophila MaleCNS v1.0',
+        desc: 'Memetakan 600 neuron biologis terverifikasi Janelia Research Campus yang merekonstruksi sirkuit penglihatan dan lokomosi alami Drosophila.'
       },
       {
-        title: 'Pelacakan Target LC11',
-        desc: 'Memanfaatkan respons sel Lobula Columna 11 (LC11) yang secara biologis terspesialisasi mengenali objek kecil bergerak melawan latar belakang.'
+        title: 'Visualisasi 3D Fly Brain Monitor',
+        desc: 'Menampilkan visualisasi 3D volumetrik otak lalat dan mode graf konektom dengan titik-titik neuron yang menyala real-time sesuai pergerakan bola di lapangan.'
       },
       {
-        title: 'Transduksi Sinyal Motorik',
-        desc: 'Mengonversi diferensial potensial aksi sinaptik menjadi sinyal translasi paddle atas dan bawah pada permainan Pong secara real-time.'
+        title: 'Deteksi Gerak Elementer (T4/T5 & VS)',
+        desc: 'Menerapkan komputasi Hassenstein-Reichardt correlator untuk membedakan gerak bola ke atas (UP motion) dan bawah (DOWN motion).'
       },
       {
-        title: 'Visualisasi Konektom Interaktif',
-        desc: 'Menampilkan topologi jaringan dan jalur aliran sinyal antar neuron untuk kebutuhan edukasi dan analisis riset.'
+        title: 'Descending Neurons (DNs) Transduction',
+        desc: 'Mengonversi potensial aksi sinaptik menjadi dorongan motorik sayap lalat untuk membelokkan lintasan bola kembali ke arah pemain.'
+      },
+      {
+        title: 'Real-Time Signal Telemetry Oscilloscope',
+        desc: 'Osiloskop gelombang multi-saluran 60 FPS yang membandingkan koordinat bola, posisi paddle pemain, dan neural drive lalat secara simultan.'
+      },
+      {
+        title: 'Evaluasi Performa Kontroler Real-Time',
+        desc: 'Tabel evaluasi komparatif performa hit rate dan rally rata-rata antara Fly Visual Controller (T4/T5/VS), Descending Motor, dan Random Baseline.'
       }
     ],
     architecture: 'Data konektivitas diekstraksi dari server neuPrint Janelia menggunakan Cypher query. Data diproses menggunakan Python, NumPy, dan NetworkX untuk membentuk adjacency matrix berbobot. Engine simulasi Pong membaca vektor keluaran neuron motorik untuk memperbarui posisi paddle dengan kecepatan 60fps.'
@@ -523,11 +561,12 @@ export const PROJECTS_DATA = {
     name: 'Temuin',
     tagline: 'Platform Pelacak & Penemu Barang Hilang Berbasis QR Code',
     fullTitle: 'Temuin',
+    description: 'Platform pelacak dan penemu barang hilang berbasis kode QR unik dengan snapshot lokasi GPS, dokumentasi bukti foto, dan notifikasi real-time ke pemilik.',
     category: 'Mobile Application / Lost & Found Platform / Full-Stack Application',
     status: 'Production Prototype',
     period: '2024',
-    liveUrl: 'https://github.com/agungkrisna/temuin',
-    githubUrl: 'https://github.com/agungkrisna/temuin',
+    liveUrl: 'https://github.com/ANTARTICA1/temuin-flutter',
+    githubUrl: 'https://github.com/ANTARTICA1/temuin-flutter',
     stack: [
       'Flutter',
       'Dart',
@@ -551,10 +590,18 @@ export const PROJECTS_DATA = {
     ],
     photos: [
       {
-        id: 'temuin-home',
-        title: 'Home Screen - Feed Barang & Manajemen Inventaris',
-        caption: 'Halaman utama menampilkan daftar barang milik pengguna beserta status keamanannya (Safe / Lost), ringkasan laporan aktif, tombol tambah barang baru, dan akses cepat ke pemindai QR.',
-        imageUrl: '/projects/temuin.jpg'
+        id: 'temuin-qrcode',
+        title: 'Detail Barang & Cetak QR Code - Identitas Digital Anti-Hilang',
+        caption: 'Tampilan detail inventaris barang ("Dompet" - ID: ITEM_1781872335454) berstatus aman dengan generator QR Code ungu presisi tinggi untuk dicetak dan ditempelkan pada barang fisik, serta tombol darurat "Tandai Barang Hilang".',
+        imageUrl: '/projects/temuin_qrcode.png',
+        isMobile: true
+      },
+      {
+        id: 'temuin-notification',
+        title: 'Notifikasi Temuan Real-Time & Modal Detail Laporan GPS',
+        caption: 'Antarmuka notifikasi bottom-sheet interaktif saat barang yang hilang (Headphone) ditemukan oleh penemu. Dilengkapi ringkasan status DITEMUKAN serta tombol aksi langsung "Cek Lokasi" via koordinat GPS dan "Detail Laporan".',
+        imageUrl: '/projects/temuin_notification.png',
+        isMobile: true
       }
     ],
     problem: 'Barang berharga yang tertinggal atau tercecer di ruang publik (kunci motor, dompet, tas, dokumen) sering kali sulit dikembalikan karena penemu tidak memiliki saluran komunikasi langsung kepada pemilik sah tanpa mengekspos data pribadi. Selain itu, titik lokasi penemuan sering tidak terdokumentasi dengan akurat dan pemilik tidak memiliki sistem terstruktur untuk memantau status barang miliknya.',
@@ -647,6 +694,7 @@ export const PROJECTS_DATA = {
     name: 'DompetQ',
     tagline: 'Fintech E-Wallet Mobile Application',
     fullTitle: 'DompetQ',
+    description: 'Aplikasi dompet digital modern dengan fitur transaksi QRIS instan, pembagian tagihan split-bill otomatis, dan analitik budgeting bulanan yang cerdas.',
     category: 'Mobile Application & Fintech',
     status: 'Portfolio Project Showcase',
     period: '2023',
@@ -690,6 +738,7 @@ export const PROJECTS_DATA = {
     name: 'Makalah Generator',
     tagline: 'AI Academic Draft & Citation Assistant',
     fullTitle: 'Makalah Generator',
+    description: 'Asisten penulisan ilmiah berbasis AI untuk menyusun kerangka riset terstruktur dan format sitasi standar akademik (APA, IEEE, Harvard) secara otomatis.',
     category: 'Web Application & Generative AI',
     status: 'Portfolio Project Showcase',
     period: '2024',
@@ -729,11 +778,12 @@ export const PROJECTS_DATA = {
     name: 'SIGAP',
     tagline: 'Sistem Gerak Aman dari Pencurian',
     fullTitle: 'SIGAP',
+    description: 'Aplikasi keamanan smartphone anti-maling berbasis sensor gerak dan charger dengan alarm darurat kontinu, volume watchdog 100%, serta bukti foto dan GPS.',
     category: 'Mobile Application / Mobile Security / Flutter',
     status: 'Production Prototype',
     period: '2024',
-    liveUrl: 'https://github.com/agungkrisna/sigap',
-    githubUrl: 'https://github.com/agungkrisna/sigap',
+    liveUrl: 'https://github.com/ANTARTICA1/sigap-flutter',
+    githubUrl: 'https://github.com/ANTARTICA1/sigap-flutter',
     stack: [
       'Flutter',
       'Dart',
@@ -758,10 +808,25 @@ export const PROJECTS_DATA = {
     ],
     photos: [
       {
-        id: 'sigap-home',
-        title: 'Home Screen - Status Keamanan & Kontrol Utama',
-        caption: 'Dashboard interaktif menampilkan status keamanan terkini (Disarmed / Armed), sakelar proteksi gerak & charger, tombol aktivasi utama, serta menu riwayat dan pengaturan.',
-        imageUrl: '/projects/sigap.jpg'
+        id: 'sigap-dashboard',
+        title: 'Dashboard Utama: Mode Terkunci & Aktif (Sistem Pemantauan Gerak & Charger)',
+        caption: 'Antarmuka utama saat sistem pengamanan aktif dengan radar perlindungan dinamis, indikator kesiapan sensor (PIN Siap, Lokasi Siap, Foto Aktif), status sensor gerak XYZ memantau, deteksi charger terkunci, dan tombol nonaktifkan sistem darurat.',
+        imageUrl: '/projects/sigap_dashboard.png',
+        isMobile: true
+      },
+      {
+        id: 'sigap-lockscreen',
+        title: 'Layar Darurat Immersive: PERANGKAT TERKUNCI & Kunci PIN Alarm',
+        caption: 'Layar proteksi darurat yang langsung menyala saat sensor mendeteksi pergerakan mencurigakan atau kabel charger dicabut paksa. Dilengkapi status pencarian GPS darurat, volume terkunci 100% anti-silenced, tombol kirim WA/SMS darurat, keypad angka interaktif, dan tombol Buka Kunci Alarm.',
+        imageUrl: '/projects/sigap_lockscreen.png',
+        isMobile: true
+      },
+      {
+        id: 'sigap-intruder-logs',
+        title: 'Bukti Penyusup & Log Insiden: Snapshot Kamera Depan & Titik Lokasi GPS',
+        caption: 'Riwayat rekam jejak insiden keamanan dengan timestamp akurat, tangkapan foto penyusup otomatis dari kamera depan smartphone, tautan koordinat GPS lokasi kejadian interaktif, dan log insiden untuk barang bukti.',
+        imageUrl: '/projects/sigap_intruder_logs.png',
+        isMobile: true
       }
     ],
     problem: 'Pengguna dapat meninggalkan smartphone di suatu tempat, misalnya di meja, ruangan, atau area publik. Jika smartphone kemudian diangkat, dipindahkan, atau charger dilepas secara paksa ketika sistem sedang aktif, aplikasi dapat mendeteksi kondisi tersebut dan memberikan respons berupa alarm serta pengumpulan bukti insiden.',
@@ -862,11 +927,12 @@ SecurityProvider (State Management & Orchestration)
     name: 'Bingkai',
     tagline: 'Membantu yang berserakan kembali beraturan.',
     fullTitle: 'Bingkai',
+    description: 'Aplikasi galeri foto lokal (Local-First) untuk merapikan ribuan foto secara cepat lewat kurasi swipe, deteksi foto kembar, dan remote kontrol via smartphone atau gamepad.',
     category: 'Desktop Utility / Local-First Photo Gallery / Python & Alpine.js',
     status: 'Production Prototype',
     period: '2024',
-    liveUrl: 'https://github.com/agungkrisna/bingkai',
-    githubUrl: 'https://github.com/agungkrisna/bingkai',
+    liveUrl: 'https://github.com/ANTARTICA1/bingkai-app',
+    githubUrl: 'https://github.com/ANTARTICA1/bingkai-app',
     stack: [
       'Python',
       'FastAPI',
@@ -885,10 +951,22 @@ SecurityProvider (State Management & Orchestration)
     ],
     photos: [
       {
-        id: 'bingkai-home',
-        title: 'Galeri Utama - Tampilan Foto Cepat & Folder Lokal Terhubung',
-        caption: 'Halaman beranda Bingkai menyajikan seluruh foto dari folder D:/Photos dalam grid modern yang rapi. Foto dimuat secepat kilat berkat caching thumbnail WebP tanpa membebani memori laptop.',
-        imageUrl: '/projects/bingkai.jpg'
+        id: 'bingkai-remote',
+        title: 'Akses Remote HP & Info Sistem (Wi-Fi Lokal)',
+        caption: 'Fitur kendali jarak jauh melalui browser smartphone via scan QR code jaringan Wi-Fi lokal (IP http://192.168.1.7:8080), didukung engine database SQLite WAL dan Gamepad API.',
+        imageUrl: '/projects/bingkai_remote.png'
+      },
+      {
+        id: 'bingkai-viewer',
+        title: 'Photo Viewer & File Inspector',
+        caption: 'Antarmuka inspeksi foto detail dengan aksi cepat: ubah nama (Y), pindah folder (M), masuk album (Alb), dan hapus ke trash (A), dilengkapi informasi dimensi, ukuran file, tanggal, serta path lokal file komputer.',
+        imageUrl: '/projects/bingkai_viewer.png'
+      },
+      {
+        id: 'bingkai-gamepad',
+        title: 'Panduan Tombol Pintasan (Stick Gamepad & Keyboard)',
+        caption: 'Dukungan kontrol penuh dengan controller stick game (Xbox Wireless Controller / PlayStation) via Gamepad API untuk navigasi galeri, zoom, putar foto, favorit, dan kurasi foto langsung dari sofa.',
+        imageUrl: '/projects/bingkai_gamepad.png'
       }
     ],
     problem: 'Kita semua punya folder D:/Photos atau Pictures di laptop yang isinya ribuan foto tak beraturan. Merapikannya terasa melelahkan karena harus klik satu per satu di depan meja kerja. Ingin pakai layanan Cloud seperti Google Photos, tapi takut privasi bocor atau malas menunggu upload berjam-jam untuk file bergiga-giga. Ditambah lagi, melihat foto di depan monitor pakai mouse terasa kaku dan kurang santai.',
@@ -952,6 +1030,7 @@ SecurityProvider (State Management & Orchestration)
     isDino: true,
     tagline: 'T-Rex Offline Runner Game',
     fullTitle: 'chrome://dino',
+    description: 'Game arkade klasik T-Rex runner retro offline dengan kontrol lompat adaptif dan efek audio 8-bit synthesizer.',
     category: 'Built-in Mini Game',
     status: 'Playable Arcade Game',
     period: 'Arcade',
@@ -973,11 +1052,12 @@ SecurityProvider (State Management & Orchestration)
     iframeUrl: 'https://portofolio.krisnaartha.my.id',
     tagline: 'Personal Portfolio & Showcase',
     fullTitle: 'portofolio.krisnaartha.my.id',
+    description: 'Website portofolio interaktif yang merangkum profil profesional, rekam jejak teknologi, dan showcase proyek software engineering.',
     category: 'Live Portfolio Web',
     status: 'Live Website',
     period: '2024',
     liveUrl: 'https://portofolio.krisnaartha.my.id',
-    githubUrl: 'https://github.com/agungkrisna',
+    githubUrl: 'https://github.com/ANTARTICA1',
     stack: ['Portfolio Web', 'Full Stack', 'Cloud & DevOps'],
     stats: [],
     photos: []

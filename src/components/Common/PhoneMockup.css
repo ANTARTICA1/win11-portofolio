@@ -1,0 +1,239 @@
+/* ==========================================================================
+   SMARTPHONE CSS MOCKUP
+   Ultra-realistic modern smartphone chassis with 9:20 aspect ratio,
+   chassis buttons, titanium/obsidian rim, hole-punch camera, and glass sheen.
+   ========================================================================== */
+
+.phone-mockup-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  box-sizing: border-box;
+  perspective: 1200px;
+}
+
+/* Ambient Backlight Glow */
+.phone-ambient-glow {
+  position: absolute;
+  width: 280px;
+  height: 480px;
+  border-radius: 50%;
+  filter: blur(75px);
+  opacity: 0.38;
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.glow-sigap {
+  background: radial-gradient(circle, rgba(239, 68, 68, 0.45) 0%, rgba(14, 165, 233, 0.28) 55%, transparent 75%);
+}
+
+.glow-temuin {
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.48) 0%, rgba(16, 185, 129, 0.3) 55%, transparent 75%);
+}
+
+.glow-dompetq {
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.45) 0%, rgba(59, 130, 246, 0.25) 55%, transparent 75%);
+}
+
+.glow-lintas {
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.48) 0%, rgba(37, 99, 235, 0.3) 55%, transparent 75%);
+}
+
+.glow-default {
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.35) 0%, rgba(99, 102, 241, 0.2) 55%, transparent 75%);
+}
+
+/* Smartphone Device Chassis */
+.phone-mockup-device {
+  position: relative;
+  height: 520px;
+  max-height: 72vh;
+  width: auto;
+  aspect-ratio: 460 / 1024;
+  background: linear-gradient(145deg, #2b303c 0%, #171a22 50%, #0e1017 100%);
+  border-radius: 46px;
+  padding: 9px;
+  box-sizing: content-box;
+  box-shadow:
+    0 0 0 1.5px rgba(255, 255, 255, 0.16),
+    0 0 0 3.5px #151821,
+    0 24px 60px -12px rgba(0, 0, 0, 0.92),
+    0 4px 12px rgba(0, 0, 0, 0.6);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+  user-select: none;
+  z-index: 2;
+}
+
+.phone-mockup-wrapper:hover .phone-mockup-device {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow:
+    0 0 0 1.5px rgba(255, 255, 255, 0.24),
+    0 0 0 3.5px #1a1e29,
+    0 32px 70px -10px rgba(0, 0, 0, 0.95),
+    0 6px 16px rgba(0, 0, 0, 0.7);
+}
+
+.phone-mockup-wrapper:hover .phone-ambient-glow {
+  opacity: 0.55;
+  transform: scale(1.05);
+}
+
+/* Hardware Buttons */
+.phone-btn-vol-up,
+.phone-btn-vol-down {
+  position: absolute;
+  left: -4px;
+  width: 3.5px;
+  height: 40px;
+  background: linear-gradient(180deg, #4b5563 0%, #374151 100%);
+  border-radius: 3px 0 0 3px;
+  box-shadow: -1px 0 2px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.phone-btn-vol-up {
+  top: 96px;
+}
+
+.phone-btn-vol-down {
+  top: 146px;
+}
+
+.phone-btn-power {
+  position: absolute;
+  right: -4px;
+  top: 114px;
+  width: 3.5px;
+  height: 56px;
+  background: linear-gradient(180deg, #4b5563 0%, #374151 100%);
+  border-radius: 0 3px 3px 0;
+  box-shadow: 1px 0 2px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+/* Bezel Rim */
+.phone-bezel-rim {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 38px;
+  overflow: hidden;
+  background: #000000;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Speaker Earpiece */
+.phone-speaker-slit {
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 44px;
+  height: 3px;
+  background: #202430;
+  border-radius: 2px;
+  z-index: 15;
+}
+
+/* Hole-Punch Front Camera */
+.phone-punch-cam {
+  position: absolute;
+  top: 9px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #06090e;
+  border: 1.5px solid #141a24;
+  z-index: 14;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.phone-punch-lens {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #0b1528;
+  box-shadow: inset 0 0 2px #38bdf8;
+}
+
+/* Screen Display */
+.phone-screen-display {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 38px;
+  background-color: #050608;
+}
+
+.phone-screen-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+/* Glass Glare Sheen */
+.phone-glass-glare {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.11) 0%,
+    rgba(255, 255, 255, 0.03) 26%,
+    transparent 42%
+  );
+  pointer-events: none;
+  z-index: 8;
+}
+
+/* Bottom Nav Bar */
+.phone-bottom-nav-bar {
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 2px;
+  z-index: 12;
+  backdrop-filter: blur(2px);
+}
+
+/* Stage wrapper for Browser gallery */
+.browser-phone-stage {
+  width: 100%;
+  min-height: 550px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 45%, #141822 0%, #090a0f 75%, #050608 100%);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.modal-phone-container {
+  padding: 10px 0;
+}
+
+.modal-phone-container .phone-mockup-device {
+  height: 560px;
+  max-height: 62vh;
+}

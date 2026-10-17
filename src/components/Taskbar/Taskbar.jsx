@@ -88,8 +88,7 @@ export const Taskbar = ({
 
   const defaultTaskbarApps = [
     { id: 'explorer', name: 'File Explorer', icon: 'explorer' },
-    { id: 'chrome', name: 'Google Chrome', icon: 'chrome' },
-    { id: 'browser', name: 'Microsoft Edge', icon: 'edge' }
+    { id: 'chrome', name: 'Google Chrome', icon: 'chrome' }
   ];
 
   return (

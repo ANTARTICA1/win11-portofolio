@@ -1,19 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { 
   ArrowLeft, ArrowRight, RotateCw, Lock, Star, ExternalLink, 
-  CheckCircle2, ChevronDown, Plus, X, ZoomIn, FolderGit2, Search
+  CheckCircle2, ChevronDown, Plus, X, ZoomIn, FolderGit2,
+  ChevronLeft, ChevronRight, Maximize2, Gamepad2
 } from 'lucide-react';
 import { WinIcon } from '../Common/WinIcon';
 import { playClickSound } from '../../utils/sound';
 import { useWindow } from '../Windows/WindowContext';
 import { ChromeDinoGame } from './ChromeDinoGame';
+import { NeuroFlyGame } from './NeuroFlyGame';
 import { PROJECTS_DATA } from '../../data/projectsData';
+import { PhoneMockup } from '../Common/PhoneMockup';
 import './BrowserApp.css';
 
 export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl = null, onLaunchApp }) => {
   const winCtx = useWindow();
   const [activeProjectId, setActiveProjectId] = useState(initialProject || 'tatagih');
   const [activePhotoIndex, setActivePhotoIndex] = useState(0);
+  const [phoneMockupMode, setPhoneMockupMode] = useState(true);
+  const [neuroFlyLiveMode, setNeuroFlyLiveMode] = useState(true);
   const [selectedPhotoModal, setSelectedPhotoModal] = useState(null);
   const [isBookmarked, setIsBookmarked] = useState(true);
   const [isReloading, setIsReloading] = useState(false);
@@ -136,7 +141,35 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
   const currentIndex = projectKeys.indexOf(activeProjectId);
   const prevProjectKey = projectKeys[(currentIndex - 1 + projectKeys.length) % projectKeys.length];
   const nextProjectKey = projectKeys[(currentIndex + 1) % projectKeys.length];
+  
+  // Strict check: only photos with isMobile: true or projects sigap / temuin are portrait mobile screenshots
   const activePhoto = currentProject.photos[activePhotoIndex] || currentProject.photos[0] || {};
+  const isMobilePhoto = Boolean(
+    activePhoto?.isMobile ||
+    currentProject.id === 'sigap' ||
+    currentProject.id === 'temuin'
+  );
+
+  // Keyboard navigation for active photo and lightbox
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (!currentProject?.photos || currentProject.photos.length <= 1) return;
+      if (['INPUT', 'TEXTAREA'].includes(e.target.tagName)) return;
+
+      if (e.key === 'ArrowLeft') {
+        playClickSound();
+        setActivePhotoIndex((prev) => (prev > 0 ? prev - 1 : currentProject.photos.length - 1));
+      } else if (e.key === 'ArrowRight') {
+        playClickSound();
+        setActivePhotoIndex((prev) => (prev < currentProject.photos.length - 1 ? prev + 1 : 0));
+      } else if (e.key === 'Escape' && selectedPhotoModal) {
+        setSelectedPhotoModal(null);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [currentProject, selectedPhotoModal]);
 
   return (
     <div className="chrome-browser">
@@ -492,10 +525,10 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
             <header className="project-header">
               <div className="project-hero-main">
                 <h1 className="project-main-title">{currentProject.fullTitle}</h1>
-                <p className="project-lead-desc">{currentProject.solution}</p>
+                <p className="project-lead-desc">{currentProject.description || currentProject.tagline}</p>
 
                 <div className="project-stack-row">
-                  {currentProject.stack.map((item, idx) => (
+                  {currentProject.stack?.map((item, idx) => (
                     <span key={idx} className="project-stack-tag">{item}</span>
                   ))}
                 </div>
@@ -510,15 +543,41 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
                     <FolderGit2 size={16} />
                     <span>Source Code (GitHub)</span>
                   </a>
-                  <a
-                    href={currentProject.liveUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="btn-live"
-                  >
-                    <ExternalLink size={15} />
-                    <span>Kunjungi Live Demo</span>
-                  </a>
+                  {currentProject.liveUrl && (
+                    <a
+                      href={currentProject.liveUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="btn-live"
+                    >
+                      <ExternalLink size={15} />
+                      <span>Kunjungi Live Demo</span>
+                    </a>
+                  )}
+                  {currentProject.id === 'neurofly' && (
+                    <button
+                      type="button"
+                      className="btn-live"
+                      onClick={() => {
+                        playClickSound();
+                        setNeuroFlyLiveMode(true);
+                        if (onLaunchApp) onLaunchApp('neurofly');
+                      }}
+                      style={{
+                        background: 'linear-gradient(135deg, #0284c7, #2563eb)',
+                        border: 'none',
+                        color: '#fff',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '6px'
+                      }}
+                      title="Mainkan game 3D Pong dan lawan lalat buah langsung"
+                    >
+                      <Gamepad2 size={15} />
+                      <span>Mainkan 3D Pong vs Lalat</span>
+                    </button>
+                  )}
                 </div>
               </div>
             </header>
@@ -526,89 +585,370 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
             <section className="preview-showcase-section">
               <div className="preview-card-header">
                 <div className="preview-header-left">
-                  <span className="preview-card-title">Galeri Dokumentasi Antarmuka</span>
+                  <span className="preview-card-title">
+                    {currentProject.id === 'neurofly' && neuroFlyLiveMode
+                      ? 'Simulasi 3D: Human vs Drosophila Fly Brain (MaleCNS v1.0)'
+                      : 'Galeri Dokumentasi Antarmuka'}
+                  </span>
                   <span className="preview-screen-count">
-                    Foto {activePhotoIndex + 1} dari {currentProject.photos.length}
+                    {currentProject.id === 'neurofly' && neuroFlyLiveMode
+                      ? 'Mode Permainan Aktif (60 FPS)'
+                      : `Layar ${activePhotoIndex + 1} dari ${currentProject.photos.length}`}
                   </span>
                 </div>
 
                 <div className="preview-header-actions">
-                  {currentProject.photos.length > 1 && (
-                    <div className="preview-tab-row">
-                      {currentProject.photos.map((photo, idx) => (
+                  {currentProject.id === 'neurofly' && (
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginRight: '6px' }}>
+                      <button
+                        type="button"
+                        className="preview-zoom-action-btn"
+                        onClick={() => {
+                          playClickSound();
+                          setNeuroFlyLiveMode(true);
+                        }}
+                        style={{
+                          backgroundColor: neuroFlyLiveMode ? '#0284c7' : '#1e293b',
+                          color: '#fff',
+                          borderColor: neuroFlyLiveMode ? '#38bdf8' : '#334155'
+                        }}
+                        title="Mainkan game langsung di halaman ini"
+                      >
+                        <Gamepad2 size={13} />
+                        <span>🎮 Lawan Lalat (Live 3D)</span>
+                      </button>
+                      <button
+                        type="button"
+                        className="preview-zoom-action-btn"
+                        onClick={() => {
+                          playClickSound();
+                          setNeuroFlyLiveMode(false);
+                        }}
+                        style={{
+                          backgroundColor: !neuroFlyLiveMode ? '#0284c7' : '#1e293b',
+                          color: '#fff',
+                          borderColor: !neuroFlyLiveMode ? '#38bdf8' : '#334155'
+                        }}
+                        title="Tampilkan foto & tangkapan layar"
+                      >
+                        <span>📸 Galeri Foto</span>
+                      </button>
+                      {onLaunchApp && (
                         <button
-                          key={photo.id}
                           type="button"
-                          className={`preview-tab-btn ${activePhotoIndex === idx ? 'active' : ''}`}
+                          className="preview-zoom-action-btn"
                           onClick={() => {
                             playClickSound();
-                            setActivePhotoIndex(idx);
+                            onLaunchApp('neurofly');
                           }}
+                          style={{
+                            backgroundColor: '#4338ca',
+                            color: '#fff',
+                            borderColor: '#6366f1'
+                          }}
+                          title="Buka NeuroFly di jendela mandiri Windows"
                         >
-                          <span>Foto {idx + 1}</span>
+                          <span>Jendela Mandiri ↗</span>
                         </button>
-                      ))}
+                      )}
                     </div>
+                  )}
+
+                  {(!neuroFlyLiveMode || currentProject.id !== 'neurofly') && (
+                    <button
+                      type="button"
+                      className="preview-zoom-action-btn"
+                      onClick={() => {
+                        playClickSound();
+                        setSelectedPhotoModal(activePhoto);
+                      }}
+                      title="Perbesar tampilan foto"
+                    >
+                      <Maximize2 size={13} />
+                      <span>Perbesar</span>
+                    </button>
                   )}
                 </div>
               </div>
 
-              <div
-                className="preview-viewport-container"
-                onClick={() => setSelectedPhotoModal(activePhoto)}
-                title="Klik untuk memperbesar gambar"
-              >
-                <div className="preview-photo-stage">
-                  <img
-                    src={activePhoto?.imageUrl || currentProject.photos[0]?.imageUrl || `/projects/${currentProject.id}.jpg`}
-                    alt={activePhoto?.title || currentProject.name}
-                    className="preview-featured-img"
-                  />
-                  <div className="preview-zoom-badge">
-                    <ZoomIn size={13} />
-                    <span>Klik untuk memperbesar</span>
-                  </div>
-                </div>
-              </div>
+              <div className={`showcase-studio-grid ${currentProject.id === 'neurofly' && neuroFlyLiveMode ? 'layout-neurofly-sim' : isMobilePhoto ? 'layout-mobile' : 'layout-desktop'}`}>
+                
+                {/* Visual Showcase Stage (Left Pane) */}
+                <div className="showcase-visual-stage">
+                  <div className={`stage-ambient-glow glow-${currentProject.id || 'default'}`} />
 
-              <div className="preview-caption-bar">
-                <div className="preview-caption-tag">Penjelasan Sekilas:</div>
-                <div className="preview-caption-title">{activePhoto?.title}</div>
-                <p className="preview-caption-text">{activePhoto?.caption}</p>
-              </div>
-
-              {currentProject.photos.length > 1 && (
-                <div className="preview-thumbnails-container">
-                  <div className="preview-thumbnails-label">
-                    Koleksi Foto Proyek ({currentProject.photos.length} Tangkapan Layar):
-                  </div>
-                  <div className="preview-thumbnails-grid">
-                    {currentProject.photos.map((photo, idx) => (
-                      <div
-                        key={photo.id}
-                        className={`preview-thumb-box ${activePhotoIndex === idx ? 'active' : ''}`}
-                        onClick={() => {
+                  {/* Stage navigation chevrons */}
+                  {currentProject.photos.length > 1 && (!neuroFlyLiveMode || currentProject.id !== 'neurofly') && (
+                    <>
+                      <button
+                        type="button"
+                        className="stage-nav-arrow arrow-left"
+                        onClick={(e) => {
+                          e.stopPropagation();
                           playClickSound();
-                          setActivePhotoIndex(idx);
+                          setActivePhotoIndex((prev) => (prev > 0 ? prev - 1 : currentProject.photos.length - 1));
                         }}
+                        title="Foto Sebelumnya (Panah Kiri)"
+                        aria-label="Previous Photo"
                       >
-                        <div className="thumb-img-wrapper">
-                          {photo.imageUrl ? (
-                            <img src={photo.imageUrl} alt={photo.title} className="thumb-preview-img" />
-                          ) : (
-                            <div className="thumb-placeholder-box">Foto {idx + 1}</div>
+                        <ChevronLeft size={20} />
+                      </button>
+                      <button
+                        type="button"
+                        className="stage-nav-arrow arrow-right"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          playClickSound();
+                          setActivePhotoIndex((prev) => (prev < currentProject.photos.length - 1 ? prev + 1 : 0));
+                        }}
+                        title="Foto Selanjutnya (Panah Kanan)"
+                        aria-label="Next Photo"
+                      >
+                        <ChevronRight size={20} />
+                      </button>
+                    </>
+                  )}
+
+                  {/* Centerpiece Container */}
+                  <div
+                    className="stage-centerpiece-wrapper"
+                    onClick={() => {
+                      if (currentProject.id === 'neurofly' && neuroFlyLiveMode) return;
+                      playClickSound();
+                      setSelectedPhotoModal(activePhoto);
+                    }}
+                    title={currentProject.id === 'neurofly' && neuroFlyLiveMode ? '' : 'Klik untuk memperbesar gambar'}
+                  >
+                    {currentProject.id === 'neurofly' && neuroFlyLiveMode ? (
+                      <div className="stage-desktop-chassis neurofly-game-mode">
+                        <div className="desktop-chassis-bar">
+                          <div className="chassis-traffic-dots">
+                            <span className="dot dot-red" />
+                            <span className="dot dot-yellow" />
+                            <span className="dot dot-green" />
+                          </div>
+                          <div className="chassis-game-title">
+                            <span>NeuroFly — 3D Pong vs Drosophila MaleCNS v1.0 (Live Biological Simulation)</span>
+                          </div>
+                          {onLaunchApp && (
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                playClickSound();
+                                onLaunchApp('neurofly');
+                              }}
+                              style={{
+                                marginLeft: 'auto',
+                                backgroundColor: '#1e293b',
+                                color: '#38bdf8',
+                                border: '1px solid #334155',
+                                borderRadius: '4px',
+                                padding: '2px 8px',
+                                fontSize: '11px',
+                                cursor: 'pointer'
+                              }}
+                              title="Buka di jendela mandiri"
+                            >
+                              Pop-out Jendela ↗
+                            </button>
                           )}
-                          <span className="thumb-index-badge">Foto {idx + 1}</span>
                         </div>
-                        <div className="thumb-meta">
-                          <div className="thumb-title">{photo.title}</div>
-                          <div className="thumb-desc-snippet">{photo.caption}</div>
+                        <div className="desktop-game-stage" style={{ height: '620px', width: '100%', overflow: 'hidden' }}>
+                          <NeuroFlyGame
+                            isEmbedded={true}
+                            onOpenExternal={onLaunchApp ? () => onLaunchApp('neurofly') : null}
+                          />
                         </div>
                       </div>
-                    ))}
+                    ) : isMobilePhoto ? (
+                      <div className="stage-phone-holder">
+                        <PhoneMockup
+                          src={activePhoto?.imageUrl || currentProject.photos[0]?.imageUrl || `/projects/${currentProject.id}.jpg`}
+                          alt={activePhoto?.title || currentProject.name}
+                          projectName={currentProject.id}
+                        />
+                      </div>
+                    ) : currentProject.id === 'theotown' ? (
+                      <div className="stage-desktop-chassis game-mode">
+                        <div className="desktop-chassis-bar">
+                          <div className="chassis-traffic-dots">
+                            <span className="dot dot-red" />
+                            <span className="dot dot-yellow" />
+                            <span className="dot dot-green" />
+                          </div>
+                          <div className="chassis-game-title">
+                            <span>TheoTown — ITB STIKOM Bali Plugin Gameplay</span>
+                          </div>
+                        </div>
+                        <div className="desktop-screenshot-stage">
+                          <img
+                            src={activePhoto?.imageUrl || currentProject.photos[0]?.imageUrl || `/projects/${currentProject.id}.jpg`}
+                            alt={activePhoto?.title || currentProject.name}
+                            className="desktop-screenshot-img"
+                          />
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="stage-desktop-chassis">
+                        <div className="desktop-chassis-bar">
+                          <div className="chassis-traffic-dots">
+                            <span className="dot dot-red" />
+                            <span className="dot dot-yellow" />
+                            <span className="dot dot-green" />
+                          </div>
+                          <div className="chassis-url-pill">
+                            <Lock size={10} className="chassis-lock-icon" />
+                            <span>
+                              {currentProject.id === 'lintas'
+                                ? 'Lintas Windows Companion Host (v2.0 • Port 8945)'
+                                : `https://${currentProject.id}.demo.app/${activePhoto?.id || ''}`}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="desktop-screenshot-stage">
+                          <img
+                            src={activePhoto?.imageUrl || currentProject.photos[0]?.imageUrl || `/projects/${currentProject.id}.jpg`}
+                            alt={activePhoto?.title || currentProject.name}
+                            className="desktop-screenshot-img"
+                          />
+                        </div>
+                      </div>
+                    )}
+
+                    {(!neuroFlyLiveMode || currentProject.id !== 'neurofly') && (
+                      <div className="stage-zoom-badge">
+                        <ZoomIn size={12} />
+                        <span>Klik untuk memperbesar</span>
+                      </div>
+                    )}
                   </div>
+
+                  {/* Pagination Dots */}
+                  {currentProject.photos.length > 1 && (!neuroFlyLiveMode || currentProject.id !== 'neurofly') && (
+                    <div className="stage-dots-tray">
+                      {currentProject.photos.map((_, idx) => (
+                        <button
+                          key={idx}
+                          type="button"
+                          className={`stage-dot-pill ${activePhotoIndex === idx ? 'active' : ''}`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            playClickSound();
+                            setActivePhotoIndex(idx);
+                          }}
+                          title={`Beralih ke foto ${idx + 1}`}
+                          aria-label={`Go to photo ${idx + 1}`}
+                        />
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Context & Interactive Gallery (Right Pane) */}
+                {(!neuroFlyLiveMode || currentProject.id !== 'neurofly') && (
+                  <div className="showcase-context-panel">
+                  
+                  {/* Active Screen Information Card */}
+                  <div className="active-screen-panel">
+                    <div className="screen-kicker-row">
+                      <span className="screen-type-tag">
+                        {currentProject.id === 'theotown'
+                          ? 'Tampilan Dalam Game TheoTown'
+                          : isMobilePhoto
+                          ? 'Antarmuka Smartphone (Flutter Android)'
+                          : currentProject.id === 'lintas'
+                          ? 'Antarmuka Desktop (Windows Companion Host)'
+                          : 'Antarmuka Web'}
+                      </span>
+                      <span className="screen-index-badge">
+                        Tangkapan Layar #{activePhotoIndex + 1}
+                      </span>
+                    </div>
+
+                    <h2 className="active-screen-title">
+                      {activePhoto?.title || currentProject.name}
+                    </h2>
+
+                    <p className="active-screen-caption">
+                      {activePhoto?.caption || currentProject.description}
+                    </p>
+                  </div>
+
+                  {/* Interactive Thumbnails List */}
+                  {currentProject.photos.length > 1 ? (
+                    <div className="screen-selector-group">
+                      <div className="screen-selector-header">
+                        <span className="selector-label">PILIH TAMPILAN</span>
+                        <span className="selector-count">{currentProject.photos.length} Tangkapan Layar Tersedia</span>
+                      </div>
+
+                      <div className={`screen-thumbs-container ${isMobilePhoto ? 'mobile-gallery-mode' : 'desktop-gallery-mode'}`}>
+                        {currentProject.photos.map((photo, idx) => {
+                          const isActive = activePhotoIndex === idx;
+                          return (
+                            <div
+                              key={photo.id || idx}
+                              className={`screen-thumb-item ${isActive ? 'active' : ''}`}
+                              onClick={() => {
+                                playClickSound();
+                                setActivePhotoIndex(idx);
+                              }}
+                            >
+                              <div className={`thumb-portrait-shell ${photo.isMobile ? 'is-mobile-thumb' : 'is-desktop-thumb'}`}>
+                                {photo.imageUrl ? (
+                                  <img
+                                    src={photo.imageUrl}
+                                    alt={photo.title}
+                                    className="thumb-portrait-img"
+                                    loading="lazy"
+                                  />
+                                ) : (
+                                  <div className="thumb-portrait-fallback">#{idx + 1}</div>
+                                )}
+                                <span className="thumb-badge-num">#{idx + 1}</span>
+                              </div>
+
+                              <div className="thumb-content-meta">
+                                <div className="thumb-meta-top">
+                                  <span className="thumb-meta-title">{photo.title}</span>
+                                </div>
+                                <p className="thumb-meta-desc">{photo.caption}</p>
+                                {isActive && (
+                                  <div className="thumb-current-indicator">
+                                    <span className="indicator-dot" />
+                                    <span>Sedang Aktif</span>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ) : (
+                    /* If single photo, display architecture & project notes */
+                    <div className="single-photo-side-box">
+                      <div className="side-box-title">Spesifikasi & Sorotan Proyek:</div>
+                      {currentProject.stats && currentProject.stats.length > 0 ? (
+                        <div className="side-stats-grid">
+                          {currentProject.stats.map((st, sIdx) => (
+                            <div key={sIdx} className="side-stat-pill">
+                              <span className="side-stat-k">{st.label}</span>
+                              <span className="side-stat-v">{st.value}</span>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <p className="side-box-text">
+                          Proyek ini dilengkapi dokumentasi lengkap dan dapat ditinjau langsung melalui tautan live demo maupun repositori kode GitHub.
+                        </p>
+                      )}
+                    </div>
+                  )}
                 </div>
               )}
+            </div>
             </section>
 
             <section className="editorial-context-section">
@@ -676,28 +1016,75 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
             onClick={(e) => e.stopPropagation()}
           >
             <div className="lightbox-header">
-              <h3 className="lightbox-title">{selectedPhotoModal.title}</h3>
+              <div className="lightbox-header-info">
+                <span className="lightbox-kicker">
+                  Foto {activePhotoIndex + 1} dari {currentProject.photos.length}
+                </span>
+                <h3 className="lightbox-title">{activePhoto?.title || selectedPhotoModal.title}</h3>
+              </div>
               <button
                 className="lightbox-close-btn"
                 onClick={() => setSelectedPhotoModal(null)}
+                title="Tutup (Esc)"
               >
                 <X size={18} />
               </button>
             </div>
+
             <div className="lightbox-body">
               <div className="lightbox-preview-frame">
-                <img
-                  src={selectedPhotoModal?.imageUrl || currentProject.photos[0]?.imageUrl || `/projects/${currentProject.id}.jpg`}
-                  alt={selectedPhotoModal?.title || currentProject.name}
-                  style={{ maxWidth: '100%', maxHeight: '60vh', objectFit: 'contain', borderRadius: '4px' }}
-                />
+                {currentProject.photos.length > 1 && (
+                  <>
+                    <button
+                      type="button"
+                      className="lightbox-nav-btn btn-left"
+                      onClick={() => {
+                        playClickSound();
+                        setActivePhotoIndex((prev) => (prev > 0 ? prev - 1 : currentProject.photos.length - 1));
+                      }}
+                      title="Sebelumnya (Panah Kiri)"
+                    >
+                      <ChevronLeft size={22} />
+                    </button>
+                    <button
+                      type="button"
+                      className="lightbox-nav-btn btn-right"
+                      onClick={() => {
+                        playClickSound();
+                        setActivePhotoIndex((prev) => (prev < currentProject.photos.length - 1 ? prev + 1 : 0));
+                      }}
+                      title="Selanjutnya (Panah Kanan)"
+                    >
+                      <ChevronRight size={22} />
+                    </button>
+                  </>
+                )}
+
+                {isMobilePhoto ? (
+                  <div className="modal-phone-container">
+                    <PhoneMockup
+                      src={activePhoto?.imageUrl || selectedPhotoModal?.imageUrl || `/projects/${currentProject.id}.jpg`}
+                      alt={activePhoto?.title || selectedPhotoModal?.title || currentProject.name}
+                      projectName={currentProject.id}
+                    />
+                  </div>
+                ) : (
+                  <img
+                    src={activePhoto?.imageUrl || selectedPhotoModal?.imageUrl || `/projects/${currentProject.id}.jpg`}
+                    alt={activePhoto?.title || selectedPhotoModal?.title || currentProject.name}
+                    className="lightbox-full-img"
+                  />
+                )}
               </div>
-              <div style={{ fontSize: '11px', color: '#64748b', textTransform: 'uppercase', fontWeight: 700, letterSpacing: '0.5px' }}>
-                Penjelasan Sekilas:
+
+              <div className="lightbox-caption-area">
+                <div className="lightbox-caption-kicker">
+                  Penjelasan Antarmuka:
+                </div>
+                <p className="lightbox-caption-text">
+                  {activePhoto?.caption || selectedPhotoModal.caption}
+                </p>
               </div>
-              <p className="lightbox-caption-text">
-                {selectedPhotoModal.caption}
-              </p>
             </div>
           </div>
         </div>

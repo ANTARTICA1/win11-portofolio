@@ -310,6 +310,15 @@ export const FileExplorerApp = ({ initialPath = 'This PC', onOpenFile, onOpenFol
       } else if (onOpenFile) {
         onOpenFile({ ...item, appId: 'chrome', projectId: targetProj });
       }
+    } else if (item.extension === 'jpg' || item.extension === 'png' || (item.type === 'file' && item.imageUrl)) {
+      if (onOpenFile) {
+        onOpenFile(item);
+      } else if (onLaunchApp) {
+        onLaunchApp('photos', {
+          imageUrl: item.imageUrl || item.previewImage,
+          title: item.title || item.name
+        });
+      }
     } else if (item.name && item.name.toLowerCase().includes('nenacare')) {
       if (onLaunchApp) onLaunchApp('chrome', { projectId: 'nenacare' });
       else if (onOpenFile) onOpenFile({ ...item, appId: 'chrome', projectId: 'nenacare' });
@@ -323,8 +332,8 @@ export const FileExplorerApp = ({ initialPath = 'This PC', onOpenFile, onOpenFol
       if (onLaunchApp) onLaunchApp('chrome', { projectId: 'lintas' });
       else if (onOpenFile) onOpenFile({ ...item, appId: 'chrome', projectId: 'lintas' });
     } else if (item.name && item.name.toLowerCase().includes('neurofly')) {
-      if (onLaunchApp) onLaunchApp('chrome', { projectId: 'neurofly' });
-      else if (onOpenFile) onOpenFile({ ...item, appId: 'chrome', projectId: 'neurofly' });
+      if (onLaunchApp) onLaunchApp('neurofly');
+      else if (onOpenFile) onOpenFile({ ...item, appId: 'neurofly' });
     } else if (item.name && item.name.toLowerCase().includes('dompetq')) {
       if (onLaunchApp) onLaunchApp('chrome', { projectId: 'dompetq' });
       else if (onOpenFile) onOpenFile({ ...item, appId: 'chrome', projectId: 'dompetq' });

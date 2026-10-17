@@ -1,0 +1,358 @@
+/* NeuroFly Game & Simulation Stylesheet */
+.neurofly-simulation-root {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-color: #06080d;
+  color: #e2e8f0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  user-select: none;
+  overflow: hidden;
+  position: relative;
+}
+
+.neurofly-simulation-root.embedded {
+  min-height: 580px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  border: 1px solid #1a2333;
+}
+
+/* ---------------- Top Simulation Split ---------------- */
+.simulation-top-split {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  border-bottom: 1px solid #141b29;
+}
+
+.pong-court-panel {
+  flex: 1.25;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #141b29;
+  min-width: 0;
+  position: relative;
+}
+
+.brain-monitor-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  position: relative;
+}
+
+.simulation-panel-header {
+  height: 38px;
+  background-color: #080b12;
+  border-bottom: 1px solid #131926;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  flex-shrink: 0;
+}
+
+.panel-title-label {
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.8px;
+  color: #ffffff;
+}
+
+.panel-header-btn-group {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.sim-pill-btn {
+  background-color: #101622;
+  color: #94a3b8;
+  border: 1px solid #1e293b;
+  border-radius: 4px;
+  padding: 3px 9px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.sim-pill-btn:hover {
+  background-color: #172033;
+  color: #f1f5f9;
+  border-color: #334155;
+}
+
+.sim-pill-btn.active-vis {
+  color: #38bdf8;
+  border-color: #0284c7;
+}
+
+.sim-pill-btn.active-human {
+  border-color: #0284c7;
+  color: #38bdf8;
+  background-color: rgba(2, 132, 199, 0.12);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+}
+
+.sim-pill-btn.active-tab {
+  background-color: #1e293b;
+  color: #f8fafc;
+  border-color: #475569;
+}
+
+.sim-pill-btn.btn-paused {
+  background-color: #7f1d1d;
+  color: #fecaca;
+  border-color: #ef4444;
+}
+
+.sim-pill-btn.btn-rst {
+  color: #f59e0b;
+}
+
+.sim-pill-btn.btn-rst:hover {
+  border-color: #f59e0b;
+}
+
+.sim-pill-btn.btn-external {
+  color: #a855f7;
+  border-color: #7e22ce;
+}
+
+.canvas-wrapper {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background-color: #06080d;
+}
+
+.interactive-3d-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: crosshair;
+}
+
+/* ---------------- Bottom Telemetry Dashboard ---------------- */
+.simulation-bottom-dashboard {
+  height: 188px;
+  display: flex;
+  background-color: #07090e;
+  border-bottom: 1px solid #141b29;
+  flex-shrink: 0;
+}
+
+.dashboard-metric-panel {
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.panel-game-telemetry {
+  flex: 1.15;
+  border-right: 1px solid #141b29;
+}
+
+.panel-connectome {
+  flex: 1.25;
+  border-right: 1px solid #141b29;
+}
+
+.panel-signal-wave {
+  flex: 1.1;
+  display: flex;
+  flex-direction: column;
+}
+
+.dash-panel-heading {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  color: #f8fafc;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-tag {
+  font-size: 9.5px;
+  font-weight: 500;
+  color: #64748b;
+}
+
+.dash-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.dash-stat-cell {
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid #131926;
+  border-radius: 4px;
+  padding: 4px 6px;
+}
+
+.dash-stat-label {
+  font-size: 9px;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.dash-stat-val {
+  font-size: 12px;
+  font-weight: 700;
+  color: #e2e8f0;
+  margin-top: 2px;
+  font-family: monospace;
+}
+
+.dash-stat-val.val-green {
+  color: #22c55e;
+}
+
+.dash-subheading {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #94a3b8;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+/* Telemetry Table */
+.telemetry-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10px;
+  font-family: monospace;
+}
+
+.telemetry-table th {
+  text-align: left;
+  color: #64748b;
+  font-weight: 600;
+  padding: 3px 4px;
+  border-bottom: 1px solid #1e293b;
+}
+
+.telemetry-table td {
+  padding: 3px 4px;
+  color: #cbd5e1;
+}
+
+.telemetry-table tr.active-row td {
+  color: #f1f5f9;
+  font-weight: 700;
+}
+
+.dot-live {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background-color: #38bdf8;
+  border-radius: 50%;
+  margin-right: 4px;
+  box-shadow: 0 0 6px #38bdf8;
+}
+
+/* Connectome Subpools */
+.subpools-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 12px;
+}
+
+.subpool-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  padding: 2px 0;
+  border-bottom: 1px dashed #141b26;
+}
+
+.subpool-name {
+  color: #94a3b8;
+}
+
+.subpool-count {
+  font-weight: 600;
+  color: #e2e8f0;
+  font-family: monospace;
+}
+
+/* Oscilloscope Signal View */
+.telemetry-wave-holder {
+  flex: 1;
+  background-color: #06080d;
+  border: 1px solid #131926;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.wave-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.waveform-legend-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 9.5px;
+  padding-top: 4px;
+  font-family: monospace;
+}
+
+/* Footer Status Bar */
+.simulation-footer-bar {
+  height: 22px;
+  background-color: #040609;
+  border-top: 1px solid #0f141f;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 14px;
+  font-size: 9.5px;
+  color: #475569;
+  font-family: monospace;
+  letter-spacing: 0.3px;
+  flex-shrink: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .simulation-top-split {
+    flex-direction: column;
+  }
+  .pong-court-panel {
+    border-right: none;
+    border-bottom: 1px solid #141b29;
+    height: 320px;
+  }
+  .brain-monitor-panel {
+    height: 260px;
+  }
+  .simulation-bottom-dashboard {
+    height: auto;
+    flex-direction: column;
+  }
+  .panel-game-telemetry,
+  .panel-connectome,
+  .panel-signal-wave {
+    border-right: none;
+    border-bottom: 1px solid #141b29;
+  }
+}

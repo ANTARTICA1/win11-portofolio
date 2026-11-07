@@ -6,6 +6,9 @@ An interactive, browser-based operating system simulator built with React 19 and
 
 This project recreates the visual language, motion physics, and user interface workflows of Windows 11 on the modern open web. Users can manipulate multi-window workspaces, interact with desktop shell elements (Start Menu, Taskbar, Quick Settings, System Tray), and launch functional software applications directly inside the browser sandbox.
 
+## Interface Preview
+
+![Windows 11 Desktop Environment Preview](public/wallpapers/win11_bloom_dark.jpg)
 ## System Architecture and Features
 
 ### 1. Window Management System

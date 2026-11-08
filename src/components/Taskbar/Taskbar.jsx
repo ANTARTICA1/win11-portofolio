@@ -40,6 +40,7 @@ export const Taskbar = ({
   const [timeStr, setTimeStr] = useState('');
   const [dateStr, setDateStr] = useState('');
   const weatherRef = useRef(null);
+  const startClicksRef = useRef([]);
 
   useEffect(() => {
     // When parent signals to close all flyouts (e.g. Esc or desktop click)
@@ -80,6 +81,15 @@ export const Taskbar = ({
 
   const handleToggleStart = () => {
     playClickSound();
+    const now = Date.now();
+    startClicksRef.current = [...startClicksRef.current.filter(t => now - t < 2200), now];
+    if (startClicksRef.current.length >= 5) {
+      startClicksRef.current = [];
+      setStartOpen(false);
+      if (onLaunchApp) onLaunchApp('bsod');
+      return;
+    }
+
     setStartOpen(!startOpen);
     setQuickSettingsOpen(false);
     setCalendarOpen(false);

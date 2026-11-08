@@ -191,3 +191,72 @@ export const playWhatsAppReceivedSound = () => {
     });
   } catch {}
 };
+
+export const playKonamiFanfare = () => {
+  try {
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    const now = ctx.currentTime;
+    // Retro 8-bit arcade victory fanfare
+    const notes = [
+      { f: 523.25, d: 0.08 }, // C5
+      { f: 659.25, d: 0.08 }, // E5
+      { f: 783.99, d: 0.08 }, // G5
+      { f: 1046.50, d: 0.16 }, // C6
+      { f: 880.00, d: 0.12 }, // A5
+      { f: 1046.50, d: 0.28 } // C6 hold
+    ];
+    let timeOffset = 0;
+    notes.forEach(({ f, d }) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(f, now + timeOffset);
+      gain.gain.setValueAtTime(0.06, now + timeOffset);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + timeOffset + d);
+      osc.connect(gain);
+      gain.connect(getDestination());
+      osc.start(now + timeOffset);
+      osc.stop(now + timeOffset + d);
+      timeOffset += d;
+    });
+  } catch {}
+};
+
+export const playClippySound = () => {
+  try {
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    const now = ctx.currentTime;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(600, now);
+    osc.frequency.exponentialRampToValueAtTime(1200, now + 0.06);
+    gain.gain.setValueAtTime(0.04, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+    osc.connect(gain);
+    gain.connect(getDestination());
+    osc.start(now);
+    osc.stop(now + 0.08);
+  } catch {}
+};
+
+export const playBSODSound = () => {
+  try {
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    const now = ctx.currentTime;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(220, now);
+    osc.frequency.exponentialRampToValueAtTime(110, now + 0.25);
+    gain.gain.setValueAtTime(0.08, now);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.35);
+    osc.connect(gain);
+    gain.connect(getDestination());
+    osc.start(now);
+    osc.stop(now + 0.35);
+  } catch {}
+};

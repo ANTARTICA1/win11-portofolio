@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense, lazy } from 'react';
+import React, { useState, useEffect, Suspense, lazy, useRef } from 'react';
 import { Desktop } from './components/Desktop/Desktop';
 import { Taskbar } from './components/Taskbar/Taskbar';
 import { Window } from './components/Windows/Window';
@@ -7,9 +7,20 @@ import { ExternalLink } from 'lucide-react';
 import { NotificationToast } from './components/Common/NotificationToast';
 import { RunDialog } from './components/Common/RunDialog';
 import { WinIcon } from './components/Common/WinIcon';
+import { BSODScreen } from './components/Common/BSODScreen';
+import { ClippyAssistant } from './components/Common/ClippyAssistant';
+import { ConfettiOverlay } from './components/Common/ConfettiOverlay';
 import { DESKTOP_ITEMS, INTRO_NOTE_CONTENT, INITIAL_USER } from './data/fileSystem';
 import { isMobileDevice } from './utils/device';
-import { playWindowSound, playStartupChime, playClickSound, setMasterVolume, setSoundEnabled } from './utils/sound';
+import { 
+  playWindowSound, 
+  playStartupChime, 
+  playClickSound, 
+  playKonamiFanfare, 
+  playClippySound, 
+  setMasterVolume, 
+  setSoundEnabled 
+} from './utils/sound';
 
 // Code-split heavy application modules for lightning-fast initial page loads
 const FileExplorerApp = lazy(() => import('./components/Apps/FileExplorerApp').then(m => ({ default: m.FileExplorerApp })));
@@ -88,11 +99,27 @@ export function App() {
   const [volume, setVolume] = useState(80);
   const [closeFlyoutsSignal, setCloseFlyoutsSignal] = useState(0);
 
+  // Easter Eggs States
+  const [bsodActive, setBsodActive] = useState(false);
+  const [clippyActive, setClippyActive] = useState(false);
+  const [confettiActive, setConfettiActive] = useState(false);
+  const [konamiToast, setKonamiToast] = useState(false);
+  const konamiSeqRef = useRef([]);
+  const KONAMI_CODE = ['arrowup', 'arrowup', 'arrowdown', 'arrowdown', 'arrowleft', 'arrowright', 'arrowleft', 'arrowright', 'b', 'a'];
+
   const [windows, setWindows] = useState(() => getInitialWindows());
   const [activeWindowId, setActiveWindowId] = useState(() => {
     const initWins = getInitialWindows();
     return initWins.length > 0 ? initWins[0].id : null;
   });
+
+  const triggerKonamiAchievement = () => {
+    playKonamiFanfare();
+    setConfettiActive(true);
+    setKonamiToast(true);
+    setAccentColor('#10b981'); // Emerald Gamer Green
+    setTimeout(() => setKonamiToast(false), 6000);
+  };
 
   useEffect(() => {
     document.documentElement.style.setProperty('--accent-color', accentColor);
@@ -105,8 +132,9 @@ export function App() {
     window.addEventListener('pointerdown', handleFirstUserClick);
 
     const handleKeyDown = (e) => {
-      // Escape: Close all flyouts & dialogs
+      // Escape: Close all flyouts, dialogs & BSOD
       if (e.key === 'Escape') {
+        if (bsodActive) setBsodActive(false);
         setCloseFlyoutsSignal(prev => prev + 1);
         setRunDialogOpen(false);
       }
@@ -135,14 +163,50 @@ export function App() {
           return prev;
         });
       }
+
+      // Ctrl + Shift + C: Toggle Clippy
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'c') {
+        e.preventDefault();
+        playClippySound();
+        setClippyActive(prev => !prev);
+      }
+
+      // Konami Code Sequence Tracker: ↑ ↑ ↓ ↓ ← → ← → B A
+      const k = e.key.toLowerCase();
+      konamiSeqRef.current = [...konamiSeqRef.current, k].slice(-10);
+      if (
+        konamiSeqRef.current.length === 10 && 
+        konamiSeqRef.current.every((key, idx) => key === KONAMI_CODE[idx])
+      ) {
+        konamiSeqRef.current = [];
+        triggerKonamiAchievement();
+      }
     };
     window.addEventListener('keydown', handleKeyDown);
+
+    // Idle timer for gentle Clippy appearance
+    let idleTimer = setTimeout(() => {
+      setClippyActive(true);
+      playClippySound();
+    }, 110000); // 110 seconds
+
+    const resetIdle = () => {
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(() => {
+        setClippyActive(true);
+        playClippySound();
+      }, 110000);
+    };
+
+    window.addEventListener('pointermove', resetIdle, { passive: true });
 
     return () => {
       window.removeEventListener('pointerdown', handleFirstUserClick);
       window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('pointermove', resetIdle);
+      clearTimeout(idleTimer);
     };
-  }, [activeWindowId]);
+  }, [activeWindowId, bsodActive]);
 
   useEffect(() => {
     document.documentElement.style.setProperty('--accent-color', accentColor);
@@ -164,6 +228,20 @@ export function App() {
       window.open(INITIAL_USER.linkedin || 'https://linkedin.com/in/krisnaartha', '_blank', 'noopener,noreferrer');
       return;
     }
+    if (appId === 'bsod' || appId === 'crash') {
+      setBsodActive(true);
+      return;
+    }
+    if (appId === 'clippy') {
+      playClippySound();
+      setClippyActive(true);
+      return;
+    }
+    if (appId === 'konami') {
+      triggerKonamiAchievement();
+      return;
+    }
+
     const projectKeys = ['theotown', 'nenacare', 'tatagih', 'temuin', 'lintas', 'neurofly', 'makalah', 'sigap', 'bingkai', 'onlyus', 'motto', 'visiondeck'];
     if (projectKeys.includes(appId)) {
       launchApp('chrome', { projectId: appId === 'visiondeck' ? 'motto' : appId, ...(typeof customData === 'object' ? customData : {}) });
@@ -731,7 +809,11 @@ export function App() {
       case 'calculator':
         return (
           <Suspense fallback={<AppLoadingSkeleton />}>
-            <CalculatorApp onLaunchApp={launchApp} />
+            <CalculatorApp 
+              onLaunchApp={launchApp} 
+              onTriggerClippy={() => setClippyActive(true)}
+              onTriggerBSOD={() => setBsodActive(true)}
+            />
           </Suspense>
         );
       default:
@@ -835,9 +917,66 @@ export function App() {
           else if (cmd === 'dino' || cmd === 'chrome://dino') launchApp('dino');
           else if (cmd === 'visiondeck' || cmd === 'motto' || cmd === 'deck' || cmd === 'manifesto') launchApp('chrome', { projectId: 'motto' });
           else if (cmd === 'onlyus') launchApp('chrome', { projectId: 'onlyus' });
+          else if (cmd === 'bsod' || cmd === 'crash') setBsodActive(true);
+          else if (cmd === 'clippy') { playClippySound(); setClippyActive(true); }
+          else if (cmd === 'konami') triggerKonamiAchievement();
+          else if (cmd === 'secret' || cmd === 'secrets' || cmd === 'easteregg') launchApp('terminal');
           else launchApp(cmd);
         }}
       />
+
+      {/* Easter Egg: BSOD Recruiter Exception Screen */}
+      {bsodActive && (
+        <BSODScreen
+          onClose={() => setBsodActive(false)}
+          onOpenRecruiter={() => launchApp('recruiter')}
+        />
+      )}
+
+      {/* Easter Egg: Clippy Office Helper */}
+      {clippyActive && (
+        <ClippyAssistant
+          onClose={() => setClippyActive(false)}
+          onOpenRecruiter={() => launchApp('recruiter')}
+          onOpenWhatsApp={() => window.open(INITIAL_USER.whatsapp, '_blank', 'noopener,noreferrer')}
+        />
+      )}
+
+      {/* Easter Egg: Konami Code Confetti Celebration */}
+      {confettiActive && (
+        <ConfettiOverlay onComplete={() => setConfettiActive(false)} />
+      )}
+
+      {/* Konami Achievement Unlocked Floating Toast */}
+      {konamiToast && (
+        <div
+          className="anim-flyout"
+          style={{
+            position: 'fixed',
+            top: '24px',
+            right: '24px',
+            backgroundColor: 'rgba(16, 185, 129, 0.95)',
+            backdropFilter: 'blur(16px)',
+            color: '#ffffff',
+            padding: '14px 20px',
+            borderRadius: '10px',
+            boxShadow: '0 12px 36px rgba(0,0,0,0.5)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+            zIndex: 100000,
+            display: 'flex',
+            alignItems: 'center',
+            gap: '12px',
+            fontFamily: 'Segoe UI, sans-serif',
+            animation: 'winToastSlideIn 0.3s cubic-bezier(0.1, 0.9, 0.2, 1) forwards'
+          }}
+        >
+          <span style={{ fontSize: '26px' }}>🏆</span>
+          <div>
+            <div style={{ fontWeight: 700, fontSize: '13.5px' }}>ACHIEVEMENT UNLOCKED: The Real Gamer!</div>
+            <div style={{ fontSize: '12px', opacity: 0.95, marginTop: '2px' }}>Konami Code (↑ ↑ ↓ ↓ ← → ← → B A) berhasil diaktifkan!</div>
+          </div>
+        </div>
+      )}
 
       {powerScreen && (
         <div

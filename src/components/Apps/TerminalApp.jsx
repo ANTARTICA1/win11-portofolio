@@ -84,6 +84,7 @@ Daftar Perintah yang Tersedia:
   contact       : Kontak resmi (Email, WhatsApp, LinkedIn, GitHub)
   dir / ls      : Menampilkan daftar file dalam direktori saat ini
   cat <file>    : Membaca isi file (contoh: cat resume.txt)
+  secret        : [?] Menampilkan petunjuk rahasia & easter eggs
   clear / cls   : Membersihkan layar terminal
 `;
         break;
@@ -218,6 +219,50 @@ LinkedIn : ${INITIAL_USER.linkedin}
 09/29/2026  03:48 PM           245,600 resume.pdf
                4 File(s)        252,880 bytes
                5 Dir(s)  380,412,985,344 bytes free
+`;
+        break;
+
+      case 'secret':
+      case 'secrets':
+      case 'easteregg':
+      case 'eastereggs':
+      case 'cheat':
+      case 'hints':
+        output = `
+======================================================================
+[!] KRISNA-OS EXPERIMENTAL PROTOCOLS (EASTER EGGS DISCOVERY)
+======================================================================
+1. [Protokol Layar Biru]  : Ketik 'bsod' / 'crash' atau ketuk Start 5x
+2. [Arcade Gamer 1986]    : Masukkan Konami Code (↑ ↑ ↓ ↓ ← → ← → B A) di Desktop
+3. [Asisten Jadul Kantor] : Ketik 'clippy' atau tekan Ctrl+Shift+C
+4. [Frekuensi Kalkulator] : Masukkan 1337 atau 6969 di Kalkulator
+5. [Berkas Sampah]        : Buka 'FILE RAHASIA.txt' di Recycle Bin!
+======================================================================
+`;
+        break;
+
+      case 'bsod':
+      case 'crash':
+        output = `Memicu simulasi Blue Screen of Death...`;
+        if (onLaunchApp) setTimeout(() => onLaunchApp('bsod'), 300);
+        break;
+
+      case 'clippy':
+        output = `Membangunkan Clippy Assistant...`;
+        if (onLaunchApp) setTimeout(() => onLaunchApp('clippy'), 300);
+        break;
+
+      case 'konami':
+        output = `Cheat Code 1986: Tekan [Atas] [Atas] [Bawah] [Bawah] [Kiri] [Kanan] [Kiri] [Kanan] [B] [A] langsung di keyboard desktop Anda!`;
+        break;
+
+      case 'matrix':
+        output = `
+01010111 01100001 01101011 01100101 00100000 01110101 01110000 00101100 00100000 01001110 01100101 01101111 00101110 00101110 00101110
+[+] Initializing neural socket...
+[+] Connecting to drosophila connectome...
+[+] Access Granted: Welcome to Agung Krisna's developer vault!
+Ketik 'secret' untuk daftar misteri tersembunyi.
 `;
         break;
 

@@ -1171,7 +1171,12 @@ PANDUAN SINGKAT:
 
 • Email     : kresnaartha3@gmail.com
 • LinkedIn  : https://linkedin.com/in/krisnaartha
-• Website   : https://portofolio.krisnaartha.my.id`;
+• Website   : https://portofolio.krisnaartha.my.id
+
+6.  Rahasia & Easter Eggs (Scavenger Hunt)
+   - Konon ada beberapa eksperimen rahasia yang terpasang di sistem ini.
+   - Penasaran? Coba intip 'FILE RAHASIA.txt' di dalam Recycle Bin, atau
+     ketik 'secret' di Command Prompt (Terminal)... 🔍`;
 
 export const DESKTOP_ITEMS = [
   {
@@ -1350,15 +1355,37 @@ export const RECYCLE_BIN_ITEMS = [
     name: 'FILE RAHASIA.txt',
     type: 'file',
     extension: 'txt',
-    size: '1.2 KB',
+    size: '1.4 KB',
     originalLocation: 'C:\\Users\\KRISNA\\Documents',
     dateDeleted: '9/27/2026 11:42 PM',
     itemType: 'Text Document',
-    content: `CATATAN RAHASIA:
-Jangan sampai lupa kode rahasia
+    content: `[LOG RAHASIA PENGEMBANG - JANGAN DIBAGIKAN KE RECRUITER!]
+============================================================
+Tanggal: 27 September 2026
+Subjek: Protokol Easter Egg & Fitur Tersembunyi KrisnaOS
 
-1. Buka aplikasi Kalkulator di desktop.
-2. Masukkan angka kode: 6969`
+Selamat! Jika kamu membaca file ini dari Recycle Bin, insting eksplorasimu luar biasa.
+Berikut adalah catatan eksperimen rahasia yang aktif di sistem Windows 11 ini:
+
+1. [Protokol BSOD (Layar Biru)]
+   - Jika sistem mengalami kelebihan beban kekaguman:
+     Tekan Alt+R lalu ketik: 'bsod' atau 'crash'
+     (Atau coba klik logo Windows Start di pojok taskbar 5x cepat!)
+
+2. [Protokol Gamer 1986 (Konami Code)]
+   - Cheat legendaris 30 nyawa era arcade terpasang di desktop ini:
+     Tekan urutan tombol di keyboard:
+     ↑ ↑ ↓ ↓ ← → ← → B A
+     Lihat apa yang terjadi di desktop!
+
+3. [Asisten Jadul (Clippy)]
+   - Butuh asisten kantor legendaris tahun 90-an?
+     Tekan: Ctrl + Shift + C
+     atau ketik 'clippy' di Run dialog (Alt+R).
+
+4. [Frekuensi Kalkulator]
+   - Buka Kalkulator di desktop, hitung angka keramat 1337 atau 6969...
+============================================================`
   },
   {
     name: '.trashed-1788291042-1. topologi.png',

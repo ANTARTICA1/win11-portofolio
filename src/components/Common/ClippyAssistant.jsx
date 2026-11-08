@@ -6,10 +6,10 @@ const CLIPPY_QUOTES = [
   'Kelihatannya Anda sedang mencari Full-Stack Developer berbakat! Mau kubantu download CV Agung Krisna?',
   'Tahukah Anda? Agung membangun 10+ proyek web & mobile dari nol dengan arsitektur clean-code.',
   'Butuh developer yang paham mobile (Flutter) sekaligus backend (Laravel)? Agung solusinya!',
-  'Psst... coba buka Recycle Bin di desktop. Ada "FILE RAHASIA.txt" yang mencurigakan di sana 😉',
+  'Psst... petunjuk rahasia sistem tersebar di folder Documents, Downloads, dan Recycle Bin.',
   'Ingin melihat simulasi crash? Coba ketik "bsod" di Run dialog (Alt+R) atau ketuk logo Windows 5x!',
-  'Para gamer sejati: coba tekan tombol panah Konami Code (↑ ↑ ↓ ↓ ← → ← → B A) di desktop!',
-  'Ketik "matrix" di Command Prompt kalau mau pura-pura sibuk di depan bos.'
+  'Para gamer sejati: coba tekan tombol panah Konami Code (Atas Atas Bawah Bawah Kiri Kanan Kiri Kanan B A) di desktop!',
+  'Ketik "matrix" di Command Prompt kalau mau melihat koneksi neural developer vault.'
 ];
 
 export const ClippyAssistant = ({ onClose, onOpenRecruiter, onOpenWhatsApp }) => {

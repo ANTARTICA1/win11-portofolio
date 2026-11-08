@@ -4,7 +4,7 @@ import {
   Plus, ChevronRight, ChevronDown, LayoutGrid, List, RotateCcw, X
 } from 'lucide-react';
 import { WinIcon } from '../Common/WinIcon';
-import { DATA_D_ITEMS, PROJECTS_ITEMS, RECYCLE_BIN_ITEMS } from '../../data/fileSystem';
+import { DATA_D_ITEMS, PROJECTS_ITEMS, RECYCLE_BIN_ITEMS, INTRO_NOTE_CONTENT } from '../../data/fileSystem';
 import { playClickSound } from '../../utils/sound';
 import { isMobileDevice } from '../../utils/device';
 import { useWindow } from '../Windows/WindowContext';
@@ -69,9 +69,9 @@ export const FileExplorerApp = ({ initialPath = 'This PC', onOpenFile, onOpenFol
       return [
         { name: 'Projects', type: 'folder', badge: 'Applications', size: `${PROJECTS_ITEMS.length} items` },
         { name: 'Downloads', type: 'folder', size: '3 items' },
-        { name: 'Documents', type: 'folder', size: '3 items' },
+        { name: 'Documents', type: 'folder', size: '4 items' },
         { name: 'Curriculum_Vitae.pdf', type: 'file', extension: 'pdf', size: '240 KB' },
-        { name: 'Pengantar.txt', type: 'file', extension: 'txt', size: '3.4 KB' }
+        { name: 'Pengantar.txt', type: 'file', extension: 'txt', size: '3.4 KB', content: INTRO_NOTE_CONTENT }
       ];
     }
 
@@ -90,15 +90,128 @@ export const FileExplorerApp = ({ initialPath = 'This PC', onOpenFile, onOpenFol
     if (currentPath === 'Downloads') {
       return [
         { name: 'Agung_Krisna_Resume.pdf', type: 'file', extension: 'pdf', size: '240 KB' },
-        { name: 'temuin_mobile_v1.apk', type: 'file', extension: 'apk', size: '18.2 MB' }
+        { name: 'temuin_mobile_v1.apk', type: 'file', extension: 'apk', size: '18.2 MB' },
+        {
+          name: 'memo_asisten_jadul.txt',
+          type: 'file',
+          extension: 'txt',
+          size: '1.2 KB',
+          content: `[MEMO INTERNAL: ASISTEN VIRTUAL 90-AN]
+============================================================
+Kategori : Utilitas Kantor Klasik (Clippy Assistant)
+Status   : Terinstal & Tersembunyi di Sistem
+
+Bagi Anda yang merindukan sosok asisten klip kertas interaktif dari era 90-an:
+Kami telah menyematkan Clippy ke dalam Krisna-OS untuk menemani Anda
+mengeksplorasi portofolio atau memandu Anda membaca CV Agung Krisna.
+
+Cara Memanggil Asisten:
+1. Tekan kombinasi tombol keyboard: Ctrl + Shift + C
+2. Atau tekan shortcut Alt + R (dialog Run), lalu ketik: clippy
+3. Atau jalankan Command Prompt (Terminal) dan ketik perintah: clippy
+4. Atau coba ketikkan angka keramat 1337 pada aplikasi Calculator!
+
+Klik pada tubuh asisten untuk mendengarkan berbagai fakta unik seputar proyek Agung.
+
+Petunjuk Scavenger Hunt Lainnya:
+- Periksa folder 'Documents' untuk petunjuk kode arcade (clue_arcade_1986.txt).
+- Buka 'FILE RAHASIA.txt' di Recycle Bin untuk protokol crash sistem!
+============================================================`
+        }
       ];
     }
 
     if (currentPath === 'Documents') {
       return [
-        { name: 'biodata_lengkap.txt', type: 'file', extension: 'txt', size: '2.1 KB' },
-        { name: 'pengalaman_kerja.txt', type: 'file', extension: 'txt', size: '1.8 KB' },
-        { name: 'tatagih_spec.txt', type: 'file', extension: 'txt', size: '1.2 KB' }
+        {
+          name: 'biodata_lengkap.txt',
+          type: 'file',
+          extension: 'txt',
+          size: '2.1 KB',
+          content: `BIODATA LENGKAP - AGUNG KRISNA
+============================================================
+Nama Lengkap : Anak Agung Ngurah Krisna Artha Wibawa
+Pendidikan   : S1 Teknologi Informasi - ITB STIKOM Bali
+Status       : Open to Work (Full-Time / Freelance)
+Lokasi       : Denpasar, Bali, Indonesia
+Email        : kresnaartha3@gmail.com
+WhatsApp     : +62 822-4784-6546
+LinkedIn     : https://linkedin.com/in/krisnaartha
+GitHub       : https://github.com/ANTARTICA1
+Website      : https://portofolio.krisnaartha.my.id
+
+Ringkasan:
+Full-Stack Web & Mobile Developer yang berfokus pada pembangunan
+aplikasi modern berkinerja tinggi, arsitektur clean-code,
+serta antarmuka pengguna yang intuitif dan responsif lintas platform.
+============================================================`
+        },
+        {
+          name: 'pengalaman_kerja.txt',
+          type: 'file',
+          extension: 'txt',
+          size: '1.8 KB',
+          content: `PENGALAMAN & RIWAYAT PROYEK - AGUNG KRISNA
+============================================================
+1. Full-Stack Web & Mobile Developer (Independent / Freelance)
+   - Membangun 10+ aplikasi produksi (Web & Mobile).
+   - Tech stack: Flutter, React.js, Next.js, Node.js, Laravel, Go, PostgreSQL.
+
+2. Sorotan Proyek Unggulan:
+   - TheoTown STIKOM Mod : Modifikasi game simulasi kota berbasis Pixel Art.
+   - NenaCare             : Sistem pelaporan insiden K3 terintegrasi AI Vision & Lokasi.
+   - Tatagih              : Aplikasi pengelola langganan cerdas & asisten finansial AI.
+   - Temuin               : Platform penemu barang hilang berbasis Dynamic QR Code.
+   - Lintas               : Utilitas transfer berkas cepat antar ponsel & PC via WebRTC.
+   - NeuroFly             : Eksperimen game bio-neural drosophila connectome.
+   - SIGAP                : Sistem deteksi gerak dan proteksi pencurian smartphone.
+============================================================`
+        },
+        {
+          name: 'tatagih_spec.txt',
+          type: 'file',
+          extension: 'txt',
+          size: '1.2 KB',
+          content: `SPESIFIKASI ARSITEKTUR - TATAGIH
+============================================================
+Framework Backend : Laravel 11 / PHP 8.3
+Database          : MySQL / PostgreSQL Relational
+Frontend Engine   : Tailwind CSS & Blade / React SPA
+AI Service        : Google Gemini REST API Integration
+Fitur Utama       :
+- Smart Billing & Subscription Reminders via Telegram Bot
+- OCR Kwitansi & Faktur Otomatis
+- Analisis Pengeluaran Finansial Bulanan
+- Manajemen Kategori Biaya Berulang
+============================================================`
+        },
+        {
+          name: 'clue_arcade_1986.txt',
+          type: 'file',
+          extension: 'txt',
+          size: '1.1 KB',
+          content: `[CATATAN EKSPLORASI: PROTOKOL ARCADE 1986]
+============================================================
+Kategori : Kode Rahasia Gamer Klasik
+Lokasi   : Desktop Windows 11
+Tingkat  : Rahasia
+
+Tahukah Anda?
+Di era keemasan konsol 8-bit tahun 1986, terdapat kombinasi tombol legendaris 
+yang dikenal dapat memberikan nyawa ekstra dan membuka kekuatan tersembunyi.
+
+Sistem Krisna-OS juga ditanami sensor kombinasi tersebut!
+Cobalah kembali ke tampilan Desktop, lalu tekan urutan tombol panah berikut di keyboard Anda:
+
+   Atas -> Atas -> Bawah -> Bawah -> Kiri -> Kanan -> Kiri -> Kanan -> B -> A
+
+Jika berhasil dieksekusi dengan benar, perayaan pencapaian gamer akan muncul!
+
+Petunjuk Scavenger Hunt Lainnya:
+- Catatan asisten kantor tersimpan di folder 'Downloads' (memo_asisten_jadul.txt).
+- Ada protokol darurat di tempat pembuangan sistem (Recycle Bin).
+============================================================`
+        }
       ];
     }
 
@@ -251,9 +364,7 @@ export const FileExplorerApp = ({ initialPath = 'This PC', onOpenFile, onOpenFol
 
   const handleItemClick = (item) => {
     setSelectedItemName(item.name);
-    if (isMobileDevice()) {
-      handleItemDoubleClick(item);
-    }
+    handleItemDoubleClick(item);
   };
 
   const handleItemDoubleClick = (item) => {

@@ -970,10 +970,10 @@ export function App() {
             animation: 'winToastSlideIn 0.3s cubic-bezier(0.1, 0.9, 0.2, 1) forwards'
           }}
         >
-          <span style={{ fontSize: '26px' }}>🏆</span>
+          <WinIcon name="xbox" size={26} />
           <div>
             <div style={{ fontWeight: 700, fontSize: '13.5px' }}>ACHIEVEMENT UNLOCKED: The Real Gamer!</div>
-            <div style={{ fontSize: '12px', opacity: 0.95, marginTop: '2px' }}>Konami Code (↑ ↑ ↓ ↓ ← → ← → B A) berhasil diaktifkan!</div>
+            <div style={{ fontSize: '12px', opacity: 0.95, marginTop: '2px' }}>Konami Code (Atas Atas Bawah Bawah Kiri Kanan Kiri Kanan B A) berhasil diaktifkan!</div>
           </div>
         </div>
       )}

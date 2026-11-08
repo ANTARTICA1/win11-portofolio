@@ -133,7 +133,7 @@ export const BSODScreen = ({ onClose, onOpenRecruiter }) => {
           onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
           onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
         >
-          💬 Hubungi via WhatsApp
+          Hubungi via WhatsApp
         </a>
 
         <button
@@ -162,7 +162,7 @@ export const BSODScreen = ({ onClose, onOpenRecruiter }) => {
             e.currentTarget.style.transform = 'translateY(0)';
           }}
         >
-          📄 Buka Resume & CV Agung
+          Buka Resume & CV Agung
         </button>
 
         <button
@@ -181,7 +181,7 @@ export const BSODScreen = ({ onClose, onOpenRecruiter }) => {
           onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)'}
           onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
         >
-          🔄 Restart Windows (Esc)
+          Restart Windows (Esc)
         </button>
       </div>
     </div>

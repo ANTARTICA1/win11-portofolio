@@ -230,13 +230,15 @@ LinkedIn : ${INITIAL_USER.linkedin}
       case 'hints':
         output = `
 ======================================================================
-[!] KRISNA-OS EXPERIMENTAL PROTOCOLS (EASTER EGGS DISCOVERY)
+[!] KRISNA-OS SCAVENGER HUNT (PETA PETUNJUK RAHASIA)
 ======================================================================
-1. [Protokol Layar Biru]  : Ketik 'bsod' / 'crash' atau ketuk Start 5x
-2. [Arcade Gamer 1986]    : Masukkan Konami Code (↑ ↑ ↓ ↓ ← → ← → B A) di Desktop
-3. [Asisten Jadul Kantor] : Ketik 'clippy' atau tekan Ctrl+Shift+C
-4. [Frekuensi Kalkulator] : Masukkan 1337 atau 6969 di Kalkulator
-5. [Berkas Sampah]        : Buka 'FILE RAHASIA.txt' di Recycle Bin!
+Petunjuk eksperimen rahasia telah dipecah dan disebarkan ke beberapa tempat:
+
+1. [Tempat Sampah] : Recycle Bin -> 'FILE RAHASIA.txt' (Protokol Crash & Ringkasan)
+2. [Dokumen]       : Documents   -> 'clue_arcade_1986.txt' (Kode Arcade Gamer 1986)
+3. [Unduhan]       : Downloads   -> 'memo_asisten_jadul.txt' (Pemanggilan Asisten 90-an)
+4. [Kalkulator]    : Coba masukkan angka '1337' atau '6969' pada aplikasi Calculator
+5. [Shortcut Run]  : Tekan Alt+R lalu coba ketik 'bsod' atau 'clippy'
 ======================================================================
 `;
         break;
@@ -253,7 +255,7 @@ LinkedIn : ${INITIAL_USER.linkedin}
         break;
 
       case 'konami':
-        output = `Cheat Code 1986: Tekan [Atas] [Atas] [Bawah] [Bawah] [Kiri] [Kanan] [Kiri] [Kanan] [B] [A] langsung di keyboard desktop Anda!`;
+        output = `Cheat Code 1986: Tekan urutan tombol [Atas] [Atas] [Bawah] [Bawah] [Kiri] [Kanan] [Kiri] [Kanan] [B] [A] langsung di keyboard desktop Anda!`;
         break;
 
       case 'matrix':

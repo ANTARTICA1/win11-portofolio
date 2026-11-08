@@ -20,7 +20,7 @@ export const CalculatorApp = ({ onLaunchApp, onTriggerClippy, onTriggerBSOD }) =
     } else if (code === '1337') {
       playStartupChime();
       setDisplay('LEET 1337');
-      setEasterEggNotice('Leet Hacker! Coba tekan Ctrl+Shift+C atau ketuk Start 5x 😉');
+      setEasterEggNotice('Leet Hacker! Coba periksa petunjuk tersembunyi di folder Documents dan Downloads.');
       if (onTriggerClippy) {
         setTimeout(() => onTriggerClippy(), 600);
       }
@@ -28,7 +28,7 @@ export const CalculatorApp = ({ onLaunchApp, onTriggerClippy, onTriggerBSOD }) =
       setDisplay('404 NOT FOUND');
       setEasterEggNotice('Halaman tidak ditemukan, tapi Agung Krisna siap di-hire!');
     } else if (code === '42') {
-      setEasterEggNotice('Jawaban atas Kehidupan, Semesta, dan Segala Sesuatu 🌌');
+      setEasterEggNotice('Jawaban atas Kehidupan, Semesta, dan Segala Sesuatu.');
     }
   };
 

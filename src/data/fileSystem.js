@@ -1174,9 +1174,13 @@ PANDUAN SINGKAT:
 • Website   : https://portofolio.krisnaartha.my.id
 
 6.  Rahasia & Easter Eggs (Scavenger Hunt)
-   - Konon ada beberapa eksperimen rahasia yang terpasang di sistem ini.
-   - Penasaran? Coba intip 'FILE RAHASIA.txt' di dalam Recycle Bin, atau
-     ketik 'secret' di Command Prompt (Terminal)... 🔍`;
+   - Sistem ini menyimpan beberapa fitur dan protokol rahasia.
+   - Petunjuknya telah dipecah dan disebarkan ke beberapa tempat:
+     * Recycle Bin      : Buka 'FILE RAHASIA.txt' (Protokol Crash & Ringkasan)
+     * Folder Documents : Buka 'clue_arcade_1986.txt' (Kode Arcade Legendaris)
+     * Folder Downloads : Buka 'memo_asisten_jadul.txt' (Asisten Kantor 90-an)
+     * Terminal         : Ketik 'secret' atau 'hints' untuk melihat peta petunjuk
+     * Calculator       : Coba hitung angka khusus seperti 1337`;
 
 export const DESKTOP_ITEMS = [
   {
@@ -1355,36 +1359,38 @@ export const RECYCLE_BIN_ITEMS = [
     name: 'FILE RAHASIA.txt',
     type: 'file',
     extension: 'txt',
-    size: '1.4 KB',
+    size: '1.8 KB',
     originalLocation: 'C:\\Users\\KRISNA\\Documents',
     dateDeleted: '9/27/2026 11:42 PM',
     itemType: 'Text Document',
     content: `[LOG RAHASIA PENGEMBANG - JANGAN DIBAGIKAN KE RECRUITER!]
 ============================================================
 Tanggal: 27 September 2026
-Subjek: Protokol Easter Egg & Fitur Tersembunyi KrisnaOS
+Subjek : Protokol Easter Egg & Fitur Tersembunyi KrisnaOS
 
-Selamat! Jika kamu membaca file ini dari Recycle Bin, insting eksplorasimu luar biasa.
+Selamat! Jika Anda membaca file ini dari Recycle Bin, insting eksplorasi Anda luar biasa.
 Berikut adalah catatan eksperimen rahasia yang aktif di sistem Windows 11 ini:
 
 1. [Protokol BSOD (Layar Biru)]
    - Jika sistem mengalami kelebihan beban kekaguman:
      Tekan Alt+R lalu ketik: 'bsod' atau 'crash'
-     (Atau coba klik logo Windows Start di pojok taskbar 5x cepat!)
+     (Atau coba klik logo Windows Start di pojok taskbar 5x dengan cepat!)
 
 2. [Protokol Gamer 1986 (Konami Code)]
-   - Cheat legendaris 30 nyawa era arcade terpasang di desktop ini:
-     Tekan urutan tombol di keyboard:
-     ↑ ↑ ↓ ↓ ← → ← → B A
-     Lihat apa yang terjadi di desktop!
+   - Kode cheat legendaris era arcade terpasang di desktop ini.
+   - Clue lengkap tercatat di folder: Documents -> clue_arcade_1986.txt
+   - Kombinasi keyboard: Atas Atas Bawah Bawah Kiri Kanan Kiri Kanan B A
 
-3. [Asisten Jadul (Clippy)]
-   - Butuh asisten kantor legendaris tahun 90-an?
-     Tekan: Ctrl + Shift + C
-     atau ketik 'clippy' di Run dialog (Alt+R).
+3. [Asisten Jadul (Clippy Office Helper)]
+   - Asisten kantor legendaris era 90-an siap membantu Anda membaca CV.
+   - Clue lengkap tercatat di folder: Downloads -> memo_asisten_jadul.txt
+   - Shortcut cepat: Tekan Ctrl + Shift + C atau ketik 'clippy' di Run (Alt+R).
 
 4. [Frekuensi Kalkulator]
-   - Buka Kalkulator di desktop, hitung angka keramat 1337 atau 6969...
+   - Buka aplikasi Calculator di desktop, hitung angka khusus seperti 1337, 6969, 404, atau 42.
+
+5. [Terminal Hack & Scavenger Hunt Map]
+   - Buka Command Prompt / Terminal, ketik 'secret' atau 'matrix' untuk melihat peta sistem.
 ============================================================`
   },
   {

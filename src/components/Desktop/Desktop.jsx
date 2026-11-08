@@ -120,6 +120,8 @@ export const Desktop = ({
       onLaunchApp('chrome', { projectId: 'sigap' });
     } else if (item.name && item.name.toLowerCase().includes('bingkai')) {
       onLaunchApp('chrome', { projectId: 'bingkai' });
+    } else if (item.name && item.name.toLowerCase().includes('onlyus')) {
+      onLaunchApp('chrome', { projectId: 'onlyus' });
     } else if (item.app === 'recycle_bin' || item.id === 'recycle_bin') {
       onLaunchApp('explorer', { path: 'Recycle Bin' });
     } else if (item.app === 'dino' || item.id === 'chrome_dino') {
@@ -136,25 +138,18 @@ export const Desktop = ({
   const handleIconClick = (e, item) => {
     e.stopPropagation();
     setSelectedIconId(item.id);
-
-    if (isMobileDevice()) {
-      handleOpenItem(item);
-    }
+    handleOpenItem(item);
   };
 
   const handleIconDoubleClick = (e, item) => {
     e.stopPropagation();
-    if (!isMobileDevice()) {
-      handleOpenItem(item);
-    }
+    handleOpenItem(item);
   };
 
   const handleIconTouchEnd = (e, item) => {
-    if (isMobileDevice()) {
-      e.stopPropagation();
-      setSelectedIconId(item.id);
-      handleOpenItem(item);
-    }
+    e.stopPropagation();
+    setSelectedIconId(item.id);
+    handleOpenItem(item);
   };
 
   return (

@@ -8,7 +8,7 @@ This project recreates the visual language, motion physics, and user interface w
 
 ## Interface Preview
 
-![Windows 11 Desktop Environment Preview](public/wallpapers/win11_bloom_dark.jpg)
+[![Interface Preview Status](https://img.shields.io/badge/Interface_Preview-Documentation_in_Progress-2563eb?style=for-the-badge)](https://github.com/ANTARTICA1/win11-portofolio)
 ## System Architecture and Features
 
 ### 1. Window Management System

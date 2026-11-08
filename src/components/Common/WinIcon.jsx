@@ -90,14 +90,17 @@ const ICON_MAP = {
   'temuin': '/icons/temuin.png',
   'lintas': '/icons/lintas.png',
   'neurofly': '/icons/antigravity.svg',
-  'dompetq': '/icons/code.png',
   'makalah': '/icons/notepad.png',
   'sigap': '/icons/sigap.png',
   'bingkai': '/icons/bingkai.png',
-  'nenacare': '/icons/nenacare.svg',
+  'nenacare': '/icons/nenacare.png',
   'theotown': '/icons/theotown.svg',
   'theotown-stikom': '/icons/theotown.svg',
-  'stikom': '/icons/theotown.svg'
+  'stikom': '/icons/theotown.svg',
+  'visiondeck': '/icons/visiondeck.svg',
+  'deck': '/icons/visiondeck.svg',
+  'manifesto': '/icons/visiondeck.svg',
+  'onlyus': '/icons/onlyus.png'
 };
 
 export const WinIcon = ({ name, size = 32, className = '' }) => {

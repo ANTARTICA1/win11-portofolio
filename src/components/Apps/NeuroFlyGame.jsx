@@ -112,6 +112,7 @@ export const NeuroFlyGame = ({ isEmbedded = false, onOpenExternal = null }) => {
   const [isPaused, setIsPaused] = useState(false);
   const [readoutMode, setReadoutMode] = useState('Vis'); // 'Vis' or 'DN'
   const [brainViewMode, setBrainViewMode] = useState('brain'); // 'brain' or 'connectome'
+  const [steerMode, setSteerMode] = useState('paddle'); // 'paddle' (direct touch steer) or 'cam' (3D rotation)
   
   // Stats telemetry
   const [ball3DZ, setBall3DZ] = useState(82);
@@ -1024,16 +1025,27 @@ export const NeuroFlyGame = ({ isEmbedded = false, onOpenExternal = null }) => {
 
   // Pointer drag controls for 3D Pong Canvas
   const handlePongPointerDown = (e) => {
-    const cam = gameStateRef.current.pongCam;
-    cam.isDragging = true;
-    cam.lastMouseX = e.clientX;
-    cam.lastMouseY = e.clientY;
-    e.currentTarget.setPointerCapture(e.pointerId);
+    if (steerMode === 'cam' && e.pointerType !== 'touch') {
+      const cam = gameStateRef.current.pongCam;
+      cam.isDragging = true;
+      cam.lastMouseX = e.clientX;
+      cam.lastMouseY = e.clientY;
+    } else {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const normX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      const normY = ((e.clientY - rect.top) / rect.height) * 2 - 1;
+      const player = gameStateRef.current.player;
+      player.x = Math.max(-gameStateRef.current.courtWidth / 2, Math.min(gameStateRef.current.courtWidth / 2, normX * (gameStateRef.current.courtWidth / 2)));
+      player.y = Math.max(-gameStateRef.current.courtHeight / 2, Math.min(gameStateRef.current.courtHeight / 2, normY * (gameStateRef.current.courtHeight / 2)));
+    }
+    try {
+      e.currentTarget.setPointerCapture(e.pointerId);
+    } catch {}
   };
 
   const handlePongPointerMove = (e) => {
     const cam = gameStateRef.current.pongCam;
-    if (cam.isDragging) {
+    if (steerMode === 'cam' && cam.isDragging) {
       const dx = e.clientX - cam.lastMouseX;
       const dy = e.clientY - cam.lastMouseY;
       cam.yaw += dx * 0.007;
@@ -1041,13 +1053,13 @@ export const NeuroFlyGame = ({ isEmbedded = false, onOpenExternal = null }) => {
       cam.lastMouseX = e.clientX;
       cam.lastMouseY = e.clientY;
     } else {
-      // Steer paddle by mouse position inside court
+      // Steer paddle by mouse or touch drag position inside court
       const rect = e.currentTarget.getBoundingClientRect();
       const normX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
       const normY = ((e.clientY - rect.top) / rect.height) * 2 - 1;
       const player = gameStateRef.current.player;
-      player.x = normX * (gameStateRef.current.courtWidth / 2 - player.width / 2);
-      player.y = normY * (gameStateRef.current.courtHeight / 2 - player.height / 2);
+      player.x = Math.max(-gameStateRef.current.courtWidth / 2, Math.min(gameStateRef.current.courtWidth / 2, normX * (gameStateRef.current.courtWidth / 2)));
+      player.y = Math.max(-gameStateRef.current.courtHeight / 2, Math.min(gameStateRef.current.courtHeight / 2, normY * (gameStateRef.current.courtHeight / 2)));
     }
   };
 
@@ -1122,6 +1134,14 @@ export const NeuroFlyGame = ({ isEmbedded = false, onOpenExternal = null }) => {
               </button>
               <button
                 type="button"
+                className={`sim-pill-btn ${steerMode === 'paddle' ? 'active-vis' : ''}`}
+                onClick={() => setSteerMode((m) => (m === 'paddle' ? 'cam' : 'paddle'))}
+                title="Beralih antara Kontrol Raket dan Putar Kamera 3D"
+              >
+                {steerMode === 'paddle' ? '🎮 Paddle' : '🔄 3D Cam'}
+              </button>
+              <button
+                type="button"
                 className={`sim-pill-btn ${isPaused ? 'btn-paused' : ''}`}
                 onClick={() => setIsPaused(!isPaused)}
                 title="Pause / Lanjutkan Permainan"
@@ -1149,7 +1169,7 @@ export const NeuroFlyGame = ({ isEmbedded = false, onOpenExternal = null }) => {
             </div>
           </div>
 
-          <div className="canvas-wrapper">
+          <div className="canvas-wrapper" style={{ position: 'relative' }}>
             <canvas
               ref={pongCanvasRef}
               width={700}
@@ -1160,6 +1180,48 @@ export const NeuroFlyGame = ({ isEmbedded = false, onOpenExternal = null }) => {
               onPointerUp={handlePongPointerUp}
               onWheel={handlePongWheel}
             />
+
+            {/* Mobile / Touch On-Screen D-Pad */}
+            <div className="neurofly-touch-controls">
+              <button 
+                type="button" 
+                className="touch-btn" 
+                onPointerDown={(e) => { e.preventDefault(); gameStateRef.current.keys['w'] = true; }}
+                onPointerUp={(e) => { e.preventDefault(); gameStateRef.current.keys['w'] = false; }}
+                title="Atas (W / ArrowUp)"
+              >
+                ▲
+              </button>
+              <div className="neurofly-touch-row">
+                <button 
+                  type="button" 
+                  className="touch-btn" 
+                  onPointerDown={(e) => { e.preventDefault(); gameStateRef.current.keys['a'] = true; }}
+                  onPointerUp={(e) => { e.preventDefault(); gameStateRef.current.keys['a'] = false; }}
+                  title="Kiri (A / ArrowLeft)"
+                >
+                  ◀
+                </button>
+                <button 
+                  type="button" 
+                  className="touch-btn" 
+                  onPointerDown={(e) => { e.preventDefault(); gameStateRef.current.keys['s'] = true; }}
+                  onPointerUp={(e) => { e.preventDefault(); gameStateRef.current.keys['s'] = false; }}
+                  title="Bawah (S / ArrowDown)"
+                >
+                  ▼
+                </button>
+                <button 
+                  type="button" 
+                  className="touch-btn" 
+                  onPointerDown={(e) => { e.preventDefault(); gameStateRef.current.keys['d'] = true; }}
+                  onPointerUp={(e) => { e.preventDefault(); gameStateRef.current.keys['d'] = false; }}
+                  title="Kanan (D / ArrowRight)"
+                >
+                  ▶
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 

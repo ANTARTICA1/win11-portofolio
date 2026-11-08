@@ -116,5 +116,7 @@
   .desktop-grid {
     grid-template-rows: repeat(auto-fill, 78px);
     grid-auto-columns: 74px;
+    padding: 8px;
+    gap: 4px;
   }
 }

@@ -15,7 +15,6 @@ export const PhotosApp = ({
     { url: '/projects/lintas_activity.png', title: 'Lintas Mobile - Riwayat Aktivitas & Transfer Berkas SHA-256', date: 'November 2024', size: '130 KB', isMobile: true, project: 'lintas' },
     { url: '/projects/nenacare.jpg', title: 'NenaCare - AI-Powered K3 Incident Reporting & Monitoring System', date: 'October 2024', size: '580 KB' },
     { url: '/projects/tatagih.jpg', title: 'Tatagih - Smart Subscription Manager Web App (Laravel 13 & AI)', date: 'November 2024', size: '540 KB' },
-    { url: '/projects/dompetq.jpg', title: 'DompetQ Mobile App Dashboard', date: 'September 2024', size: '482 KB', isMobile: true, project: 'dompetq' },
     { url: '/projects/temuin_qrcode.png', title: 'Temuin - Detail Barang & Cetak QR Code Identitas', date: 'August 2024', size: '69 KB', isMobile: true, project: 'temuin' },
     { url: '/projects/temuin_notification.png', title: 'Temuin - Notifikasi Temuan Real-Time & GPS', date: 'August 2024', size: '96 KB', isMobile: true, project: 'temuin' },
     { url: '/projects/sigap_dashboard.png', title: 'SIGAP - Dashboard Utama (Terkunci & Aktif)', date: 'September 2024', size: '90 KB', isMobile: true, project: 'sigap' },

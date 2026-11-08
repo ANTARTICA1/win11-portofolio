@@ -3064,24 +3064,6 @@ export const renderMockupVisual = (type) => {
     case 'temuin-admin':
       return renderTemuinPhoneMockup(type);
 
-    case 'dompetq-dash':
-      return (
-        <div style={{ width: '92%', height: '88%', backgroundColor: '#1e1b4b', borderRadius: '6px', border: '1px solid #4338ca', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10.5px', color: '#818cf8', fontWeight: 700 }}>
-            <span>DOMPETQ FINTECH WALLET</span>
-            <span style={{ color: '#4ade80', backgroundColor: '#064e3b', padding: '2px 6px', borderRadius: '3px' }}>ACTIVE</span>
-          </div>
-          <div style={{ backgroundColor: '#312e81', padding: '10px', borderRadius: '6px' }}>
-            <div style={{ fontSize: '9px', color: '#c7d2fe' }}>SALDO UTAMA</div>
-            <div style={{ fontSize: '15px', fontWeight: 800, color: '#ffffff' }}>Rp 1.450.000</div>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px', fontSize: '9.5px', textAlign: 'center' }}>
-            <div style={{ backgroundColor: '#4338ca', color: '#ffffff', padding: '6px', borderRadius: '4px' }}>Scan QRIS</div>
-            <div style={{ backgroundColor: '#4338ca', color: '#ffffff', padding: '6px', borderRadius: '4px' }}>Split Bill</div>
-          </div>
-        </div>
-      );
-
     case 'makalah-dash':
       return (
         <div style={{ width: '92%', height: '88%', backgroundColor: '#1c1917', borderRadius: '6px', border: '1px solid #44403c', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -3112,6 +3094,52 @@ export const renderMockupVisual = (type) => {
     case 'bingkai-album':
     case 'bingkai-trash':
       return renderBingkaiMockup(type);
+
+    case 'onlyus-vault':
+    case 'onlyus-home':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between', padding: '14px', background: 'radial-gradient(circle at 50% 20%, #064e3b 0%, #022c22 45%, #050b14 100%)', color: '#f8fafc', fontFamily: 'inherit' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255, 255, 255, 0.1)', paddingBottom: '8px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <Lock size={15} color="#34d399" />
+              <span style={{ fontSize: '13px', fontWeight: 800, color: '#f0fdf4', letterSpacing: '0.4px' }}>OnlyUs Vault</span>
+            </div>
+            <span style={{ fontSize: '9px', background: 'rgba(52, 211, 153, 0.15)', color: '#34d399', padding: '2px 8px', borderRadius: '10px', fontWeight: 700, border: '1px solid rgba(52, 211, 153, 0.3)' }}>Bilateral Active</span>
+          </div>
+
+          <div style={{ background: 'rgba(15, 23, 42, 0.65)', border: '1px solid rgba(52, 211, 153, 0.25)', borderRadius: '12px', padding: '12px', textAlign: 'center', margin: '10px 0' }}>
+            <div style={{ fontSize: '9.5px', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.6px', marginBottom: '4px' }}>Status Proximity Dua Perangkat</div>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(5, 150, 105, 0.2)', border: '1px solid #10b981', padding: '4px 12px', borderRadius: '14px' }}>
+              <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#34d399', boxShadow: '0 0 8px #34d399' }} />
+              <span style={{ fontSize: '11px', fontWeight: 700, color: '#ecfdf5' }}>TERBUKA SAAT DEKAT</span>
+            </div>
+            <div style={{ fontSize: '10px', color: '#a7f3d0', marginTop: '6px' }}>Jarak Sinyal: ~0.8m (Aman & Terverifikasi)</div>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', margin: '4px 0' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(2, 44, 34, 0.6)', padding: '8px 10px', borderRadius: '8px', border: '1px solid rgba(52, 211, 153, 0.18)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <ShieldCheck size={14} color="#34d399" />
+                <span style={{ fontSize: '10.5px', color: '#f0fdf4', fontWeight: 600 }}>Foto Kenangan Rahasia</span>
+              </div>
+              <span style={{ fontSize: '9.5px', color: '#6ee7b7', fontWeight: 700 }}>24 Berkas</span>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(2, 44, 34, 0.6)', padding: '8px 10px', borderRadius: '8px', border: '1px solid rgba(52, 211, 153, 0.18)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <FileText size={14} color="#38bdf8" />
+                <span style={{ fontSize: '10.5px', color: '#f0fdf4', fontWeight: 600 }}>Catatan & Surat Bersama</span>
+              </div>
+              <span style={{ fontSize: '9.5px', color: '#38bdf8', fontWeight: 700 }}>12 Catatan</span>
+            </div>
+          </div>
+
+          <div style={{ background: 'rgba(0, 0, 0, 0.4)', borderRadius: '8px', padding: '8px 10px', textAlign: 'center', marginTop: '8px', border: '1px dashed rgba(255, 255, 255, 0.15)' }}>
+            <div style={{ fontSize: '10px', fontStyle: 'italic', color: '#94a3b8' }}>
+              "Membantu menyimpan rapat dan terbuka saat dekat"
+            </div>
+          </div>
+        </div>
+      );
 
     default:
       return null;

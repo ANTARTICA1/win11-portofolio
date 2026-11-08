@@ -7,10 +7,10 @@ export const INITIAL_USER = {
   institution: "Institut Teknologi dan Bisnis STIKOM Bali",
   degree: "Information Technology",
   location: "Denpasar, Bali, Indonesia",
-  email: "anakagungarthawibawa22@gmail.com",
-  phone: "+62 812-3456-7890",
-  whatsapp: "https://wa.me/6281234567890?text=Halo%20Agung,%20kami%20tertarik%20dengan%20profil%20portfolio%20Anda",
-  github: "https://github.com/agungkrisna",
+  email: "kresnaartha3@gmail.com",
+  phone: "+62 822-4784-6546",
+  whatsapp: "https://wa.me/6282247846546?text=Halo%20Agung,%20kami%20tertarik%20dengan%20profil%20portfolio%20Anda",
+  github: "https://github.com/ANTARTICA1",
   linkedin: "https://linkedin.com/in/krisnaartha",
   website: "https://portofolio.krisnaartha.my.id",
   avatar: "/avatars/gungkrisna_avatar.jpg"
@@ -106,18 +106,6 @@ export const PROJECTS_ITEMS = [
     description: "NeuroFly - Drosophila Connectome x Pong"
   },
   {
-    name: "DompetQ.exe",
-    type: "executable",
-    extension: "exe",
-    appId: "dompetq",
-    projectId: "dompetq",
-    icon: "code",
-    fileType: "Application",
-    size: "22.4 MB",
-    modified: "05/12/2024 16:30",
-    description: "DompetQ - Fintech Mobile Wallet"
-  },
-  {
     name: "MakalahGenerator.exe",
     type: "executable",
     extension: "exe",
@@ -152,6 +140,18 @@ export const PROJECTS_ITEMS = [
     size: "14.2 MB",
     modified: "10/15/2024 14:20",
     description: "Bingkai - Galeri Foto Komputer Lokal (Python & Alpine.js)"
+  },
+  {
+    name: "OnlyUs.exe",
+    type: "executable",
+    extension: "exe",
+    appId: "onlyus",
+    projectId: "onlyus",
+    icon: "onlyus",
+    fileType: "Application",
+    size: "15.6 MB",
+    modified: "11/25/2024 11:30",
+    description: "OnlyUs - Bilateral Proximity-Locked Digital Vault (Flutter)"
   }
 ];
 
@@ -851,74 +851,6 @@ motorik aktif, dilengkapi pemantau 3D Fly Brain Monitor dan telemetri osiloskop.
     ]
   },
   {
-    name: "dompetq",
-    type: "folder",
-    description: "Fintech E-Wallet Mobile Application",
-    previewImage: "/projects/dompetq.jpg",
-    badge: "Mobile App",
-    items: [
-      {
-        name: "DompetQ.exe",
-        type: "executable",
-        extension: "exe",
-        appId: "dompetq",
-        projectId: "dompetq",
-        icon: "code",
-        fileType: "Application",
-        size: "22.4 MB",
-        description: "Buka DompetQ Showcase di Chrome"
-      },
-      {
-        name: "project_overview.txt",
-        type: "file",
-        extension: "txt",
-        size: "3.2 KB",
-        content: `=====================================================
-PROYEK: DOMPETQ - FINTECH MOBILE APP
-=====================================================
-Platform   : Android & iOS
-Framework  : Flutter (Dart)
-State Mgmt : Riverpod & BLoC Pattern
-Backend    : Node.js (Express), PostgreSQL, Redis Cache
-Keamanan   : JWT Authentication, Biometric Fingerprint / FaceID, PIN Encryption
-
-DESKRIPSI:
-DompetQ adalah aplikasi dompet digital modern yang mempermudah pengguna
-dalam melacak keuangan harian, pembayaran via QRIS, transfer antar bank,
-dan split-bill dengan sistem analitik grafik interaktif.
-
-FITUR UTAMA:
-✓ Dashboard saldo real-time dengan grafik arus kas bulanan
-✓ Simulasi pembayaran QRIS dinamis & statis
-✓ Riwayat transaksi dengan filter kategori & ekspor PDF laporan
-✓ Keamanan biometrik & notifikasi push transaksi instan
-✓ Dukungan multi-akun & kantong tabungan terencana (Saving Goals)
-`
-      },
-      {
-        name: "dompetq_preview.jpg",
-        type: "file",
-        extension: "jpg",
-        size: "482 KB",
-        imageUrl: "/projects/dompetq.jpg",
-        title: "DompetQ Mobile UI Dashboard"
-      },
-      {
-        name: "tech_stack.txt",
-        type: "file",
-        extension: "txt",
-        size: "1.1 KB",
-        content: `TECH STACK DOMPETQ:
-- Client: Flutter 3.22, Dart
-- UI/UX: Material 3, Custom Dark Violet Theme
-- Local DB: Hive & SecureStorage
-- Network: Dio with interceptors & retry policy
-- Testing: Mocktail, Golden UI Tests
-`
-      }
-    ]
-  },
-  {
     name: "project temuin",
     type: "folder",
     description: "Lost & Found Platform Berbasis QR Code",
@@ -1120,12 +1052,11 @@ PENGALAMAN:
         size: "1.2 KB",
         content: `INFORMASI KONTAK RESMI:
 --------------------------------------------
-Email       : agungkrisna.dev@gmail.com
-WhatsApp    : +62 812-3456-7890
+Email       : kresnaartha3@gmail.com
+WhatsApp    : +62 822-4784-6546
 LinkedIn    : https://linkedin.com/in/krisnaartha
-GitHub      : https://github.com/agungkrisna
-Telegram    : @agungkrisna
-Portfolio   : https://agungkrisna.vercel.app
+GitHub      : https://github.com/ANTARTICA1
+Portfolio   : https://portofolio.krisnaartha.my.id
 
 Tertarik untuk berkolaborasi atau merekrut saya?
 Silakan klik link WhatsApp atau kirim pesan email langsung!
@@ -1163,14 +1094,13 @@ saat perangkat memasuki atau meninggalkan zona geofencing yang telah ditentukan.
         extension: "txt",
         size: "1.9 KB",
         content: `KATALOG APLIKASI YANG PERNAH DIBANGUN:
-1. DompetQ (Mobile E-Wallet Fintech)
-2. Temuin (Lost and Found Location Platform)
-3. Makalah Generator (Academic AI Suite)
-4. RadiusApp (Geofencing & Proximity Sensor)
-5. KuisMobile (Gamified Learning Quiz)
-6. Tatagih (Smart Subscription Manager & AI Financial Assistant - Laravel 13)
-7. NenaCare (AI-Powered K3 Incident Reporting & Monitoring System - PHP OOP & Gemini)
-8. ITB STIKOM Bali Plugin for TheoTown (Custom Isometric Pixel Art Educational Building)
+1. Temuin (Lost and Found Location Platform)
+2. Makalah Generator (Academic AI Suite)
+3. RadiusApp (Geofencing & Proximity Sensor)
+4. KuisMobile (Gamified Learning Quiz)
+5. Tatagih (Smart Subscription Manager & AI Financial Assistant - Laravel 13)
+6. NenaCare (AI-Powered K3 Incident Reporting & Monitoring System - PHP OOP & Gemini)
+7. ITB STIKOM Bali Plugin for TheoTown (Custom Isometric Pixel Art Educational Building)
 `
       }
     ]
@@ -1187,7 +1117,6 @@ saat perangkat memasuki atau meninggalkan zona geofencing yang telah ditentukan.
       { name: "theotown_screen.jpg", type: "file", extension: "jpg", size: "620 KB", imageUrl: "/projects/theotown.jpg", title: "ITB STIKOM Bali TheoTown Gameplay" },
       { name: "nenacare_screen.jpg", type: "file", extension: "jpg", size: "580 KB", imageUrl: "/projects/nenacare.jpg", title: "NenaCare K3 Incident Dashboard" },
       { name: "tatagih_screen.jpg", type: "file", extension: "jpg", size: "540 KB", imageUrl: "/projects/tatagih.jpg", title: "Tatagih Web App Dashboard" },
-      { name: "dompetq_screen.jpg", type: "file", extension: "jpg", size: "482 KB", imageUrl: "/projects/dompetq.jpg", title: "DompetQ Screen" },
       { name: "temuin_qrcode.png", type: "file", extension: "png", size: "69 KB", imageUrl: "/projects/temuin_qrcode.png", title: "Temuin Detail QR Code" },
       { name: "temuin_notification.png", type: "file", extension: "png", size: "96 KB", imageUrl: "/projects/temuin_notification.png", title: "Temuin Notifikasi Penemuan" },
       { name: "sigap_dashboard.png", type: "file", extension: "png", size: "90 KB", imageUrl: "/projects/sigap_dashboard.png", title: "SIGAP Dashboard Utama" },
@@ -1228,12 +1157,87 @@ PANDUAN SINGKAT:
    - Klik shortcut 'portofolio.krisnaartha.my.id' di desktop untuk langsung mengakses 
      website portofolio saya.
 
+5.  Koleksi Moto & Visi Proyek (Google Chrome)
+   - Buka Google Chrome dan klik tab/bookmark 'Koleksi Moto & Visi' untuk melihat
+     kartu interaktif yang memuat filosofi dan moto resmi dari setiap karya:
+     * Lintas: "Membantu berbagi berkas dengan tangkas dan tuntas"
+     * Bingkai: "Membantu yang tersimpan tetap rupawan"
+     * Sigap: "Membantu ponsel berdering saat disentuh maling"
+     * NenaCare: "Membantu proses laporan tanpa perlu antrean"
+     * OnlyUs: "Membantu menyimpan rapat dan terbuka saat dekat"
+     * Temuin: "Membantu yang hilang kembali pulang"
+     * Tatagih: "Membantu mengatur agar duit tak kabur"
 
-• Email     : anakagungarthawibawa22@gmail.com
+
+• Email     : kresnaartha3@gmail.com
 • LinkedIn  : https://linkedin.com/in/krisnaartha
 • Website   : https://portofolio.krisnaartha.my.id`;
 
 export const DESKTOP_ITEMS = [
+  {
+    id: "theotown_app",
+    name: "TheoTown",
+    type: "app",
+    app: "theotown",
+    icon: "theotown",
+    isProject: true
+  },
+  {
+    id: "nenacare_app",
+    name: "NenaCare",
+    type: "app",
+    app: "nenacare",
+    icon: "nenacare",
+    isProject: true
+  },
+  {
+    id: "tatagih_app",
+    name: "Tatagih",
+    type: "app",
+    app: "tatagih",
+    icon: "tatagih",
+    isProject: true
+  },
+  {
+    id: "lintas_app",
+    name: "Lintas",
+    type: "app",
+    app: "lintas",
+    icon: "lintas",
+    isProject: true
+  },
+  {
+    id: "sigap_app",
+    name: "SIGAP",
+    type: "app",
+    app: "sigap",
+    icon: "sigap",
+    isProject: true
+  },
+  {
+    id: "temuin_app",
+    name: "Temuin",
+    type: "app",
+    app: "temuin",
+    icon: "temuin",
+    isProject: true
+  },
+  {
+    id: "bingkai_app",
+    name: "Bingkai",
+    type: "app",
+    app: "bingkai",
+    icon: "bingkai",
+    isProject: true
+  },
+  {
+    id: "onlyus_app",
+    name: "OnlyUs",
+    type: "app",
+    app: "onlyus",
+    icon: "onlyus",
+    isProject: true
+  },
   {
     id: "this_pc",
     name: "This PC",
@@ -1249,55 +1253,6 @@ export const DESKTOP_ITEMS = [
     app: "explorer",
     path: "Projects",
     icon: "explorer"
-  },
-  {
-    id: "theotown_app",
-    name: "ITB STIKOM TheoTown",
-    type: "app",
-    app: "theotown",
-    icon: "theotown"
-  },
-  {
-    id: "nenacare_app",
-    name: "NenaCare (K3 Incident AI)",
-    type: "app",
-    app: "nenacare",
-    icon: "nenacare"
-  },
-  {
-    id: "tatagih_app",
-    name: "Tatagih (Subscription)",
-    type: "app",
-    app: "tatagih",
-    icon: "tatagih"
-  },
-  {
-    id: "lintas_app",
-    name: "Lintas (Cross-Device)",
-    type: "app",
-    app: "lintas",
-    icon: "lintas"
-  },
-  {
-    id: "sigap_app",
-    name: "SIGAP (Keamanan HP)",
-    type: "app",
-    app: "sigap",
-    icon: "sigap"
-  },
-  {
-    id: "temuin_app",
-    name: "Temuin (Lost & Found)",
-    type: "app",
-    app: "temuin",
-    icon: "temuin"
-  },
-  {
-    id: "bingkai_app",
-    name: "Bingkai (Galeri Foto)",
-    type: "app",
-    app: "bingkai",
-    icon: "bingkai"
   },
   {
     id: "notepad",

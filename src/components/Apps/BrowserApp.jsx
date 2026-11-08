@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { 
   ArrowLeft, ArrowRight, RotateCw, Lock, Star, ExternalLink, 
   CheckCircle2, ChevronDown, Plus, X, ZoomIn, FolderGit2,
-  ChevronLeft, ChevronRight, Maximize2, Gamepad2
+  ChevronLeft, ChevronRight, Maximize2, Gamepad2, Layers, Smartphone
 } from 'lucide-react';
 import { WinIcon } from '../Common/WinIcon';
 import { playClickSound } from '../../utils/sound';
 import { useWindow } from '../Windows/WindowContext';
 import { ChromeDinoGame } from './ChromeDinoGame';
 import { NeuroFlyGame } from './NeuroFlyGame';
+import { VisionDeckApp } from './VisionDeckApp';
 import { PROJECTS_DATA } from '../../data/projectsData';
 import { PhoneMockup } from '../Common/PhoneMockup';
 import './BrowserApp.css';
@@ -18,12 +19,16 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
   const [activeProjectId, setActiveProjectId] = useState(initialProject || 'tatagih');
   const [activePhotoIndex, setActivePhotoIndex] = useState(0);
   const [phoneMockupMode, setPhoneMockupMode] = useState(true);
+  const [stageViewMode, setStageViewMode] = useState('phone');
+  const [lightboxViewMode, setLightboxViewMode] = useState('full');
+  const [lightboxZoom, setLightboxZoom] = useState(1);
   const [neuroFlyLiveMode, setNeuroFlyLiveMode] = useState(true);
   const [selectedPhotoModal, setSelectedPhotoModal] = useState(null);
   const [isBookmarked, setIsBookmarked] = useState(true);
   const [isReloading, setIsReloading] = useState(false);
   const [showTabSearch, setShowTabSearch] = useState(false);
   const [omniboxVal, setOmniboxVal] = useState(() => {
+    if (initialProject === 'motto') return 'agungkrisna.dev/motto';
     return initialProject === 'dino' ? 'chrome://dino' : initialProject === 'krisnaartha' ? 'portofolio.krisnaartha.my.id' : `agungkrisna.dev/projects/${initialProject || 'tatagih'}`;
   });
 
@@ -31,6 +36,14 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
 
   const [tabs, setTabs] = useState(() => {
     const initKey = initialProject || 'tatagih';
+    if (initKey === 'motto') {
+      return [{
+        id: 'motto',
+        projectId: 'motto',
+        title: 'Koleksi Moto & Visi',
+        icon: 'visiondeck'
+      }];
+    }
     const p = PROJECTS_DATA[initKey] || PROJECTS_DATA.tatagih;
     const title = p.isDino ? 'chrome://dino' : p.isExternalIframe ? 'portofolio.krisnaartha.my.id' : `${p.name} - Showcase`;
     const icon = p.isDino ? 'dino' : p.isExternalIframe ? 'krisnaartha' : 'chrome';
@@ -45,7 +58,9 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
   });
 
   useEffect(() => {
-    if (activeProjectId === 'dino') {
+    if (activeProjectId === 'motto') {
+      setOmniboxVal('agungkrisna.dev/motto');
+    } else if (activeProjectId === 'dino') {
       setOmniboxVal('chrome://dino');
     } else if (activeProjectId === 'krisnaartha') {
       setOmniboxVal('portofolio.krisnaartha.my.id');
@@ -61,6 +76,17 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
     setTabs((prev) => {
       const exists = prev.find((t) => (t.projectId || t.id) === projectId);
       if (exists) return prev;
+      if (projectId === 'motto') {
+        return [
+          ...prev,
+          {
+            id: 'motto',
+            projectId: 'motto',
+            title: 'Koleksi Moto & Visi',
+            icon: 'visiondeck'
+          }
+        ];
+      }
       const p = PROJECTS_DATA[projectId];
       const title = p ? (p.isDino ? 'chrome://dino' : p.isExternalIframe ? 'portofolio.krisnaartha.my.id' : `${p.name} - Showcase`) : 'New Tab';
       const icon = p?.isDino ? 'dino' : p?.isExternalIframe ? 'krisnaartha' : 'chrome';
@@ -77,7 +103,7 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
   };
 
   useEffect(() => {
-    if (initialProject && PROJECTS_DATA[initialProject]) {
+    if (initialProject) {
       handleSelectProject(initialProject);
     }
   }, [initialProject]);
@@ -324,7 +350,9 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
           onSubmit={(e) => {
             e.preventDefault();
             const val = (omniboxVal || '').trim().toLowerCase();
-            if (val.includes('dino')) {
+            if (val.includes('motto') || val.includes('moto') || val.includes('visi') || val.includes('deck')) {
+              handleSelectProject('motto');
+            } else if (val.includes('dino')) {
               handleSelectProject('dino');
             } else if (val.includes('krisnaartha') || val.includes('portofolio')) {
               handleSelectProject('krisnaartha');
@@ -346,6 +374,8 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
               handleSelectProject('sigap');
             } else if (val.includes('bingkai')) {
               handleSelectProject('bingkai');
+            } else if (val.includes('onlyus')) {
+              handleSelectProject('onlyus');
             }
           }}
         >
@@ -405,6 +435,18 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
 
       <div className="chrome-bookmarks-bar">
         <div
+          className={`chrome-bookmark-item ${activeProjectId === 'motto' ? 'active' : ''}`}
+          onClick={() => {
+            playClickSound();
+            handleSelectProject('motto');
+          }}
+          title="Buka Koleksi Kartu Moto & Filosofi di Chrome"
+          style={{ color: '#38bdf8', fontWeight: 600 }}
+        >
+          <WinIcon name="visiondeck" size={13} />
+          <span>Koleksi Moto &amp; Visi</span>
+        </div>
+        <div
           className={`chrome-bookmark-item ${activeProjectId === 'dino' ? 'active' : ''}`}
           onClick={() => handleSelectProject('dino')}
           title="Play Chrome Dinosaur Game"
@@ -425,59 +467,66 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
           onClick={() => handleSelectProject('theotown')}
         >
           <WinIcon name="theotown" size={13} />
-          <span>TheoTown (STIKOM Bali Mod)</span>
+          <span>TheoTown</span>
         </div>
         <div
           className={`chrome-bookmark-item ${activeProjectId === 'nenacare' ? 'active' : ''}`}
           onClick={() => handleSelectProject('nenacare')}
         >
           <WinIcon name="nenacare" size={13} />
-          <span>NenaCare (K3 Incident AI)</span>
+          <span>NenaCare</span>
         </div>
         <div
           className={`chrome-bookmark-item ${activeProjectId === 'tatagih' ? 'active' : ''}`}
           onClick={() => handleSelectProject('tatagih')}
         >
           <WinIcon name="tatagih" size={13} />
-          <span>Tatagih (Bill Manager)</span>
+          <span>Tatagih</span>
         </div>
         <div
           className={`chrome-bookmark-item ${activeProjectId === 'lintas' ? 'active' : ''}`}
           onClick={() => handleSelectProject('lintas')}
         >
           <WinIcon name="lintas" size={13} />
-          <span>Lintas (Companion Utility)</span>
+          <span>Lintas</span>
         </div>
         <div
           className={`chrome-bookmark-item ${activeProjectId === 'neurofly' ? 'active' : ''}`}
           onClick={() => handleSelectProject('neurofly')}
         >
           <WinIcon name="neurofly" size={13} />
-          <span>NeuroFly (Drosophila × Pong)</span>
+          <span>NeuroFly</span>
         </div>
         <div
           className={`chrome-bookmark-item ${activeProjectId === 'sigap' ? 'active' : ''}`}
           onClick={() => handleSelectProject('sigap')}
         >
           <WinIcon name="sigap" size={13} />
-          <span>SIGAP (Keamanan HP)</span>
+          <span>SIGAP</span>
         </div>
         <div
           className={`chrome-bookmark-item ${activeProjectId === 'temuin' ? 'active' : ''}`}
           onClick={() => handleSelectProject('temuin')}
         >
           <WinIcon name="temuin" size={13} />
-          <span>Temuin (Lost &amp; Found)</span>
+          <span>Temuin</span>
         </div>
         <div
           className={`chrome-bookmark-item ${activeProjectId === 'bingkai' ? 'active' : ''}`}
           onClick={() => handleSelectProject('bingkai')}
         >
           <WinIcon name="bingkai" size={13} />
-          <span>Bingkai (Galeri Foto)</span>
+          <span>Bingkai</span>
+        </div>
+        <div
+          className={`chrome-bookmark-item ${activeProjectId === 'onlyus' ? 'active' : ''}`}
+          onClick={() => handleSelectProject('onlyus')}
+        >
+          <WinIcon name="onlyus" size={13} />
+          <span>OnlyUs</span>
         </div>
         <a
-          href="https://github.com/agungkrisna"
+          href="https://github.com/ANTARTICA1"
           target="_blank"
           rel="noreferrer"
           className="chrome-bookmark-item"
@@ -488,8 +537,22 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
         </a>
       </div>
 
-      <div className="chrome-content-area" style={currentProject?.isDino || currentProject?.isExternalIframe ? { padding: 0, overflow: 'hidden', display: 'flex', flexDirection: 'column' } : {}}>
-        {currentProject?.isDino ? (
+      <div className="chrome-content-area" style={activeProjectId === 'motto' || currentProject?.isDino || currentProject?.isExternalIframe ? { padding: 0, overflow: 'hidden', display: 'flex', flexDirection: 'column' } : {}}>
+        {activeProjectId === 'motto' ? (
+          <div style={{ flex: 1, width: '100%', height: '100%', overflowY: 'auto' }}>
+            <VisionDeckApp
+              onLaunchApp={(appId, data) => {
+                if (data?.projectId) {
+                  handleSelectProject(data.projectId);
+                } else if (appId === 'neurofly') {
+                  handleSelectProject('neurofly');
+                } else if (PROJECTS_DATA[appId]) {
+                  handleSelectProject(appId);
+                }
+              }}
+            />
+          </div>
+        ) : currentProject?.isDino ? (
           <div style={{ flex: 1, width: '100%', height: '100%', overflow: 'hidden' }}>
             <ChromeDinoGame isEmbedded={true} />
           </div>
@@ -503,6 +566,17 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
           <div className="chrome-page-container">
             <div className="project-nav-bar">
               <span className="project-nav-label">PROYEK:</span>
+              <button
+                type="button"
+                className={`project-nav-btn ${activeProjectId === 'motto' ? 'active' : ''}`}
+                onClick={() => {
+                  handleSelectProject('motto');
+                }}
+                style={{ borderColor: 'rgba(56, 189, 248, 0.4)', color: '#38bdf8' }}
+              >
+                <WinIcon name="visiondeck" size={14} />
+                <span>Koleksi Moto &amp; Visi</span>
+              </button>
               {projectKeys.filter(k => k !== 'dino' && k !== 'krisnaartha').map((pKey) => {
                 const p = PROJECTS_DATA[pKey];
                 const isActive = pKey === activeProjectId;
@@ -525,6 +599,13 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
             <header className="project-header">
               <div className="project-hero-main">
                 <h1 className="project-main-title">{currentProject.fullTitle}</h1>
+
+                {currentProject.motto && (
+                  <p className="project-motto-text">
+                    "{currentProject.motto}"
+                  </p>
+                )}
+
                 <p className="project-lead-desc">{currentProject.description || currentProject.tagline}</p>
 
                 <div className="project-stack-row">
@@ -615,7 +696,7 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
                         title="Mainkan game langsung di halaman ini"
                       >
                         <Gamepad2 size={13} />
-                        <span>🎮 Lawan Lalat (Live 3D)</span>
+                        <span>Lawan Lalat (Live 3D)</span>
                       </button>
                       <button
                         type="button"
@@ -631,7 +712,7 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
                         }}
                         title="Tampilkan foto & tangkapan layar"
                       >
-                        <span>📸 Galeri Foto</span>
+                        <span>Galeri Foto</span>
                       </button>
                       {onLaunchApp && (
                         <button
@@ -655,18 +736,66 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
                   )}
 
                   {(!neuroFlyLiveMode || currentProject.id !== 'neurofly') && (
-                    <button
-                      type="button"
-                      className="preview-zoom-action-btn"
-                      onClick={() => {
-                        playClickSound();
-                        setSelectedPhotoModal(activePhoto);
-                      }}
-                      title="Perbesar tampilan foto"
-                    >
-                      <Maximize2 size={13} />
-                      <span>Perbesar</span>
-                    </button>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      {isMobilePhoto && (
+                        <div className="stage-mode-toggle-group">
+                          <button
+                            type="button"
+                            className={`preview-zoom-action-btn ${stageViewMode === 'phone' ? 'active' : ''}`}
+                            onClick={() => {
+                              playClickSound();
+                              setStageViewMode('phone');
+                            }}
+                            title="Tampilan dalam bingkai smartphone"
+                          >
+                            <Smartphone size={13} />
+                            <span>Bingkai HP</span>
+                          </button>
+                          <button
+                            type="button"
+                            className={`preview-zoom-action-btn ${stageViewMode === 'full' ? 'active' : ''}`}
+                            onClick={() => {
+                              playClickSound();
+                              setStageViewMode('full');
+                            }}
+                            title="Tampilan foto lebar penuh tanpa terpotong bingkai"
+                          >
+                            <Maximize2 size={13} />
+                            <span>Foto Penuh (Jelas)</span>
+                          </button>
+                        </div>
+                      )}
+
+                      <button
+                        type="button"
+                        className="preview-zoom-action-btn btn-highlight-zoom"
+                        onClick={() => {
+                          playClickSound();
+                          setLightboxViewMode('full');
+                          setLightboxZoom(1);
+                          setSelectedPhotoModal(activePhoto);
+                        }}
+                        title="Buka foto ukuran penuh / zoom resolusi tinggi"
+                      >
+                        <ZoomIn size={14} />
+                        <span>Buka Foto Penuh (Zoom)</span>
+                      </button>
+
+                      <a
+                        href={activePhoto?.imageUrl || `/projects/${currentProject.id}.jpg`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="preview-zoom-action-btn"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          playClickSound();
+                        }}
+                        title="Buka berkas foto asli di tab baru peramban"
+                      >
+                        <ExternalLink size={13} />
+                        <span>Tab Baru</span>
+                      </a>
+                    </div>
                   )}
                 </div>
               </div>
@@ -715,6 +844,8 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
                     onClick={() => {
                       if (currentProject.id === 'neurofly' && neuroFlyLiveMode) return;
                       playClickSound();
+                      setLightboxViewMode('full');
+                      setLightboxZoom(1);
                       setSelectedPhotoModal(activePhoto);
                     }}
                     title={currentProject.id === 'neurofly' && neuroFlyLiveMode ? '' : 'Klik untuk memperbesar gambar'}
@@ -761,13 +892,66 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
                           />
                         </div>
                       </div>
-                    ) : isMobilePhoto ? (
+                    ) : isMobilePhoto && stageViewMode === 'phone' ? (
                       <div className="stage-phone-holder">
                         <PhoneMockup
                           src={activePhoto?.imageUrl || currentProject.photos[0]?.imageUrl || `/projects/${currentProject.id}.jpg`}
                           alt={activePhoto?.title || currentProject.name}
                           projectName={currentProject.id}
+                          onClick={() => {
+                            playClickSound();
+                            setLightboxZoom(1);
+                            setSelectedPhotoModal(activePhoto);
+                          }}
                         />
+                        <button
+                          type="button"
+                          className="stage-floating-zoom-btn"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            playClickSound();
+                            setLightboxZoom(1);
+                            setSelectedPhotoModal(activePhoto);
+                          }}
+                          title="Buka foto ukuran penuh tanpa bingkai"
+                        >
+                          <ZoomIn size={13} />
+                          <span>Klik untuk Memperbesar Foto</span>
+                        </button>
+                      </div>
+                    ) : isMobilePhoto && stageViewMode === 'full' ? (
+                      <div className="stage-desktop-chassis mobile-expanded-mode">
+                        <div className="desktop-chassis-bar">
+                          <div className="chassis-traffic-dots">
+                            <span className="dot dot-red" />
+                            <span className="dot dot-yellow" />
+                            <span className="dot dot-green" />
+                          </div>
+                          <div className="chassis-url-pill">
+                            <Lock size={10} className="chassis-lock-icon" />
+                            <span>{activePhoto?.title || currentProject.name} (Tangkapan Layar Resolusi Tinggi)</span>
+                          </div>
+                          <button
+                            type="button"
+                            className="stage-bar-action-btn"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              playClickSound();
+                              setLightboxViewMode('full');
+                              setSelectedPhotoModal(activePhoto);
+                            }}
+                            title="Perbesar ke Lightbox"
+                          >
+                            <Maximize2 size={12} />
+                          </button>
+                        </div>
+                        <div className="desktop-screenshot-stage expanded-portrait-stage">
+                          <img
+                            src={activePhoto?.imageUrl || currentProject.photos[0]?.imageUrl || `/projects/${currentProject.id}.jpg`}
+                            alt={activePhoto?.title || currentProject.name}
+                            className="desktop-screenshot-img expanded-portrait-img"
+                          />
+                        </div>
                       </div>
                     ) : currentProject.id === 'theotown' ? (
                       <div className="stage-desktop-chassis game-mode">
@@ -860,9 +1044,6 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
                           : currentProject.id === 'lintas'
                           ? 'Antarmuka Desktop (Windows Companion Host)'
                           : 'Antarmuka Web'}
-                      </span>
-                      <span className="screen-index-badge">
-                        Tangkapan Layar #{activePhotoIndex + 1}
                       </span>
                     </div>
 
@@ -1018,17 +1199,41 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
             <div className="lightbox-header">
               <div className="lightbox-header-info">
                 <span className="lightbox-kicker">
-                  Foto {activePhotoIndex + 1} dari {currentProject.photos.length}
+                  Foto {activePhotoIndex + 1} dari {currentProject.photos.length} • {currentProject.name}
                 </span>
                 <h3 className="lightbox-title">{activePhoto?.title || selectedPhotoModal.title}</h3>
               </div>
-              <button
-                className="lightbox-close-btn"
-                onClick={() => setSelectedPhotoModal(null)}
-                title="Tutup (Esc)"
-              >
-                <X size={18} />
-              </button>
+
+              <div className="lightbox-header-controls">
+                <button
+                  type="button"
+                  className="lightbox-action-tool"
+                  onClick={() => setLightboxZoom((prev) => (prev === 1 ? 1.6 : 1))}
+                  title={lightboxZoom > 1 ? 'Reset Ukuran (100%)' : 'Perbesar Zoom (160%)'}
+                >
+                  <ZoomIn size={14} />
+                  <span>{lightboxZoom > 1 ? 'Zoom 100%' : 'Zoom Penuh'}</span>
+                </button>
+
+                <a
+                  href={activePhoto?.imageUrl || selectedPhotoModal?.imageUrl || `/projects/${currentProject.id}.jpg`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="lightbox-action-tool"
+                  title="Buka berkas gambar asli di tab baru peramban"
+                >
+                  <ExternalLink size={14} />
+                  <span>Tab Baru</span>
+                </a>
+
+                <button
+                  className="lightbox-close-btn"
+                  onClick={() => setSelectedPhotoModal(null)}
+                  title="Tutup (Esc)"
+                >
+                  <X size={18} />
+                </button>
+              </div>
             </div>
 
             <div className="lightbox-body">
@@ -1060,32 +1265,30 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
                   </>
                 )}
 
-                {isMobilePhoto ? (
-                  <div className="modal-phone-container">
-                    <PhoneMockup
-                      src={activePhoto?.imageUrl || selectedPhotoModal?.imageUrl || `/projects/${currentProject.id}.jpg`}
-                      alt={activePhoto?.title || selectedPhotoModal?.title || currentProject.name}
-                      projectName={currentProject.id}
-                    />
-                  </div>
-                ) : (
+                <div 
+                  className={`lightbox-zoom-viewport ${lightboxZoom > 1 ? 'has-zoomed' : ''}`}
+                  onClick={() => setLightboxZoom((prev) => (prev === 1 ? 1.6 : 1))}
+                >
                   <img
                     src={activePhoto?.imageUrl || selectedPhotoModal?.imageUrl || `/projects/${currentProject.id}.jpg`}
                     alt={activePhoto?.title || selectedPhotoModal?.title || currentProject.name}
-                    className="lightbox-full-img"
+                    className={`lightbox-full-img ${lightboxZoom > 1 ? 'is-zoomed' : ''}`}
+                    style={{
+                      cursor: lightboxZoom > 1 ? 'zoom-out' : 'zoom-in'
+                    }}
+                    title="Klik untuk memperbesar / memperkecil"
                   />
-                )}
-              </div>
-
-              <div className="lightbox-caption-area">
-                <div className="lightbox-caption-kicker">
-                  Penjelasan Antarmuka:
                 </div>
+              </div>
+            </div>
+
+            {(activePhoto?.caption || selectedPhotoModal.caption) && (
+              <div className="lightbox-unified-footer">
                 <p className="lightbox-caption-text">
                   {activePhoto?.caption || selectedPhotoModal.caption}
                 </p>
               </div>
-            </div>
+            )}
           </div>
         </div>
       )}

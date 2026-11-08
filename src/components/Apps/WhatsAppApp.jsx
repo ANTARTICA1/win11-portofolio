@@ -178,34 +178,50 @@ export const WhatsAppApp = ({ onLaunchApp }) => {
   const generateBotReply = (userMsg) => {
     const lower = (userMsg || '').toLowerCase();
 
+    if (lower.includes('vision deck') || lower.includes('motto') || lower.includes('visi') || lower.includes('manifesto') || lower.includes('deck') || lower.includes('filosofi')) {
+      return 'Setiap karya memiliki moto dan nilai esensial:\n- Lintas: "Membantu berbagi berkas dengan tangkas dan tuntas"\n- Bingkai: "Membantu yang tersimpan tetap rupawan"\n- Sigap: "Membantu ponsel berdering saat disentuh maling"\n- NenaCare: "Membantu proses laporan tanpa perlu antrean"\n- OnlyUs: "Membantu menyimpan rapat dan terbuka saat dekat"\n- Temuin: "Membantu yang hilang kembali pulang"\n- Tatagih: "Membantu mengatur agar duit tak kabur"\n\nKamu bisa membuka shortcut Vision Deck di Desktop untuk melihat kartu koleksi 3D lengkapnya!';
+    }
+
     if (lower.includes('theotown') || lower.includes('stikom') || lower.includes('pixel art') || lower.includes('mod') || lower.includes('plugin') || lower.includes('bali')) {
-      return 'ITB STIKOM Bali Building Plugin for TheoTown adalah game plugin custom yang menambahkan gedung kampus ITB STIKOM Bali ke dalam game simulasi kota TheoTown! Menggunakan asset pixel art, gedung ini berfungsi nyata sebagai fasilitas pendidikan melalui konfigurasi code.json dan plugin.manifest resmi. Coba buka demonya via shortcut ITB STIKOM TheoTown di desktop!';
+      return 'ITB STIKOM Bali Building Plugin for TheoTown (Motto: "Membantu membangun kota impian berjiwa nusantara") adalah game plugin custom yang menambahkan gedung kampus ITB STIKOM Bali ke dalam game simulasi kota TheoTown! Menggunakan asset pixel art, gedung ini berfungsi nyata sebagai fasilitas pendidikan melalui konfigurasi code.json dan plugin.manifest resmi. Coba buka demonya via shortcut ITB STIKOM TheoTown di desktop!';
     }
 
     if (lower.includes('nenacare') || lower.includes('k3') || lower.includes('keselamatan') || lower.includes('insiden') || lower.includes('nena cafe')) {
-      return 'NenaCare adalah sistem pelaporan dan monitoring keselamatan kerja (K3) terintegrasi untuk Nena Cafe. Didukung Google Gemini 2.5 Flash-Lite untuk analisis risiko otomatis, opsi pelaporan anonim demi privasi pelapor, integrasi Telegram Bot remote action ([Proses] / [Selesai]), visualisasi analitik Chart.js, serta ekspor dokumen PDF Dompdf. Coba lihat detailnya via shortcut NenaCare.exe di Desktop!';
+      return 'NenaCare (Motto: "Membantu proses laporan tanpa perlu antrean") adalah sistem pelaporan dan monitoring keselamatan kerja (K3) terintegrasi untuk Nena Cafe. Didukung Google Gemini 2.5 Flash-Lite untuk analisis risiko otomatis, opsi pelaporan anonim demi privasi pelapor, integrasi Telegram Bot remote action ([Proses] / [Selesai]), visualisasi analitik Chart.js, serta ekspor dokumen PDF Dompdf. Coba lihat detailnya via shortcut NenaCare.exe di Desktop!';
     }
 
     if (lower.includes('tatagih') || lower.includes('tagihan') || lower.includes('fintech') || lower.includes('langganan')) {
-      return 'Tatagih adalah aplikasi manajemen langganan yang kubangun dengan Laravel 13, Tailwind CSS, Intergrasi Gemini AI, Chart.js, dan Telegram Bot API. Ada fitur Tata Asisten, pendeteksi kebocoran dana, serta patungan langganan (split bill)! Kamu bisa buka shortcut Tatagih.exe di desktop untuk membaca lebih detail.';
+      return 'Tatagih (Motto: "Membantu mengatur agar duit tak kabur") adalah aplikasi manajemen langganan yang kubangun dengan Laravel 13, Tailwind CSS, Integrasi Gemini AI, Chart.js, dan Telegram Bot API. Ada fitur Tata Asisten, pendeteksi kebocoran dana, serta patungan langganan (split bill)! Kamu bisa buka shortcut Tatagih.exe di desktop untuk membaca lebih detail.';
     }
 
     if (lower.includes('temuin') || lower.includes('maps') || lower.includes('geofencing') || lower.includes('hilang')) {
-      return 'Temuin merupakan aplikasi pencarian barang hilang penemu barang cukup melakukan scan qr pada barang yang ditemukan untuk menemukan dan menghubungi pemilik barang tersebut.';
+      return 'Temuin (Motto: "Membantu yang hilang kembali pulang") merupakan platform pelacak dan penemu barang hilang berbasis kode QR unik dengan snapshot lokasi GPS, dokumentasi bukti foto, dan notifikasi real-time ke pemilik.';
     }
 
     if (lower.includes('lintas') || lower.includes('cross-device') || lower.includes('touchpad') || lower.includes('nearlock') || lower.includes('instant drop')) {
-      return 'Lintas adalah ekosistem produktivitas lintas perangkat yang menghubungkan smartphone Android dengan komputer Windows via Wi-Fi secara langsung. Dilengkapi Remote Touchpad, Virtual Keyboard dengan tombol modifier, Instant Drop transfer berkas, auto-lock PC saat ponsel menjauh, dan Presentation Mode remote. Baca kebih detail lewat shortcut Lintas di desktop!';
+      return 'Lintas (Motto: "Membantu berbagi berkas dengan tangkas dan tuntas") adalah ekosistem produktivitas lintas perangkat yang menghubungkan smartphone Android dengan komputer Windows via Wi-Fi secara langsung. Dilengkapi Remote Touchpad, Virtual Keyboard dengan tombol modifier, Instant Drop transfer berkas, auto-lock PC saat ponsel menjauh, dan Presentation Mode remote. Baca lebih detail lewat shortcut Lintas di desktop!';
     }
 
-    if (lower.includes('neurofly') || lower.includes('pong') || lower.includes('ai') || lower.includes('drosophila')) {
-      return 'NeuroFly mengintegrasikan neural connectome lalat buah dengan game Pong untuk melihat bagaimana jaringan saraf dapat mengendalikan respons';
+    if (lower.includes('sigap') || lower.includes('maling') || lower.includes('anti-maling') || lower.includes('alarm')) {
+      return 'SIGAP (Motto: "Membantu ponsel berdering saat disentuh maling") adalah aplikasi mobile security berbasis Flutter yang melindungi perangkat dari pencurian melalui pendeteksian sensor gerak akselerometer, pencabutan charger, alarm darurat volume 100%, dan foto penyusup otomatis.';
+    }
+
+    if (lower.includes('bingkai') || lower.includes('foto') || lower.includes('galeri')) {
+      return 'Bingkai (Motto: "Membantu yang tersimpan tetap rupawan") adalah aplikasi galeri foto lokal (Local-First) untuk merapikan ribuan foto secara cepat lewat kurasi swipe, deteksi foto kembar, dan remote kontrol via smartphone atau gamepad.';
+    }
+
+    if (lower.includes('onlyus') || lower.includes('proximity') || lower.includes('brankas') || lower.includes('vault') || lower.includes('bilateral')) {
+      return 'OnlyUs (Motto: "Membantu menyimpan rapat dan terbuka saat dekat") adalah aplikasi brankas bilateral khusus dua orang berbasis sensor proximity nirkabel. Brankas rahasia hanya dapat didekripsi dan terbuka saat kedua smartphone berada dalam jarak dekat.';
+    }
+
+    if (lower.includes('neurofly') || lower.includes('pong') || lower.includes('drosophila')) {
+      return 'NeuroFly mengintegrasikan neural connectome lalat buah dengan game Pong untuk melihat bagaimana jaringan saraf dapat mengendalikan respons real-time.';
     }
 
     if (lower.includes('proyek') || lower.includes('project') || lower.includes('portfolio') || lower.includes('karya') || lower.includes('aplikasi')) {
       const replies = [
-        'Proyek unggulanku meliputi: 1) Tatagih, 2) Temuin, 3) Lintas, dan 4) Bingkai. Semuanya bisa kamu buka via icon di Desktop atau Google Chrome di sini!',
-        'Kamu bisa melihat preview detail dan kode masing-masing proyek di File Explorer folder "Projects"'
+        'Proyek unggulanku meliputi: 1) Tatagih, 2) Temuin, 3) Lintas, 4) OnlyUs, 5) Sigap, dan 6) Bingkai. Kamu juga bisa membuka Vision Deck di Desktop untuk melihat moto dan kartu 3D lengkapnya!',
+        'Kamu bisa melihat preview detail dan kode masing-masing proyek di File Explorer folder "Projects" atau membuka Vision Deck.'
       ];
       return replies[Math.floor(Math.random() * replies.length)];
     }

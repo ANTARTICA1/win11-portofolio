@@ -356,3 +356,54 @@
     border-bottom: 1px solid #141b29;
   }
 }
+
+/* Touch On-Screen Controls for Mobile / Tablets */
+.neurofly-touch-controls {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  z-index: 15;
+  background: rgba(6, 8, 13, 0.7);
+  padding: 8px;
+  border-radius: 12px;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  backdrop-filter: blur(8px);
+}
+
+.neurofly-touch-row {
+  display: flex;
+  gap: 8px;
+}
+
+.touch-btn {
+  width: 38px;
+  height: 38px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #38bdf8;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+  transition: background-color 0.1s, transform 0.08s;
+}
+
+.touch-btn:hover {
+  background: rgba(56, 189, 248, 0.2);
+}
+
+.touch-btn:active {
+  background: rgba(56, 189, 248, 0.45);
+  color: #ffffff;
+  transform: scale(0.92);
+}
+

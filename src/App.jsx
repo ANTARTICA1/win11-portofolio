@@ -1,18 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { Desktop } from './components/Desktop/Desktop';
 import { Taskbar } from './components/Taskbar/Taskbar';
 import { Window } from './components/Windows/Window';
-import { FileExplorerApp } from './components/Apps/FileExplorerApp';
-import { NotepadApp } from './components/Apps/NotepadApp';
-import { TerminalApp } from './components/Apps/TerminalApp';
-import { BrowserApp } from './components/Apps/BrowserApp';
-import { PhotosApp } from './components/Apps/PhotosApp';
-import { RecruiterHubApp } from './components/Apps/RecruiterHubApp';
-import { SettingsApp } from './components/Apps/SettingsApp';
-import { CalculatorApp } from './components/Apps/CalculatorApp';
-import { WhatsAppApp } from './components/Apps/WhatsAppApp';
-import { ChromeDinoGame } from './components/Apps/ChromeDinoGame';
-import { NeuroFlyApp } from './components/Apps/NeuroFlyApp';
 import { ExternalLink } from 'lucide-react';
 
 import { NotificationToast } from './components/Common/NotificationToast';
@@ -20,7 +9,27 @@ import { RunDialog } from './components/Common/RunDialog';
 import { WinIcon } from './components/Common/WinIcon';
 import { DESKTOP_ITEMS, INTRO_NOTE_CONTENT, INITIAL_USER } from './data/fileSystem';
 import { isMobileDevice } from './utils/device';
-import { playWindowSound, playStartupChime, playClickSound } from './utils/sound';
+import { playWindowSound, playStartupChime, playClickSound, setMasterVolume, setSoundEnabled } from './utils/sound';
+
+// Code-split heavy application modules for lightning-fast initial page loads
+const FileExplorerApp = lazy(() => import('./components/Apps/FileExplorerApp').then(m => ({ default: m.FileExplorerApp })));
+const NotepadApp = lazy(() => import('./components/Apps/NotepadApp').then(m => ({ default: m.NotepadApp })));
+const TerminalApp = lazy(() => import('./components/Apps/TerminalApp').then(m => ({ default: m.TerminalApp })));
+const BrowserApp = lazy(() => import('./components/Apps/BrowserApp').then(m => ({ default: m.BrowserApp })));
+const PhotosApp = lazy(() => import('./components/Apps/PhotosApp').then(m => ({ default: m.PhotosApp })));
+const RecruiterHubApp = lazy(() => import('./components/Apps/RecruiterHubApp').then(m => ({ default: m.RecruiterHubApp })));
+const SettingsApp = lazy(() => import('./components/Apps/SettingsApp').then(m => ({ default: m.SettingsApp })));
+const CalculatorApp = lazy(() => import('./components/Apps/CalculatorApp').then(m => ({ default: m.CalculatorApp })));
+const WhatsAppApp = lazy(() => import('./components/Apps/WhatsAppApp').then(m => ({ default: m.WhatsAppApp })));
+const ChromeDinoGame = lazy(() => import('./components/Apps/ChromeDinoGame').then(m => ({ default: m.ChromeDinoGame })));
+const NeuroFlyApp = lazy(() => import('./components/Apps/NeuroFlyApp').then(m => ({ default: m.NeuroFlyApp })));
+
+const AppLoadingSkeleton = () => (
+  <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: '#181824', color: '#94a3b8', gap: '14px' }}>
+    <div style={{ width: '30px', height: '30px', borderRadius: '50%', border: '3px solid rgba(255,255,255,0.15)', borderTopColor: '#38bdf8', animation: 'spin 0.8s linear infinite' }} />
+    <span style={{ fontSize: '12.5px', fontWeight: 500, letterSpacing: '0.3px', color: '#cbd5e1' }}>Memuat Aplikasi...</span>
+  </div>
+);
 
 const PROJECT_TITLES = {
   theotown: 'ITB STIKOM Bali - Building Plugin for TheoTown',
@@ -29,10 +38,11 @@ const PROJECT_TITLES = {
   temuin: 'Temuin - Lost & Found Platform',
   lintas: 'Lintas - Phone-to-PC Companion Utility',
   neurofly: 'NeuroFly - 3D Pong vs Drosophila MaleCNS v1.0',
-  dompetq: 'DompetQ - Fintech E-Wallet Mobile App',
   makalah: 'Makalah Generator - AI Academic Assistant',
   sigap: 'SIGAP - Sistem Gerak Aman dari Pencurian',
-  bingkai: 'Bingkai - Galeri Foto Komputer Lokal'
+  bingkai: 'Bingkai - Galeri Foto Komputer Lokal',
+  onlyus: 'OnlyUs - Bilateral Proximity Vault',
+  motto: 'Koleksi Moto & Visi Proyek - Google Chrome'
 };
 
 const getInitialWindows = () => {
@@ -43,10 +53,10 @@ const getInitialWindows = () => {
   const screenW = typeof window !== 'undefined' ? window.innerWidth : 1280;
   const screenH = typeof window !== 'undefined' ? window.innerHeight : 800;
 
-  const posX = Math.max(178, Math.min(195, Math.floor(screenW * 0.125)));
-  const posY = Math.max(22, Math.min(36, Math.floor(screenH * 0.035)));
-  const winW = Math.max(900, screenW - posX - 18);
-  const winH = Math.max(540, screenH - posY - 60);
+  const posX = Math.max(140, Math.min(180, Math.floor(screenW * 0.1)));
+  const posY = Math.max(20, Math.min(32, Math.floor(screenH * 0.035)));
+  const winW = Math.min(940, Math.max(740, screenW - posX - 36));
+  const winH = Math.min(590, Math.max(480, screenH - posY - 68));
 
   return [
     {
@@ -72,6 +82,12 @@ export function App() {
   const [runDialogOpen, setRunDialogOpen] = useState(false);
   const [powerScreen, setPowerScreen] = useState(null);
 
+  // Dynamic system adjustments (Brightness, Night Light, Volume)
+  const [brightness, setBrightness] = useState(100);
+  const [nightLight, setNightLight] = useState(false);
+  const [volume, setVolume] = useState(80);
+  const [closeFlyoutsSignal, setCloseFlyoutsSignal] = useState(0);
+
   const [windows, setWindows] = useState(() => getInitialWindows());
   const [activeWindowId, setActiveWindowId] = useState(() => {
     const initWins = getInitialWindows();
@@ -89,9 +105,35 @@ export function App() {
     window.addEventListener('pointerdown', handleFirstUserClick);
 
     const handleKeyDown = (e) => {
+      // Escape: Close all flyouts & dialogs
+      if (e.key === 'Escape') {
+        setCloseFlyoutsSignal(prev => prev + 1);
+        setRunDialogOpen(false);
+      }
+
+      // Alt+R / Meta+R: Run Dialog
       if ((e.altKey && e.key.toLowerCase() === 'r') || (e.metaKey && e.key.toLowerCase() === 'r')) {
         e.preventDefault();
         setRunDialogOpen(prev => !prev);
+      }
+
+      // Alt+D / Meta+D: Toggle Show Desktop
+      if ((e.altKey && e.key.toLowerCase() === 'd') || (e.metaKey && e.key.toLowerCase() === 'd')) {
+        e.preventDefault();
+        toggleMinimizeAll();
+      }
+
+      // Alt+Tab: Cycle open windows
+      if (e.altKey && e.key === 'Tab') {
+        e.preventDefault();
+        setWindows(prev => {
+          if (prev.length <= 1) return prev;
+          const currentIdx = prev.findIndex(w => w.id === activeWindowId);
+          const nextIdx = (currentIdx + 1) % prev.length;
+          const nextWin = prev[nextIdx];
+          focusWindow(nextWin.id);
+          return prev;
+        });
       }
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -100,7 +142,7 @@ export function App() {
       window.removeEventListener('pointerdown', handleFirstUserClick);
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [activeWindowId]);
 
   useEffect(() => {
     document.documentElement.style.setProperty('--accent-color', accentColor);
@@ -122,9 +164,9 @@ export function App() {
       window.open(INITIAL_USER.linkedin || 'https://linkedin.com/in/krisnaartha', '_blank', 'noopener,noreferrer');
       return;
     }
-    const projectKeys = ['theotown', 'nenacare', 'tatagih', 'temuin', 'lintas', 'neurofly', 'dompetq', 'makalah', 'sigap', 'bingkai'];
+    const projectKeys = ['theotown', 'nenacare', 'tatagih', 'temuin', 'lintas', 'neurofly', 'makalah', 'sigap', 'bingkai', 'onlyus', 'motto', 'visiondeck'];
     if (projectKeys.includes(appId)) {
-      launchApp('chrome', { projectId: appId, ...(typeof customData === 'object' ? customData : {}) });
+      launchApp('chrome', { projectId: appId === 'visiondeck' ? 'motto' : appId, ...(typeof customData === 'object' ? customData : {}) });
       return;
     }
     playWindowSound('open');
@@ -270,6 +312,12 @@ export function App() {
         initialSize: { width: 980, height: 640 },
         initialPosition: { x: 75 + (windows.length % 5) * 25, y: 35 + (windows.length % 5) * 20 }
       },
+      onlyus: {
+        title: 'OnlyUs - Bilateral Proximity Vault',
+        icon: 'onlyus',
+        initialSize: { width: 940, height: 620 },
+        initialPosition: { x: 70 + (windows.length % 5) * 25, y: 35 + (windows.length % 5) * 20 }
+      },
       chrome: {
         title: customData?.projectId 
           ? `${PROJECT_TITLES[customData.projectId] || 'Project Showcase'} - Google Chrome`
@@ -332,16 +380,15 @@ export function App() {
         initialSize: { width: 920, height: 620 },
         initialPosition: { x: 70 + (windows.length % 5) * 25, y: 35 + (windows.length % 5) * 20 }
       },
-
       krisnaartha_site: {
         title: 'portofolio.krisnaartha.my.id - Personal Portfolio Website',
         icon: 'krisnaartha',
         initialSize: { 
-          width: typeof window !== 'undefined' ? Math.max(900, window.innerWidth - 200) : 1200, 
-          height: typeof window !== 'undefined' ? Math.max(540, window.innerHeight - 95) : 720 
+          width: typeof window !== 'undefined' ? Math.min(940, window.innerWidth - 160) : 940, 
+          height: typeof window !== 'undefined' ? Math.min(600, window.innerHeight - 90) : 600 
         },
         initialPosition: { 
-          x: typeof window !== 'undefined' ? Math.max(178, Math.min(195, Math.floor(window.innerWidth * 0.125))) : 180, 
+          x: typeof window !== 'undefined' ? Math.max(120, Math.min(180, Math.floor(window.innerWidth * 0.1))) : 160, 
           y: 25 
         }
       },
@@ -419,10 +466,6 @@ export function App() {
     }
     if (fileItem.name && fileItem.name.toLowerCase().includes('neurofly')) {
       launchApp('chrome', { projectId: 'neurofly' });
-      return;
-    }
-    if (fileItem.name && fileItem.name.toLowerCase().includes('dompetq')) {
-      launchApp('chrome', { projectId: 'dompetq' });
       return;
     }
     if (fileItem.name && fileItem.name.toLowerCase().includes('makalah')) {
@@ -546,79 +589,117 @@ export function App() {
       case 'explorer':
       case 'recycle_bin':
         return (
-          <FileExplorerApp
-            initialPath={win.appId === 'recycle_bin' ? 'Recycle Bin' : (win.data?.path || 'This PC')}
-            onOpenFile={openFile}
-            onOpenFolder={(folder) => {}}
-            onLaunchApp={launchApp}
-          />
+          <Suspense fallback={<AppLoadingSkeleton />}>
+            <FileExplorerApp
+              initialPath={win.appId === 'recycle_bin' ? 'Recycle Bin' : (win.data?.path || 'This PC')}
+              onOpenFile={openFile}
+              onOpenFolder={(folder) => {}}
+              onLaunchApp={launchApp}
+            />
+          </Suspense>
         );
       case 'notepad':
       case 'todo':
       case 'onenote':
         return (
-          <NotepadApp
-            initialContent={win.data?.content || DESKTOP_ITEMS.find(d => d.id === 'notepad')?.content || INTRO_NOTE_CONTENT}
-            fileName={win.data?.name || (win.appId === 'todo' ? 'To_Do_List.txt' : win.appId === 'onenote' ? 'Catatan_OneNote.txt' : 'Pengantar.txt')}
-          />
+          <Suspense fallback={<AppLoadingSkeleton />}>
+            <NotepadApp
+              initialContent={win.data?.content || DESKTOP_ITEMS.find(d => d.id === 'notepad')?.content || INTRO_NOTE_CONTENT}
+              fileName={win.data?.name || (win.appId === 'todo' ? 'To_Do_List.txt' : win.appId === 'onenote' ? 'Catatan_OneNote.txt' : 'Pengantar.txt')}
+            />
+          </Suspense>
         );
       case 'terminal':
       case 'antigravity':
-        return <TerminalApp onLaunchApp={launchApp} />;
+        return (
+          <Suspense fallback={<AppLoadingSkeleton />}>
+            <TerminalApp onLaunchApp={launchApp} />
+          </Suspense>
+        );
       case 'neurofly':
         if (win.data?.openInBrowser) {
           return (
-            <BrowserApp
-              onOpenFile={openFile}
-              initialProject="neurofly"
-              initialUrl={win.data?.url}
-              onLaunchApp={launchApp}
-            />
+            <Suspense fallback={<AppLoadingSkeleton />}>
+              <BrowserApp
+                onOpenFile={openFile}
+                initialProject="neurofly"
+                initialUrl={win.data?.url}
+                onLaunchApp={launchApp}
+              />
+            </Suspense>
           );
         }
-        return <NeuroFlyApp onLaunchApp={launchApp} />;
+        return (
+          <Suspense fallback={<AppLoadingSkeleton />}>
+            <NeuroFlyApp onLaunchApp={launchApp} />
+          </Suspense>
+        );
       case 'theotown':
       case 'nenacare':
       case 'tatagih':
       case 'temuin':
       case 'lintas':
-      case 'dompetq':
       case 'makalah':
       case 'sigap':
       case 'bingkai':
+      case 'onlyus':
+      case 'motto':
+      case 'visiondeck':
       case 'browser':
       case 'chrome':
       case 'ldplayer':
         return (
-          <BrowserApp
-            onOpenFile={openFile}
-            initialProject={win.data?.projectId || (['theotown', 'nenacare', 'tatagih', 'temuin', 'lintas', 'neurofly', 'dompetq', 'makalah', 'sigap', 'bingkai'].includes(win.appId) ? win.appId : 'theotown')}
-            initialUrl={win.data?.url}
-            onLaunchApp={launchApp}
-          />
+          <Suspense fallback={<AppLoadingSkeleton />}>
+            <BrowserApp
+              onOpenFile={openFile}
+              initialProject={win.data?.projectId || (['theotown', 'nenacare', 'tatagih', 'temuin', 'lintas', 'neurofly', 'makalah', 'sigap', 'bingkai', 'onlyus', 'motto'].includes(win.appId) ? win.appId : 'theotown')}
+              initialUrl={win.data?.url}
+              onLaunchApp={launchApp}
+            />
+          </Suspense>
         );
       case 'photos':
       case 'paint':
         return (
-          <PhotosApp
-            initialImage={win.data?.imageUrl || '/certificates/foto_krisna.jpg'}
-            initialTitle={win.data?.title || (win.appId === 'paint' ? 'Paint Studio Showcase' : 'Photos - Gallery')}
-          />
+          <Suspense fallback={<AppLoadingSkeleton />}>
+            <PhotosApp
+              initialImage={win.data?.imageUrl || '/certificates/foto_krisna.jpg'}
+              initialTitle={win.data?.title || (win.appId === 'paint' ? 'Paint Studio Showcase' : 'Photos - Gallery')}
+            />
+          </Suspense>
         );
       case 'recruiter':
       case 'ms-store':
       case 'xbox':
-        return <RecruiterHubApp onOpenFile={openFile} onOpenApp={launchApp} />;
+        return (
+          <Suspense fallback={<AppLoadingSkeleton />}>
+            <RecruiterHubApp onOpenFile={openFile} onOpenApp={launchApp} />
+          </Suspense>
+        );
       case 'whatsapp':
       case 'discord':
-        return <WhatsAppApp onLaunchApp={launchApp} />;
+        return (
+          <Suspense fallback={<AppLoadingSkeleton />}>
+            <WhatsAppApp onLaunchApp={launchApp} />
+          </Suspense>
+        );
       case 'krisnaartha_site':
         return (
           <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', backgroundColor: '#0f172a', color: '#fff' }}>
-            <div style={{ height: '44px', backgroundColor: '#1e293b', borderBottom: '1px solid #334155', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 16px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', color: '#94a3b8' }}>
-                <span style={{ color: '#f8fafc', fontWeight: 600 }}>https://portofolio.krisnaartha.my.id</span>
+            <div style={{ height: '42px', backgroundColor: '#1e293b', borderBottom: '1px solid #334155', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 14px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12.5px', color: '#94a3b8' }}>
+                <span style={{ color: '#38bdf8', fontWeight: 600 }}>https://portofolio.krisnaartha.my.id</span>
               </div>
+              <a 
+                href="https://portofolio.krisnaartha.my.id" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '11px', color: '#93c5fd', textDecoration: 'none', padding: '3px 8px', borderRadius: '4px', backgroundColor: 'rgba(56, 189, 248, 0.15)' }}
+                title="Buka situs di tab browser baru"
+              >
+                <span>Buka Tab Baru</span>
+                <ExternalLink size={12} />
+              </a>
             </div>
             <iframe 
               src="https://portofolio.krisnaartha.my.id" 
@@ -628,21 +709,31 @@ export function App() {
           </div>
         );
       case 'dino':
-        return <ChromeDinoGame />;
+        return (
+          <Suspense fallback={<AppLoadingSkeleton />}>
+            <ChromeDinoGame />
+          </Suspense>
+        );
       case 'settings':
       case 'clock':
         return (
-          <SettingsApp
-            currentWallpaper={wallpaper}
-            onSelectWallpaper={setWallpaper}
-            accentColor={accentColor}
-            onSelectAccentColor={setAccentColor}
-            isDarkTheme={isDarkTheme}
-            onToggleTheme={() => setIsDarkTheme(!isDarkTheme)}
-          />
+          <Suspense fallback={<AppLoadingSkeleton />}>
+            <SettingsApp
+              currentWallpaper={wallpaper}
+              onSelectWallpaper={setWallpaper}
+              accentColor={accentColor}
+              onSelectAccentColor={setAccentColor}
+              isDarkTheme={isDarkTheme}
+              onToggleTheme={() => setIsDarkTheme(!isDarkTheme)}
+            />
+          </Suspense>
         );
       case 'calculator':
-        return <CalculatorApp onLaunchApp={launchApp} />;
+        return (
+          <Suspense fallback={<AppLoadingSkeleton />}>
+            <CalculatorApp onLaunchApp={launchApp} />
+          </Suspense>
+        );
       default:
         return (
           <div style={{ padding: '24px', color: '#fff' }}>
@@ -653,8 +744,22 @@ export function App() {
     }
   };
 
+  const rootFilterStyle = [
+    brightness < 100 ? `brightness(${brightness}%)` : null,
+    nightLight ? 'sepia(0.24) saturate(0.92)' : null
+  ].filter(Boolean).join(' ') || undefined;
+
   return (
-    <div style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden' }}>
+    <div 
+      style={{ 
+        position: 'relative', 
+        width: '100vw', 
+        height: '100vh', 
+        overflow: 'hidden',
+        filter: rootFilterStyle,
+        transition: 'filter 0.2s ease-out'
+      }}
+    >
       <Desktop
         wallpaper={wallpaper}
         onLaunchApp={launchApp}
@@ -681,7 +786,7 @@ export function App() {
           onClose={() => closeWindow(win.id)}
           hideTitlebar={[
             'chrome', 'browser', 'theotown', 'nenacare', 'tatagih', 'temuin', 'lintas',
-            'neurofly', 'dompetq', 'makalah', 'sigap', 'bingkai', 'ldplayer',
+            'neurofly', 'makalah', 'sigap', 'bingkai', 'ldplayer',
             'explorer', 'recycle_bin', 'notepad', 'todo', 'onenote', 'terminal', 'antigravity'
           ].includes(win.appId) || Boolean(win.data?.projectId)}
         >
@@ -700,6 +805,13 @@ export function App() {
         onShutDown={shutDownOS}
         onSleep={sleepOS}
         accentColor={accentColor}
+        brightness={brightness}
+        setBrightness={setBrightness}
+        nightLight={nightLight}
+        setNightLight={setNightLight}
+        volume={volume}
+        setVolume={setVolume}
+        closeFlyoutsSignal={closeFlyoutsSignal}
       />
 
       <NotificationToast
@@ -721,6 +833,8 @@ export function App() {
           else if (cmd === 'wa' || cmd === 'whatsapp') launchApp('whatsapp');
           else if (cmd === 'web' || cmd === 'krisnaartha' || cmd === 'krisnaartha.my.id' || cmd === 'portofolio.krisnaartha.my.id' || cmd === 'porto') launchApp('krisnaartha_site');
           else if (cmd === 'dino' || cmd === 'chrome://dino') launchApp('dino');
+          else if (cmd === 'visiondeck' || cmd === 'motto' || cmd === 'deck' || cmd === 'manifesto') launchApp('chrome', { projectId: 'motto' });
+          else if (cmd === 'onlyus') launchApp('chrome', { projectId: 'onlyus' });
           else launchApp(cmd);
         }}
       />

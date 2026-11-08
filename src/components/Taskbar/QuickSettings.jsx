@@ -1,30 +1,74 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   Wifi, Bluetooth, Moon, Volume2, Sun, Battery, 
-  Plane, Sliders, Shield, Laptop 
+  Plane, Sliders 
 } from 'lucide-react';
-import { playClickSound } from '../../utils/sound';
+import { playClickSound, setMasterVolume, setSoundEnabled } from '../../utils/sound';
 
-export const QuickSettings = ({ isOpen, onClose, accentColor, onOpenSettings }) => {
+export const QuickSettings = ({ 
+  isOpen, 
+  onClose, 
+  accentColor, 
+  onOpenSettings,
+  brightness = 100,
+  setBrightness,
+  nightLight = false,
+  setNightLight,
+  volume = 80,
+  setVolume
+}) => {
   const [wifiActive, setWifiActive] = useState(true);
   const [btActive, setBtActive] = useState(true);
-  const [nightLight, setNightLight] = useState(false);
-  const [volume, setVolume] = useState(80);
-  const [brightness, setBrightness] = useState(90);
+  const flyoutRef = useRef(null);
+
+  useEffect(() => {
+    const handleOutsideClick = (e) => {
+      if (isOpen && flyoutRef.current && !flyoutRef.current.contains(e.target)) {
+        if (!e.target.closest('.tray-btn')) {
+          onClose();
+        }
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('pointerdown', handleOutsideClick);
+    }
+    return () => {
+      document.removeEventListener('pointerdown', handleOutsideClick);
+    };
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
   const toggleButtons = [
     { label: 'Wi-Fi', sub: 'Home-Fiber-5G', icon: Wifi, active: wifiActive, toggle: () => setWifiActive(!wifiActive) },
     { label: 'Bluetooth', sub: 'AirPods Connected', icon: Bluetooth, active: btActive, toggle: () => setBtActive(!btActive) },
-    { label: 'Night light', sub: nightLight ? 'On' : 'Off', icon: Moon, active: nightLight, toggle: () => setNightLight(!nightLight) },
+    { 
+      label: 'Night light', 
+      sub: nightLight ? 'On' : 'Off', 
+      icon: Moon, 
+      active: nightLight, 
+      toggle: () => setNightLight ? setNightLight(!nightLight) : null 
+    },
     { label: 'Airplane mode', sub: 'Off', icon: Plane, active: false, toggle: () => {} },
     { label: 'Battery saver', sub: 'Off', icon: Battery, active: false, toggle: () => {} },
     { label: 'Accessibility', sub: 'Ready', icon: Sliders, active: false, toggle: () => {} }
   ];
 
+  const handleVolumeChange = (newVal) => {
+    const num = Number(newVal);
+    if (setVolume) setVolume(num);
+    setMasterVolume(num / 100);
+    if (num === 0) {
+      setSoundEnabled(false);
+    } else {
+      setSoundEnabled(true);
+    }
+  };
+
   return (
     <div
+      ref={flyoutRef}
       className="anim-flyout"
       style={{
         position: 'fixed',
@@ -85,11 +129,12 @@ export const QuickSettings = ({ isOpen, onClose, accentColor, onOpenSettings }) 
           <Sun size={17} color="#9ca3af" />
           <input
             type="range"
-            min="10"
+            min="30"
             max="100"
             value={brightness}
-            onChange={(e) => setBrightness(e.target.value)}
+            onChange={(e) => setBrightness && setBrightness(Number(e.target.value))}
             style={{ flex: 1, accentColor: accentColor }}
+            title={`Brightness: ${brightness}%`}
           />
         </div>
 
@@ -100,8 +145,9 @@ export const QuickSettings = ({ isOpen, onClose, accentColor, onOpenSettings }) 
             min="0"
             max="100"
             value={volume}
-            onChange={(e) => setVolume(e.target.value)}
+            onChange={(e) => handleVolumeChange(e.target.value)}
             style={{ flex: 1, accentColor: accentColor }}
+            title={`Volume: ${volume}%`}
           />
         </div>
       </div>

@@ -11,17 +11,25 @@ export const StartMenu = ({ isOpen, onClose, onLaunchApp, onOpenFile, onRestart,
   useEffect(() => {
     const handleOutsideClick = (e) => {
       if (isOpen && menuRef.current && !menuRef.current.contains(e.target)) {
-        if (!e.target.closest('.start-btn')) {
+        if (!e.target.closest('.taskbar-icon-btn, .start-btn')) {
           onClose();
         }
       }
     };
 
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+
     if (isOpen) {
       document.addEventListener('pointerdown', handleOutsideClick);
+      document.addEventListener('keydown', handleKeyDown);
     }
     return () => {
       document.removeEventListener('pointerdown', handleOutsideClick);
+      document.removeEventListener('keydown', handleKeyDown);
     };
   }, [isOpen, onClose]);
 

@@ -2,6 +2,7 @@ export const PROJECTS_DATA = {
   theotown: {
     id: 'theotown',
     name: 'ITB STIKOM Bali TheoTown',
+    motto: 'Membantu membangun kota impian berjiwa nusantara',
     tagline: 'Custom Isometric Pixel Art Educational Building Plugin for TheoTown',
     fullTitle: 'ITB STIKOM Bali TheoTown',
     description: 'Plugin kustom TheoTown yang menghadirkan gedung kampus ITB STIKOM Bali dengan grafis pixel art isometrik 2.5D serta fungsi simulasi edukasi kota.',
@@ -90,6 +91,7 @@ export const PROJECTS_DATA = {
   nenacare: {
     id: 'nenacare',
     name: 'NenaCare',
+    motto: 'Membantu proses laporan tanpa perlu antrean',
     tagline: 'AI-Powered K3 Incident Reporting & Monitoring System',
     fullTitle: 'NenaCare',
     description: 'Sistem manajemen keselamatan kerja (K3) berbasis AI Gemini dan integrasi Telegram Bot untuk pelaporan insiden, analisis risiko otomatis, dan monitoring real-time industri F&B.',
@@ -188,6 +190,7 @@ export const PROJECTS_DATA = {
   tatagih: {
     id: 'tatagih',
     name: 'Tatagih',
+    motto: 'Membantu mengatur agar duit tak kabur',
     tagline: 'Smart Subscription Manager & AI Financial Assistant',
     fullTitle: 'Tatagih',
     description: 'Smart subscription manager berbasis web dengan asisten AI Gemini untuk memantau tagihan digital, mendeteksi pemborosan dana, dan mengelola split bill otomatis.',
@@ -365,6 +368,7 @@ export const PROJECTS_DATA = {
   lintas: {
     id: 'lintas',
     name: 'Lintas',
+    motto: 'Membantu berbagi berkas dengan tangkas dan tuntas',
     tagline: 'Cross-Device Productivity Ecosystem (Android Mobile & Windows Companion)',
     fullTitle: 'Lintas',
     description: 'Ekosistem produktivitas lintas perangkat yang menghubungkan smartphone Android dan PC Windows via Wi-Fi lokal untuk remote trackpad, transfer berkas instan, dan auto-lock PC.',
@@ -478,6 +482,7 @@ export const PROJECTS_DATA = {
   neurofly: {
     id: 'neurofly',
     name: 'NeuroFly',
+    motto: 'Membantu simulasi biologis serangga dan komputasi saraf',
     tagline: 'Drosophila Connectome (MaleCNS v1.0) × 3D Pong Simulation System',
     fullTitle: 'NeuroFly - 3D Pong vs Drosophila Biological Connectome',
     description: 'Sistem simulasi biologis & komputasi saraf 3D yang menghubungkan konektom visual lalat buah (Drosophila MaleCNS v1.0, 600 neuron, 4.297 sinapsis) dengan gameplay 3D Pong retro real-time di mana manusia dapat bertanding langsung melawan kecerdasan saraf biologis lalat.',
@@ -559,6 +564,7 @@ export const PROJECTS_DATA = {
   temuin: {
     id: 'temuin',
     name: 'Temuin',
+    motto: 'Membantu yang hilang kembali pulang',
     tagline: 'Platform Pelacak & Penemu Barang Hilang Berbasis QR Code',
     fullTitle: 'Temuin',
     description: 'Platform pelacak dan penemu barang hilang berbasis kode QR unik dengan snapshot lokasi GPS, dokumentasi bukti foto, dan notifikasi real-time ke pemilik.',
@@ -689,53 +695,11 @@ export const PROJECTS_DATA = {
 │ (Monitoring & Data Audit) │
 └───────────────────────────┘`
   },
-  dompetq: {
-    id: 'dompetq',
-    name: 'DompetQ',
-    tagline: 'Fintech E-Wallet Mobile Application',
-    fullTitle: 'DompetQ',
-    description: 'Aplikasi dompet digital modern dengan fitur transaksi QRIS instan, pembagian tagihan split-bill otomatis, dan analitik budgeting bulanan yang cerdas.',
-    category: 'Mobile Application & Fintech',
-    status: 'Portfolio Project Showcase',
-    period: '2023',
-    liveUrl: 'https://demo.dompetq.app',
-    githubUrl: 'https://github.com/agungkrisna/dompetq',
-    stack: ['Flutter', 'Riverpod', 'Node.js', 'PostgreSQL', 'Redis', 'Biometric Auth'],
-    stats: [
-      { label: 'Fitur Utama', value: 'QRIS & Split Bill' },
-      { label: 'Keamanan', value: 'Biometric & PIN Encryption' },
-      { label: 'Latency Transaksi', value: '< 200ms' },
-      { label: 'Analitik Keuangan', value: 'Monthly Budget Breakdown' }
-    ],
-    photos: [
-      {
-        id: 'dompetq-dash',
-        title: 'Dashboard Keuangan & Saldo Real-Time',
-        caption: 'Tampilan saldo utama, aksi cepat transfer, scan QRIS, top-up saldo, dan rekap mutasi transaksi harian.',
-        imageUrl: '/projects/dompetq.jpg'
-      }
-    ],
-    problem: 'Pencatatan pengeluaran harian dan pengelolaan saldo e-wallet sering terpecah-pecah di berbagai aplikasi, menyulitkan pengguna dalam mengontrol batas anggaran bulanan.',
-    solution: 'DompetQ memadukan dompet digital dengan pelacak keuangan cerdas, transaksi QRIS instan, dan fitur split-bill otomatis yang memudahkan pembagian beban tagihan bersama.',
-    keyFeatures: [
-      {
-        title: 'Transaksi QRIS Instan',
-        desc: 'Mendukung pembayaran merchant dan transfer antar pengguna dengan validasi PIN serta biometrik sidik jari.'
-      },
-      {
-        title: 'Split-Bill Otomatis',
-        desc: 'Membagi tagihan belanja bersama teman secara merata atau proporsional hanya dengan beberapa ketukan.'
-      },
-      {
-        title: 'Analitik Budgeting Bulanan',
-        desc: 'Visualisasi grafik pengeluaran berdasarkan kategori kebutuhan primer, sekunder, dan hiburan.'
-      }
-    ],
-    architecture: 'Frontend dibangun menggunakan Flutter dengan manajemen state Riverpod. Backend microservices berbasis Node.js dan PostgreSQL dengan isolasi database transaksi ACID yang aman.'
-  },
+
   makalah: {
     id: 'makalah',
     name: 'Makalah Generator',
+    motto: 'Membantu riset dan penulisan karya ilmiah',
     tagline: 'AI Academic Draft & Citation Assistant',
     fullTitle: 'Makalah Generator',
     description: 'Asisten penulisan ilmiah berbasis AI untuk menyusun kerangka riset terstruktur dan format sitasi standar akademik (APA, IEEE, Harvard) secara otomatis.',
@@ -776,6 +740,7 @@ export const PROJECTS_DATA = {
   sigap: {
     id: 'sigap',
     name: 'SIGAP',
+    motto: 'Membantu ponsel berdering saat disentuh maling',
     tagline: 'Sistem Gerak Aman dari Pencurian',
     fullTitle: 'SIGAP',
     description: 'Aplikasi keamanan smartphone anti-maling berbasis sensor gerak dan charger dengan alarm darurat kontinu, volume watchdog 100%, serta bukti foto dan GPS.',
@@ -925,7 +890,8 @@ SecurityProvider (State Management & Orchestration)
   bingkai: {
     id: 'bingkai',
     name: 'Bingkai',
-    tagline: 'Membantu yang berserakan kembali beraturan.',
+    motto: 'Membantu yang tersimpan tetap rupawan',
+    tagline: 'Membantu yang tersimpan tetap rupawan.',
     fullTitle: 'Bingkai',
     description: 'Aplikasi galeri foto lokal (Local-First) untuk merapikan ribuan foto secara cepat lewat kurasi swipe, deteksi foto kembar, dan remote kontrol via smartphone atau gamepad.',
     category: 'Desktop Utility / Local-First Photo Gallery / Python & Alpine.js',
@@ -1044,6 +1010,58 @@ SecurityProvider (State Management & Orchestration)
       { label: 'Fisika', value: 'Gravitasi & Kecepatan Adaptif' }
     ],
     photos: []
+  },
+  onlyus: {
+    id: 'onlyus',
+    name: 'OnlyUs',
+    motto: 'Membantu menyimpan rapat dan terbuka saat dekat',
+    tagline: 'Bilateral Proximity-Locked Digital Vault',
+    fullTitle: 'OnlyUs - Bilateral Proximity Vault',
+    description: 'Aplikasi brankas rahasia bilateral khusus dua orang yang terkunci rapat dan hanya dapat terbuka saat kedua smartphone berada dalam jarak dekat berbasis sensor proximity nirkabel.',
+    category: 'Mobile Application / Bilateral Cryptographic Vault / Flutter',
+    status: 'Mobile Showcase',
+    period: '2024',
+    liveUrl: 'https://github.com/ANTARTICA1/Onlyus',
+    githubUrl: 'https://github.com/ANTARTICA1/Onlyus',
+    stack: [
+      'Flutter',
+      'Dart',
+      'Proximity Sensor API',
+      'Bilateral Key Exchange',
+      'Secure Storage',
+      'Clean Architecture',
+      'Material 3 UI'
+    ],
+    stats: [
+      { label: 'Tipe Akses', value: 'Bilateral (2 Perangkat)' },
+      { label: 'Pemicu Buka', value: 'Proximity Saling Berdekatan' },
+      { label: 'Keamanan', value: 'Enkripsi Brankas Lokal' },
+      { label: 'Platform', value: 'Android & iOS' }
+    ],
+    photos: [
+      {
+        id: 'onlyus-vault',
+        title: 'Antarmuka Brankas Bilateral OnlyUs',
+        caption: 'Brankas rahasia hanya terbuka ketika perangkat pasangan terdeteksi dalam jangkauan sinyal proximity terpercaya.',
+        imageUrl: '/projects/onlyus.jpg'
+      }
+    ],
+    problem: 'Privasi dua orang seringkali rentan diakses pihak ketiga jika disimpan di cloud publik atau catatan biasa tanpa mekanisme otentikasi fisik yang mengikat kedua pihak.',
+    solution: 'OnlyUs memanfaatkan komunikasi jarak dekat (proximity verification) sehingga brankas rahasia hanya bisa didekripsi ketika kedua pemilik berada di satu tempat fisik yang sama.',
+    keyFeatures: [
+      {
+        title: 'Bilateral Proximity Lock',
+        desc: 'Brankas otomatis terkunci saat kedua ponsel terpisah dan terbuka otomatis saat berdekatan.'
+      },
+      {
+        title: 'Private Vault Storage',
+        desc: 'Penyimpanan dokumen, foto, dan catatan rahasia dengan enkripsi kunci lokal tanpa transit ke server publik.'
+      },
+      {
+        title: 'Trusted Device Pairing',
+        desc: 'Proses pairing aman satu kali menggunakan QR Code dan pertukaran token bilateral.'
+      }
+    ]
   },
   krisnaartha: {
     id: 'krisnaartha',

@@ -81,7 +81,6 @@ export const FileExplorerApp = ({ initialPath = 'This PC', onOpenFile, onOpenFol
 
     if (currentPath === 'Gallery') {
       return [
-        { name: 'dompetq_preview.jpg', type: 'file', extension: 'jpg', size: '1.2 MB' },
         { name: 'temuin_preview.jpg', type: 'file', extension: 'jpg', size: '980 KB' },
         { name: 'sertifikat_flutter.png', type: 'file', extension: 'png', size: '1.5 MB' },
         { name: 'sertifikat_react.png', type: 'file', extension: 'png', size: '1.4 MB' }
@@ -91,7 +90,6 @@ export const FileExplorerApp = ({ initialPath = 'This PC', onOpenFile, onOpenFol
     if (currentPath === 'Downloads') {
       return [
         { name: 'Agung_Krisna_Resume.pdf', type: 'file', extension: 'pdf', size: '240 KB' },
-        { name: 'dompetq_release.apk', type: 'file', extension: 'apk', size: '24.5 MB' },
         { name: 'temuin_mobile_v1.apk', type: 'file', extension: 'apk', size: '18.2 MB' }
       ];
     }
@@ -285,7 +283,6 @@ export const FileExplorerApp = ({ initialPath = 'This PC', onOpenFile, onOpenFol
       item.appId === 'temuin' ||
       item.appId === 'lintas' ||
       item.appId === 'neurofly' ||
-      item.appId === 'dompetq' ||
       item.appId === 'makalah' ||
       item.appId === 'sigap' ||
       item.appId === 'bingkai'
@@ -299,7 +296,6 @@ export const FileExplorerApp = ({ initialPath = 'This PC', onOpenFile, onOpenFol
         else if (lower.includes('temuin')) targetProj = 'temuin';
         else if (lower.includes('lintas')) targetProj = 'lintas';
         else if (lower.includes('neurofly')) targetProj = 'neurofly';
-        else if (lower.includes('dompetq')) targetProj = 'dompetq';
         else if (lower.includes('makalah')) targetProj = 'makalah';
         else if (lower.includes('sigap')) targetProj = 'sigap';
         else if (lower.includes('bingkai')) targetProj = 'bingkai';
@@ -334,9 +330,6 @@ export const FileExplorerApp = ({ initialPath = 'This PC', onOpenFile, onOpenFol
     } else if (item.name && item.name.toLowerCase().includes('neurofly')) {
       if (onLaunchApp) onLaunchApp('neurofly');
       else if (onOpenFile) onOpenFile({ ...item, appId: 'neurofly' });
-    } else if (item.name && item.name.toLowerCase().includes('dompetq')) {
-      if (onLaunchApp) onLaunchApp('chrome', { projectId: 'dompetq' });
-      else if (onOpenFile) onOpenFile({ ...item, appId: 'chrome', projectId: 'dompetq' });
     } else if (item.name && item.name.toLowerCase().includes('makalah')) {
       if (onLaunchApp) onLaunchApp('chrome', { projectId: 'makalah' });
       else if (onOpenFile) onOpenFile({ ...item, appId: 'chrome', projectId: 'makalah' });

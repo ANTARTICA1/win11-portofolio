@@ -1,0 +1,18 @@
+{
+  "name": "Agung Krisna - Windows 11 Portfolio",
+  "short_name": "KrisnaOS",
+  "description": "Portfolio interaktif berbasis Windows 11 milik Agung Krisna - Full Stack & Mobile Developer. Jelajahi proyek, CV, sertifikat, dan terminal interaktif.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#191919",
+  "theme_color": "#191919",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -78,6 +78,8 @@ Daftar Perintah yang Tersedia:
   whoami        : Informasi profil dan spesialisasi developer
   skills        : Ringkasan keahlian teknis (Tech Stack)
   projects      : Daftar proyek unggulan yang telah diselesaikan
+  visiondeck    : Membuka Vision Deck 3D Holographic Card Deck & Moto
+  motto         : Menampilkan daftar moto resmi dari setiap karya
   resume        : Ringkasan kualifikasi kerja & pengalaman
   contact       : Kontak resmi (Email, WhatsApp, LinkedIn, GitHub)
   dir / ls      : Menampilkan daftar file dalam direktori saat ini
@@ -112,45 +114,70 @@ KEAHLIAN TEKNIS (TECH STACK):
 
       case 'projects':
         output = `
-PROYEK UNGGULAN:
+PROYEK UNGGULAN & MOTO RESMI:
 --------------------------------------------------
-1. ITB STIKOM Bali - Building Plugin for TheoTown
-   - Tech  : TheoTown Plugin API, JSON (code.json), Plugin Manifest, Isometric Pixel Art (StikomBali.png), Android & PC
-   - Fitur : Representasi arsitektur kampus ITB STIKOM Bali Renon dengan ornamen Bali (atap meru tumpang & gerbang candi bentar), 5x5 tile isometric, fungsional bertipe education (kapasitas 2.500 mahasiswa, radius pengaruh 700 tile, aspect 1000-2500), ground rendering aktif (draw ground: true), plugin manifest resmi, dokumentasi bilingual ID/EN, cross-platform Android & PC.
-
-2. NenaCare (AI-Powered K3 Incident Reporting & Monitoring System)
-   - Tech  : PHP (OOP), MySQL & MySQLi, Google Gemini 2.5 Flash-Lite, Telegram Bot API, Chart.js, Dompdf
-   - Fitur : Pelaporan insiden K3 (Staf & Customer), Opsi Pelaporan 100% Anonim, AI Analyst evaluasi risiko & prioritas otomatis (Gemini 2.5 Flash-Lite), Notifikasi & Remote Action Telegram Bot (Proses/Selesai), Live Feed & Status Workflow, Admin Dashboard visualisasi Chart.js, Ekspor Dokumen Laporan Resmi PDF Dompdf.
-
-2. Tatagih (Smart Subscription Manager & AI Financial Assistant)
+1. Tatagih (Smart Subscription Manager & AI Financial Assistant)
+   - Motto : "Membantu mengatur agar duit tak kabur"
    - Tech  : PHP, Laravel 13, Blade, Tailwind CSS, Vite, MySQL, Chart.js, Google Gemini API, Telegram Bot API
-   - Fitur : Tata Asisten (Health Score & Gemini AI), Tata AI Chat (Multi-sesi & offline fallback), Pendeteksi Kebocoran Dana, Fitur Patungan (Split Bill & verifikasi bukti transfer), Telegram Bot Reminder (Queue & Scheduler), Dashboard Kalender & Chart.js, Admin Dashboard.
+   - Fitur : Tata Asisten (Health Score & Gemini AI), Pendeteksi Kebocoran Dana, Fitur Patungan (Split Bill).
 
-3. Lintas (Cross-Device Productivity Ecosystem)
+2. Lintas (Cross-Device Productivity Ecosystem)
+   - Motto : "Membantu berbagi berkas dengan tangkas dan tuntas"
    - Tech  : Flutter, Dart, C++ Windows Runner, Riverpod, GoRouter, HTTP & WebSocket (Port 8945), SHA-256
-   - Fitur : Android Mobile Controller & Windows Companion, pairing QR Code dengan token expiration & nonce, LAN Auto-Discovery, Remote Touchpad & Virtual Keyboard (Windows SendInput API), Instant Drop transfer berkas 2 arah dengan verifikasi checksum SHA-256, Universal Clipboard dengan URL detection otomatis, NearLock auto-lock PC saat ponsel menjauh, Presentation Mode slide controller & timer.
+   - Fitur : Remote Touchpad, Virtual Keyboard, Instant Drop transfer berkas, NearLock auto-lock PC.
 
-4. DompetQ (Fintech Mobile App)
-   - Tech  : Flutter, Riverpod, Node.js, PostgreSQL
-   - Fitur : E-Wallet, QRIS payment, grafik analitik keuangan, biometrik auth.
-
-2. Temuin (QR Code Lost & Found Platform)
-   - Tech  : Flutter, Dart, PHP Native, PDO, MySQL, Midtrans Snap
-   - Fitur : Identitas barang via QR code, snapshot GPS & foto bukti saat lapor temuan, notifikasi in-app pemilik, boost postingan Rp15.000.
-
-3. Makalah Generator (Academic AI Assistant)
-   - Tech  : Next.js 14, TypeScript, OpenAI API, LaTeX Engine
-   - Fitur : Pembuatan bab akademik terstruktur, manajemen sitasi otomatis APA.
-
-4. SIGAP (Sistem Gerak Aman dari Pencurian)
+3. SIGAP (Sistem Gerak Aman dari Pencurian)
+   - Motto : "Membantu ponsel berdering saat disentuh maling"
    - Tech  : Flutter, Dart, Provider, Sensors Plus, Battery Plus, Camera, GPS
-   - Fitur : Proteksi anti-angkat meja via accelerometer (threshold 2.0), charger unplug alert, volume watchdog 100%, snapshot GPS & kamera depan lokal.
+   - Fitur : Proteksi anti-angkat meja via accelerometer, charger unplug alert, volume watchdog 100%, snapshot GPS & kamera.
 
-5. Bingkai (Galeri Foto Komputer Lokal)
+4. NenaCare (AI-Powered K3 Incident Reporting & Monitoring System)
+   - Motto : "Membantu proses laporan tanpa perlu antrean"
+   - Tech  : PHP (OOP), MySQL, Google Gemini 2.5 Flash-Lite, Telegram Bot API, Chart.js, Dompdf
+   - Fitur : Pelaporan insiden K3 anonim, AI risk analysis otomatis, remote action Telegram Bot.
+
+5. OnlyUs (Bilateral Proximity-Locked Digital Vault)
+   - Motto : "Membantu menyimpan rapat dan terbuka saat dekat"
+   - Tech  : Flutter, Dart, Proximity API, Bilateral Key Exchange, Secure Storage
+   - Fitur : Brankas bilateral khusus 2 perangkat, hanya terbuka saat smartphone berada dalam jarak dekat fisik.
+
+6. Temuin (QR Code Lost & Found Platform)
+   - Motto : "Membantu yang hilang kembali pulang"
+   - Tech  : Flutter, Dart, PHP Native, PDO, MySQL, Midtrans Snap
+   - Fitur : Identitas barang via QR code, snapshot GPS & foto bukti saat lapor temuan.
+
+7. Bingkai (Galeri Foto Komputer Lokal)
+   - Motto : "Membantu yang tersimpan tetap rupawan"
    - Tech  : Python, FastAPI, SQLite, Alpine.js, Tailwind CSS, Pillow-WebP
-   - Fitur : 100% Offline (Local-First), Rebahan Mode (Gamepad & HP Wi-Fi Remote), Tinder Swipe Mode, Deteksi Foto Kembar, Album Virtual, Tong Sampah Anti-Panik.
+   - Fitur : 100% Offline (Local-First), Tinder Swipe Mode, Deteksi Foto Kembar, Remote Wi-Fi & Gamepad.
 
-Ketik 'projects' atau buka File Explorer untuk detail lengkap.
+8. ITB STIKOM Bali TheoTown (Building Plugin)
+   - Motto : "Membantu membangun kota impian berjiwa nusantara"
+   - Tech  : TheoTown Plugin API, code.json, Isometric Pixel Art 2.5D, Android & PC
+   - Fitur : Gedung kampus khas arsitektur Bali, fungsi edukasi 2.500 mahasiswa, radius 700 tile.
+
+Ketik 'visiondeck' untuk membuka kartu koleksi 3D interaktif.
+`;
+        break;
+
+      case 'visiondeck':
+      case 'motto':
+      case 'manifesto':
+      case 'deck':
+        if (onLaunchApp) onLaunchApp('visiondeck');
+        output = `
+MEMBUKA VISION DECK...
+--------------------------------------------------
+Daftar Moto Resmi Karya Agung Krisna:
+[1] Lintas   : "Membantu berbagi berkas dengan tangkas dan tuntas"
+[2] Bingkai  : "Membantu yang tersimpan tetap rupawan"
+[3] Sigap    : "Membantu ponsel berdering saat disentuh maling"
+[4] NenaCare : "Membantu proses laporan tanpa perlu antrean"
+[5] OnlyUs   : "Membantu menyimpan rapat dan terbuka saat dekat"
+[6] Temuin   : "Membantu yang hilang kembali pulang"
+[7] Tatagih  : "Membantu mengatur agar duit tak kabur"
+
+Jendela Vision Deck 3D Holographic Card Deck sedang diluncurkan...
 `;
         break;
 

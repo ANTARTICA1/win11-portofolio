@@ -1,11 +1,25 @@
 let audioCtx = null;
+let masterGainNode = null;
 let soundEnabled = true;
+let masterVolume = 0.8;
 
 export const setSoundEnabled = (enabled) => {
   soundEnabled = enabled;
+  if (masterGainNode && audioCtx) {
+    masterGainNode.gain.setValueAtTime(soundEnabled ? masterVolume : 0, audioCtx.currentTime);
+  }
 };
 
 export const isSoundEnabled = () => soundEnabled;
+
+export const setMasterVolume = (val) => {
+  masterVolume = Math.max(0, Math.min(1, val));
+  if (masterGainNode && audioCtx) {
+    masterGainNode.gain.setValueAtTime(soundEnabled ? masterVolume : 0, audioCtx.currentTime);
+  }
+};
+
+export const getMasterVolume = () => masterVolume;
 
 const getAudioContext = () => {
   if (!soundEnabled) return null;
@@ -15,10 +29,19 @@ const getAudioContext = () => {
       audioCtx = new AudioContextClass();
     }
   }
+  if (audioCtx && !masterGainNode) {
+    masterGainNode = audioCtx.createGain();
+    masterGainNode.gain.setValueAtTime(soundEnabled ? masterVolume : 0, audioCtx.currentTime);
+    masterGainNode.connect(audioCtx.destination);
+  }
   if (audioCtx && audioCtx.state === 'suspended') {
     audioCtx.resume();
   }
   return audioCtx;
+};
+
+const getDestination = () => {
+  return masterGainNode || audioCtx?.destination;
 };
 
 export const playClickSound = () => {
@@ -36,7 +59,7 @@ export const playClickSound = () => {
     gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.04);
     
     osc.connect(gain);
-    gain.connect(ctx.destination);
+    gain.connect(getDestination());
     
     osc.start();
     osc.stop(ctx.currentTime + 0.04);
@@ -65,7 +88,7 @@ export const playWindowSound = (type = 'open') => {
     gain.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
     
     osc.connect(gain);
-    gain.connect(ctx.destination);
+    gain.connect(getDestination());
     
     osc.start(now);
     osc.stop(now + 0.09);
@@ -88,7 +111,7 @@ export const playNotificationSound = () => {
       gain.gain.setValueAtTime(0.04, now + time);
       gain.gain.exponentialRampToValueAtTime(0.001, now + time + dur);
       osc.connect(gain);
-      gain.connect(ctx.destination);
+      gain.connect(getDestination());
       osc.start(now + time);
       osc.stop(now + time + dur);
     });
@@ -115,7 +138,7 @@ export const playStartupChime = () => {
       gain.gain.exponentialRampToValueAtTime(0.0001, now + idx * 0.06 + 1.2);
       
       osc.connect(gain);
-      gain.connect(ctx.destination);
+      gain.connect(getDestination());
       
       osc.start(now + idx * 0.06);
       osc.stop(now + idx * 0.06 + 1.25);
@@ -139,7 +162,7 @@ export const playWhatsAppSentSound = () => {
     gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
     
     osc.connect(gain);
-    gain.connect(ctx.destination);
+    gain.connect(getDestination());
     
     osc.start(now);
     osc.stop(now + 0.05);
@@ -162,7 +185,7 @@ export const playWhatsAppReceivedSound = () => {
       gain.gain.setValueAtTime(0.045, now + time);
       gain.gain.exponentialRampToValueAtTime(0.001, now + time + dur);
       osc.connect(gain);
-      gain.connect(ctx.destination);
+      gain.connect(getDestination());
       osc.start(now + time);
       osc.stop(now + time + dur);
     });

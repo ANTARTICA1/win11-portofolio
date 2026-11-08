@@ -1,9 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ChevronUp, ChevronDown, Bell, Calendar as CalIcon } from 'lucide-react';
 import { playClickSound } from '../../utils/sound';
 
 export const CalendarFlyout = ({ isOpen, onClose, accentColor }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
+  const flyoutRef = useRef(null);
+
+  useEffect(() => {
+    const handleOutsideClick = (e) => {
+      if (isOpen && flyoutRef.current && !flyoutRef.current.contains(e.target)) {
+        if (!e.target.closest('.tray-clock')) {
+          onClose();
+        }
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('pointerdown', handleOutsideClick);
+    }
+    return () => {
+      document.removeEventListener('pointerdown', handleOutsideClick);
+    };
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
@@ -35,6 +53,7 @@ export const CalendarFlyout = ({ isOpen, onClose, accentColor }) => {
 
   return (
     <div
+      ref={flyoutRef}
       className="anim-flyout"
       style={{
         position: 'fixed',

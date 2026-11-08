@@ -192,3 +192,4 @@ export const ClippyAssistant = ({ onClose, onOpenRecruiter, onOpenWhatsApp }) =>
     </div>
   );
 };
+

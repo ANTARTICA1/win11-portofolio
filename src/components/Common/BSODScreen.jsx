@@ -187,3 +187,4 @@ export const BSODScreen = ({ onClose, onOpenRecruiter }) => {
     </div>
   );
 };
+

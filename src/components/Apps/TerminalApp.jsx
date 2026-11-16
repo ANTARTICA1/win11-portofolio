@@ -472,7 +472,7 @@ Ketik 'secret' untuk daftar misteri tersembunyi.
       </div>
 
       <div
-        onClick={() => inputRef.current?.focus()}
+        onClick={() => { if (!isHackMode) inputRef.current?.focus(); }}
         style={{
           flex: 1,
           width: '100%',
@@ -496,35 +496,42 @@ Ketik 'secret' untuk daftar misteri tersembunyi.
         </div>
       ))}
 
-      {isHackMode && (
-        <TerminalHack onExit={() => setIsHackMode(false)} />
+      {isHackMode ? (
+        <TerminalHack onExit={() => {
+          setIsHackMode(false);
+          setHistory(prev => [
+            ...prev,
+            { type: 'system', text: '\n[+] Sesi simulasi Terminal Hack ditutup. Kembali ke Command Prompt.\n' }
+          ]);
+          setTimeout(() => inputRef.current?.focus(), 100);
+        }} />
+      ) : (
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <span style={{ color: '#cccccc', fontWeight: 'normal', whiteSpace: 'nowrap' }}>
+            C:\Users\KRISNA&gt;
+          </span>
+          <input
+            ref={inputRef}
+            type="text"
+            className="selectable"
+            value={inputVal}
+            onChange={(e) => setInputVal(e.target.value)}
+            onKeyDown={handleKeyDown}
+            autoFocus
+            spellCheck={false}
+            style={{
+              flex: 1,
+              background: 'transparent',
+              border: 'none',
+              outline: 'none',
+              color: '#ffffff',
+              fontFamily: 'inherit',
+              fontSize: 'inherit',
+              caretColor: '#ffffff'
+            }}
+          />
+        </div>
       )}
-
-      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-        <span style={{ color: '#cccccc', fontWeight: 'normal', whiteSpace: 'nowrap' }}>
-          C:\Users\KRISNA&gt;
-        </span>
-        <input
-          ref={inputRef}
-          type="text"
-          className="selectable"
-          value={inputVal}
-          onChange={(e) => setInputVal(e.target.value)}
-          onKeyDown={handleKeyDown}
-          autoFocus
-          spellCheck={false}
-          style={{
-            flex: 1,
-            background: 'transparent',
-            border: 'none',
-            outline: 'none',
-            color: '#ffffff',
-            fontFamily: 'inherit',
-            fontSize: 'inherit',
-            caretColor: '#ffffff'
-          }}
-        />
-      </div>
 
       <div ref={terminalEndRef} />
       </div>

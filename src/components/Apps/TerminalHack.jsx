@@ -25,36 +25,42 @@ export const TerminalHack = ({ onExit }) => {
   const [candidates, setCandidates] = useState([]);
   const [targetWord, setTargetWord] = useState('');
   const [dudsRemoved, setDudsRemoved] = useState(new Set());
+  const [usedBrackets, setUsedBrackets] = useState(new Set());
   const [attemptsLeft, setAttemptsLeft] = useState(4);
   const [gameStatus, setGameStatus] = useState('playing'); // 'playing' | 'won' | 'lost'
-  const [logs, setLogs] = useState([
-    'ROBCO INDUSTRIES (TM) TERMLINK PROTOCOL',
-    'KRISNA CYBERSECURITY VAULT - OVERRIDE SYSTEM v4.09',
-    'ENTER PASSWORD TO OVERRIDE RESTRICTED ACCESS'
-  ]);
+  const [showGuide, setShowGuide] = useState(true);
+  const [logs, setLogs] = useState([]);
   const [hoveredWord, setHoveredWord] = useState(null);
+  const [hoveredBracket, setHoveredBracket] = useState(null);
   const [inputGuess, setInputGuess] = useState('');
+  
   const logEndRef = useRef(null);
+  const vaultInputRef = useRef(null);
 
   // Initialize a new hacking puzzle
   const initGame = () => {
-    // Pick 12 random words from the pool
+    // Pick 10 random words from the pool
     const shuffled = [...WORD_POOL].sort(() => 0.5 - Math.random());
-    const selected = shuffled.slice(0, 12);
+    const selected = shuffled.slice(0, 10);
     const target = selected[Math.floor(Math.random() * selected.length)];
     
     setCandidates(selected);
     setTargetWord(target);
     setDudsRemoved(new Set());
+    setUsedBrackets(new Set());
     setAttemptsLeft(4);
     setGameStatus('playing');
     setLogs([
       'ROBCO INDUSTRIES (TM) TERMLINK PROTOCOL',
       'KRISNA CYBERSECURITY VAULT - OVERRIDE SYSTEM v4.09',
       'ENTER PASSWORD TO OVERRIDE RESTRICTED ACCESS',
+      '--------------------------------------------------',
+      '[!] MISI: Temukan 1 kata sandi rahasia di memory dump.',
+      '[!] Klik kata hijau untuk menebak, atau gunakan celah kurung.',
       'ATTEMPTS REMAINING: [ ■ ■ ■ ■ ]'
     ]);
     setInputGuess('');
+    setTimeout(() => vaultInputRef.current?.focus(), 50);
   };
 
   useEffect(() => {
@@ -65,69 +71,68 @@ export const TerminalHack = ({ onExit }) => {
     logEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [logs]);
 
-  // Generate 16 rows of memory dump (2 columns of 8 rows)
-  const memoryRows = useMemo(() => {
-    if (!candidates.length) return [];
-    
-    const rows = [];
-    let wordIndex = 0;
+  // Generate 8 left rows and 8 right rows.
+  // 10 candidate words are placed (5 on the left, 5 on the right).
+  // Remaining rows get bracket bonus pairs.
+  const { leftRows, rightRows } = useMemo(() => {
+    if (!candidates.length) return { leftRows: [], rightRows: [] };
+
     const baseAddr = 0xf240;
+    const brackets = [['(', ')'], ['[', ']'], ['{', '}'], ['<', '>']];
 
-    for (let i = 0; i < 16; i++) {
-      const addrLeft = '0x' + (baseAddr + i * 12).toString(16).toUpperCase();
-      const addrRight = '0x' + (baseAddr + (i + 16) * 12).toString(16).toUpperCase();
+    // Left column gets words at indices 0..4 (in rows 0, 2, 4, 6, 7)
+    // Right column gets words at indices 5..9 (in rows 0, 2, 4, 5, 7)
+    const leftWordRowMap = { 0: candidates[0], 2: candidates[1], 4: candidates[2], 6: candidates[3], 7: candidates[4] };
+    const rightWordRowMap = { 0: candidates[5], 2: candidates[6], 4: candidates[7], 5: candidates[8], 7: candidates[9] };
 
-      const buildChunk = (wIdx) => {
-        let chunk = [];
-        const hasWord = wIdx < candidates.length && (i % 2 === 0 || i % 3 === 0);
-        const word = hasWord ? candidates[wIdx] : null;
-        
-        let chars = '';
-        while (chars.length < 12) {
-          chars += GARBAGE_CHARS[Math.floor(Math.random() * GARBAGE_CHARS.length)];
-        }
+    const buildRow = (rowIdx, isRight, wordMap) => {
+      const addrNum = baseAddr + (isRight ? 16 + rowIdx : rowIdx) * 12;
+      const addr = '0x' + addrNum.toString(16).toUpperCase();
+      const word = wordMap[rowIdx];
 
-        if (word) {
-          const insertPos = Math.floor(Math.random() * (12 - word.length));
-          const pre = chars.slice(0, insertPos);
-          const post = chars.slice(insertPos + word.length);
-          chunk = [
-            { type: 'garbage', text: pre },
-            { type: 'word', text: word },
-            { type: 'garbage', text: post }
-          ];
-        } else {
-          // Check if we can insert a bonus bracket pair: (...) or [...] or {...} or <...>
-          const brackets = [['(', ')'], ['[', ']'], ['{', '}'], ['<', '>']];
-          const b = brackets[Math.floor(Math.random() * brackets.length)];
-          const bContent = GARBAGE_CHARS[Math.floor(Math.random() * GARBAGE_CHARS.length)] + 
-                           GARBAGE_CHARS[Math.floor(Math.random() * GARBAGE_CHARS.length)];
-          const bracketStr = b[0] + bContent + b[1];
-          const pre = chars.slice(0, 3);
-          const post = chars.slice(3 + bracketStr.length);
-          chunk = [
-            { type: 'garbage', text: pre },
-            { type: 'bracket', text: bracketStr },
-            { type: 'garbage', text: post }
-          ];
-        }
-        return { chunk, nextWIdx: hasWord ? wIdx + 1 : wIdx };
-      };
+      let chars = '';
+      while (chars.length < 12) {
+        chars += GARBAGE_CHARS[Math.floor(Math.random() * GARBAGE_CHARS.length)];
+      }
 
-      const left = buildChunk(wordIndex);
-      wordIndex = left.nextWIdx;
-      const right = buildChunk(wordIndex);
-      wordIndex = right.nextWIdx;
+      let chunks = [];
+      if (word) {
+        // Place word with garbage prefix and suffix
+        const insertPos = Math.floor(Math.random() * (12 - word.length));
+        const pre = chars.slice(0, insertPos);
+        const post = chars.slice(insertPos + word.length);
+        chunks = [
+          { type: 'garbage', text: pre },
+          { type: 'word', text: word },
+          { type: 'garbage', text: post }
+        ];
+      } else {
+        // Place a bonus bracket pair
+        const b = brackets[Math.floor(Math.random() * brackets.length)];
+        const bContent = GARBAGE_CHARS[Math.floor(Math.random() * GARBAGE_CHARS.length)] + 
+                         GARBAGE_CHARS[Math.floor(Math.random() * GARBAGE_CHARS.length)];
+        const bracketStr = b[0] + bContent + b[1];
+        const bracketId = `bracket-${isRight ? 'r' : 'l'}-${rowIdx}`;
+        const pre = chars.slice(0, 3);
+        const post = chars.slice(3 + bracketStr.length);
+        chunks = [
+          { type: 'garbage', text: pre },
+          { type: 'bracket', text: bracketStr, id: bracketId },
+          { type: 'garbage', text: post }
+        ];
+      }
 
-      rows.push({
-        addrLeft,
-        leftChunks: left.chunk,
-        addrRight,
-        rightChunks: right.chunk
-      });
+      return { addr, chunks };
+    };
+
+    const lRows = [];
+    const rRows = [];
+    for (let i = 0; i < 8; i++) {
+      lRows.push(buildRow(i, false, leftWordRowMap));
+      rRows.push(buildRow(i, true, rightWordRowMap));
     }
 
-    return rows;
+    return { leftRows: lRows, rightRows: rRows };
   }, [candidates]);
 
   const handleWordSelect = (word) => {
@@ -141,12 +146,12 @@ export const TerminalHack = ({ onExit }) => {
       setGameStatus('won');
       setLogs(prev => [
         ...prev,
-        `> ${word}`,
-        '> ACCESS GRANTED.',
-        '> CLEARANCE LEVEL: ROOT_SECURITY_OPERATOR',
-        '> [SECRET FLAG UNLOCKED]: KRISNA{CYBER_VAULT_OVERRIDE_GRANTED_2026}',
-        '> Security audit logs verified. All system parameters nominal.',
-        '> Type "hack" to test another cipher, or "exit" to leave terminal hack.'
+        `> [TEBAKAN]: ${word}`,
+        '> HASIL: AKSES DITERIMA! PASSWORD BENAR!',
+        '> OTORITAS: ROOT SECURITY ADMINISTRATOR',
+        '> [SECRET FLAG]: KRISNA{CYBER_VAULT_OVERRIDE_GRANTED_2026}',
+        '> Seluruh sistem keamanan berhasil dibuka.',
+        '> Ketik "hack" untuk main lagi atau klik "Exit" untuk keluar.'
       ]);
       return;
     }
@@ -162,54 +167,56 @@ export const TerminalHack = ({ onExit }) => {
       setGameStatus('lost');
       setLogs(prev => [
         ...prev,
-        `> ${word}`,
-        '> ENTRY DENIED.',
-        `> LIKENESS = ${likeness}/${targetWord.length}`,
-        '> TERMINAL LOCKED OUT.',
-        '> INTRUSION PREVENTION SYSTEM ACTIVATED.',
-        `> Correct password was: ${targetWord}`,
-        '> Type "hack" to reboot security terminal, or "exit" to leave.'
+        `> [TEBAKAN]: ${word}`,
+        '> HASIL: ENTRY DENIED (Password Salah)',
+        `> LIKENESS = ${likeness}/${targetWord.length} (huruf yang cocok di posisi sama)`,
+        '> TERMINAL LOCKED OUT! KESEMPATAN HABIS!',
+        '> PROTOKOL PENCEGAHAN PENYUSUP DIAKTIFKAN.',
+        `> Password yang benar adalah: ${targetWord}`,
+        '> Klik tombol [Reset] di atas untuk mencoba cipher baru.'
       ]);
     } else {
       setLogs(prev => [
         ...prev,
-        `> ${word}`,
-        '> ENTRY DENIED.',
-        `> LIKENESS = ${likeness}/${targetWord.length} (huruf cocok pada posisi sama)`,
-        `> ATTEMPTS REMAINING: [ ${attemptsBar.trim()} ]`
+        `> [TEBAKAN]: ${word}`,
+        '> HASIL: ENTRY DENIED (Password Salah)',
+        `> LIKENESS = ${likeness}/${targetWord.length} (${likeness} huruf posisinya persis cocok)`,
+        `> SISA KESEMPATAN: [ ${attemptsBar.trim()} ]`
       ]);
     }
   };
 
-  const handleBracketClick = (bracketText) => {
+  const handleBracketClick = (bracketItem) => {
     if (gameStatus !== 'playing') return;
-    playHackerKeySound();
+    if (usedBrackets.has(bracketItem.id)) return;
 
-    // 50% chance dud removed, 50% chance reset attempts
+    playHackerKeySound();
+    setUsedBrackets(prev => new Set([...prev, bracketItem.id]));
+
+    // 50% chance reset attempts to 4, 50% chance remove a dud word
     if (Math.random() > 0.4 && attemptsLeft < 4) {
       setAttemptsLeft(4);
       setLogs(prev => [
         ...prev,
-        `> ${bracketText}`,
-        '> ALLOWANCE REPLENISHED.',
+        `> [CELAH MEMORI]: ${bracketItem.text}`,
+        '> ALLOWANCE REPLENISHED (Kesempatan Mencoba Dipulihkan Penuh)!',
         '> ATTEMPTS REMAINING: [ ■ ■ ■ ■ ]'
       ]);
     } else {
-      // Find a wrong candidate that hasn't been removed yet
       const availableDuds = candidates.filter(w => w !== targetWord && !dudsRemoved.has(w));
       if (availableDuds.length > 0) {
         const removed = availableDuds[Math.floor(Math.random() * availableDuds.length)];
         setDudsRemoved(prev => new Set([...prev, removed]));
         setLogs(prev => [
           ...prev,
-          `> ${bracketText}`,
-          `> DUD REMOVED: "${removed}" dinonaktifkan.`
+          `> [CELAH MEMORI]: ${bracketItem.text}`,
+          `> DUD REMOVED: Kata palsu "${removed}" dinonaktifkan.`
         ]);
       } else {
         setLogs(prev => [
           ...prev,
-          `> ${bracketText}`,
-          '> BUFFER CLEARED.'
+          `> [CELAH MEMORI]: ${bracketItem.text}`,
+          '> BUFFER CLEARED (Tidak ada dud tersisa).'
         ]);
       }
     }
@@ -226,8 +233,13 @@ export const TerminalHack = ({ onExit }) => {
       return;
     }
 
-    if (clean === 'HACK' || clean === 'RESTART') {
+    if (clean === 'HACK' || clean === 'RESTART' || clean === 'RESET') {
       initGame();
+      return;
+    }
+
+    if (clean === 'HELP' || clean === 'PANDUAN') {
+      setShowGuide(prev => !prev);
       return;
     }
 
@@ -237,20 +249,72 @@ export const TerminalHack = ({ onExit }) => {
       setLogs(prev => [
         ...prev,
         `> ${clean}`,
-        '> ERROR: Input tidak ditemukan dalam memory dump.'
+        '> ERROR: Kata tersebut tidak ada dalam memory dump.'
       ]);
     }
   };
 
+  const renderChunk = (c, cIdx) => {
+    if (c.type === 'word') {
+      const isDud = dudsRemoved.has(c.text);
+      const isHovered = hoveredWord === c.text;
+      return (
+        <span
+          key={cIdx}
+          onMouseEnter={() => setHoveredWord(c.text)}
+          onMouseLeave={() => setHoveredWord(null)}
+          onClick={() => handleWordSelect(c.text)}
+          style={{
+            cursor: isDud ? 'default' : 'pointer',
+            color: isDud ? '#166534' : isHovered ? '#05130b' : '#4ade80',
+            backgroundColor: isHovered && !isDud ? '#22c55e' : 'transparent',
+            textDecoration: isDud ? 'line-through' : 'none',
+            fontWeight: 700,
+            padding: '0 1px'
+          }}
+          title={isDud ? `"${c.text}" telah dieliminasi (bukan password)` : `Klik untuk menebak "${c.text}"`}
+        >
+          {isDud ? '......' : c.text}
+        </span>
+      );
+    }
+
+    if (c.type === 'bracket') {
+      const isUsed = usedBrackets.has(c.id);
+      return (
+        <span
+          key={cIdx}
+          onMouseEnter={() => !isUsed && setHoveredBracket(c.text)}
+          onMouseLeave={() => setHoveredBracket(null)}
+          onClick={() => handleBracketClick(c)}
+          style={{
+            cursor: isUsed ? 'default' : 'pointer',
+            color: isUsed ? '#166534' : '#38bdf8',
+            backgroundColor: isUsed ? 'transparent' : 'rgba(56, 189, 248, 0.12)',
+            textDecoration: isUsed ? 'line-through' : 'none',
+            padding: '0 2px',
+            borderRadius: '2px'
+          }}
+          title={isUsed ? 'Celah memori telah digunakan' : 'Celah memori: Klik untuk bonus eliminasi dud atau reset kesempatan!'}
+        >
+          {isUsed ? '....' : c.text}
+        </span>
+      );
+    }
+
+    return <span key={cIdx} style={{ opacity: 0.65 }}>{c.text}</span>;
+  };
+
   return (
     <div
+      onClick={() => vaultInputRef.current?.focus()}
       style={{
         backgroundColor: '#05130b',
         color: '#22c55e',
         fontFamily: '"Cascadia Code", Consolas, "Lucida Console", monospace',
         fontSize: 'clamp(11px, 2vw, 13px)',
         lineHeight: 1.45,
-        padding: '12px',
+        padding: '14px',
         borderRadius: '6px',
         border: '1px solid #15803d',
         boxShadow: 'inset 0 0 24px rgba(34, 197, 94, 0.12)',
@@ -259,40 +323,69 @@ export const TerminalHack = ({ onExit }) => {
         overflowX: 'auto'
       }}
     >
-      {/* Header Bar */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #166534', paddingBottom: '8px', marginBottom: '12px' }}>
+      {/* Top Header Bar */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #166534', paddingBottom: '10px', marginBottom: '12px', flexWrap: 'wrap', gap: '8px' }}>
         <div>
-          <span style={{ fontWeight: 700, letterSpacing: '0.5px' }}>ROBCO INDUSTRIES (TM) TERMLINK PROTOCOL</span>
+          <div style={{ fontWeight: 700, letterSpacing: '0.5px' }}>ROBCO INDUSTRIES (TM) TERMLINK PROTOCOL</div>
           <div style={{ fontSize: '11px', color: '#86efac', marginTop: '2px' }}>
-            KRISNA SECURITY VAULT - OVERRIDE SYSTEM v4.09
+            KRISNA CYBERSECURITY VAULT - OVERRIDE SYSTEM v4.09
           </div>
         </div>
-        <div style={{ display: 'flex', gap: '8px' }}>
+
+        <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
           <button
             type="button"
-            onClick={initGame}
+            onClick={(e) => {
+              e.stopPropagation();
+              playClickSound();
+              setShowGuide(prev => !prev);
+            }}
+            style={{
+              backgroundColor: showGuide ? 'rgba(56, 189, 248, 0.2)' : 'rgba(255, 255, 255, 0.08)',
+              border: '1px solid #38bdf8',
+              color: '#38bdf8',
+              padding: '4px 10px',
+              fontSize: '11px',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              fontWeight: 600
+            }}
+          >
+            {showGuide ? '[ Sembunyikan Panduan ]' : '[ Buka Panduan Cara Main ]'}
+          </button>
+
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              initGame();
+            }}
             style={{
               backgroundColor: 'rgba(34, 197, 94, 0.15)',
               border: '1px solid #22c55e',
               color: '#4ade80',
-              padding: '3px 8px',
+              padding: '4px 10px',
               fontSize: '11px',
-              borderRadius: '3px',
+              borderRadius: '4px',
               cursor: 'pointer'
             }}
           >
             Reset
           </button>
+
           <button
             type="button"
-            onClick={onExit}
+            onClick={(e) => {
+              e.stopPropagation();
+              onExit();
+            }}
             style={{
               backgroundColor: 'rgba(239, 68, 68, 0.15)',
               border: '1px solid #ef4444',
               color: '#f87171',
-              padding: '3px 8px',
+              padding: '4px 10px',
               fontSize: '11px',
-              borderRadius: '3px',
+              borderRadius: '4px',
               cursor: 'pointer'
             }}
           >
@@ -301,116 +394,112 @@ export const TerminalHack = ({ onExit }) => {
         </div>
       </div>
 
-      {/* Attempts Remaining Status */}
-      <div style={{ marginBottom: '12px', fontSize: '12.5px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-        <span>ATTEMPTS REMAINING:</span>
-        <span style={{ color: attemptsLeft <= 1 ? '#f87171' : '#4ade80', fontWeight: 700, letterSpacing: '2px' }}>
-          {'■ '.repeat(Math.max(0, attemptsLeft)) + '□ '.repeat(Math.max(0, 4 - attemptsLeft))}
+      {/* Guide Box (Penjelasan Cara Bermain Langsung di Antarmuka Game) */}
+      {showGuide && (
+        <div
+          style={{
+            backgroundColor: 'rgba(0, 20, 10, 0.75)',
+            border: '1px solid #22c55e',
+            borderRadius: '5px',
+            padding: '10px 14px',
+            marginBottom: '14px',
+            fontSize: '12px',
+            lineHeight: 1.5,
+            color: '#dcfce7'
+          }}
+        >
+          <div style={{ fontWeight: 700, color: '#4ade80', marginBottom: '6px', fontSize: '12.5px', borderBottom: '1px solid rgba(34, 197, 94, 0.3)', paddingBottom: '4px' }}>
+            PANDUAN LENGKAP CARA BERMAIN (ROBCO HACKING PROTOCOL):
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '8px 16px' }}>
+            <div>
+              <strong style={{ color: '#86efac' }}>1. Tujuan Utama:</strong>
+              <div>Tebak 1 KATA SANDI RAHASIA yang benar dari kumpulan kata hijau berhuruf kapital (contoh: ACCESS, KERNEL, SYSTEM, dll).</div>
+            </div>
+            <div>
+              <strong style={{ color: '#86efac' }}>2. Cara Memilih Kata:</strong>
+              <div>Klik langsung kata hijau yang dicurigai pada memori dump, ATAU ketik kata tersebut pada kolom VAULT:\&gt; lalu Enter.</div>
+            </div>
+            <div>
+              <strong style={{ color: '#86efac' }}>3. Petunjuk Likeness (Kunci Menang):</strong>
+              <div>Jika tebakan salah, sistem memberi nilai LIKENESS. Contoh: Likeness = 2/6 artinya ada 2 huruf yang cocok sama persis pada urutan posisi yang sama.</div>
+            </div>
+            <div>
+              <strong style={{ color: '#86efac' }}>4. Celah Memori Bonus (Kurung):</strong>
+              <div>Klik pasangan kurung biru muda seperti (...), [...], {'{...}'}, atau &lt;...&gt; untuk membuang kata salah (Dud Removed) atau memulihkan 4 kesempatan mencoba!</div>
+            </div>
+          </div>
+          <div style={{ marginTop: '6px', fontSize: '11px', color: '#86efac', opacity: 0.9 }}>
+            Kesempatan Mencoba: Anda memiliki 4 kesempatan (■ ■ ■ ■) sebelum terminal terkunci.
+          </div>
+        </div>
+      )}
+
+      {/* Status Bar / Attempts Remaining */}
+      <div style={{ marginBottom: '10px', fontSize: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '6px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <span>ATTEMPTS REMAINING:</span>
+          <span style={{ color: attemptsLeft <= 1 ? '#f87171' : '#4ade80', fontWeight: 700, letterSpacing: '2px', fontSize: '13px' }}>
+            {'■ '.repeat(Math.max(0, attemptsLeft)) + '□ '.repeat(Math.max(0, 4 - attemptsLeft))}
+          </span>
+        </div>
+
+        <div style={{ fontSize: '11px', color: '#86efac' }}>
+          Target: Kata 6 Huruf | Total Kata Tersedia: {candidates.length} Kata
+        </div>
+      </div>
+
+      {/* Interactive Cursor Hover Indicator */}
+      <div
+        style={{
+          padding: '6px 10px',
+          backgroundColor: 'rgba(0, 0, 0, 0.45)',
+          border: '1px solid #166534',
+          borderRadius: '4px',
+          marginBottom: '12px',
+          fontSize: '11.5px',
+          color: hoveredWord ? '#4ade80' : hoveredBracket ? '#38bdf8' : '#86efac',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: '4px'
+        }}
+      >
+        <span>
+          {hoveredWord ? (
+            <>KURSOR MEMORI: &gt; <strong style={{ textDecoration: 'underline' }}>{hoveredWord}</strong> (Klik untuk menebak kata ini)</>
+          ) : hoveredBracket ? (
+            <>CELAH MEMORI: &gt; <strong>{hoveredBracket}</strong> (Klik untuk bonus eliminasi dud atau reset kesempatan)</>
+          ) : (
+            <>[i] Arahkan kursor dan klik kata hijau di memory dump untuk menebak kata sandi rahasia.</>
+          )}
+        </span>
+        <span style={{ fontSize: '10.5px', opacity: 0.85 }}>
+          Status: {gameStatus === 'playing' ? 'Aktif' : gameStatus === 'won' ? 'Akses Diterima' : 'Terkunci'}
         </span>
       </div>
 
       {/* Main Grid: Left/Right Memory Dumps & Log Sidepanel */}
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
-        {/* Memory Hex Grid */}
-        <div style={{ flex: '1 1 280px', minWidth: '240px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '8px' }}>
-          {/* Column Left */}
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px' }}>
+        {/* Memory Hex Grid (2 Columns: Left & Right) */}
+        <div style={{ flex: '1 1 300px', minWidth: '260px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '8px' }}>
+          {/* Column Left (8 Rows) */}
           <div>
-            {memoryRows.slice(0, 8).map((row, idx) => (
-              <div key={idx} style={{ display: 'flex', gap: '8px', marginBottom: '2px', fontFamily: 'monospace' }}>
-                <span style={{ color: '#15803d', opacity: 0.85 }}>{row.addrLeft}</span>
-                <span>
-                  {row.leftChunks.map((c, cIdx) => {
-                    if (c.type === 'word') {
-                      const isDud = dudsRemoved.has(c.text);
-                      const isHovered = hoveredWord === c.text;
-                      return (
-                        <span
-                          key={cIdx}
-                          onMouseEnter={() => setHoveredWord(c.text)}
-                          onMouseLeave={() => setHoveredWord(null)}
-                          onClick={() => handleWordSelect(c.text)}
-                          style={{
-                            cursor: isDud ? 'default' : 'pointer',
-                            color: isDud ? '#166534' : isHovered ? '#05130b' : '#4ade80',
-                            backgroundColor: isHovered && !isDud ? '#22c55e' : 'transparent',
-                            textDecoration: isDud ? 'line-through' : 'none',
-                            fontWeight: 700
-                          }}
-                        >
-                          {isDud ? '......' : c.text}
-                        </span>
-                      );
-                    }
-                    if (c.type === 'bracket') {
-                      return (
-                        <span
-                          key={cIdx}
-                          onClick={() => handleBracketClick(c.text)}
-                          style={{
-                            cursor: 'pointer',
-                            color: '#38bdf8',
-                            backgroundColor: 'rgba(56, 189, 248, 0.1)'
-                          }}
-                          title="Click bracket pair for bypass bonus!"
-                        >
-                          {c.text}
-                        </span>
-                      );
-                    }
-                    return <span key={cIdx} style={{ opacity: 0.65 }}>{c.text}</span>;
-                  })}
-                </span>
+            {leftRows.map((row, idx) => (
+              <div key={idx} style={{ display: 'flex', gap: '8px', marginBottom: '3px', fontFamily: 'monospace' }}>
+                <span style={{ color: '#15803d', opacity: 0.85 }}>{row.addr}</span>
+                <span>{row.chunks.map((c, cIdx) => renderChunk(c, cIdx))}</span>
               </div>
             ))}
           </div>
 
-          {/* Column Right */}
+          {/* Column Right (8 Rows) */}
           <div>
-            {memoryRows.slice(8, 16).map((row, idx) => (
-              <div key={idx} style={{ display: 'flex', gap: '8px', marginBottom: '2px', fontFamily: 'monospace' }}>
-                <span style={{ color: '#15803d', opacity: 0.85 }}>{row.addrRight}</span>
-                <span>
-                  {row.rightChunks.map((c, cIdx) => {
-                    if (c.type === 'word') {
-                      const isDud = dudsRemoved.has(c.text);
-                      const isHovered = hoveredWord === c.text;
-                      return (
-                        <span
-                          key={cIdx}
-                          onMouseEnter={() => setHoveredWord(c.text)}
-                          onMouseLeave={() => setHoveredWord(null)}
-                          onClick={() => handleWordSelect(c.text)}
-                          style={{
-                            cursor: isDud ? 'default' : 'pointer',
-                            color: isDud ? '#166534' : isHovered ? '#05130b' : '#4ade80',
-                            backgroundColor: isHovered && !isDud ? '#22c55e' : 'transparent',
-                            textDecoration: isDud ? 'line-through' : 'none',
-                            fontWeight: 700
-                          }}
-                        >
-                          {isDud ? '......' : c.text}
-                        </span>
-                      );
-                    }
-                    if (c.type === 'bracket') {
-                      return (
-                        <span
-                          key={cIdx}
-                          onClick={() => handleBracketClick(c.text)}
-                          style={{
-                            cursor: 'pointer',
-                            color: '#38bdf8',
-                            backgroundColor: 'rgba(56, 189, 248, 0.1)'
-                          }}
-                          title="Click bracket pair for bypass bonus!"
-                        >
-                          {c.text}
-                        </span>
-                      );
-                    }
-                    return <span key={cIdx} style={{ opacity: 0.65 }}>{c.text}</span>;
-                  })}
-                </span>
+            {rightRows.map((row, idx) => (
+              <div key={idx} style={{ display: 'flex', gap: '8px', marginBottom: '3px', fontFamily: 'monospace' }}>
+                <span style={{ color: '#15803d', opacity: 0.85 }}>{row.addr}</span>
+                <span>{row.chunks.map((c, cIdx) => renderChunk(c, cIdx))}</span>
               </div>
             ))}
           </div>
@@ -420,18 +509,25 @@ export const TerminalHack = ({ onExit }) => {
         <div
           style={{
             flex: '1 1 240px',
-            backgroundColor: 'rgba(0, 0, 0, 0.35)',
+            backgroundColor: 'rgba(0, 0, 0, 0.45)',
             border: '1px solid #166534',
             borderRadius: '4px',
             padding: '10px',
-            maxHeight: '190px',
+            maxHeight: '220px',
             overflowY: 'auto',
             fontSize: '11.5px',
-            lineHeight: 1.4
+            lineHeight: 1.45
           }}
         >
           {logs.map((log, lIdx) => (
-            <div key={lIdx} style={{ color: log.startsWith('>') ? '#a7f3d0' : '#86efac', marginBottom: '4px' }}>
+            <div
+              key={lIdx}
+              style={{
+                color: log.includes('HASIL: AKSES DITERIMA') ? '#4ade80' : log.includes('ENTRY DENIED') || log.includes('LOCKED OUT') ? '#f87171' : log.startsWith('>') ? '#a7f3d0' : '#86efac',
+                marginBottom: '4px',
+                fontWeight: log.includes('HASIL:') ? 700 : 'normal'
+              }}
+            >
               {log}
             </div>
           ))}
@@ -440,13 +536,14 @@ export const TerminalHack = ({ onExit }) => {
       </div>
 
       {/* Interactive Input Form */}
-      <form onSubmit={handleInputSubmit} style={{ marginTop: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+      <form onSubmit={handleInputSubmit} style={{ marginTop: '14px', display: 'flex', alignItems: 'center', gap: '8px' }}>
         <span style={{ color: '#4ade80', fontWeight: 700 }}>VAULT:\&gt;</span>
         <input
+          ref={vaultInputRef}
           type="text"
           value={inputGuess}
           onChange={(e) => setInputGuess(e.target.value.toUpperCase())}
-          placeholder={gameStatus === 'playing' ? "Ketik kata sandi atau klik kata di memory dump..." : "Ketik 'hack' untuk main lagi atau 'exit' untuk keluar..."}
+          placeholder={gameStatus === 'playing' ? "Ketik kata sandi (contoh: ACCESS) lalu Enter..." : "Ketik 'hack' untuk main lagi atau 'exit' untuk keluar..."}
           style={{
             flex: 1,
             backgroundColor: 'transparent',
@@ -456,7 +553,7 @@ export const TerminalHack = ({ onExit }) => {
             fontFamily: 'inherit',
             fontSize: '13px',
             outline: 'none',
-            padding: '2px 4px'
+            padding: '4px 6px'
           }}
           autoFocus
         />
@@ -466,10 +563,11 @@ export const TerminalHack = ({ onExit }) => {
             backgroundColor: '#166534',
             color: '#dcfce7',
             border: '1px solid #22c55e',
-            padding: '4px 12px',
+            padding: '5px 14px',
             fontSize: '11.5px',
             borderRadius: '3px',
-            cursor: 'pointer'
+            cursor: 'pointer',
+            fontWeight: 600
           }}
         >
           Enter

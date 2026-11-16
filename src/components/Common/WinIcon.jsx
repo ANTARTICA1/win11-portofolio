@@ -40,6 +40,8 @@ const ICON_MAP = {
   'chrome_dino': '/icons/chrome_dino.svg',
   'solitaire': '/icons/solitaire.svg',
   'sol': '/icons/solitaire.svg',
+  'chess': '/icons/chess.svg',
+  'catur': '/icons/chess.svg',
   'vlc': '/icons/vlc.svg',
   'media-player': '/icons/media-player.png',
   'movies': '/icons/media-player.png',

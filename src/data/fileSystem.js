@@ -1181,7 +1181,8 @@ PANDUAN SINGKAT:
      * Folder Downloads : Buka 'memo_asisten_jadul.txt' (Asisten Kantor 90-an)
      * Terminal         : Ketik 'secret' atau 'hints' untuk melihat peta petunjuk, atau 'hack' untuk mini game Fallout
      * Calculator       : Coba hitung angka khusus seperti 1337
-     * Solitaire        : Mainkan kartu Klondike klasik dengan animasi cascade legendaris`;
+     * Solitaire        : Mainkan kartu Klondike klasik dengan animasi cascade legendaris
+     * Chess (Catur)    : Mainkan catur melawan Bot AI (Pemula, Menengah, Master)`;
 
 export const DESKTOP_ITEMS = [
   {
@@ -1316,6 +1317,13 @@ export const DESKTOP_ITEMS = [
     type: "app",
     app: "solitaire",
     icon: "solitaire"
+  },
+  {
+    id: "chess",
+    name: "Chess",
+    type: "app",
+    app: "chess",
+    icon: "chess"
   },
   {
     id: "curriculum_vitae",

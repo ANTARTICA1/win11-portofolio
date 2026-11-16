@@ -35,6 +35,7 @@ const WhatsAppApp = lazy(() => import('./components/Apps/WhatsAppApp').then(m =>
 const ChromeDinoGame = lazy(() => import('./components/Apps/ChromeDinoGame').then(m => ({ default: m.ChromeDinoGame })));
 const NeuroFlyApp = lazy(() => import('./components/Apps/NeuroFlyApp').then(m => ({ default: m.NeuroFlyApp })));
 const SolitaireApp = lazy(() => import('./components/Apps/SolitaireApp').then(m => ({ default: m.SolitaireApp })));
+const ChessApp = lazy(() => import('./components/Apps/ChessApp').then(m => ({ default: m.ChessApp })));
 
 const AppLoadingSkeleton = () => (
   <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: '#181824', color: '#94a3b8', gap: '14px' }}>
@@ -482,6 +483,12 @@ export function App() {
         icon: 'solitaire',
         initialSize: { width: 920, height: 640 },
         initialPosition: { x: 75 + (windows.length % 5) * 25, y: 35 + (windows.length % 5) * 20 }
+      },
+      chess: {
+        title: 'Chess (Catur)',
+        icon: 'chess',
+        initialSize: { width: 880, height: 640 },
+        initialPosition: { x: 80 + (windows.length % 5) * 25, y: 35 + (windows.length % 5) * 20 }
       }
     };
 
@@ -805,6 +812,13 @@ export function App() {
             <SolitaireApp />
           </Suspense>
         );
+      case 'chess':
+      case 'catur':
+        return (
+          <Suspense fallback={<AppLoadingSkeleton />}>
+            <ChessApp />
+          </Suspense>
+        );
       case 'settings':
       case 'clock':
         return (
@@ -929,6 +943,7 @@ export function App() {
           else if (cmd === 'web' || cmd === 'krisnaartha' || cmd === 'krisnaartha.my.id' || cmd === 'portofolio.krisnaartha.my.id' || cmd === 'porto') launchApp('krisnaartha_site');
           else if (cmd === 'dino' || cmd === 'chrome://dino') launchApp('dino');
           else if (cmd === 'solitaire' || cmd === 'sol') launchApp('solitaire');
+          else if (cmd === 'chess' || cmd === 'catur') launchApp('chess');
           else if (cmd === 'hack' || cmd === 'cyber' || cmd === 'fallout') launchApp('terminal');
           else if (cmd === 'visiondeck' || cmd === 'motto' || cmd === 'deck' || cmd === 'manifesto') launchApp('chrome', { projectId: 'motto' });
           else if (cmd === 'onlyus') launchApp('chrome', { projectId: 'onlyus' });

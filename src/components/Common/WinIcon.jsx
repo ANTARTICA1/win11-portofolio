@@ -34,6 +34,8 @@ const ICON_MAP = {
   'whatsapp': '/icons/whatsapp.svg',
   'discord': '/icons/whatsapp.svg',
   'linkedin': '/icons/linkedin.svg',
+  'github': '/icons/github.svg',
+  'git': '/icons/github.svg',
   'krisnaartha': '/icons/krisnaartha.svg',
   'krisnaartha_web': '/icons/krisnaartha.svg',
   'dino': '/icons/dino.svg',

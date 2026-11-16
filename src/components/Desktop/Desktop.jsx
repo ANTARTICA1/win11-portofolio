@@ -128,6 +128,8 @@ export const Desktop = ({
       onLaunchApp('dino');
     } else if (item.app === 'linkedin' || item.id === 'linkedin') {
       window.open(item.url || 'https://linkedin.com/in/krisnaartha', '_blank', 'noopener,noreferrer');
+    } else if (item.app === 'github' || item.id === 'github') {
+      window.open(item.url || 'https://github.com/ANTARTICA1', '_blank', 'noopener,noreferrer');
     } else if (item.app === 'krisnaartha_site' || item.id === 'krisnaartha_site' || item.url) {
       onLaunchApp('krisnaartha_site', { url: item.url || 'https://portofolio.krisnaartha.my.id' });
     } else {

@@ -230,6 +230,10 @@ export function App() {
       window.open(INITIAL_USER.linkedin || 'https://linkedin.com/in/krisnaartha', '_blank', 'noopener,noreferrer');
       return;
     }
+    if (appId === 'github') {
+      window.open(INITIAL_USER.github || 'https://github.com/ANTARTICA1', '_blank', 'noopener,noreferrer');
+      return;
+    }
     if (appId === 'bsod' || appId === 'crash') {
       setBsodActive(true);
       return;
@@ -939,6 +943,7 @@ export function App() {
           else if (cmd === 'calc') launchApp('calculator');
           else if (cmd === 'settings') launchApp('settings');
           else if (cmd === 'linkedin') launchApp('linkedin');
+          else if (cmd === 'github' || cmd === 'git') launchApp('github');
           else if (cmd === 'wa' || cmd === 'whatsapp') launchApp('whatsapp');
           else if (cmd === 'web' || cmd === 'krisnaartha' || cmd === 'krisnaartha.my.id' || cmd === 'portofolio.krisnaartha.my.id' || cmd === 'porto') launchApp('krisnaartha_site');
           else if (cmd === 'dino' || cmd === 'chrome://dino') launchApp('dino');

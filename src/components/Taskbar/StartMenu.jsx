@@ -37,6 +37,7 @@ export const StartMenu = ({ isOpen, onClose, onLaunchApp, onOpenFile, onRestart,
 
   const pinnedApps = [
     { id: 'linkedin', name: 'LinkedIn', icon: 'linkedin' },
+    { id: 'github', name: 'GitHub', icon: 'github' },
     { id: 'whatsapp', name: 'WhatsApp', icon: 'whatsapp' },
     { id: 'krisnaartha_site', name: 'portofolio.krisnaartha.my.id', icon: 'krisnaartha' },
     { id: 'solitaire', name: 'Solitaire', icon: 'solitaire' },

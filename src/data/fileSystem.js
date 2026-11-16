@@ -1298,6 +1298,14 @@ export const DESKTOP_ITEMS = [
     icon: "linkedin"
   },
   {
+    id: "github",
+    name: "GitHub",
+    type: "shortcut",
+    app: "github",
+    url: "https://github.com/ANTARTICA1",
+    icon: "github"
+  },
+  {
     id: "whatsapp",
     name: "WhatsApp",
     type: "app",

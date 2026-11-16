@@ -248,6 +248,12 @@ LinkedIn : ${INITIAL_USER.linkedin}
         output = `Membuka Windows Chess (Catur vs Bot AI)...`;
         break;
 
+      case 'github':
+      case 'git':
+        if (onLaunchApp) onLaunchApp('github');
+        output = `Membuka profil GitHub https://github.com/ANTARTICA1 di tab baru...`;
+        break;
+
       case 'secret':
       case 'secrets':
       case 'easteregg':

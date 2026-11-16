@@ -36,57 +36,58 @@ export const StartMenu = ({ isOpen, onClose, onLaunchApp, onOpenFile, onRestart,
   if (!isOpen) return null;
 
   const pinnedApps = [
-    { id: 'linkedin', name: 'LinkedIn', icon: 'linkedin' },
-    { id: 'github', name: 'GitHub', icon: 'github' },
-    { id: 'whatsapp', name: 'WhatsApp', icon: 'whatsapp' },
-    { id: 'krisnaartha_site', name: 'portofolio.krisnaartha.my.id', icon: 'krisnaartha' },
-    { id: 'solitaire', name: 'Solitaire', icon: 'solitaire' },
-    { id: 'chess', name: 'Chess', icon: 'chess' },
-    { id: 'dino', name: 'chrome://dino', icon: 'chrome_dino' },
-    { id: 'ms-store', name: 'Microsoft Store', icon: 'ms-store' },
-    { id: 'xbox', name: 'XBOX', icon: 'xbox' },
-    { id: 'todo', name: 'To Do', icon: 'todo' },
-    { id: 'calculator', name: 'Calculator', icon: 'calculator' },
-    { id: 'clock', name: 'Clock', icon: 'clock' },
-    { id: 'paint', name: 'Paint', icon: 'paint' },
-    { id: 'onenote', name: 'OneNote', icon: 'onenote' },
-    { id: 'neurofly', name: 'NeuroFly 3D', icon: 'neurofly' },
     { id: 'explorer', name: 'File Explorer', icon: 'explorer' },
     { id: 'chrome', name: 'Google Chrome', icon: 'chrome' },
     { id: 'terminal', name: 'Command Prompt', icon: 'terminal' },
-    { id: 'ldplayer', name: 'LDPlayer 14', icon: 'ldplayer' }
+    { id: 'recruiter', name: 'Curriculum Vitae', icon: 'recruiter' },
+    { id: 'whatsapp', name: 'WhatsApp', icon: 'whatsapp' },
+    { id: 'settings', name: 'Settings', icon: 'settings' },
+
+    { id: 'solitaire', name: 'Solitaire', icon: 'solitaire' },
+    { id: 'chess', name: 'Chess', icon: 'chess' },
+    { id: 'dino', name: 'Dino Runner', icon: 'chrome_dino' },
+    { id: 'calculator', name: 'Calculator', icon: 'calculator' },
+    { id: 'neurofly', name: 'NeuroFly 3D', icon: 'neurofly' },
+    { id: 'krisnaartha_site', name: 'Web Portfolio', icon: 'krisnaartha' },
+
+    { id: 'photos', name: 'Photos Gallery', icon: 'photos' },
+    { id: 'notepad', name: 'Notepad', icon: 'notepad' },
+    { id: 'github', name: 'GitHub', icon: 'github' },
+    { id: 'linkedin', name: 'LinkedIn', icon: 'linkedin' },
+    { id: 'tatagih', name: 'Tatagih', icon: 'tatagih' },
+    { id: 'lintas', name: 'Lintas', icon: 'lintas' }
   ];
 
   const categoryGroups = [
     {
       name: 'Productivity',
-      icons: ['chrome', 'folder', 'whatsapp', 'calculator'],
+      icons: ['chrome', 'explorer', 'whatsapp', 'calculator'],
       appToLaunch: 'chrome'
     },
     {
-      name: 'Creativity',
-      icons: ['vlc', 'gallery', 'video-editor', 'paint'],
-      appToLaunch: 'paint'
+      name: 'Portfolio Projects',
+      icons: ['tatagih', 'lintas', 'sigap', 'nenacare'],
+      appToLaunch: 'explorer'
     },
     {
-      name: 'Utilities & Tools',
-      icons: ['snipping-tool', 'settings', 'download-manager', 'winrar'],
+      name: 'Utilities & System',
+      icons: ['settings', 'terminal', 'calculator', 'notepad'],
       appToLaunch: 'settings'
     },
     {
-      name: 'Developer',
-      icons: ['terminal', 'mail', 'vscode', 'powershell'],
+      name: 'Developer Tools',
+      icons: ['terminal', 'github', 'linkedin', 'krisnaartha'],
       appToLaunch: 'terminal'
     },
     {
-      name: 'Coding & Terminal',
-      icons: ['vscode', 'terminal', 'powershell', 'notepad'],
-      appToLaunch: 'terminal'
+      name: 'Media & Gallery',
+      icons: ['photos', 'chrome', 'whatsapp', 'notepad'],
+      appToLaunch: 'photos'
     },
     {
-      name: 'Media & Play',
-      icons: ['media-player', 'xbox', 'whatsapp', 'chrome'],
-      appToLaunch: 'whatsapp'
+      name: 'Games & Arcade',
+      icons: ['solitaire', 'chess', 'chrome_dino', 'neurofly'],
+      appToLaunch: 'solitaire'
     }
   ];
 
@@ -163,9 +164,9 @@ export const StartMenu = ({ isOpen, onClose, onLaunchApp, onOpenFile, onRestart,
 
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(72px, 1fr))',
-          gap: '8px 4px',
-          marginBottom: '26px'
+          gridTemplateColumns: 'repeat(auto-fill, minmax(80px, 1fr))',
+          gap: '6px 4px',
+          marginBottom: '24px'
         }}>
           {filteredApps.map((app) => (
             <div
@@ -180,7 +181,7 @@ export const StartMenu = ({ isOpen, onClose, onLaunchApp, onOpenFile, onRestart,
                 flexDirection: 'column',
                 alignItems: 'center',
                 textAlign: 'center',
-                padding: '10px 4px',
+                padding: '8px 4px',
                 borderRadius: '6px',
                 cursor: 'pointer',
                 transition: 'background-color 0.12s'
@@ -188,18 +189,21 @@ export const StartMenu = ({ isOpen, onClose, onLaunchApp, onOpenFile, onRestart,
               onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.08)'}
               onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
             >
-              <div style={{ marginBottom: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <WinIcon name={app.icon} size={38} />
+              <div style={{ marginBottom: '5px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <WinIcon name={app.icon} size={36} />
               </div>
               <span style={{
                 fontSize: '11px',
                 color: '#f1f5f9',
                 lineHeight: 1.2,
+                maxHeight: '28px',
                 display: '-webkit-box',
                 WebkitLineClamp: 2,
                 WebkitBoxOrient: 'vertical',
                 overflow: 'hidden',
-                textOverflow: 'ellipsis'
+                textOverflow: 'ellipsis',
+                wordBreak: 'break-word',
+                padding: '0 2px'
               }}>
                 {app.name}
               </span>

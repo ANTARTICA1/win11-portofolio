@@ -260,3 +260,82 @@ export const playBSODSound = () => {
     osc.stop(now + 0.35);
   } catch {}
 };
+
+export const playCardSlideSound = () => {
+  try {
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    const now = ctx.currentTime;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(520, now);
+    osc.frequency.exponentialRampToValueAtTime(280, now + 0.05);
+    gain.gain.setValueAtTime(0.03, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+    osc.connect(gain);
+    gain.connect(getDestination());
+    osc.start(now);
+    osc.stop(now + 0.05);
+  } catch {}
+};
+
+export const playHackerKeySound = () => {
+  try {
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    const now = ctx.currentTime;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'square';
+    osc.frequency.setValueAtTime(1200 + (Math.random() * 200 - 100), now);
+    gain.gain.setValueAtTime(0.015, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.025);
+    osc.connect(gain);
+    gain.connect(getDestination());
+    osc.start(now);
+    osc.stop(now + 0.025);
+  } catch {}
+};
+
+export const playHackerDenySound = () => {
+  try {
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    const now = ctx.currentTime;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(150, now);
+    osc.frequency.setValueAtTime(120, now + 0.08);
+    gain.gain.setValueAtTime(0.05, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+    osc.connect(gain);
+    gain.connect(getDestination());
+    osc.start(now);
+    osc.stop(now + 0.18);
+  } catch {}
+};
+
+export const playHackerSuccessSound = () => {
+  try {
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    const now = ctx.currentTime;
+    [
+      { f: 880, t: 0, d: 0.08 },
+      { f: 1174.66, t: 0.09, d: 0.15 }
+    ].forEach(({ f, t, d }) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(f, now + t);
+      gain.gain.setValueAtTime(0.06, now + t);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + t + d);
+      osc.connect(gain);
+      gain.connect(getDestination());
+      osc.start(now + t);
+      osc.stop(now + t + d);
+    });
+  } catch {}
+};

@@ -34,6 +34,7 @@ const CalculatorApp = lazy(() => import('./components/Apps/CalculatorApp').then(
 const WhatsAppApp = lazy(() => import('./components/Apps/WhatsAppApp').then(m => ({ default: m.WhatsAppApp })));
 const ChromeDinoGame = lazy(() => import('./components/Apps/ChromeDinoGame').then(m => ({ default: m.ChromeDinoGame })));
 const NeuroFlyApp = lazy(() => import('./components/Apps/NeuroFlyApp').then(m => ({ default: m.NeuroFlyApp })));
+const SolitaireApp = lazy(() => import('./components/Apps/SolitaireApp').then(m => ({ default: m.SolitaireApp })));
 
 const AppLoadingSkeleton = () => (
   <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: '#181824', color: '#94a3b8', gap: '14px' }}>
@@ -475,6 +476,12 @@ export function App() {
         icon: 'chrome_dino',
         initialSize: { width: 840, height: 480 },
         initialPosition: { x: 95 + (windows.length % 5) * 25, y: 45 + (windows.length % 5) * 20 }
+      },
+      solitaire: {
+        title: 'Solitaire',
+        icon: 'solitaire',
+        initialSize: { width: 920, height: 640 },
+        initialPosition: { x: 75 + (windows.length % 5) * 25, y: 35 + (windows.length % 5) * 20 }
       }
     };
 
@@ -792,6 +799,12 @@ export function App() {
             <ChromeDinoGame />
           </Suspense>
         );
+      case 'solitaire':
+        return (
+          <Suspense fallback={<AppLoadingSkeleton />}>
+            <SolitaireApp />
+          </Suspense>
+        );
       case 'settings':
       case 'clock':
         return (
@@ -915,6 +928,8 @@ export function App() {
           else if (cmd === 'wa' || cmd === 'whatsapp') launchApp('whatsapp');
           else if (cmd === 'web' || cmd === 'krisnaartha' || cmd === 'krisnaartha.my.id' || cmd === 'portofolio.krisnaartha.my.id' || cmd === 'porto') launchApp('krisnaartha_site');
           else if (cmd === 'dino' || cmd === 'chrome://dino') launchApp('dino');
+          else if (cmd === 'solitaire' || cmd === 'sol') launchApp('solitaire');
+          else if (cmd === 'hack' || cmd === 'cyber' || cmd === 'fallout') launchApp('terminal');
           else if (cmd === 'visiondeck' || cmd === 'motto' || cmd === 'deck' || cmd === 'manifesto') launchApp('chrome', { projectId: 'motto' });
           else if (cmd === 'onlyus') launchApp('chrome', { projectId: 'onlyus' });
           else if (cmd === 'bsod' || cmd === 'crash') setBsodActive(true);

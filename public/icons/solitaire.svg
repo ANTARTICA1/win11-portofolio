@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <defs>
+    <linearGradient id="cardGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
+    </linearGradient>
+    <linearGradient id="cardGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#cbd5e1"/>
+    </linearGradient>
+    <filter id="cardShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Green felt circular background badge -->
+  <rect x="2" y="2" width="44" height="44" rx="10" fill="#15803d" stroke="#166534" stroke-width="1.5"/>
+
+  <!-- Back card (tilted) -->
+  <g transform="rotate(-10 20 24)" filter="url(#cardShadow)">
+    <rect x="10" y="8" width="22" height="30" rx="3" fill="url(#cardGrad2)" stroke="#94a3b8" stroke-width="1"/>
+    <!-- Red Diamond Symbol -->
+    <path d="M 21 17 L 25 23 L 21 29 L 17 23 Z" fill="#ef4444"/>
+  </g>
+
+  <!-- Front card (straight) -->
+  <g transform="translate(6, 2)" filter="url(#cardShadow)">
+    <rect x="11" y="8" width="22" height="30" rx="3" fill="url(#cardGrad1)" stroke="#cbd5e1" stroke-width="1"/>
+    <!-- Ace Rank top left -->
+    <text x="14" y="16" font-family="'Segoe UI', Arial, sans-serif" font-size="7" font-weight="bold" fill="#0f172a">A</text>
+    <!-- Spade Symbol in center -->
+    <path d="M 22 17 C 22 17 25 21 25 23 C 25 24.6 23.7 25.5 22.2 25.5 C 21.4 25.5 20.8 25.1 22 26.5 L 22 28 L 20 28 L 20 26.5 C 21.2 25.1 20.6 25.5 19.8 25.5 C 18.3 25.5 17 24.6 17 23 C 17 21 20 17 20 17 C 20 17 20.8 18 21 18.5 C 21.2 18 22 17 22 17 Z" fill="#0f172a"/>
+  </g>
+</svg>

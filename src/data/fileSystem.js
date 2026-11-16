@@ -1179,8 +1179,9 @@ PANDUAN SINGKAT:
      * Recycle Bin      : Buka 'FILE RAHASIA.txt' (Protokol Crash & Ringkasan)
      * Folder Documents : Buka 'clue_arcade_1986.txt' (Kode Arcade Legendaris)
      * Folder Downloads : Buka 'memo_asisten_jadul.txt' (Asisten Kantor 90-an)
-     * Terminal         : Ketik 'secret' atau 'hints' untuk melihat peta petunjuk
-     * Calculator       : Coba hitung angka khusus seperti 1337`;
+     * Terminal         : Ketik 'secret' atau 'hints' untuk melihat peta petunjuk, atau 'hack' untuk mini game Fallout
+     * Calculator       : Coba hitung angka khusus seperti 1337
+     * Solitaire        : Mainkan kartu Klondike klasik dengan animasi cascade legendaris`;
 
 export const DESKTOP_ITEMS = [
   {
@@ -1310,6 +1311,13 @@ export const DESKTOP_ITEMS = [
     icon: "chrome_dino"
   },
   {
+    id: "solitaire",
+    name: "Solitaire",
+    type: "app",
+    app: "solitaire",
+    icon: "solitaire"
+  },
+  {
     id: "curriculum_vitae",
     name: "Curriculum Vitae.pdf",
     type: "file",
@@ -1390,7 +1398,10 @@ Berikut adalah catatan eksperimen rahasia yang aktif di sistem Windows 11 ini:
    - Buka aplikasi Calculator di desktop, hitung angka khusus seperti 1337, 6969, 404, atau 42.
 
 5. [Terminal Hack & Scavenger Hunt Map]
-   - Buka Command Prompt / Terminal, ketik 'secret' atau 'matrix' untuk melihat peta sistem.
+   - Buka Command Prompt / Terminal, ketik 'hack' untuk memainkan mini game decrypt kata sandi Fallout, atau 'secret' / 'matrix' untuk melihat peta sistem.
+
+6. [Retro Solitaire Classic]
+   - Buka Solitaire di desktop atau ketik 'solitaire' di Run (Alt+R) untuk memainkan game kartu klasik dengan animasi kartu memantul Windows legendaris.
 ============================================================`
   },
   {

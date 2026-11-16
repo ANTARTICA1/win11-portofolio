@@ -4,9 +4,11 @@ import { WinIcon } from '../Common/WinIcon';
 import { INITIAL_USER, RECRUITER_SUMMARY } from '../../data/fileSystem';
 import { playClickSound } from '../../utils/sound';
 import { useWindow } from '../Windows/WindowContext';
+import { TerminalHack } from './TerminalHack';
 
 export const TerminalApp = ({ onLaunchApp }) => {
   const winCtx = useWindow();
+  const [isHackMode, setIsHackMode] = useState(false);
   const [history, setHistory] = useState([
     {
       type: 'system',
@@ -82,6 +84,8 @@ Daftar Perintah yang Tersedia:
   motto         : Menampilkan daftar moto resmi dari setiap karya
   resume        : Ringkasan kualifikasi kerja & pengalaman
   contact       : Kontak resmi (Email, WhatsApp, LinkedIn, GitHub)
+  hack / cyber  : [MINIGAME] Fallout-style Cybersecurity Terminal Hack
+  solitaire     : [GAME] Membuka game kartu klasik Solitaire
   dir / ls      : Menampilkan daftar file dalam direktori saat ini
   cat <file>    : Membaca isi file (contoh: cat resume.txt)
   secret        : [?] Menampilkan petunjuk rahasia & easter eggs
@@ -222,6 +226,21 @@ LinkedIn : ${INITIAL_USER.linkedin}
 `;
         break;
 
+      case 'hack':
+      case 'cyber':
+      case 'fallout':
+      case 'cyberhack':
+      case 'terminalhack':
+        setIsHackMode(true);
+        output = `[+] Menginisialisasi modul RobCo Termlink / Cyber Security Terminal Hack...\n[+] Memuat memory dump dan protokol enkripsi kata sandi...\n[+] Silakan pilih kata sandi pada antarmuka hacking di bawah ini.`;
+        break;
+
+      case 'solitaire':
+      case 'sol':
+        if (onLaunchApp) onLaunchApp('solitaire');
+        output = `Membuka Windows Classic Solitaire...`;
+        break;
+
       case 'secret':
       case 'secrets':
       case 'easteregg':
@@ -238,7 +257,9 @@ Petunjuk eksperimen rahasia telah dipecah dan disebarkan ke beberapa tempat:
 2. [Dokumen]       : Documents   -> 'clue_arcade_1986.txt' (Kode Arcade Gamer 1986)
 3. [Unduhan]       : Downloads   -> 'memo_asisten_jadul.txt' (Pemanggilan Asisten 90-an)
 4. [Kalkulator]    : Coba masukkan angka '1337' atau '6969' pada aplikasi Calculator
-5. [Shortcut Run]  : Tekan Alt+R lalu coba ketik 'bsod' atau 'clippy'
+5. [Shortcut Run]  : Tekan Alt+R lalu coba ketik 'bsod', 'clippy', atau 'solitaire'
+6. [Terminal Hack] : Ketik 'hack' di terminal ini untuk mini-game decrypt password Fallout
+7. [Solitaire]     : Ketik 'solitaire' di terminal untuk membuka kartu Windows klasik
 ======================================================================
 `;
         break;
@@ -438,6 +459,10 @@ Ketik 'secret' untuk daftar misteri tersembunyi.
         </div>
       ))}
 
+      {isHackMode && (
+        <TerminalHack onExit={() => setIsHackMode(false)} />
+      )}
+
       <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
         <span style={{ color: '#cccccc', fontWeight: 'normal', whiteSpace: 'nowrap' }}>
           C:\Users\KRISNA&gt;
@@ -472,7 +497,7 @@ Ketik 'secret' untuk daftar misteri tersembunyi.
         paddingTop: '12px',
         borderTop: '1px solid rgba(255, 255, 255, 0.08)'
       }}>
-        {['help', 'whoami', 'skills', 'projects', 'resume', 'contact', 'clear'].map((cmd) => (
+        {['help', 'whoami', 'skills', 'projects', 'hack', 'solitaire', 'resume', 'contact', 'clear'].map((cmd) => (
           <button
             key={cmd}
             type="button"
@@ -481,9 +506,9 @@ Ketik 'secret' untuk daftar misteri tersembunyi.
               executeCommand(cmd);
             }}
             style={{
-              backgroundColor: 'rgba(255, 255, 255, 0.08)',
-              border: '1px solid rgba(255, 255, 255, 0.16)',
-              color: '#e2e8f0',
+              backgroundColor: cmd === 'hack' ? 'rgba(34, 197, 94, 0.18)' : cmd === 'solitaire' ? 'rgba(56, 189, 248, 0.18)' : 'rgba(255, 255, 255, 0.08)',
+              border: cmd === 'hack' ? '1px solid rgba(34, 197, 94, 0.4)' : cmd === 'solitaire' ? '1px solid rgba(56, 189, 248, 0.4)' : '1px solid rgba(255, 255, 255, 0.16)',
+              color: cmd === 'hack' ? '#4ade80' : cmd === 'solitaire' ? '#38bdf8' : '#e2e8f0',
               borderRadius: '4px',
               padding: '3px 9px',
               fontSize: '11px',

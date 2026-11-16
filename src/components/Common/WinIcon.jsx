@@ -38,6 +38,8 @@ const ICON_MAP = {
   'krisnaartha_web': '/icons/krisnaartha.svg',
   'dino': '/icons/dino.svg',
   'chrome_dino': '/icons/chrome_dino.svg',
+  'solitaire': '/icons/solitaire.svg',
+  'sol': '/icons/solitaire.svg',
   'vlc': '/icons/vlc.svg',
   'media-player': '/icons/media-player.png',
   'movies': '/icons/media-player.png',

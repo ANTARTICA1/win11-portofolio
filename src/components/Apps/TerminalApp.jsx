@@ -12,7 +12,7 @@ export const TerminalApp = ({ onLaunchApp }) => {
   const [history, setHistory] = useState([
     {
       type: 'system',
-      text: `Microsoft Windows [Version 10.0.26200.9457]\n(c) Microsoft Corporation. All rights reserved.\n`
+      text: `Microsoft Windows [Version 10.0.26200.9457]\n(c) Microsoft Corporation. All rights reserved.\n\nKetik 'help' untuk melihat daftar perintah yang tersedia.\nKetik 'hack' untuk memainkan game simulasi peretasan (cybersecurity).\n`
     }
   ]);
   const [inputVal, setInputVal] = useState('');
@@ -77,16 +77,19 @@ export const TerminalApp = ({ onLaunchApp }) => {
         output = `
 Daftar Perintah yang Tersedia:
 --------------------------------------------------
+  help          : Menampilkan seluruh daftar perintah
+  hack / cyber  : [MINIGAME] Fallout-style Cybersecurity Terminal Hack
   whoami        : Informasi profil dan spesialisasi developer
   skills        : Ringkasan keahlian teknis (Tech Stack)
   projects      : Daftar proyek unggulan yang telah diselesaikan
+  games         : Menampilkan daftar mini game yang dapat dimainkan
+  solitaire     : [GAME] Membuka game kartu klasik Solitaire
+  chess / catur : [GAME] Membuka game catur melawan Bot AI
+  dino          : [GAME] Membuka Chrome Offline Dino Runner
   visiondeck    : Membuka Vision Deck 3D Holographic Card Deck & Moto
   motto         : Menampilkan daftar moto resmi dari setiap karya
   resume        : Ringkasan kualifikasi kerja & pengalaman
   contact       : Kontak resmi (Email, WhatsApp, LinkedIn, GitHub)
-  hack / cyber  : [MINIGAME] Fallout-style Cybersecurity Terminal Hack
-  solitaire     : [GAME] Membuka game kartu klasik Solitaire
-  chess / catur : [GAME] Membuka game catur melawan Bot AI (Minimax Engine)
   dir / ls      : Menampilkan daftar file dalam direktori saat ini
   cat <file>    : Membaca isi file (contoh: cat resume.txt)
   secret        : [?] Menampilkan petunjuk rahasia & easter eggs
@@ -234,6 +237,26 @@ LinkedIn : ${INITIAL_USER.linkedin}
       case 'terminalhack':
         setIsHackMode(true);
         output = `[+] Menginisialisasi modul RobCo Termlink / Cyber Security Terminal Hack...\n[+] Memuat memory dump dan protokol enkripsi kata sandi...\n[+] Silakan pilih kata sandi pada antarmuka hacking di bawah ini.`;
+        break;
+
+      case 'game':
+      case 'games':
+        output = `
+Daftar Mini Game yang Tersedia:
+--------------------------------------------------
+1. hack      : Mini game peretasan terminal ala Fallout (Tebak Password Memori)
+2. solitaire : Permainan kartu Windows Classic Solitaire dengan animasi cascade kartu
+3. chess     : Permainan catur interaktif Windows Chess (vs Bot AI Minimax)
+4. dino      : Permainan arcade Chrome Dino Runner
+
+Ketik nama perintah di atas langsung di terminal untuk memainkannya.
+`;
+        break;
+
+      case 'dino':
+      case 'trex':
+        if (onLaunchApp) onLaunchApp('dino');
+        output = `Membuka game Chrome Dino Runner...`;
         break;
 
       case 'solitaire':
@@ -501,38 +524,6 @@ Ketik 'secret' untuk daftar misteri tersembunyi.
             caretColor: '#ffffff'
           }}
         />
-      </div>
-
-      <div style={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: '6px',
-        marginTop: '20px',
-        paddingTop: '12px',
-        borderTop: '1px solid rgba(255, 255, 255, 0.08)'
-      }}>
-        {['help', 'whoami', 'skills', 'projects', 'hack', 'solitaire', 'chess', 'resume', 'contact', 'clear'].map((cmd) => (
-          <button
-            key={cmd}
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              executeCommand(cmd);
-            }}
-            style={{
-              backgroundColor: cmd === 'hack' ? 'rgba(34, 197, 94, 0.18)' : cmd === 'solitaire' ? 'rgba(56, 189, 248, 0.18)' : cmd === 'chess' ? 'rgba(234, 179, 8, 0.18)' : 'rgba(255, 255, 255, 0.08)',
-              border: cmd === 'hack' ? '1px solid rgba(34, 197, 94, 0.4)' : cmd === 'solitaire' ? '1px solid rgba(56, 189, 248, 0.4)' : cmd === 'chess' ? '1px solid rgba(234, 179, 8, 0.4)' : '1px solid rgba(255, 255, 255, 0.16)',
-              color: cmd === 'hack' ? '#4ade80' : cmd === 'solitaire' ? '#38bdf8' : cmd === 'chess' ? '#facc15' : '#e2e8f0',
-              borderRadius: '4px',
-              padding: '3px 9px',
-              fontSize: '11px',
-              fontFamily: 'inherit',
-              cursor: 'pointer'
-            }}
-          >
-            {cmd}
-          </button>
-        ))}
       </div>
 
       <div ref={terminalEndRef} />

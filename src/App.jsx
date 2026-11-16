@@ -985,6 +985,9 @@ export function App() {
           onClose={() => setClippyActive(false)}
           onOpenRecruiter={() => launchApp('recruiter')}
           onOpenWhatsApp={() => window.open(INITIAL_USER.whatsapp, '_blank', 'noopener,noreferrer')}
+          onLaunchApp={launchApp}
+          onSelectWallpaper={setWallpaper}
+          currentWallpaper={wallpaper}
         />
       )}
 

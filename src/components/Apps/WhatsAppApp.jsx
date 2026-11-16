@@ -386,22 +386,9 @@ export const WhatsAppApp = ({ onLaunchApp }) => {
             />
           </div>
           <div className="wa-header-info">
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <span className="wa-header-name">Gungkrisna</span>
-              <span style={{
-                fontSize: '10px',
-                backgroundColor: 'rgba(34, 197, 94, 0.2)',
-                color: '#4ade80',
-                padding: '1px 6px',
-                borderRadius: '8px',
-                border: '1px solid rgba(34, 197, 94, 0.4)',
-                fontWeight: 600
-              }}>
-                Developer
-              </span>
-            </div>
+            <span className="wa-header-name">Gungkrisna</span>
             <span className={`wa-header-status ${isTyping ? 'typing' : ''}`}>
-              {isTyping ? 'sedang mengetik...' : 'online (Open to Work)'}
+              {isTyping ? 'sedang mengetik...' : 'Klik disini untuk melihat info'}
             </span>
           </div>
         </div>

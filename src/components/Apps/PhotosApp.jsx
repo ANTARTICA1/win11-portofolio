@@ -77,8 +77,10 @@ export const PhotosApp = ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: '12px',
-        padding: '0 16px'
+        gap: '10px',
+        padding: '0 12px',
+        overflowX: 'auto',
+        flexShrink: 0
       }}>
         <button
           onClick={handleZoomOut}

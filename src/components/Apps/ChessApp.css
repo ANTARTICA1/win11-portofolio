@@ -327,3 +327,49 @@
   border-color: #60a5fa;
   transform: scale(1.05);
 }
+
+@media (max-width: 768px) {
+  .chess-toolbar {
+    padding: 6px 10px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .chess-toolbar-left {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .chess-btn {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+
+  .chess-body {
+    flex-direction: column !important;
+    padding: 10px 6px !important;
+    gap: 12px !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    overflow-y: auto !important;
+  }
+
+  .chess-board-wrapper {
+    padding: 8px !important;
+    width: 100% !important;
+    max-width: min(92vw, 400px) !important;
+  }
+
+  .chess-board {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1 !important;
+  }
+
+  .chess-side-panel {
+    width: min(92vw, 400px) !important;
+    height: auto !important;
+    max-height: 240px !important;
+    padding: 10px !important;
+  }
+}

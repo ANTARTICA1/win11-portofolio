@@ -248,14 +248,15 @@ export const TerminalHack = ({ onExit }) => {
         backgroundColor: '#05130b',
         color: '#22c55e',
         fontFamily: '"Cascadia Code", Consolas, "Lucida Console", monospace',
-        fontSize: '13px',
+        fontSize: 'clamp(11px, 2vw, 13px)',
         lineHeight: 1.45,
-        padding: '14px',
+        padding: '12px',
         borderRadius: '6px',
         border: '1px solid #15803d',
         boxShadow: 'inset 0 0 24px rgba(34, 197, 94, 0.12)',
         userSelect: 'none',
-        marginBottom: '16px'
+        marginBottom: '16px',
+        overflowX: 'auto'
       }}
     >
       {/* Header Bar */}
@@ -311,7 +312,7 @@ export const TerminalHack = ({ onExit }) => {
       {/* Main Grid: Left/Right Memory Dumps & Log Sidepanel */}
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
         {/* Memory Hex Grid */}
-        <div style={{ flex: '1 1 360px', minWidth: '320px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+        <div style={{ flex: '1 1 280px', minWidth: '240px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '8px' }}>
           {/* Column Left */}
           <div>
             {memoryRows.slice(0, 8).map((row, idx) => (

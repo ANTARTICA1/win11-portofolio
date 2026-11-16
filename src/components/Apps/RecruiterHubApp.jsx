@@ -328,10 +328,15 @@ export const RecruiterHubApp = ({ onOpenApp }) => {
 
   // Sesuaikan zoom awal dengan lebar jendela supaya CV langsung terlihat utuh
   useEffect(() => {
-    const el = viewportRef.current;
-    if (!el) return;
-    const fit = Math.floor(((el.clientWidth - 40) / PAGE_W) * 20) * 5;
-    setZoom(Math.max(50, Math.min(100, fit)));
+    const handleFit = () => {
+      const el = viewportRef.current;
+      if (!el) return;
+      const fit = Math.floor(((el.clientWidth - 40) / PAGE_W) * 20) * 5;
+      setZoom(Math.max(40, Math.min(100, fit)));
+    };
+    handleFit();
+    window.addEventListener('resize', handleFit);
+    return () => window.removeEventListener('resize', handleFit);
   }, []);
 
   const handleZoomIn = () => {
@@ -428,9 +433,10 @@ export const RecruiterHubApp = ({ onOpenApp }) => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '0 16px',
+        padding: '0 12px',
         flexShrink: 0,
-        gap: '12px'
+        gap: '8px',
+        overflowX: 'auto'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0 }}>
           <div style={{

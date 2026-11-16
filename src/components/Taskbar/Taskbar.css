@@ -153,14 +153,42 @@
 }
 
 @media (max-width: 768px) {
+  .win-taskbar {
+    padding: 0 4px;
+    height: 44px;
+  }
   .taskbar-left {
     display: none;
   }
   .taskbar-center {
     position: static;
     transform: none;
+    overflow-x: auto;
+    max-width: calc(100vw - 110px);
+    scrollbar-width: none;
+    gap: 2px;
+  }
+  .taskbar-center::-webkit-scrollbar {
+    display: none;
+  }
+  .taskbar-icon-btn {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+  }
+  .tray-btn {
+    padding: 2px 4px;
+    gap: 3px;
+    font-size: 11px;
+  }
+  .tray-clock {
+    padding: 2px 4px;
+    font-size: 11px;
   }
   .tray-clock-date {
+    display: none;
+  }
+  .desktop-peek-btn {
     display: none;
   }
 }

@@ -280,3 +280,58 @@
   margin-bottom: 20px;
   line-height: 1.6;
 }
+
+@media (max-width: 768px) {
+  .solitaire-table {
+    padding: 8px 4px !important;
+    gap: 8px !important;
+  }
+
+  .solitaire-menu-bar {
+    padding: 4px 6px !important;
+    flex-wrap: wrap !important;
+    gap: 4px !important;
+  }
+
+  .solitaire-btn {
+    padding: 3px 6px !important;
+    font-size: 10.5px !important;
+  }
+
+  .solitaire-slot,
+  .solitaire-card,
+  .solitaire-tableau-col {
+    width: clamp(38px, 12.5vw, 52px) !important;
+    height: clamp(54px, 17.5vw, 76px) !important;
+    border-radius: 4px !important;
+  }
+
+  .solitaire-top-row,
+  .solitaire-tableau-row {
+    gap: 3px !important;
+  }
+
+  .solitaire-stock-waste-group,
+  .solitaire-foundations-group {
+    gap: 3px !important;
+  }
+
+  .solitaire-card-corner {
+    top: 2px !important;
+    left: 2px !important;
+  }
+
+  .solitaire-card-corner.bottom {
+    bottom: 2px !important;
+    right: 2px !important;
+  }
+
+  .solitaire-card-rank,
+  .solitaire-card-suit {
+    font-size: 9.5px !important;
+  }
+
+  .solitaire-card-center {
+    font-size: 16px !important;
+  }
+}

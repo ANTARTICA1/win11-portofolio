@@ -75,6 +75,7 @@ export const QuickSettings = ({
         bottom: 'calc(var(--taskbar-height) + 12px)',
         right: '12px',
         width: '360px',
+        maxWidth: 'calc(100vw - 24px)',
         backgroundColor: 'rgba(32, 32, 32, 0.94)',
         backdropFilter: 'blur(30px) saturate(150%)',
         WebkitBackdropFilter: 'blur(30px) saturate(150%)',

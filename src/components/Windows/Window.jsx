@@ -154,8 +154,28 @@ export const Window = ({
   hideTitlebar = false,
   children
 }) => {
-  const [pos, setPos] = useState(initialPosition);
-  const [size, setSize] = useState(initialSize);
+  const getSafeBounds = (targetPos, targetSize) => {
+    if (typeof window === 'undefined') return { pos: targetPos, size: targetSize };
+    const maxW = Math.max(300, window.innerWidth - 20);
+    const maxH = Math.max(220, window.innerHeight - 56);
+
+    const w = Math.min(targetSize.width, maxW);
+    const h = Math.min(targetSize.height, maxH);
+
+    const x = Math.max(8, Math.min(targetPos.x, window.innerWidth - w - 8));
+    const y = Math.max(8, Math.min(targetPos.y, window.innerHeight - h - 50));
+
+    return { pos: { x, y }, size: { width: w, height: h } };
+  };
+
+  const [pos, setPos] = useState(() => {
+    const safe = getSafeBounds(initialPosition, initialSize);
+    return safe.pos;
+  });
+  const [size, setSize] = useState(() => {
+    const safe = getSafeBounds(initialPosition, initialSize);
+    return safe.size;
+  });
   const [showSnapLayouts, setShowSnapLayouts] = useState(false);
   const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth <= 768 : false);
 
@@ -165,11 +185,16 @@ export const Window = ({
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
+      const mobile = window.innerWidth <= 768;
+      setIsMobile(mobile);
+      if (!mobile) {
+        setPos(p => getSafeBounds(p, size).pos);
+        setSize(s => getSafeBounds(pos, s).size);
+      }
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  }, [pos, size]);
 
   const handleTitlePointerDown = (e) => {
     if (isMobile) return;

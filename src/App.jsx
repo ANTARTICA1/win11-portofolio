@@ -66,10 +66,12 @@ const getInitialWindows = () => {
   const screenW = typeof window !== 'undefined' ? window.innerWidth : 1280;
   const screenH = typeof window !== 'undefined' ? window.innerHeight : 800;
 
-  const posX = Math.max(140, Math.min(180, Math.floor(screenW * 0.1)));
-  const posY = Math.max(20, Math.min(32, Math.floor(screenH * 0.035)));
-  const winW = Math.min(940, Math.max(740, screenW - posX - 36));
-  const winH = Math.min(590, Math.max(480, screenH - posY - 68));
+  const rawPosX = Math.max(80, Math.min(180, Math.floor(screenW * 0.1)));
+  const rawPosY = Math.max(16, Math.min(32, Math.floor(screenH * 0.035)));
+  const winW = Math.min(940, Math.max(340, screenW - rawPosX - 24));
+  const winH = Math.min(590, Math.max(300, screenH - rawPosY - 68));
+  const posX = Math.max(8, Math.min(rawPosX, screenW - winW - 12));
+  const posY = Math.max(8, Math.min(rawPosY, screenH - winH - 52));
 
   return [
     {
@@ -503,16 +505,25 @@ export function App() {
       initialPosition: { x: 100, y: 60 }
     };
 
+    const screenW = typeof window !== 'undefined' ? window.innerWidth : 1280;
+    const screenH = typeof window !== 'undefined' ? window.innerHeight : 800;
+    const isMobile = screenW <= 768;
+
+    const targetW = isMobile ? screenW : Math.min(cfg.initialSize.width, Math.max(340, screenW - 32));
+    const targetH = isMobile ? Math.max(300, screenH - 48) : Math.min(cfg.initialSize.height, Math.max(300, screenH - 64));
+    const targetX = isMobile ? 0 : Math.max(8, Math.min(cfg.initialPosition.x, screenW - targetW - 12));
+    const targetY = isMobile ? 0 : Math.max(8, Math.min(cfg.initialPosition.y, screenH - targetH - 52));
+
     const newWindow = {
       id: newId,
       appId,
       title: cfg.title,
       icon: cfg.icon,
       isMinimized: false,
-      isMaximized: false,
+      isMaximized: isMobile,
       zIndex: nextZ,
-      initialPosition: cfg.initialPosition,
-      initialSize: cfg.initialSize,
+      initialPosition: { x: targetX, y: targetY },
+      initialSize: { width: targetW, height: targetH },
       data: normalizedData
     };
 

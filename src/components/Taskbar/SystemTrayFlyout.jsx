@@ -79,7 +79,8 @@ export const SystemTrayFlyout = ({
       style={{
         position: 'fixed',
         bottom: 'calc(var(--taskbar-height) + 10px)',
-        right: '128px',
+        right: 'max(12px, min(128px, 30vw))',
+        maxWidth: 'calc(100vw - 24px)',
         width: '185px',
         backgroundColor: 'rgba(32, 32, 32, 0.94)',
         backdropFilter: 'blur(30px) saturate(150%)',

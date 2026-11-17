@@ -1,34 +1,40 @@
-/* Microsoft Store - Authentic Windows 11 Fluent Design */
+/* ==========================================================================
+   AUTHENTIC MICROSOFT STORE - WINDOWS 11 FLUENT DESIGN
+   ========================================================================== */
+
 .ms-store-container {
   display: flex;
   flex-direction: column;
-  height: 100%;
   width: 100%;
-  background-color: #202020;
-  color: #f3f3f3;
+  height: 100%;
+  background-color: #1e1e24;
+  color: #f1f5f9;
   font-family: 'Segoe UI Variable Display', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
   overflow: hidden;
   user-select: none;
 }
 
-/* Header Bar */
+/* ----------------------------------------------------
+   1. INTEGRATED TITLEBAR & SEARCH HEADER
+   ---------------------------------------------------- */
 .ms-store-header {
-  height: 54px;
-  background-color: #202020;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  height: 44px;
+  background-color: #1a1a20;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 0 0 0 16px;
   flex-shrink: 0;
   gap: 16px;
-  z-index: 10;
+  z-index: 20;
 }
 
 .ms-store-brand {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
+  cursor: default;
 }
 
 .ms-store-logo {
@@ -37,758 +43,1159 @@
   justify-content: center;
 }
 
-.ms-store-title-wrap {
-  display: flex;
-  flex-direction: column;
-}
-
 .ms-store-title {
-  font-size: 14px;
-  font-weight: 600;
-  color: #ffffff;
-  letter-spacing: -0.2px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #cbd5e1;
+  letter-spacing: -0.1px;
 }
 
-.ms-store-subtitle {
-  font-size: 11px;
-  color: #94a3b8;
-  margin-top: 1px;
-}
-
-.ms-store-search-wrap {
+/* Pill Search Bar */
+.ms-store-search-pill {
   display: flex;
   align-items: center;
-  background-color: #2c2c2c;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 6px;
-  padding: 6px 12px;
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 20px;
+  padding: 4px 14px;
   gap: 8px;
-  width: 320px;
-  transition: all 0.2s ease;
+  width: 380px;
+  max-width: 45vw;
+  height: 30px;
+  transition: all 0.18s ease;
 }
 
-.ms-store-search-wrap:focus-within {
-  border-color: #0067c0;
-  background-color: #1a1a1a;
-  box-shadow: 0 0 0 1px #0067c0;
-}
-
-.ms-store-search-icon {
-  color: #8a8a8a;
-  flex-shrink: 0;
+.ms-store-search-pill:focus-within {
+  background-color: rgba(0, 0, 0, 0.35);
+  border-color: #0078d4;
+  box-shadow: 0 0 0 1px #0078d4;
 }
 
 .ms-store-search-input {
   background: transparent;
   border: none;
   outline: none;
-  color: #f3f3f3;
-  font-size: 12.5px;
+  color: #ffffff;
+  font-size: 12px;
   width: 100%;
 }
 
 .ms-store-search-input::placeholder {
-  color: #8a8a8a;
+  color: #94a3b8;
+  font-size: 12px;
 }
 
-.ms-store-search-clear {
+.ms-store-search-icon {
+  color: #94a3b8;
+  flex-shrink: 0;
+}
+
+.ms-search-clear-btn {
   background: none;
   border: none;
-  color: #8a8a8a;
+  color: #94a3b8;
   cursor: pointer;
   padding: 2px;
   display: flex;
   align-items: center;
-  border-radius: 4px;
+  border-radius: 50%;
 }
 
-.ms-store-search-clear:hover {
+.ms-search-clear-btn:hover {
   color: #ffffff;
-  background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Body Layout */
+/* Header Right: Profile & Window Controls */
+.ms-store-header-right {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  gap: 8px;
+}
+
+.ms-store-profile-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.ms-store-profile-btn:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ----------------------------------------------------
+   2. BODY & LEFT NAVIGATION RAIL
+   ---------------------------------------------------- */
 .ms-store-body {
   display: flex;
   flex: 1;
   overflow: hidden;
-}
-
-/* Left Navigation Rail */
-.ms-store-nav {
-  width: 220px;
-  background-color: #272727;
-  border-right: 1px solid rgba(255, 255, 255, 0.06);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 16px 10px;
-  flex-shrink: 0;
-}
-
-.ms-store-nav-group {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.ms-store-nav-label {
-  font-size: 11px;
-  font-weight: 600;
-  color: #8a8a8a;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  padding: 0 10px 8px 10px;
-}
-
-.ms-store-nav-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 9px 12px;
-  border-radius: 6px;
-  border: none;
-  background: transparent;
-  color: #d1d5db;
-  font-size: 12.5px;
-  font-weight: 500;
-  cursor: pointer;
-  text-align: left;
-  transition: all 0.15s ease;
-}
-
-.ms-store-nav-item:hover {
-  background-color: rgba(255, 255, 255, 0.06);
-  color: #ffffff;
-}
-
-.ms-store-nav-item.active {
-  background-color: rgba(255, 255, 255, 0.09);
-  color: #ffffff;
-  font-weight: 600;
   position: relative;
 }
 
-.ms-store-nav-item.active::before {
-  content: '';
-  position: absolute;
-  left: 3px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 3px;
-  height: 16px;
-  background-color: #0067c0;
-  border-radius: 2px;
+.ms-store-rail {
+  width: 68px;
+  background-color: #181820;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 0;
+  flex-shrink: 0;
+  z-index: 10;
 }
 
-/* Publisher Badge */
-.ms-store-publisher-badge {
+.ms-rail-group {
   display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
   align-items: center;
-  gap: 10px;
-  padding: 10px;
-  background-color: #202020;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.ms-rail-spacer {
+  flex: 1;
+}
+
+.ms-rail-item {
+  position: relative;
+  width: 58px;
+  height: 52px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #94a3b8;
+  gap: 3px;
+  padding: 4px 2px;
+  transition: background-color 0.12s, color 0.12s;
+}
+
+.ms-rail-item:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #f1f5f9;
+}
+
+.ms-rail-item.active {
+  color: #ffffff;
+}
+
+.ms-rail-item.active .ms-rail-icon-box {
+  background-color: rgba(239, 68, 68, 0.18);
+  color: #f87171;
   border-radius: 8px;
 }
 
-.ms-publisher-avatar {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  flex-shrink: 0;
+.ms-rail-indicator {
+  position: absolute;
+  left: 1px;
+  top: 14px;
+  bottom: 14px;
+  width: 3px;
+  background-color: #ef4444;
+  border-radius: 2px;
 }
 
-.ms-publisher-avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.ms-publisher-info {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.ms-publisher-name {
-  font-size: 12px;
-  font-weight: 600;
-  color: #ffffff;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-
-.ms-publisher-status {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 10.5px;
-  color: #94a3b8;
-}
-
-/* Main Content Area */
-.ms-store-content {
-  flex: 1;
-  overflow-y: auto;
-  padding: 24px 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-/* Featured Hero Banner */
-.ms-store-hero {
-  position: relative;
-  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  overflow: hidden;
-  padding: 24px 28px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
-}
-
-.ms-hero-content {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.ms-hero-badge {
-  font-size: 10.5px;
-  font-weight: 700;
-  color: #38bdf8;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-}
-
-.ms-hero-header {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.ms-hero-icon {
-  width: 52px;
-  height: 52px;
-  background-color: #27272a;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 10px;
+.ms-rail-icon-box {
+  width: 32px;
+  height: 26px;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
+  transition: all 0.15s ease;
+}
+
+.ms-rail-label {
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: -0.1px;
+  white-space: nowrap;
+}
+
+/* ----------------------------------------------------
+   3. MAIN CONTENT SCROLLER
+   ---------------------------------------------------- */
+.ms-store-main-scroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 16px 24px 40px 24px;
+}
+
+/* ----------------------------------------------------
+   4. ASYMMETRIC HERO SPOTLIGHT SECTION
+   ---------------------------------------------------- */
+.ms-hero-grid {
+  display: grid;
+  grid-template-columns: 1.55fr 1fr;
+  gap: 12px;
+  margin-bottom: 28px;
+  width: 100%;
+}
+
+/* Large Left Hero Card */
+.ms-hero-card-left {
+  position: relative;
+  height: 300px;
+  border-radius: 12px;
+  overflow: hidden;
+  padding: 32px 36px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: background 0.4s ease;
+}
+
+.ms-hero-left-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 55%;
+  z-index: 2;
 }
 
 .ms-hero-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.15;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.3px;
+}
+
+.ms-hero-subtitle {
+  font-size: 13px;
+  color: #cbd5e1;
+  margin: 0 0 22px 0;
+  line-height: 1.4;
+  opacity: 0.9;
+}
+
+.ms-hero-action-pill {
+  align-self: flex-start;
+  padding: 7px 32px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.ms-hero-action-pill:hover {
+  transform: translateY(-1px) scale(1.02);
+  filter: brightness(1.08);
+}
+
+.ms-hero-right-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.ms-hero-brand-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ms-spotify-circle {
+  width: 90px;
+  height: 90px;
+}
+
+.ms-spotify-wordmark {
+  font-size: 38px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -1.5px;
+}
+
+.ms-tatagih-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ms-tatagih-wordmark {
+  font-size: 34px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.8px;
+}
+
+/* Hero Carousel Dots */
+.ms-hero-dots {
+  position: absolute;
+  bottom: 12px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  z-index: 5;
+}
+
+.ms-hero-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ms-hero-dot.active {
+  background-color: #ffffff;
+  width: 14px;
+  border-radius: 4px;
+}
+
+/* Right Stack (WhatsApp + 2 Mini Cards) */
+.ms-hero-stack-right {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 300px;
+}
+
+/* WhatsApp Bright Green Card */
+.ms-hero-card-whatsapp {
+  height: 180px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 60%, #047857 100%);
+  padding: 22px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(5, 150, 105, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.ms-hero-card-whatsapp:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(5, 150, 105, 0.35);
+}
+
+.ms-whatsapp-info {
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+  max-width: 65%;
+}
+
+.ms-whatsapp-title {
   font-size: 20px;
   font-weight: 700;
   color: #ffffff;
   margin: 0;
 }
 
-.ms-hero-tagline {
-  font-size: 12.5px;
-  color: #cbd5e1;
-  margin: 3px 0 0 0;
-}
-
-.ms-hero-motto {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background-color: rgba(0, 103, 192, 0.15);
-  border-left: 3px solid #0067c0;
-  padding: 8px 14px;
-  border-radius: 4px;
-  font-size: 12.5px;
+.ms-whatsapp-get-btn {
+  align-self: flex-start;
+  margin: 12px 0 14px 0;
+  padding: 5px 24px;
+  border-radius: 16px;
+  background-color: #047857;
+  color: #ffffff;
+  font-size: 12px;
   font-weight: 600;
-  color: #7dd3fc;
-  font-style: italic;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: background-color 0.12s;
 }
 
-.ms-quote-icon {
-  color: #38bdf8;
-  flex-shrink: 0;
+.ms-whatsapp-get-btn:hover {
+  background-color: #065f46;
 }
 
-.ms-hero-desc {
-  font-size: 12.5px;
-  line-height: 1.55;
-  color: #94a3b8;
-  margin: 0;
-  max-width: 800px;
-}
-
-.ms-hero-footer {
+/* ESRB Badge */
+.ms-esrb-badge {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-top: 8px;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.ms-hero-tags {
-  display: flex;
-  flex-wrap: wrap;
   gap: 6px;
 }
 
-.ms-tech-pill {
-  font-size: 11px;
-  padding: 3px 9px;
-  border-radius: 4px;
-  background-color: rgba(255, 255, 255, 0.08);
-  color: #e2e8f0;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+.ms-esrb-letter {
+  background-color: #000000;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 4px;
+  border: 1px solid #ffffff;
+  line-height: 1;
 }
 
-.ms-hero-actions {
+.ms-esrb-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.ms-esrb-headline {
+  font-size: 8.5px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.1;
+}
+
+.ms-esrb-sub {
+  font-size: 7px;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1;
+}
+
+.ms-whatsapp-logo-watermark {
+  width: 78px;
+  height: 78px;
+  opacity: 0.95;
+  z-index: 2;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.2));
+}
+
+/* Bottom Row: 2 Mini Side-by-Side Cards */
+.ms-hero-bottom-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  height: 108px;
+}
+
+.ms-mini-card {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  display: flex;
+  align-items: flex-end;
+  padding: 10px;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.ms-mini-card:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+}
+
+.ms-mini-fm {
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.2) 0%, rgba(15, 23, 42, 0.85) 100%),
+              radial-gradient(circle at 50% 20%, #15803d 0%, #064e3b 70%);
+}
+
+.ms-mini-forza {
+  background: linear-gradient(180deg, rgba(30, 27, 75, 0.2) 0%, rgba(30, 27, 75, 0.85) 100%),
+              linear-gradient(135deg, #1e3a8a 0%, #312e81 60%, #0369a1 100%);
+}
+
+.ms-mini-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
+}
+
+.ms-mini-pill-tag {
+  position: relative;
+  z-index: 2;
+  font-size: 11px;
+  font-weight: 600;
+  color: #ffffff;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 5px;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
 }
 
-/* Buttons */
-.ms-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 8px 16px;
-  border-radius: 6px;
-  font-size: 12.5px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.15s ease;
-  border: none;
-}
-
-.ms-btn-primary {
-  background-color: #0067c0;
+.ms-red-icon-box {
+  background-color: #ef4444;
   color: #ffffff;
+  font-size: 8px;
+  font-weight: 800;
+  padding: 2px 3px;
+  border-radius: 2px;
 }
 
-.ms-btn-primary:hover {
-  background-color: #1979c9;
-}
-
-.ms-btn-secondary {
-  background-color: #2c2c2c;
+.ms-mini-badge-citylife {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  font-size: 9px;
+  font-weight: 700;
   color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  letter-spacing: -0.2px;
+  z-index: 2;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
 }
 
-.ms-btn-secondary:hover {
-  background-color: #383838;
+/* ----------------------------------------------------
+   5. HORIZONTAL SHELF SECTION: APPS WE THINK...
+   ---------------------------------------------------- */
+.ms-shelf-section {
+  width: 100%;
+  margin-bottom: 24px;
 }
 
-.ms-btn-ghost {
-  background: transparent;
-  color: #94a3b8;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.ms-btn-ghost:hover {
-  color: #ffffff;
-  background-color: rgba(255, 255, 255, 0.05);
-}
-
-/* Section Header */
-.ms-section-header {
+.ms-shelf-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 14px;
 }
 
-.ms-section-title {
-  font-size: 16px;
+.ms-shelf-title-wrap {
+  cursor: pointer;
+}
+
+.ms-shelf-title {
+  font-size: 17px;
   font-weight: 600;
   color: #ffffff;
   margin: 0;
-}
-
-.ms-section-desc {
-  font-size: 12px;
-  color: #8a8a8a;
-  margin: 3px 0 0 0;
-}
-
-/* Windows Fluent App Cards Grid */
-.ms-store-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px;
-}
-
-.ms-card {
-  background-color: #272727;
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 8px;
-  padding: 16px;
   display: flex;
-  flex-direction: column;
-  gap: 12px;
-  cursor: pointer;
-  transition: all 0.15s ease;
+  align-items: center;
+  gap: 4px;
+  letter-spacing: -0.2px;
 }
 
-.ms-card:hover {
-  background-color: #2f2f2f;
-  border-color: rgba(255, 255, 255, 0.18);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.28);
+.ms-shelf-title:hover {
+  text-decoration: underline;
 }
 
-.ms-card-top {
+.ms-shelf-title-chevron {
+  color: #94a3b8;
+  transition: transform 0.15s ease;
+}
+
+.ms-shelf-title:hover .ms-shelf-title-chevron {
+  transform: translateX(2px);
+}
+
+.ms-shelf-controls {
   display: flex;
-  align-items: flex-start;
-  gap: 12px;
+  gap: 6px;
 }
 
-.ms-card-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 8px;
-  background-color: #202020;
+.ms-shelf-nav-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
+  cursor: pointer;
+  transition: all 0.15s ease;
 }
 
-.ms-card-identity {
+.ms-shelf-nav-btn:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+/* Horizontal Scroll Container */
+.ms-shelf-slider {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 4px 2px 10px 2px;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+}
+
+.ms-shelf-slider::-webkit-scrollbar {
+  height: 6px;
+}
+
+.ms-shelf-slider::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.ms-shelf-slider::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+}
+
+/* Compact App Tile (Windows 11 Store Anatomy) */
+.ms-app-tile {
+  width: 134px;
+  min-width: 134px;
+  height: 195px;
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 12px 10px 8px 10px;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.ms-app-tile:hover {
+  transform: translateY(-2px);
+  background-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.ms-app-tile-icon-box {
+  width: 66px;
+  height: 66px;
+  border-radius: 12px;
+  margin: 4px auto 12px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
 }
 
-.ms-card-title {
-  font-size: 13.5px;
+.ms-app-tile-name {
+  font-size: 11.5px;
   font-weight: 600;
   color: #ffffff;
-  margin: 0;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-
-.ms-card-cat {
-  font-size: 11px;
-  color: #94a3b8;
-  margin-top: 1px;
-}
-
-.ms-card-rating {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 3px;
-}
-
-.ms-stars {
-  display: flex;
-  align-items: center;
-  gap: 1px;
-}
-
-.ms-rating-text {
-  font-size: 10.5px;
-  color: #8a8a8a;
-}
-
-/* Motto container inside card */
-.ms-card-motto {
-  display: flex;
-  align-items: flex-start;
-  gap: 6px;
-  background-color: #202020;
-  border-left: 2px solid #0067c0;
-  padding: 6px 10px;
-  border-radius: 4px;
-  font-size: 11.5px;
-  font-weight: 500;
-  color: #7dd3fc;
-  font-style: italic;
-  line-height: 1.4;
-}
-
-.ms-card-quote-icon {
-  color: #38bdf8;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-.ms-card-desc {
-  font-size: 11.5px;
-  color: #94a3b8;
-  line-height: 1.45;
-  margin: 0;
+  line-height: 1.28;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: auto;
 }
 
-.ms-card-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  margin-top: auto;
-}
-
-.ms-card-tag {
-  font-size: 10.5px;
-  padding: 2px 7px;
-  border-radius: 4px;
-  background-color: #202020;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  color: #cbd5e1;
-}
-
-.ms-card-tag.muted {
-  color: #8a8a8a;
-}
-
-.ms-card-actions {
+.ms-app-tile-footer {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding-top: 6px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  justify-content: flex-end;
+  margin-top: 6px;
 }
 
-.ms-card-btn {
-  flex: 1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 7px 10px;
-  border-radius: 5px;
-  font-size: 11.5px;
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
-  transition: all 0.15s ease;
-}
-
-.ms-card-btn-get {
-  background-color: #0067c0;
-  color: #ffffff;
-}
-
-.ms-card-btn-get:hover {
-  background-color: #1979c9;
-}
-
-.ms-card-btn-info {
-  background-color: #202020;
-  color: #d1d5db;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.ms-card-btn-info:hover {
-  background-color: #2a2a2a;
-  color: #ffffff;
-}
-
-.ms-card-btn-git {
-  width: 32px;
-  flex: 0 0 32px;
-  padding: 0;
-  background-color: #202020;
+.ms-app-tile-price {
+  font-size: 11px;
   color: #94a3b8;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 5px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.15s ease;
+  font-weight: 500;
 }
 
-.ms-card-btn-git:hover {
-  background-color: #2a2a2a;
-  color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.2);
-}
-
-/* Modal Dialog */
-.ms-modal-backdrop {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.65);
-  backdrop-filter: blur(8px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  padding: 20px;
-}
-
-.ms-modal-dialog {
-  background-color: #272727;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 10px;
-  width: 100%;
-  max-width: 640px;
-  max-height: 85vh;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
-  overflow: hidden;
-}
-
-.ms-modal-header {
-  padding: 16px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  background-color: #202020;
-}
-
-.ms-modal-brand {
-  display: flex;
-  align-items: center;
+/* ----------------------------------------------------
+   6. TOP FREE APPS GRID
+   ---------------------------------------------------- */
+.ms-top-free-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 12px;
 }
 
-.ms-modal-title {
-  font-size: 15px;
+.ms-top-free-card {
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 10px 14px;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ms-top-free-card:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
+}
+
+.ms-top-free-rank {
+  font-size: 13px;
   font-weight: 700;
+  color: #94a3b8;
+  width: 14px;
+  text-align: center;
+}
+
+.ms-top-free-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ms-top-free-info {
+  flex: 1;
+  overflow: hidden;
+}
+
+.ms-top-free-title {
+  font-size: 12.5px;
+  font-weight: 600;
   color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ms-top-free-cat {
+  font-size: 11px;
+  color: #94a3b8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 1px 0 3px 0;
+}
+
+.ms-top-free-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10.5px;
+  color: #cbd5e1;
+}
+
+.ms-bullet {
+  color: #64748b;
+}
+
+.ms-price-badge {
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.ms-btn-card-open {
+  padding: 4px 14px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 14px;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.12s;
+  flex-shrink: 0;
+}
+
+.ms-btn-card-open:hover {
+  background-color: #0078d4;
+  border-color: #0078d4;
+}
+
+/* ----------------------------------------------------
+   7. SEARCH RESULTS & CATEGORY VIEWS
+   ---------------------------------------------------- */
+.ms-search-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.ms-search-count {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.ms-search-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+}
+
+.ms-search-card {
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 12px 14px;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ms-search-card:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+}
+
+.ms-search-card-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ms-search-card-info {
+  flex: 1;
+  overflow: hidden;
+}
+
+.ms-search-card-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ms-search-card-category {
+  font-size: 11px;
+  color: #94a3b8;
+  margin: 2px 0 4px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ms-search-card-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10.5px;
+  color: #cbd5e1;
+}
+
+/* Empty State */
+.ms-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.ms-empty-icon {
+  color: #64748b;
+  opacity: 0.5;
+  margin-bottom: 14px;
+}
+
+.ms-empty-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #f1f5f9;
+  margin: 0 0 6px 0;
+}
+
+.ms-empty-sub {
+  font-size: 12px;
+  color: #94a3b8;
   margin: 0;
 }
 
-.ms-modal-subtitle {
-  font-size: 11.5px;
-  color: #94a3b8;
-  margin: 2px 0 0 0;
+/* Themes Grid */
+.ms-themes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
 }
 
-.ms-modal-close {
-  background: none;
-  border: none;
-  color: #8a8a8a;
-  cursor: pointer;
-  padding: 4px;
-  border-radius: 4px;
+.ms-theme-card {
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.ms-theme-preview {
+  height: 130px;
+  background-size: cover;
+  background-position: center;
+}
+
+.ms-theme-card-body {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
 }
 
-.ms-modal-close:hover {
+.ms-theme-name {
+  font-size: 12px;
+  font-weight: 600;
   color: #ffffff;
-  background-color: rgba(255, 255, 255, 0.1);
 }
 
-.ms-modal-body {
-  padding: 20px;
+/* ----------------------------------------------------
+   8. PRODUCT DETAIL MODAL DIALOG (STORE SHEET)
+   ---------------------------------------------------- */
+.ms-detail-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.ms-detail-dialog {
+  width: 620px;
+  max-width: 95%;
+  max-height: 85vh;
+  background-color: #24242e;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.ms-detail-header {
+  display: flex;
+  align-items: center;
+  padding: 20px 24px;
+  gap: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+}
+
+.ms-detail-icon {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ms-detail-meta {
+  flex: 1;
+}
+
+.ms-detail-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 4px 0;
+}
+
+.ms-detail-developer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #94a3b8;
+  margin: 0 0 6px 0;
+}
+
+.ms-detail-rating-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: #cbd5e1;
+}
+
+.ms-stars {
+  display: flex;
+  gap: 1px;
+}
+
+.ms-rating-score {
+  font-weight: 700;
+}
+
+.ms-rating-reviews {
+  color: #94a3b8;
+}
+
+.ms-cat-pill {
+  color: #38bdf8;
+  background-color: rgba(56, 189, 248, 0.12);
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+.ms-detail-close-btn {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.12s;
+}
+
+.ms-detail-close-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.ms-detail-actions {
+  display: flex;
+  gap: 10px;
+  padding: 14px 24px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.ms-btn-primary-get {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #0078d4;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 24px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.12s;
+}
+
+.ms-btn-primary-get:hover {
+  background-color: #106ebe;
+}
+
+.ms-btn-secondary {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.12s;
+}
+
+.ms-btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.14);
+}
+
+.ms-detail-scroll {
+  padding: 20px 24px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 18px;
 }
 
-.ms-modal-motto-box {
-  background-color: #202020;
-  border-left: 3px solid #0067c0;
-  padding: 12px 16px;
-  border-radius: 6px;
+.ms-motto-callout {
+  background: linear-gradient(135deg, rgba(0, 120, 212, 0.12) 0%, rgba(139, 92, 246, 0.12) 100%);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 8px;
+  padding: 14px 18px;
 }
 
-.ms-modal-motto-label {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 11.5px;
-  font-weight: 600;
+.ms-motto-badge {
+  font-size: 9.5px;
+  font-weight: 700;
   color: #38bdf8;
+  letter-spacing: 0.5px;
   margin-bottom: 4px;
 }
 
-.ms-modal-motto-text {
+.ms-motto-text {
   font-size: 13.5px;
-  font-weight: 600;
-  color: #ffffff;
   font-style: italic;
-  line-height: 1.45;
+  color: #f1f5f9;
+  margin: 0;
+  line-height: 1.4;
 }
 
-.ms-modal-section-title {
-  font-size: 12.5px;
+.ms-detail-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ms-detail-section-title {
+  font-size: 13px;
   font-weight: 600;
-  color: #d1d5db;
-  margin: 0 0 8px 0;
-}
-
-.ms-modal-desc-text {
-  font-size: 12px;
-  line-height: 1.6;
   color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
   margin: 0;
 }
 
-.ms-modal-stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 8px;
+.ms-detail-desc {
+  font-size: 12.5px;
+  color: #cbd5e1;
+  line-height: 1.5;
+  margin: 0;
 }
 
-.ms-modal-stat-card {
-  background-color: #202020;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  padding: 8px 12px;
-  border-radius: 6px;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.ms-modal-stat-label {
-  font-size: 10.5px;
-  color: #8a8a8a;
-}
-
-.ms-modal-stat-val {
-  font-size: 12px;
-  font-weight: 600;
-  color: #ffffff;
-}
-
-.ms-modal-tags {
+.ms-stack-wrap {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
 }
 
-.ms-modal-tech-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
+.ms-stack-pill {
   font-size: 11px;
-  padding: 4px 9px;
+  color: #e2e8f0;
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 3px 8px;
   border-radius: 4px;
-  background-color: #202020;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: #93c5fd;
 }
 
-.ms-modal-footer {
-  padding: 14px 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  background-color: #202020;
+.ms-features-list {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ms-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 12px;
+  color: #cbd5e1;
+  line-height: 1.4;
+}
+
+.ms-feature-check {
+  margin-top: 1px;
+  flex-shrink: 0;
+}
+
+/* ----------------------------------------------------
+   9. RESPONSIVE QUERIES
+   ---------------------------------------------------- */
+@media (max-width: 860px) {
+  .ms-hero-grid {
+    grid-template-columns: 1fr;
+  }
+  .ms-hero-card-left {
+    height: 240px;
+    padding: 20px;
+  }
+  .ms-hero-stack-right {
+    height: auto;
+  }
 }

@@ -930,7 +930,8 @@ export function App() {
           hideTitlebar={[
             'chrome', 'browser', 'theotown', 'nenacare', 'tatagih', 'temuin', 'lintas',
             'neurofly', 'makalah', 'sigap', 'bingkai', 'ldplayer',
-            'explorer', 'recycle_bin', 'notepad', 'todo', 'onenote', 'terminal', 'antigravity'
+            'explorer', 'recycle_bin', 'notepad', 'todo', 'onenote', 'terminal', 'antigravity',
+            'ms-store', 'visiondeck'
           ].includes(win.appId) || Boolean(win.data?.projectId)}
         >
           {renderAppContent(win)}

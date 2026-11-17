@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { RotateCcw, Play, Sparkles, Trophy, FastForward } from 'lucide-react';
+import { RotateCcw, Play, Trophy, FastForward } from 'lucide-react';
 import { playCardSlideSound, playHackerSuccessSound, playClickSound } from '../../utils/sound';
 import './SolitaireApp.css';
 
@@ -340,11 +340,6 @@ export const SolitaireApp = () => {
     setIsWon(true);
   };
 
-  // Demo win trigger for instant visual testing
-  const handleDemoWin = () => {
-    handleAutoFinish();
-  };
-
   // -------------------------------------------------------------
   // THE ICONIC RETRO WINNING CASCADE ANIMATION (WINDOWS 95/XP)
   // -------------------------------------------------------------
@@ -498,10 +493,7 @@ export const SolitaireApp = () => {
               <span>Auto-Finish</span>
             </button>
           )}
-          <button type="button" className="solitaire-btn" onClick={handleDemoWin} title="Uji animasi kartu memantul klasik">
-            <Sparkles size={13} />
-            <span>Demo Win</span>
-          </button>
+
         </div>
 
         <div className="solitaire-menu-right">

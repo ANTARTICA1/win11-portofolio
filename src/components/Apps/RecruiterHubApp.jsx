@@ -21,7 +21,7 @@ const CV = {
     email: 'kresnaartha3@gmail.com',
     linkedin: 'linkedin.com/in/krisnaartha',
     github: 'antartica1',
-    whatsapp: 'https://wa.me/6282247846546'
+    whatsapp: '#'
   },
   skills: [
     { name: 'Flutter & Dart', level: 90, icon: Code },
@@ -541,14 +541,14 @@ export const RecruiterHubApp = ({ onOpenApp }) => {
                 playClickSound();
                 onOpenApp('chrome', { projectId: 'motto' });
               }}
-              title="Buka Koleksi Moto & Visi di Google Chrome"
+              title="Buka Katalog Aplikasi di Microsoft Store"
               style={{
                 display: 'flex',
                 alignItems: 'center',
                 gap: '6px',
-                background: 'linear-gradient(135deg, #0284c7, #6366f1)',
+                background: '#2c2c2c',
                 color: '#ffffff',
-                border: 'none',
+                border: '1px solid rgba(255, 255, 255, 0.15)',
                 borderRadius: '6px',
                 padding: '6px 12px',
                 fontSize: '12px',
@@ -557,31 +557,36 @@ export const RecruiterHubApp = ({ onOpenApp }) => {
               }}
             >
               <Layers size={14} />
-              <span>Vision Deck (Motto)</span>
+              <span>Microsoft Store</span>
             </button>
           )}
 
-          <a
-            href={CV.contact.whatsapp}
-            target="_blank"
-            rel="noreferrer"
+          <button
+            type="button"
+            onClick={() => {
+              playClickSound();
+              if (onOpenApp) {
+                onOpenApp('whatsapp');
+              }
+            }}
+            title="Buka Aplikasi WhatsApp Web OS"
             style={{
               display: 'flex',
               alignItems: 'center',
               gap: '6px',
               backgroundColor: '#22c55e',
               color: '#ffffff',
+              border: 'none',
               borderRadius: '6px',
               padding: '6px 12px',
               fontSize: '12px',
               fontWeight: 600,
-              textDecoration: 'none',
               cursor: 'pointer'
             }}
           >
             <Send size={14} />
             <span>WhatsApp</span>
-          </a>
+          </button>
         </div>
       </div>
 
@@ -622,7 +627,29 @@ export const RecruiterHubApp = ({ onOpenApp }) => {
                   <ul className="cv-contact">
                     <li>
                       <span className="cv-ico"><Phone size={12} fill="#fff" strokeWidth={0} /></span>
-                      <a href={CV.contact.whatsapp}>{CV.contact.phone}</a>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          playClickSound();
+                          if (onOpenApp) {
+                            onOpenApp('whatsapp');
+                          }
+                        }}
+                        title="Buka Aplikasi WhatsApp Web OS"
+                        style={{
+                          background: 'none',
+                          border: 'none',
+                          color: '#e2e8f0',
+                          padding: 0,
+                          fontSize: 'inherit',
+                          fontFamily: 'inherit',
+                          cursor: 'pointer',
+                          textDecoration: 'underline',
+                          textAlign: 'left'
+                        }}
+                      >
+                        {CV.contact.phone}
+                      </button>
                     </li>
                     <li>
                       <span className="cv-ico"><Mail size={12} /></span>

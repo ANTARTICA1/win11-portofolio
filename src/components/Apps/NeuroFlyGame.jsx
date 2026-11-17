@@ -1138,7 +1138,7 @@ export const NeuroFlyGame = ({ isEmbedded = false, onOpenExternal = null }) => {
                 onClick={() => setSteerMode((m) => (m === 'paddle' ? 'cam' : 'paddle'))}
                 title="Beralih antara Kontrol Raket dan Putar Kamera 3D"
               >
-                {steerMode === 'paddle' ? '🎮 Paddle' : '🔄 3D Cam'}
+                {steerMode === 'paddle' ? 'Mode: Paddle' : 'Mode: 3D Cam'}
               </button>
               <button
                 type="button"

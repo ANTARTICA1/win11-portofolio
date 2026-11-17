@@ -35,6 +35,7 @@ const ChromeDinoGame = lazy(() => import('./components/Apps/ChromeDinoGame').the
 const NeuroFlyApp = lazy(() => import('./components/Apps/NeuroFlyApp').then(m => ({ default: m.NeuroFlyApp })));
 const SolitaireApp = lazy(() => import('./components/Apps/SolitaireApp').then(m => ({ default: m.SolitaireApp })));
 const ChessApp = lazy(() => import('./components/Apps/ChessApp').then(m => ({ default: m.ChessApp })));
+const MicrosoftStoreApp = lazy(() => import('./components/Apps/VisionDeckApp').then(m => ({ default: m.VisionDeckApp })));
 
 const AppLoadingSkeleton = () => (
   <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: '#181824', color: '#94a3b8', gap: '14px' }}>
@@ -775,11 +776,16 @@ export function App() {
           </Suspense>
         );
       case 'recruiter':
-      case 'ms-store':
       case 'xbox':
         return (
           <Suspense fallback={<AppLoadingSkeleton />}>
             <RecruiterHubApp onOpenFile={openFile} onOpenApp={launchApp} />
+          </Suspense>
+        );
+      case 'ms-store':
+        return (
+          <Suspense fallback={<AppLoadingSkeleton />}>
+            <MicrosoftStoreApp onLaunchApp={launchApp} />
           </Suspense>
         );
       case 'whatsapp':

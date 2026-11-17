@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { 
-  X, Sparkles, MessageSquare, Compass, Zap, Send, 
+  X, MessageSquare, Compass, Zap, Send, 
   RefreshCw, Download, ExternalLink, ChevronRight, ChevronLeft, Gamepad2, Image, MessageCircle
 } from 'lucide-react';
 import { playClippySound, playClickSound } from '../../utils/sound';
@@ -269,8 +269,7 @@ export const ClippyAssistant = ({
           paddingBottom: '6px'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11.5px', fontWeight: 700, color: '#0369a1' }}>
-            <Sparkles size={14} color="#f59e0b" />
-            <span>Clippy Assistant v2.0</span>
+            <span>Clippy Assistant</span>
           </div>
 
           <button

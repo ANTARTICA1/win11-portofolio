@@ -1,8 +1,8 @@
 import React, { useState, useMemo } from 'react';
 import { 
-  Layers, Sparkles, RotateCw, Search, ExternalLink, 
-  Shield, Share2, Smartphone, Globe, Lock, Camera, 
-  FolderGit2, Shuffle, Quote, Code, CheckCircle2, ChevronRight
+  Search, ExternalLink, FolderGit2, Quote, Code, 
+  X, Smartphone, Globe, Cpu, CheckCircle2, ShieldCheck, 
+  Star, ArrowRight, BookOpen, Layers
 } from 'lucide-react';
 import { PROJECTS_DATA } from '../../data/projectsData';
 import { WinIcon } from '../Common/WinIcon';
@@ -10,18 +10,11 @@ import { playClickSound } from '../../utils/sound';
 import './VisionDeckApp.css';
 
 export const VisionDeckApp = ({ onLaunchApp, initialSelectedProject = null }) => {
-  const [flippedCards, setFlippedCards] = useState(() => {
-    const init = {};
-    if (initialSelectedProject) {
-      init[initialSelectedProject] = true;
-    }
-    return init;
-  });
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedSpotlight, setSelectedSpotlight] = useState(null);
+  const [selectedProject, setSelectedProject] = useState(null);
 
-  // Filter out internal non-project keys like dino
+  // Filter out internal non-project keys like dino and krisnaartha
   const validProjects = useMemo(() => {
     return Object.values(PROJECTS_DATA).filter(
       (p) => p.id !== 'dino' && p.id !== 'krisnaartha' && p.motto
@@ -29,10 +22,10 @@ export const VisionDeckApp = ({ onLaunchApp, initialSelectedProject = null }) =>
   }, []);
 
   const categories = [
-    { id: 'all', label: 'Semua Karya' },
-    { id: 'mobile', label: 'Mobile Apps' },
-    { id: 'web', label: 'Web & AI SaaS' },
-    { id: 'utility', label: 'Desktop & Utilities' }
+    { id: 'all', label: 'Semua Aplikasi', icon: Layers },
+    { id: 'mobile', label: 'Mobile Apps (Flutter)', icon: Smartphone },
+    { id: 'web', label: 'Web & AI Cloud', icon: Globe },
+    { id: 'utility', label: 'Desktop & Game Engine', icon: Cpu }
   ];
 
   const filteredProjects = useMemo(() => {
@@ -42,6 +35,7 @@ export const VisionDeckApp = ({ onLaunchApp, initialSelectedProject = null }) =>
         p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         (p.motto && p.motto.toLowerCase().includes(searchQuery.toLowerCase())) ||
         (p.tagline && p.tagline.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        (p.description && p.description.toLowerCase().includes(searchQuery.toLowerCase())) ||
         (p.stack && p.stack.some((s) => s.toLowerCase().includes(searchQuery.toLowerCase())));
 
       if (!matchSearch) return false;
@@ -72,27 +66,13 @@ export const VisionDeckApp = ({ onLaunchApp, initialSelectedProject = null }) =>
     });
   }, [validProjects, activeCategory, searchQuery]);
 
-  const toggleCardFlip = (projectId) => {
-    playClickSound();
-    setFlippedCards((prev) => ({
-      ...prev,
-      [projectId]: !prev[projectId]
-    }));
-  };
-
-  const flipAllCards = (flipToBack) => {
-    playClickSound();
-    const nextState = {};
-    validProjects.forEach((p) => {
-      nextState[p.id] = flipToBack;
-    });
-    setFlippedCards(nextState);
-  };
-
-  const areAllFlipped = validProjects.length > 0 && validProjects.every((p) => flippedCards[p.id]);
+  // Featured Spotlight Project
+  const featuredProject = useMemo(() => {
+    return validProjects.find((p) => p.id === 'tatagih') || validProjects[0];
+  }, [validProjects]);
 
   const handleLaunchProject = (e, projectId) => {
-    e.stopPropagation();
+    if (e) e.stopPropagation();
     playClickSound();
     if (onLaunchApp) {
       if (projectId === 'neurofly') {
@@ -103,190 +83,339 @@ export const VisionDeckApp = ({ onLaunchApp, initialSelectedProject = null }) =>
     }
   };
 
+  const handleOpenDetail = (project) => {
+    playClickSound();
+    setSelectedProject(project);
+  };
+
+  const handleCloseDetail = () => {
+    playClickSound();
+    setSelectedProject(null);
+  };
+
   return (
-    <div className="vision-deck-container">
-      <header className="vision-deck-header">
-        <div className="vision-deck-title-area">
-          <div className="vision-deck-badge-icon">
-            <Layers size={20} color="#ffffff" />
+    <div className="ms-store-container">
+      {/* Microsoft Store Header Bar */}
+      <header className="ms-store-header">
+        <div className="ms-store-brand">
+          <div className="ms-store-logo">
+            <WinIcon name="store" size={24} />
           </div>
-          <div className="vision-deck-title-text">
-            <h1>Vision Deck - Koleksi Kartu 3D & Filosofi</h1>
-            <p>Eksplorasi moto berima dan esensi nilai dari setiap karya Agung Krisna</p>
+          <div className="ms-store-title-wrap">
+            <div className="ms-store-title">Microsoft Store</div>
+            <div className="ms-store-subtitle">Katalog Karya &amp; Filosofi Pengembang — Agung Krisna</div>
           </div>
         </div>
 
-        <div className="vision-deck-toolbar">
-          <div className="vision-deck-search">
-            <Search size={14} color="#64748b" />
-            <input
-              type="text"
-              placeholder="Cari moto, nama, atau teknologi..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-          </div>
-
-          <button
-            type="button"
-            className="vision-deck-btn"
-            onClick={() => flipAllCards(!areAllFlipped)}
-            title="Balik semua kartu sekaligus"
-          >
-            <RotateCw size={14} />
-            <span>{areAllFlipped ? 'Lihat Spesifikasi' : 'Buka Semua Moto'}</span>
-          </button>
+        <div className="ms-store-search-wrap">
+          <Search size={14} className="ms-store-search-icon" />
+          <input
+            type="text"
+            className="ms-store-search-input"
+            placeholder="Cari aplikasi, stack teknologi, atau kata kunci..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          {searchQuery && (
+            <button
+              type="button"
+              className="ms-store-search-clear"
+              onClick={() => setSearchQuery('')}
+            >
+              <X size={12} />
+            </button>
+          )}
         </div>
       </header>
 
-      <div className="vision-deck-categories">
-        {categories.map((cat) => (
-          <button
-            key={cat.id}
-            type="button"
-            className={`vision-deck-filter-pill ${activeCategory === cat.id ? 'active' : ''}`}
-            onClick={() => {
-              playClickSound();
-              setActiveCategory(cat.id);
-            }}
-          >
-            {cat.label}
-          </button>
-        ))}
-        <span style={{ marginLeft: 'auto', fontSize: '11px', color: '#64748b' }}>
-          Menampilkan {filteredProjects.length} kartu koleksi
-        </span>
-      </div>
-
-      <main className="vision-deck-content">
-        <div className="vision-deck-grid">
-          {filteredProjects.map((project) => {
-            const isFlipped = !!flippedCards[project.id];
-            const stats = project.stats || [];
-
-            return (
-              <div key={project.id} className="deck-card-scene">
-                <div
-                  className={`deck-card ${isFlipped ? 'is-flipped' : ''}`}
-                  onClick={() => toggleCardFlip(project.id)}
-                  title="Klik untuk membalik kartu"
+      <div className="ms-store-body">
+        {/* Left Navigation Rail */}
+        <nav className="ms-store-nav">
+          <div className="ms-store-nav-group">
+            <div className="ms-store-nav-label">Navigasi Katalog</div>
+            {categories.map((cat) => {
+              const Icon = cat.icon;
+              return (
+                <button
+                  key={cat.id}
+                  type="button"
+                  className={`ms-store-nav-item ${activeCategory === cat.id ? 'active' : ''}`}
+                  onClick={() => {
+                    playClickSound();
+                    setActiveCategory(cat.id);
+                  }}
                 >
-                  {/* FRONT FACE: SPECIFICATIONS & IDENTITY */}
-                  <div className="deck-card-face deck-card-front">
-                    <div className="card-holo-shimmer" />
+                  <Icon size={16} />
+                  <span>{cat.label}</span>
+                </button>
+              );
+            })}
+          </div>
 
-                    <div className="card-top-row">
-                      <span className="card-badge">{project.status || 'Active Showcase'}</span>
-                      <span className="card-year-tag">{project.period || '2024'}</span>
-                    </div>
+          <div className="ms-store-publisher-badge">
+            <div className="ms-publisher-avatar">
+              <img src="/certificates/foto_krisna.jpg" alt="Agung Krisna" />
+            </div>
+            <div className="ms-publisher-info">
+              <div className="ms-publisher-name">Agung Krisna</div>
+              <div className="ms-publisher-status">
+                <ShieldCheck size={12} color="#3b82f6" />
+                <span>Verified Developer</span>
+              </div>
+            </div>
+          </div>
+        </nav>
 
-                    <div className="card-icon-banner">
-                      <div className="card-icon-box">
-                        <WinIcon name={project.id} size={32} />
-                      </div>
-                      <div className="card-heading">
-                        <h3>{project.name}</h3>
-                        <p>{project.tagline}</p>
-                      </div>
-                    </div>
+        {/* Main Content Area */}
+        <main className="ms-store-content">
+          {/* Featured Spotlight Banner (Shown when no search query and on 'all' tab) */}
+          {activeCategory === 'all' && !searchQuery && featuredProject && (
+            <div className="ms-store-hero">
+              <div className="ms-hero-backdrop" />
+              <div className="ms-hero-content">
+                <div className="ms-hero-badge">PILIHAN PENGEMBANG &bull; UNGGULAN</div>
+                <div className="ms-hero-header">
+                  <div className="ms-hero-icon">
+                    <WinIcon name={featuredProject.id} size={44} />
+                  </div>
+                  <div>
+                    <h2 className="ms-hero-title">{featuredProject.name}</h2>
+                    <p className="ms-hero-tagline">{featuredProject.tagline}</p>
+                  </div>
+                </div>
 
-                    {stats.length > 0 && (
-                      <div className="card-stats-list">
-                        {stats.slice(0, 3).map((st, sIdx) => (
-                          <div key={sIdx} className="card-stat-item">
-                            <span className="card-stat-label">{st.label}</span>
-                            <span className="card-stat-val">{st.value}</span>
-                          </div>
-                        ))}
-                      </div>
-                    )}
+                <div className="ms-hero-motto">
+                  <Quote size={15} className="ms-quote-icon" />
+                  <span>&ldquo;{featuredProject.motto}&rdquo;</span>
+                </div>
 
-                    <div className="card-stack-pills">
-                      {project.stack?.slice(0, 4).map((tech, tIdx) => (
-                        <span key={tIdx} className="card-stack-pill">{tech}</span>
-                      ))}
-                    </div>
+                <p className="ms-hero-desc">
+                  {featuredProject.description}
+                </p>
 
-                    <div className="card-flip-prompt">
-                      <Sparkles size={13} />
-                      <span>Klik untuk membuka Moto Resmi</span>
-                    </div>
+                <div className="ms-hero-footer">
+                  <div className="ms-hero-tags">
+                    {featuredProject.stack?.slice(0, 4).map((tech, idx) => (
+                      <span key={idx} className="ms-tech-pill">{tech}</span>
+                    ))}
                   </div>
 
-                  {/* BACK FACE: EMBOSSED MOTTO & CORE MISSION */}
-                  <div className="deck-card-face deck-card-back">
-                    <div className="back-header-row">
-                      <span className="back-motto-badge">
-                        <Quote size={13} />
-                        <span>Moto Resmi Produk</span>
-                      </span>
-                      <WinIcon name={project.id} size={22} />
-                    </div>
-
-                    <div className="back-motto-quote-box">
-                      <h4>"{project.motto}"</h4>
-                    </div>
-
-                    <div className="back-mission-text">
-                      {project.description}
-                    </div>
-
-                    <div style={{ marginTop: 'auto', paddingTop: '10px' }}>
-                      <div style={{ fontSize: '10.5px', color: '#94a3b8', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '5px' }}>
-                        <Code size={12} color="#38bdf8" />
-                        <span>Arsitektur Pilihan:</span>
-                      </div>
-                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px', marginBottom: '14px' }}>
-                        {project.stack?.slice(0, 3).map((t, idx) => (
-                          <span
-                            key={idx}
-                            style={{
-                              fontSize: '10px',
-                              padding: '2px 7px',
-                              borderRadius: '4px',
-                              background: 'rgba(99, 102, 241, 0.2)',
-                              border: '1px solid rgba(99, 102, 241, 0.35)',
-                              color: '#c7d2fe'
-                            }}
-                          >
-                            {t}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="back-actions-grid">
-                      <button
-                        type="button"
-                        className="back-action-btn launch"
-                        onClick={(e) => handleLaunchProject(e, project.id)}
-                        title="Buka showcase aplikasi ini"
-                      >
-                        <ExternalLink size={13} />
-                        <span>Buka Showcase</span>
-                      </button>
-
-                      {project.githubUrl && (
-                        <a
-                          href={project.githubUrl}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="back-action-btn"
-                          onClick={(e) => e.stopPropagation()}
-                          title="Lihat source code di GitHub"
-                        >
-                          <FolderGit2 size={13} />
-                          <span>GitHub</span>
-                        </a>
-                      )}
-                    </div>
+                  <div className="ms-hero-actions">
+                    <button
+                      type="button"
+                      className="ms-btn ms-btn-primary"
+                      onClick={(e) => handleLaunchProject(e, featuredProject.id)}
+                    >
+                      <ExternalLink size={14} />
+                      <span>Buka Aplikasi</span>
+                    </button>
+                    <button
+                      type="button"
+                      className="ms-btn ms-btn-secondary"
+                      onClick={() => handleOpenDetail(featuredProject)}
+                    >
+                      <span>Lihat Detail</span>
+                    </button>
                   </div>
                 </div>
               </div>
-            );
-          })}
+            </div>
+          )}
+
+          {/* Section Heading */}
+          <div className="ms-section-header">
+            <div>
+              <h3 className="ms-section-title">
+                {activeCategory === 'all' ? 'Semua Aplikasi & Karya' : categories.find(c => c.id === activeCategory)?.label}
+              </h3>
+              <p className="ms-section-desc">
+                {filteredProjects.length} aplikasi siap diuji dan ditinjau
+              </p>
+            </div>
+          </div>
+
+          {/* Windows Fluent App Cards Grid */}
+          <div className="ms-store-grid">
+            {filteredProjects.map((project) => (
+              <div
+                key={project.id}
+                className="ms-card"
+                onClick={() => handleOpenDetail(project)}
+              >
+                <div className="ms-card-top">
+                  <div className="ms-card-icon">
+                    <WinIcon name={project.id} size={36} />
+                  </div>
+                  <div className="ms-card-identity">
+                    <h4 className="ms-card-title">{project.name}</h4>
+                    <span className="ms-card-cat">{project.status || 'Showcase'}</span>
+                    <div className="ms-card-rating">
+                      <div className="ms-stars">
+                        <Star size={11} fill="#eab308" color="#eab308" />
+                        <Star size={11} fill="#eab308" color="#eab308" />
+                        <Star size={11} fill="#eab308" color="#eab308" />
+                        <Star size={11} fill="#eab308" color="#eab308" />
+                        <Star size={11} fill="#eab308" color="#eab308" />
+                      </div>
+                      <span className="ms-rating-text">5.0 &bull; Bebas Biaya</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="ms-card-motto">
+                  <Quote size={12} className="ms-card-quote-icon" />
+                  <span>&ldquo;{project.motto}&rdquo;</span>
+                </div>
+
+                <p className="ms-card-desc">
+                  {project.tagline || project.description}
+                </p>
+
+                <div className="ms-card-tags">
+                  {project.stack?.slice(0, 3).map((st, i) => (
+                    <span key={i} className="ms-card-tag">{st}</span>
+                  ))}
+                  {project.stack && project.stack.length > 3 && (
+                    <span className="ms-card-tag muted">+{project.stack.length - 3}</span>
+                  )}
+                </div>
+
+                <div className="ms-card-actions">
+                  <button
+                    type="button"
+                    className="ms-card-btn ms-card-btn-get"
+                    onClick={(e) => handleLaunchProject(e, project.id)}
+                    title="Jalankan dan buka aplikasi ini"
+                  >
+                    <ExternalLink size={13} />
+                    <span>Buka</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    className="ms-card-btn ms-card-btn-info"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleOpenDetail(project);
+                    }}
+                    title="Lihat spesifikasi &amp; arsitektur"
+                  >
+                    <span>Detail</span>
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </main>
+      </div>
+
+      {/* Detail Modal (Windows 11 Fluent Dialog) */}
+      {selectedProject && (
+        <div className="ms-modal-backdrop" onClick={handleCloseDetail}>
+          <div className="ms-modal-dialog" onClick={(e) => e.stopPropagation()}>
+            <div className="ms-modal-header">
+              <div className="ms-modal-brand">
+                <WinIcon name={selectedProject.id} size={32} />
+                <div>
+                  <h3 className="ms-modal-title">{selectedProject.name}</h3>
+                  <p className="ms-modal-subtitle">{selectedProject.tagline}</p>
+                </div>
+              </div>
+              <button
+                type="button"
+                className="ms-modal-close"
+                onClick={handleCloseDetail}
+              >
+                <X size={16} />
+              </button>
+            </div>
+
+            <div className="ms-modal-body">
+              {/* Motto Banner */}
+              <div className="ms-modal-motto-box">
+                <div className="ms-modal-motto-label">
+                  <Quote size={13} />
+                  <span>Filosofi &amp; Moto Produk:</span>
+                </div>
+                <div className="ms-modal-motto-text">
+                  &ldquo;{selectedProject.motto}&rdquo;
+                </div>
+              </div>
+
+              {/* Description */}
+              <div className="ms-modal-section">
+                <h4 className="ms-modal-section-title">Deskripsi Lengkap</h4>
+                <p className="ms-modal-desc-text">
+                  {selectedProject.description}
+                </p>
+              </div>
+
+              {/* Specs & Stats if available */}
+              {selectedProject.stats && selectedProject.stats.length > 0 && (
+                <div className="ms-modal-section">
+                  <h4 className="ms-modal-section-title">Spesifikasi &amp; Metrik Kunci</h4>
+                  <div className="ms-modal-stats-grid">
+                    {selectedProject.stats.map((st, sIdx) => (
+                      <div key={sIdx} className="ms-modal-stat-card">
+                        <span className="ms-modal-stat-label">{st.label}</span>
+                        <span className="ms-modal-stat-val">{st.value}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Tech Stack */}
+              <div className="ms-modal-section">
+                <h4 className="ms-modal-section-title">Teknologi &amp; Arsitektur</h4>
+                <div className="ms-modal-tags">
+                  {selectedProject.stack?.map((t, tIdx) => (
+                    <span key={tIdx} className="ms-modal-tech-badge">
+                      <Code size={11} />
+                      <span>{t}</span>
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="ms-modal-footer">
+              <button
+                type="button"
+                className="ms-btn ms-btn-primary"
+                onClick={(e) => {
+                  handleLaunchProject(e, selectedProject.id);
+                  handleCloseDetail();
+                }}
+              >
+                <ExternalLink size={14} />
+                <span>Buka Aplikasi Sekarang</span>
+              </button>
+
+              {selectedProject.githubUrl && (
+                <a
+                  href={selectedProject.githubUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="ms-btn ms-btn-secondary"
+                  style={{ textDecoration: 'none' }}
+                >
+                  <FolderGit2 size={14} />
+                  <span>Lihat Repository GitHub</span>
+                </a>
+              )}
+
+              <button
+                type="button"
+                className="ms-btn ms-btn-ghost"
+                onClick={handleCloseDetail}
+              >
+                Tutup
+              </button>
+            </div>
+          </div>
         </div>
-      </main>
+      )}
     </div>
   );
 };

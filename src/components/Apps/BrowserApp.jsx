@@ -40,8 +40,8 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
       return [{
         id: 'motto',
         projectId: 'motto',
-        title: 'Koleksi Moto & Visi',
-        icon: 'visiondeck'
+        title: 'Microsoft Store',
+        icon: 'store'
       }];
     }
     const p = PROJECTS_DATA[initKey] || PROJECTS_DATA.tatagih;
@@ -82,8 +82,8 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
           {
             id: 'motto',
             projectId: 'motto',
-            title: 'Koleksi Moto & Visi',
-            icon: 'visiondeck'
+            title: 'Microsoft Store',
+            icon: 'store'
           }
         ];
       }
@@ -440,11 +440,11 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
             playClickSound();
             handleSelectProject('motto');
           }}
-          title="Buka Koleksi Kartu Moto & Filosofi di Chrome"
+          title="Buka Microsoft Store - Portofolio Aplikasi"
           style={{ color: '#38bdf8', fontWeight: 600 }}
         >
-          <WinIcon name="visiondeck" size={13} />
-          <span>Koleksi Moto &amp; Visi</span>
+          <WinIcon name="store" size={13} />
+          <span>Microsoft Store</span>
         </div>
         <div
           className={`chrome-bookmark-item ${activeProjectId === 'dino' ? 'active' : ''}`}
@@ -574,8 +574,8 @@ export const BrowserApp = ({ onOpenFile, initialProject = 'tatagih', initialUrl 
                 }}
                 style={{ borderColor: 'rgba(56, 189, 248, 0.4)', color: '#38bdf8' }}
               >
-                <WinIcon name="visiondeck" size={14} />
-                <span>Koleksi Moto &amp; Visi</span>
+                <WinIcon name="store" size={14} />
+                <span>Microsoft Store</span>
               </button>
               {projectKeys.filter(k => k !== 'dino' && k !== 'krisnaartha').map((pKey) => {
                 const p = PROJECTS_DATA[pKey];

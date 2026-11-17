@@ -100,7 +100,7 @@ export function App() {
   const [powerScreen, setPowerScreen] = useState(null);
 
   // Dynamic system adjustments (Brightness, Night Light, Volume)
-  const [brightness, setBrightness] = useState(100);
+  const [brightness, setBrightness] = useState(70);
   const [nightLight, setNightLight] = useState(false);
   const [volume, setVolume] = useState(80);
   const [closeFlyoutsSignal, setCloseFlyoutsSignal] = useState(0);
@@ -887,8 +887,21 @@ export function App() {
     }
   };
 
+  const calculateFilterBrightness = (val) => {
+    // Pada dasarnya nilai 70% di slider tetap 100% pencahayaan normal (tidak digelapkan)
+    if (val === 70) return null;
+    if (val > 70) {
+      // Jika dinaikkan menuju 100%, layar semakin terang (flashbang boost hingga 135%)
+      const boost = 100 + Math.round((val - 70) * 1.15);
+      return `brightness(${boost}%)`;
+    }
+    // Jika diturunkan di bawah 70%, meredup perlahan
+    const dim = 100 - Math.round((70 - val) * 0.65);
+    return `brightness(${dim}%)`;
+  };
+
   const rootFilterStyle = [
-    brightness < 100 ? `brightness(${brightness}%)` : null,
+    calculateFilterBrightness(brightness),
     nightLight ? 'sepia(0.24) saturate(0.92)' : null
   ].filter(Boolean).join(' ') || undefined;
 

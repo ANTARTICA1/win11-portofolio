@@ -4,7 +4,6 @@ import { Taskbar } from './components/Taskbar/Taskbar';
 import { Window } from './components/Windows/Window';
 import { ExternalLink } from 'lucide-react';
 
-import { NotificationToast } from './components/Common/NotificationToast';
 import { RunDialog } from './components/Common/RunDialog';
 import { WinIcon } from './components/Common/WinIcon';
 import { BSODScreen } from './components/Common/BSODScreen';
@@ -105,7 +104,7 @@ export function App() {
 
   // Easter Eggs States
   const [bsodActive, setBsodActive] = useState(false);
-  const [clippyActive, setClippyActive] = useState(false);
+  const [clippyActive, setClippyActive] = useState(true);
   const [confettiActive, setConfettiActive] = useState(false);
   const [konamiToast, setKonamiToast] = useState(false);
   const konamiSeqRef = useRef([]);
@@ -845,6 +844,7 @@ export function App() {
               onSelectAccentColor={setAccentColor}
               isDarkTheme={isDarkTheme}
               onToggleTheme={() => setIsDarkTheme(!isDarkTheme)}
+              onLaunchApp={launchApp}
             />
           </Suspense>
         );
@@ -936,11 +936,6 @@ export function App() {
         volume={volume}
         setVolume={setVolume}
         closeFlyoutsSignal={closeFlyoutsSignal}
-      />
-
-      <NotificationToast
-        onOpenRecruiter={() => launchApp('recruiter')}
-        onOpenExplorer={() => launchApp('explorer', { path: 'Projects' })}
       />
 
       <RunDialog

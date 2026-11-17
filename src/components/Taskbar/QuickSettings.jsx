@@ -22,6 +22,7 @@ export const QuickSettings = ({
   const [btActive, setBtActive] = useState(true);
   const [airplaneActive, setAirplaneActive] = useState(false);
   const [batterySaver, setBatterySaver] = useState(false);
+  const [accessibilityActive, setAccessibilityActive] = useState(false);
   const flyoutRef = useRef(null);
 
   useEffect(() => {
@@ -122,15 +123,17 @@ export const QuickSettings = ({
     },
     { 
       label: 'Accessibility', 
-      sub: 'Ready', 
+      sub: accessibilityActive ? 'On' : 'Ready', 
       icon: Sliders, 
-      active: false, 
+      active: accessibilityActive, 
       toggle: () => {
+        const nextVal = !accessibilityActive;
+        setAccessibilityActive(nextVal);
         if (onShowTrayToast) {
           onShowTrayToast(
-            <Sliders size={16} color="#a855f7" />, 
+            <Sliders size={16} color="#38bdf8" />, 
             'Accessibility', 
-            'All systems accessible. Coffee cup refilled.'
+            nextVal ? 'All systems accessible. Visual enhancement active.' : 'Accessibility standard mode.'
           );
         }
       } 

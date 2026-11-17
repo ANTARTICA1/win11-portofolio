@@ -245,35 +245,19 @@ export const Taskbar = ({
             <ChevronUp size={14} color={systemTrayOpen ? '#38bdf8' : '#9ca3af'} />
           </button>
 
-          <div className="tray-btn">
-            <span
-              onClick={(e) => {
-                e.stopPropagation();
-                showTrayToast(<Wifi size={16} color="#38bdf8" />, 'Wi-Fi Network', 'Connection secured. Your secrets are not.');
-              }}
-              title="Connection secured. Your secrets are not."
-              style={{ display: 'inline-flex', padding: '2px 4px', cursor: 'pointer' }}
-            >
+          <div 
+            className="tray-btn"
+            onClick={handleToggleQuickSettings}
+            title="Internet, Sound &amp; Battery (Quick Settings)"
+            style={{ cursor: 'pointer' }}
+          >
+            <span style={{ display: 'inline-flex', padding: '2px 4px' }}>
               <Wifi size={15} />
             </span>
-            <span
-              onClick={(e) => {
-                e.stopPropagation();
-                handleToggleQuickSettings();
-              }}
-              title="Internet, Sound &amp; Battery (Quick Settings)"
-              style={{ display: 'inline-flex', padding: '2px 3px', cursor: 'pointer' }}
-            >
+            <span style={{ display: 'inline-flex', padding: '2px 3px' }}>
               <Volume2 size={15} />
             </span>
-            <span
-              onClick={(e) => {
-                e.stopPropagation();
-                showTrayToast(<Battery size={16} color="#22c55e" />, 'Power &amp; Battery', 'Battery: 100% (Optimism: 5%)');
-              }}
-              title="Battery: 100% (Optimism: 5%)"
-              style={{ display: 'inline-flex', padding: '2px 4px', cursor: 'pointer' }}
-            >
+            <span style={{ display: 'inline-flex', padding: '2px 4px' }}>
               <Battery size={16} />
             </span>
           </div>

@@ -29,6 +29,10 @@ export const CalculatorApp = ({ onLaunchApp, onTriggerClippy, onTriggerBSOD }) =
       setEasterEggNotice('Halaman tidak ditemukan, tapi Agung Krisna siap di-hire!');
     } else if (code === '42') {
       setEasterEggNotice('Jawaban atas Kehidupan, Semesta, dan Segala Sesuatu.');
+    } else if (code === '007') {
+      setEasterEggNotice('License to debug. Menghilangkan bug tanpa jejak.');
+    } else if (code === '420') {
+      setEasterEggNotice('High-level architecture approved. Stay chill & code.');
     }
   };
 
@@ -78,6 +82,15 @@ export const CalculatorApp = ({ onLaunchApp, onTriggerClippy, onTriggerBSOD }) =
     try {
       const fullExpr = equation + display;
       const sanitized = fullExpr.replace(/×/g, '*').replace(/÷/g, '/');
+
+      // Witty divide by zero check
+      if (/\/\s*0(?![.0-9])/.test(sanitized)) {
+        setDisplay('Infinity');
+        setEasterEggNotice('Nice try. Universe intact.');
+        setResetNext(true);
+        return;
+      }
+
       const result = Function(`'use strict'; return (${sanitized})`)();
       const strRes = String(result);
       

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { 
-  Wifi, Bluetooth, Moon, Volume2, Sun, Battery, 
+  Wifi, Bluetooth, Moon, Volume2, VolumeX, Sun, Battery, BatteryCharging,
   Plane, Sliders 
 } from 'lucide-react';
 import { playClickSound, setMasterVolume, setSoundEnabled } from '../../utils/sound';
@@ -20,6 +20,8 @@ export const QuickSettings = ({
 }) => {
   const [wifiActive, setWifiActive] = useState(true);
   const [btActive, setBtActive] = useState(true);
+  const [airplaneActive, setAirplaneActive] = useState(false);
+  const [batterySaver, setBatterySaver] = useState(false);
   const flyoutRef = useRef(null);
 
   useEffect(() => {
@@ -54,17 +56,85 @@ export const QuickSettings = ({
         }
       } 
     },
-    { label: 'Bluetooth', sub: 'AirPods Connected', icon: Bluetooth, active: btActive, toggle: () => setBtActive(!btActive) },
+    { 
+      label: 'Bluetooth', 
+      sub: btActive ? 'AirPods Connected' : 'Disconnected', 
+      icon: Bluetooth, 
+      active: btActive, 
+      toggle: () => {
+        setBtActive(!btActive);
+        if (onShowTrayToast) {
+          onShowTrayToast(
+            <Bluetooth size={16} color="#3b82f6" />, 
+            'Bluetooth Device', 
+            btActive ? 'Device disconnected. Singing in public not recommended.' : 'Searching for coffee machine via Bluetooth 5.3...'
+          );
+        }
+      } 
+    },
     { 
       label: 'Night light', 
       sub: nightLight ? 'On' : 'Off', 
       icon: Moon, 
       active: nightLight, 
-      toggle: () => setNightLight ? setNightLight(!nightLight) : null 
+      toggle: () => {
+        if (setNightLight) setNightLight(!nightLight);
+        if (onShowTrayToast) {
+          onShowTrayToast(
+            <Moon size={16} color="#f59e0b" />, 
+            'Night Light', 
+            !nightLight ? 'Amber tint active. Sleep mode: still rejected by developer.' : 'Blue light returned. Back to coding!'
+          );
+        }
+      } 
     },
-    { label: 'Airplane mode', sub: 'Off', icon: Plane, active: false, toggle: () => {} },
-    { label: 'Battery saver', sub: 'Off', icon: Battery, active: false, toggle: () => {} },
-    { label: 'Accessibility', sub: 'Ready', icon: Sliders, active: false, toggle: () => {} }
+    { 
+      label: 'Airplane mode', 
+      sub: airplaneActive ? 'On' : 'Off', 
+      icon: Plane, 
+      active: airplaneActive, 
+      toggle: () => {
+        setAirplaneActive(!airplaneActive);
+        if (onShowTrayToast) {
+          onShowTrayToast(
+            <Plane size={16} color="#38bdf8" />, 
+            'Airplane Mode', 
+            !airplaneActive ? 'Fasten your seatbelts. This portfolio is ready for takeoff.' : 'Back on the ground. Welcome to Bali.'
+          );
+        }
+      } 
+    },
+    { 
+      label: 'Battery saver', 
+      sub: batterySaver ? 'Active' : 'Off', 
+      icon: BatteryCharging, 
+      active: batterySaver, 
+      toggle: () => {
+        setBatterySaver(!batterySaver);
+        if (onShowTrayToast) {
+          onShowTrayToast(
+            <BatteryCharging size={16} color="#22c55e" />, 
+            'Battery Saver', 
+            !batterySaver ? 'Developer running on 10% caffeine and 90% determination.' : 'Full performance mode unleashed.'
+          );
+        }
+      } 
+    },
+    { 
+      label: 'Accessibility', 
+      sub: 'Ready', 
+      icon: Sliders, 
+      active: false, 
+      toggle: () => {
+        if (onShowTrayToast) {
+          onShowTrayToast(
+            <Sliders size={16} color="#a855f7" />, 
+            'Accessibility', 
+            'All systems accessible. Coffee cup refilled.'
+          );
+        }
+      } 
+    }
   ];
 
   const handleVolumeChange = (newVal) => {
@@ -73,8 +143,22 @@ export const QuickSettings = ({
     setMasterVolume(num / 100);
     if (num === 0) {
       setSoundEnabled(false);
+      if (onShowTrayToast) {
+        onShowTrayToast(<VolumeX size={16} color="#94a3b8" />, 'Audio Muted', 'Pure silence. Peaceful debugging session initiated.');
+      }
     } else {
       setSoundEnabled(true);
+      if (num === 100 && onShowTrayToast) {
+        onShowTrayToast(<Volume2 size={16} color="#ef4444" />, 'Volume Alert', 'Your neighbors have filed a complaint.');
+      }
+    }
+  };
+
+  const handleBrightnessChange = (newVal) => {
+    const num = Number(newVal);
+    if (setBrightness) setBrightness(num);
+    if (num === 100 && onShowTrayToast) {
+      onShowTrayToast(<Sun size={16} color="#f59e0b" />, 'Display Warning', 'Flashbang deployed. Your eyes have left the chat.');
     }
   };
 
@@ -145,7 +229,7 @@ export const QuickSettings = ({
             min="30"
             max="100"
             value={brightness}
-            onChange={(e) => setBrightness && setBrightness(Number(e.target.value))}
+            onChange={(e) => handleBrightnessChange(e.target.value)}
             style={{ flex: 1, accentColor: accentColor }}
             title={`Brightness: ${brightness}%`}
           />
@@ -178,7 +262,7 @@ export const QuickSettings = ({
           onClick={() => {
             playClickSound();
             if (onShowTrayToast) {
-              onShowTrayToast(<Battery size={16} color="#22c55e" />, 'Power &amp; Battery', 'Battery: 100% (Optimism: 5%)');
+              onShowTrayToast(<Battery size={16} color="#22c55e" />, 'Power & Battery', 'Battery: 100% (Optimism: 5%)');
             }
           }}
           style={{ display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer' }}

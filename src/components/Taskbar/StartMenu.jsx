@@ -168,47 +168,75 @@ export const StartMenu = ({ isOpen, onClose, onLaunchApp, onOpenFile, onRestart,
           gap: '6px 4px',
           marginBottom: '24px'
         }}>
-          {filteredApps.map((app) => (
-            <div
-              key={app.id}
-              onClick={() => {
-                playClickSound();
-                onLaunchApp(app.id);
-                onClose();
-              }}
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                textAlign: 'center',
-                padding: '8px 4px',
-                borderRadius: '6px',
-                cursor: 'pointer',
-                transition: 'background-color 0.12s'
-              }}
-              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.08)'}
-              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
-            >
-              <div style={{ marginBottom: '5px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <WinIcon name={app.icon} size={36} />
-              </div>
-              <span style={{
-                fontSize: '11px',
-                color: '#f1f5f9',
-                lineHeight: 1.2,
-                maxHeight: '28px',
-                display: '-webkit-box',
-                WebkitLineClamp: 2,
-                WebkitBoxOrient: 'vertical',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                wordBreak: 'break-word',
-                padding: '0 2px'
-              }}>
-                {app.name}
-              </span>
+          {filteredApps.length === 0 ? (
+            <div style={{
+              gridColumn: '1 / -1',
+              padding: '24px 16px',
+              textAlign: 'center',
+              backgroundColor: 'rgba(255, 255, 255, 0.04)',
+              borderRadius: '8px',
+              border: '1px dashed rgba(255, 255, 255, 0.15)',
+              color: '#94a3b8',
+              fontSize: '12px'
+            }}>
+              <p style={{ fontWeight: 600, color: '#f1f5f9', margin: '0 0 6px 0' }}>
+                Tidak ada hasil untuk "{search}"
+              </p>
+              <p style={{ opacity: 0.85, margin: 0, fontStyle: 'italic' }}>
+                {search.toLowerCase().includes('pacar') || search.toLowerCase().includes('girlfriend') || search.toLowerCase().includes('jodoh')
+                  ? 'Error 404: Coba optimasi arsitektur kode terlebih dahulu.' 
+                  : search.toLowerCase().includes('duit') || search.toLowerCase().includes('uang') || search.toLowerCase().includes('money')
+                  ? 'Menghitung runway... Menunggu invoice freelance cair.'
+                  : search.toLowerCase().includes('kopi') || search.toLowerCase().includes('coffee')
+                  ? 'Status: Kopi habis, bug tetap ada.'
+                  : search.toLowerCase().includes('tidur') || search.toLowerCase().includes('sleep')
+                  ? 'Fitur ini telah di-deprecate oleh developer.'
+                  : 'Nothing here. Just like my free time.'}
+              </p>
             </div>
-          ))}
+          ) : (
+            filteredApps.map((app) => (
+              <div
+                key={app.id}
+                onClick={() => {
+                  playClickSound();
+                  onLaunchApp(app.id);
+                  onClose();
+                }}
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  textAlign: 'center',
+                  padding: '8px 4px',
+                  borderRadius: '6px',
+                  cursor: 'pointer',
+                  transition: 'background-color 0.12s'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.08)'}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+              >
+                <div style={{ marginBottom: '5px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <WinIcon name={app.icon} size={36} />
+                </div>
+                <span style={{
+                  fontSize: '11px',
+                  color: '#f1f5f9',
+                  lineHeight: 1.2,
+                  maxHeight: '28px',
+                  display: '-webkit-box',
+                  WebkitLineClamp: 2,
+                  WebkitBoxOrient: 'vertical',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  wordBreak: 'break-word',
+                  padding: '0 2px'
+                }}>
+                  {app.name}
+                </span>
+              </div>
+            ))
+          )}
         </div>
 
         <div style={{

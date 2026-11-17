@@ -414,9 +414,9 @@ export function App() {
       },
       'ms-store': {
         title: 'Microsoft Store',
-        icon: 'ms-store',
-        initialSize: { width: 880, height: 580 },
-        initialPosition: { x: 80 + (windows.length % 5) * 25, y: 40 + (windows.length % 5) * 20 }
+        icon: 'store',
+        initialSize: { width: 980, height: 640 },
+        initialPosition: { x: 70 + (windows.length % 5) * 25, y: 35 + (windows.length % 5) * 20 }
       },
       xbox: {
         title: 'XBOX',
@@ -962,7 +962,8 @@ export function App() {
           else if (cmd === 'solitaire' || cmd === 'sol') launchApp('solitaire');
           else if (cmd === 'chess' || cmd === 'catur') launchApp('chess');
           else if (cmd === 'hack' || cmd === 'cyber' || cmd === 'fallout') launchApp('terminal');
-          else if (cmd === 'visiondeck' || cmd === 'motto' || cmd === 'deck' || cmd === 'manifesto') launchApp('chrome', { projectId: 'motto' });
+          else if (cmd === 'store' || cmd === 'ms-store' || cmd === 'market' || cmd === 'katalog') launchApp('ms-store');
+          else if (cmd === 'visiondeck' || cmd === 'motto' || cmd === 'deck' || cmd === 'manifesto') launchApp('ms-store');
           else if (cmd === 'onlyus') launchApp('chrome', { projectId: 'onlyus' });
           else if (cmd === 'bsod' || cmd === 'crash') setBsodActive(true);
           else if (cmd === 'clippy') { playClippySound(); setClippyActive(true); }

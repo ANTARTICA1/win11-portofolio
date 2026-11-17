@@ -37,9 +37,17 @@ const QA_DATABASE = [
     id: 'projects',
     label: 'Rekomendasi Proyek Terbaik?',
     keywords: ['proyek', 'project', 'karya', 'rekomendasi', 'aplikasi', 'portfolio', 'tatagih', 'lintas', 'sigap'],
-    answer: 'Tiga proyek terfavorit: 1. Tatagih (AI Financial & Bill Manager), 2. Lintas (Cross-Device PC Touchpad & File Transfer Port 8945), dan 3. SIGAP (Proteksi ponsel anti-maling berbasis sensor akselerometer & kamera).',
-    actionLabel: 'Jelajahi di File Explorer',
-    actionType: 'explorer'
+    answer: 'Tiga proyek terfavorit: 1. Tatagih (AI Financial & Bill Manager), 2. Lintas (Cross-Device PC Touchpad & File Transfer Port 8945), dan 3. SIGAP (Proteksi ponsel anti-maling berbasis sensor akselerometer & kamera). Seluruh karya dapat dibuka langsung di Microsoft Store!',
+    actionLabel: 'Buka Microsoft Store',
+    actionType: 'ms-store'
+  },
+  {
+    id: 'store',
+    label: 'Katalog Aplikasi (Microsoft Store)?',
+    keywords: ['store', 'microsoft store', 'katalog', 'aplikasi', 'unduh', 'download', 'market', 'koleksi'],
+    answer: 'Microsoft Store menyajikan seluruh karya aplikasi mobile, web SaaS, dan game engine karya Agung Krisna lengkap dengan filosofi moto produk dan rating produksi.',
+    actionLabel: 'Buka Microsoft Store',
+    actionType: 'ms-store'
   },
   {
     id: 'hire',
@@ -169,6 +177,7 @@ export const ClippyAssistant = ({
       else if (onLaunchApp) onLaunchApp('recruiter');
     } else if (actionType === 'whatsapp') {
       if (onOpenWhatsApp) onOpenWhatsApp();
+      else if (onLaunchApp) onLaunchApp('whatsapp');
       else window.open(INITIAL_USER.whatsapp, '_blank', 'noopener,noreferrer');
     } else if (actionType === 'random_project') {
       const randomProj = PROJECTS_LIST[Math.floor(Math.random() * PROJECTS_LIST.length)];
@@ -648,6 +657,27 @@ export const ClippyAssistant = ({
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px' }}>
+              <button
+                onClick={() => handleActionExecute('ms-store')}
+                style={{
+                  gridColumn: 'span 2',
+                  backgroundColor: '#0067c0',
+                  border: 'none',
+                  borderRadius: '5px',
+                  padding: '7px 10px',
+                  fontSize: '11px',
+                  fontWeight: 600,
+                  color: '#ffffff',
+                  cursor: 'pointer',
+                  textAlign: 'center',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '6px'
+                }}
+              >
+                <span>Buka Microsoft Store</span>
+              </button>
               <button
                 onClick={() => handleActionExecute('random_project')}
                 style={{

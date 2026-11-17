@@ -600,6 +600,28 @@
   color: #ffffff;
 }
 
+.ms-card-btn-git {
+  width: 32px;
+  flex: 0 0 32px;
+  padding: 0;
+  background-color: #202020;
+  color: #94a3b8;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ms-card-btn-git:hover {
+  background-color: #2a2a2a;
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
 /* Modal Dialog */
 .ms-modal-backdrop {
   position: fixed;

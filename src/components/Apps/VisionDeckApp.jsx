@@ -66,10 +66,19 @@ export const VisionDeckApp = ({ onLaunchApp, initialSelectedProject = null }) =>
     });
   }, [validProjects, activeCategory, searchQuery]);
 
-  // Featured Spotlight Project
+  // Featured Spotlight Project per category
   const featuredProject = useMemo(() => {
+    if (activeCategory === 'mobile') {
+      return validProjects.find((p) => p.id === 'lintas') || validProjects[0];
+    }
+    if (activeCategory === 'web') {
+      return validProjects.find((p) => p.id === 'tatagih') || validProjects[0];
+    }
+    if (activeCategory === 'utility') {
+      return validProjects.find((p) => p.id === 'neurofly') || validProjects[0];
+    }
     return validProjects.find((p) => p.id === 'tatagih') || validProjects[0];
-  }, [validProjects]);
+  }, [validProjects, activeCategory]);
 
   const handleLaunchProject = (e, projectId) => {
     if (e) e.stopPropagation();
@@ -168,8 +177,8 @@ export const VisionDeckApp = ({ onLaunchApp, initialSelectedProject = null }) =>
 
         {/* Main Content Area */}
         <main className="ms-store-content">
-          {/* Featured Spotlight Banner (Shown when no search query and on 'all' tab) */}
-          {activeCategory === 'all' && !searchQuery && featuredProject && (
+          {/* Featured Spotlight Banner (Shown when no search query) */}
+          {!searchQuery && featuredProject && (
             <div className="ms-store-hero">
               <div className="ms-hero-backdrop" />
               <div className="ms-hero-content">
@@ -302,6 +311,19 @@ export const VisionDeckApp = ({ onLaunchApp, initialSelectedProject = null }) =>
                   >
                     <span>Detail</span>
                   </button>
+
+                  {project.githubUrl && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="ms-card-btn ms-card-btn-git"
+                      onClick={(e) => e.stopPropagation()}
+                      title="Lihat Repository GitHub"
+                    >
+                      <FolderGit2 size={13} />
+                    </a>
+                  )}
                 </div>
               </div>
             ))}

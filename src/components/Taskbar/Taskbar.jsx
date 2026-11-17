@@ -39,8 +39,19 @@ export const Taskbar = ({
 
   const [timeStr, setTimeStr] = useState('');
   const [dateStr, setDateStr] = useState('');
+  const [trayToast, setTrayToast] = useState(null);
+  const toastTimeoutRef = useRef(null);
   const weatherRef = useRef(null);
   const startClicksRef = useRef([]);
+
+  const showTrayToast = (icon, title, message) => {
+    playClickSound();
+    if (toastTimeoutRef.current) clearTimeout(toastTimeoutRef.current);
+    setTrayToast({ icon, title, message });
+    toastTimeoutRef.current = setTimeout(() => {
+      setTrayToast(null);
+    }, 4000);
+  };
 
   useEffect(() => {
     // When parent signals to close all flyouts (e.g. Esc or desktop click)
@@ -234,10 +245,37 @@ export const Taskbar = ({
             <ChevronUp size={14} color={systemTrayOpen ? '#38bdf8' : '#9ca3af'} />
           </button>
 
-          <div className="tray-btn" onClick={handleToggleQuickSettings} title="Internet, Sound & Battery">
-            <Wifi size={15} />
-            <Volume2 size={15} />
-            <Battery size={16} />
+          <div className="tray-btn">
+            <span
+              onClick={(e) => {
+                e.stopPropagation();
+                showTrayToast(<Wifi size={16} color="#38bdf8" />, 'Wi-Fi Network', 'Connection secured. Your secrets are not.');
+              }}
+              title="Connection secured. Your secrets are not."
+              style={{ display: 'inline-flex', padding: '2px 4px', cursor: 'pointer' }}
+            >
+              <Wifi size={15} />
+            </span>
+            <span
+              onClick={(e) => {
+                e.stopPropagation();
+                handleToggleQuickSettings();
+              }}
+              title="Internet, Sound &amp; Battery (Quick Settings)"
+              style={{ display: 'inline-flex', padding: '2px 3px', cursor: 'pointer' }}
+            >
+              <Volume2 size={15} />
+            </span>
+            <span
+              onClick={(e) => {
+                e.stopPropagation();
+                showTrayToast(<Battery size={16} color="#22c55e" />, 'Power &amp; Battery', 'Battery: 100% (Optimism: 5%)');
+              }}
+              title="Battery: 100% (Optimism: 5%)"
+              style={{ display: 'inline-flex', padding: '2px 4px', cursor: 'pointer' }}
+            >
+              <Battery size={16} />
+            </span>
           </div>
 
           <div className="tray-btn tray-clock" onClick={handleToggleCalendar} title="Date and Time">
@@ -386,6 +424,7 @@ export const Taskbar = ({
         setNightLight={setNightLight}
         volume={volume}
         setVolume={setVolume}
+        onShowTrayToast={showTrayToast}
       />
 
       <CalendarFlyout
@@ -402,6 +441,53 @@ export const Taskbar = ({
         onOpenQuickSettings={handleToggleQuickSettings}
         accentColor={accentColor}
       />
+
+      {/* Easter Egg Floating Toast Balloon */}
+      {trayToast && (
+        <div
+          className="anim-flyout"
+          style={{
+            position: 'fixed',
+            bottom: 'calc(var(--taskbar-height) + 16px)',
+            right: '16px',
+            backgroundColor: 'rgba(32, 32, 36, 0.96)',
+            backdropFilter: 'blur(30px)',
+            WebkitBackdropFilter: 'blur(30px)',
+            color: '#ffffff',
+            padding: '12px 16px',
+            borderRadius: '10px',
+            border: '1px solid rgba(255, 255, 255, 0.15)',
+            boxShadow: '0 16px 40px rgba(0, 0, 0, 0.65)',
+            zIndex: 100000,
+            display: 'flex',
+            alignItems: 'center',
+            gap: '12px',
+            maxWidth: '380px',
+            animation: 'winToastSlideIn 0.25s cubic-bezier(0.1, 0.9, 0.2, 1) forwards'
+          }}
+        >
+          <div style={{
+            width: '32px',
+            height: '32px',
+            borderRadius: '8px',
+            backgroundColor: 'rgba(255, 255, 255, 0.08)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexShrink: 0
+          }}>
+            {trayToast.icon}
+          </div>
+          <div>
+            <div style={{ fontSize: '11px', color: '#94a3b8', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.4px' }}>
+              {trayToast.title}
+            </div>
+            <div style={{ fontSize: '12.5px', color: '#f8fafc', fontWeight: 600, marginTop: '2px' }}>
+              {trayToast.message}
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

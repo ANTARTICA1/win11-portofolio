@@ -244,13 +244,34 @@ export const VisionDeckApp = ({ onLaunchApp, initialSelectedProject = null }) =>
           </div>
 
           {/* Windows Fluent App Cards Grid */}
-          <div className="ms-store-grid">
-            {filteredProjects.map((project) => (
-              <div
-                key={project.id}
-                className="ms-card"
-                onClick={() => handleOpenDetail(project)}
-              >
+          {filteredProjects.length === 0 ? (
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '60px 20px',
+              width: '100%',
+              color: '#94a3b8',
+              textAlign: 'center',
+              userSelect: 'none'
+            }}>
+              <Search size={44} color="#64748b" style={{ opacity: 0.5, marginBottom: '14px' }} />
+              <div style={{ fontSize: '14px', fontWeight: 600, color: '#e2e8f0' }}>
+                Tidak ada aplikasi yang ditemukan.
+              </div>
+              <div style={{ fontSize: '13px', color: '#38bdf8', fontStyle: 'italic', marginTop: '8px' }}>
+                &ldquo;Nothing here. Just like my free time.&rdquo;
+              </div>
+            </div>
+          ) : (
+            <div className="ms-store-grid">
+              {filteredProjects.map((project) => (
+                <div
+                  key={project.id}
+                  className="ms-card"
+                  onClick={() => handleOpenDetail(project)}
+                >
                 <div className="ms-card-top">
                   <div className="ms-card-icon">
                     <WinIcon name={project.id} size={36} />
@@ -328,6 +349,7 @@ export const VisionDeckApp = ({ onLaunchApp, initialSelectedProject = null }) =>
               </div>
             ))}
           </div>
+        )}
         </main>
       </div>
 

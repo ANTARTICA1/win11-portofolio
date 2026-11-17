@@ -90,9 +90,11 @@ export const Desktop = ({
     } else if (item.app === 'pdf_viewer' || item.app === 'recruiter' || item.id === 'curriculum_vitae') {
       onLaunchApp('recruiter');
     } else if (item.app === 'explorer') {
-      const targetPath = item.id === 'this_pc' 
-        ? 'This PC' 
-        : (item.id === 'file_explorer' ? 'Projects' : (item.path || 'This PC'));
+      if (item.id === 'this_pc') {
+        onLaunchApp('settings', { tab: 'system' });
+        return;
+      }
+      const targetPath = item.id === 'file_explorer' ? 'Projects' : (item.path || 'This PC');
       onLaunchApp('explorer', { path: targetPath });
     } else if (item.app === 'neurofly' || (item.name && item.name.toLowerCase().includes('neurofly'))) {
       onLaunchApp('neurofly');

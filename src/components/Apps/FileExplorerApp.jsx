@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { 
   ArrowLeft, ArrowRight, ArrowUp, RefreshCw, Search,
-  Plus, ChevronRight, ChevronDown, LayoutGrid, List, RotateCcw, X
+  Plus, ChevronRight, ChevronDown, LayoutGrid, List, RotateCcw, X, FolderOpen
 } from 'lucide-react';
 import { WinIcon } from '../Common/WinIcon';
 import { DATA_D_ITEMS, PROJECTS_ITEMS, RECYCLE_BIN_ITEMS, INTRO_NOTE_CONTENT } from '../../data/fileSystem';
@@ -11,6 +11,7 @@ import { useWindow } from '../Windows/WindowContext';
 import './FileExplorer.css';
 
 const getItemIconName = (item) => {
+  if (item.isSpec || item.type === 'system') return 'settings';
   if (item.isDrive) {
     if (item.name.includes('(C:)')) return 'drive-c';
     if (item.name.includes('(D:)')) return 'drive-d';
@@ -60,6 +61,7 @@ export const FileExplorerApp = ({ initialPath = 'This PC', onOpenFile, onOpenFol
 
     if (currentPath === 'This PC') {
       return [
+        { name: 'Spesifikasi PC Developer', type: 'system', isSpec: true, total: 'Ryzen 7 5800H', free: '16 GB RAM', desc: 'Buka Developer Workstation di Settings' },
         { name: 'Local Disk (C:)', type: 'drive', isDrive: true, total: '256 GB', free: '142 GB' },
         { name: 'Data (D:)', type: 'drive', isDrive: true, total: '512 GB', free: '380 GB' }
       ];
@@ -123,6 +125,12 @@ Petunjuk Scavenger Hunt Lainnya:
 
     if (currentPath === 'Documents') {
       return [
+        {
+          name: 'Free Time (Waktu Luang)',
+          type: 'folder',
+          badge: 'Empty',
+          size: '0 items'
+        },
         {
           name: 'biodata_lengkap.txt',
           type: 'file',
@@ -234,6 +242,16 @@ Petunjuk Scavenger Hunt Lainnya:
       return DATA_D_ITEMS;
     }
 
+    if (
+      currentPath.includes('Free Time') || 
+      currentPath.includes('Waktu Luang') || 
+      currentPath.includes('Program Files') || 
+      currentPath.includes('Windows') || 
+      currentPath.includes('Users')
+    ) {
+      return [];
+    }
+
     const pathParts = currentPath.split(' > ');
     const lastPart = pathParts[pathParts.length - 1];
     if (lastPart.toLowerCase() === 'projects') {
@@ -242,6 +260,10 @@ Petunjuk Scavenger Hunt Lainnya:
     const matchedFolder = DATA_D_ITEMS.find(f => f.name.toLowerCase() === lastPart.toLowerCase());
     if (matchedFolder && matchedFolder.items) {
       return matchedFolder.items;
+    }
+
+    if (currentPath.startsWith('Data (D:) > ') || currentPath.startsWith('Local Disk (C:) > ')) {
+      return [];
     }
 
     return DATA_D_ITEMS;
@@ -374,6 +396,10 @@ Petunjuk Scavenger Hunt Lainnya:
 
     playClickSound();
     setMobileSidebarOpen(false);
+    if (item.isSpec || item.type === 'system' || (item.name && item.name.toLowerCase().includes('spesifikasi'))) {
+      if (onLaunchApp) onLaunchApp('settings', { tab: 'system' });
+      return;
+    }
     if (item.type === 'drive') {
       navigateTo(item.name);
     } else if (item.type === 'folder') {
@@ -841,7 +867,79 @@ Petunjuk Scavenger Hunt Lainnya:
         </div>
 
         <div className="explorer-content-view">
-          {(viewMode === 'list' || currentPath === 'Recycle Bin') ? (
+          {currentPath === 'This PC' && (
+            <div
+              onClick={() => {
+                playClickSound();
+                if (onLaunchApp) onLaunchApp('settings', { tab: 'system' });
+              }}
+              style={{
+                margin: '12px 16px 4px 16px',
+                padding: '12px 16px',
+                backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                borderRadius: '8px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                cursor: 'pointer',
+                transition: 'all 0.15s ease'
+              }}
+              title="Klik untuk membuka spesifikasi PC developer lengkap di Settings"
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <WinIcon name="settings" size={30} />
+                <div>
+                  <div style={{ fontSize: '13px', fontWeight: 600, color: '#ffffff' }}>
+                    AGUNG-WORKSTATION &bull; AMD Ryzen 7 5800H &bull; 16.0 GB RAM
+                  </div>
+                  <div style={{ fontSize: '11px', color: '#94a3b8', marginTop: '2px' }}>
+                    Spesifikasi PC Developer &bull; Windows 11 Pro Portfolio Edition
+                  </div>
+                </div>
+              </div>
+              <button
+                type="button"
+                style={{
+                  padding: '6px 12px',
+                  backgroundColor: '#0067c0',
+                  color: '#ffffff',
+                  border: 'none',
+                  borderRadius: '6px',
+                  fontSize: '11.5px',
+                  fontWeight: 600,
+                  cursor: 'pointer'
+                }}
+              >
+                Lihat Spesifikasi
+              </button>
+            </div>
+          )}
+
+          {filteredItems.length === 0 ? (
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '60px 20px',
+                width: '100%',
+                height: '100%',
+                color: '#94a3b8',
+                textAlign: 'center',
+                userSelect: 'none'
+              }}
+            >
+              <FolderOpen size={48} color="#64748b" style={{ opacity: 0.5, marginBottom: '14px' }} />
+              <div style={{ fontSize: '14px', fontWeight: 600, color: '#e2e8f0' }}>
+                This folder is empty.
+              </div>
+              <div style={{ fontSize: '12.5px', color: '#38bdf8', fontStyle: 'italic', marginTop: '8px' }}>
+                &ldquo;Nothing here. Just like my free time.&rdquo;
+              </div>
+            </div>
+          ) : (viewMode === 'list' || currentPath === 'Recycle Bin') ? (
             <div className="explorer-details-table">
               <div className="details-header-row">
                 <div className="details-col col-name">Name</div>
@@ -909,7 +1007,9 @@ Petunjuk Scavenger Hunt Lainnya:
                     }}
                   >
                     <div className="folder-icon-wrapper">
-                      {item.isDrive ? (
+                      {item.isSpec || item.type === 'system' ? (
+                        <WinIcon name="settings" size={52} />
+                      ) : item.isDrive ? (
                         item.name.includes('(C:)') ? (
                           <WinIcon name="drive-c" size={52} />
                         ) : item.name.includes('(D:)') ? (
@@ -942,6 +1042,9 @@ Petunjuk Scavenger Hunt Lainnya:
                       )}
                     </div>
                     <span className="folder-name">{item.name}</span>
+                    {item.isSpec && (
+                      <span style={{ fontSize: '10px', color: '#38bdf8', marginTop: '2px', fontWeight: 600 }}>Spesifikasi PC</span>
+                    )}
                     {(item.type === 'executable' || item.extension === 'exe') && (
                       <span style={{ fontSize: '10px', color: '#38bdf8', marginTop: '2px', fontWeight: 600 }}>Aplikasi</span>
                     )}

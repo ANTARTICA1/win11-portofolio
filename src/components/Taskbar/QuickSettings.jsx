@@ -15,7 +15,8 @@ export const QuickSettings = ({
   nightLight = false,
   setNightLight,
   volume = 80,
-  setVolume
+  setVolume,
+  onShowTrayToast
 }) => {
   const [wifiActive, setWifiActive] = useState(true);
   const [btActive, setBtActive] = useState(true);
@@ -41,7 +42,18 @@ export const QuickSettings = ({
   if (!isOpen) return null;
 
   const toggleButtons = [
-    { label: 'Wi-Fi', sub: 'Home-Fiber-5G', icon: Wifi, active: wifiActive, toggle: () => setWifiActive(!wifiActive) },
+    { 
+      label: 'Wi-Fi', 
+      sub: wifiActive ? 'Connection secured' : 'Disconnected', 
+      icon: Wifi, 
+      active: wifiActive, 
+      toggle: () => {
+        setWifiActive(!wifiActive);
+        if (onShowTrayToast) {
+          onShowTrayToast(<Wifi size={16} color="#38bdf8" />, 'Wi-Fi Network', 'Connection secured. Your secrets are not.');
+        }
+      } 
+    },
     { label: 'Bluetooth', sub: 'AirPods Connected', icon: Bluetooth, active: btActive, toggle: () => setBtActive(!btActive) },
     { 
       label: 'Night light', 
@@ -162,9 +174,18 @@ export const QuickSettings = ({
         fontSize: '11.5px',
         color: '#9ca3af'
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+        <div 
+          onClick={() => {
+            playClickSound();
+            if (onShowTrayToast) {
+              onShowTrayToast(<Battery size={16} color="#22c55e" />, 'Power &amp; Battery', 'Battery: 100% (Optimism: 5%)');
+            }
+          }}
+          style={{ display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer' }}
+          title="Battery: 100% (Optimism: 5%)"
+        >
           <Battery size={16} color="#22c55e" />
-          <span style={{ color: '#ffffff', fontWeight: 500 }}>98% (Battery Healthy)</span>
+          <span style={{ color: '#ffffff', fontWeight: 500 }}>Battery: 100% (Optimism: 5%)</span>
         </div>
 
         <span

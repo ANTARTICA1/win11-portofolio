@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { playBSODSound, playStartupChime, playClickSound } from '../../utils/sound';
 import { INITIAL_USER } from '../../data/fileSystem';
 
-export const BSODScreen = ({ onClose, onOpenRecruiter }) => {
+export const BSODScreen = ({ onClose, onOpenRecruiter, errorData = null }) => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -38,8 +38,25 @@ export const BSODScreen = ({ onClose, onOpenRecruiter }) => {
     onClose();
   };
 
+  const stopCode = errorData?.stopCode || 'RECRUITER_IMPRESSED_EXCEPTION';
+  const whatFailed = errorData?.whatFailed || 'GUNGKRISNA_TOO_CREATIVE.SYS';
+  const headline = errorData?.headline || (
+    <>Perangkat Anda mengalami kendala fatal: <strong>Sangat butuh merekrut Agung Krisna sekarang juga.</strong></>
+  );
+  const desc = errorData?.desc || 'Kami baru saja mengumpulkan bukti portofolio yang luar biasa. Sistem ini akan otomatis membuka jalur komunikasi agar Anda tidak melewatkan kandidat terbaik.';
+  
+  const progressText = errorData?.stopCode === 'VERSION_CONFUSION'
+    ? `${progress}% mencari file final_final_v4_beneran_final.exe...`
+    : errorData?.stopCode === 'BAD_DECISION'
+    ? `${progress}% mengembalikan berkas root yang terhapus...`
+    : `${progress}% selesai mengagumi portofolio...`;
+
   // WhatsApp link with custom message
-  const waUrl = `https://wa.me/6282247846546?text=Halo%20Agung%20Krisna,%20saya%20terkena%20BSOD%20(Recruiter%20Exception)%20di%20portfolio%20Anda%20dan%20tertarik%20untuk%20diskusi!`;
+  const waUrl = `https://wa.me/6282247846546?text=${encodeURIComponent(
+    errorData?.stopCode
+      ? `Halo Agung Krisna, saya memicu easter egg BSOD [${errorData.stopCode}] di Windows 11 Portfolio Anda!`
+      : 'Halo Agung Krisna, saya terkena BSOD (Recruiter Exception) di portfolio Anda dan tertarik untuk diskusi!'
+  )}`;
 
   return (
     <div
@@ -69,15 +86,15 @@ export const BSODScreen = ({ onClose, onOpenRecruiter }) => {
       </div>
 
       <h1 style={{ fontSize: 'clamp(20px, 2.5vw, 32px)', fontWeight: 300, lineHeight: 1.35, marginBottom: '24px', maxWidth: '850px' }}>
-        Perangkat Anda mengalami kendala fatal: <strong>Sangat butuh merekrut Agung Krisna sekarang juga.</strong>
+        {headline}
       </h1>
 
       <p style={{ fontSize: 'clamp(14px, 1.4vw, 18px)', fontWeight: 300, lineHeight: 1.5, marginBottom: '32px', opacity: 0.95, maxWidth: '800px' }}>
-        Kami baru saja mengumpulkan bukti portofolio yang luar biasa. Sistem ini akan otomatis membuka jalur komunikasi agar Anda tidak melewatkan kandidat terbaik.
+        {desc}
       </p>
 
       <div style={{ fontSize: 'clamp(16px, 1.8vw, 22px)', fontWeight: 400, marginBottom: '36px' }}>
-        {progress}% selesai mengagumi portofolio...
+        {progressText}
       </div>
 
       <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '32px', marginBottom: '40px' }}>
@@ -103,10 +120,10 @@ export const BSODScreen = ({ onClose, onOpenRecruiter }) => {
             Kunjungi: <span style={{ textDecoration: 'underline', fontWeight: 600 }}>https://portofolio.krisnaartha.my.id</span>
           </div>
           <div style={{ marginTop: '4px' }}>
-            Stop code: <strong style={{ color: '#fed7aa', letterSpacing: '0.5px' }}>RECRUITER_IMPRESSED_EXCEPTION</strong>
+            Stop code: <strong style={{ color: '#fed7aa', letterSpacing: '0.5px' }}>{stopCode}</strong>
           </div>
           <div>
-            What failed: <strong style={{ color: '#fed7aa', letterSpacing: '0.5px' }}>GUNGKRISNA_TOO_CREATIVE.SYS</strong>
+            What failed: <strong style={{ color: '#fed7aa', letterSpacing: '0.5px' }}>{whatFailed}</strong>
           </div>
         </div>
       </div>

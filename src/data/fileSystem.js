@@ -1258,6 +1258,16 @@ export const DESKTOP_ITEMS = [
     icon: "computer"
   },
   {
+    id: "final_final_v3_exe",
+    name: "final_final_v3.exe",
+    type: "app",
+    app: "final_version",
+    icon: "notepad",
+    fileType: "Application",
+    size: "4.2 MB",
+    description: "Versi final yang sebenarnya... atau bukan?"
+  },
+  {
     id: "file_explorer",
     name: "File Explorer",
     type: "app",

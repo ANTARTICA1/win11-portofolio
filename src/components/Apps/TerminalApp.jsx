@@ -225,7 +225,8 @@ LinkedIn : ${INITIAL_USER.linkedin}
 09/29/2026  03:48 PM             2,150 biodata.txt
 09/29/2026  03:48 PM             1,890 skills.txt
 09/29/2026  03:48 PM           245,600 resume.pdf
-               4 File(s)        252,880 bytes
+09/29/2026  03:52 PM         4,194,304 final_final_v3.exe
+               5 File(s)      4,447,184 bytes
                5 Dir(s)  380,412,985,344 bytes free
 `;
         break;
@@ -299,6 +300,50 @@ Petunjuk eksperimen rahasia telah dipecah dan disebarkan ke beberapa tempat:
 8. [Chess vs Bot]  : Ketik 'chess' di terminal untuk bermain catur melawan AI
 ======================================================================
 `;
+        break;
+
+      case 'sudo rm -rf /':
+      case 'sudo rm -rf /*':
+      case 'sudo rm -rf':
+      case 'rm -rf /':
+      case 'rm -rf /*':
+      case 'rm -rf':
+      case 'sudo rm':
+      case 'rmdir /s /q c:\\':
+      case 'del /f /s /q c:\\*.*':
+        output = `
+[CRITICAL SYSTEM FAULT]
+Executing root deletion: / ...
+Unmounting root filesystem...
+Kernel panic: Bad decision detected.
+`;
+        if (onLaunchApp) {
+          setTimeout(() => {
+            onLaunchApp('bsod', {
+              stopCode: 'BAD_DECISION',
+              headline: 'You knew what you were doing. Probably.',
+              whatFailed: 'SUDO_ROOT_DELETE.SYS',
+              desc: 'Menghapus seluruh sistem root dari terminal bukanlah ide terbaik yang pernah ada.'
+            });
+          }, 400);
+        }
+        break;
+
+      case 'final_final_v3.exe':
+      case './final_final_v3.exe':
+      case 'final_final_v3':
+      case 'start final_final_v3.exe':
+        output = `Menjalankan final_final_v3.exe...`;
+        if (onLaunchApp) {
+          setTimeout(() => {
+            onLaunchApp('bsod', {
+              stopCode: 'VERSION_CONFUSION',
+              headline: 'Which final version is actually final?',
+              whatFailed: 'FINAL_FINAL_V3.EXE',
+              desc: 'Sistem mengalami kebingungan identitas versi berkas yang tidak berujung.'
+            });
+          }, 400);
+        }
         break;
 
       case 'bsod':

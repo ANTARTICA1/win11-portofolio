@@ -105,6 +105,7 @@ export function App() {
 
   // Easter Eggs States
   const [bsodActive, setBsodActive] = useState(false);
+  const [bsodData, setBsodData] = useState(null);
   const [clippyActive, setClippyActive] = useState(true);
   const [confettiActive, setConfettiActive] = useState(false);
   const [konamiToast, setKonamiToast] = useState(false);
@@ -237,6 +238,11 @@ export function App() {
       return;
     }
     if (appId === 'bsod' || appId === 'crash') {
+      if (customData && typeof customData === 'object') {
+        setBsodData(customData);
+      } else {
+        setBsodData(null);
+      }
       setBsodActive(true);
       return;
     }
@@ -965,7 +971,26 @@ export function App() {
           else if (cmd === 'store' || cmd === 'ms-store' || cmd === 'market' || cmd === 'katalog') launchApp('ms-store');
           else if (cmd === 'visiondeck' || cmd === 'motto' || cmd === 'deck' || cmd === 'manifesto') launchApp('ms-store');
           else if (cmd === 'onlyus') launchApp('chrome', { projectId: 'onlyus' });
-          else if (cmd === 'bsod' || cmd === 'crash') setBsodActive(true);
+          else if (cmd.toLowerCase().includes('final_final')) {
+            launchApp('bsod', {
+              stopCode: 'VERSION_CONFUSION',
+              headline: 'Which final version is actually final?',
+              whatFailed: 'FINAL_FINAL_V3.EXE',
+              desc: 'Sistem mengalami kebingungan identitas versi berkas yang tidak berujung.'
+            });
+          }
+          else if (cmd.toLowerCase().includes('rm -rf') || cmd.toLowerCase().includes('sudo rm') || cmd.toLowerCase().includes('del /f /s /q')) {
+            launchApp('bsod', {
+              stopCode: 'BAD_DECISION',
+              headline: 'You knew what you were doing. Probably.',
+              whatFailed: 'SUDO_ROOT_DELETE.SYS',
+              desc: 'Menghapus seluruh sistem root bukanlah ide terbaik yang pernah ada.'
+            });
+          }
+          else if (cmd === 'bsod' || cmd === 'crash') {
+            setBsodData(null);
+            setBsodActive(true);
+          }
           else if (cmd === 'clippy') { playClippySound(); setClippyActive(true); }
           else if (cmd === 'konami') triggerKonamiAchievement();
           else if (cmd === 'secret' || cmd === 'secrets' || cmd === 'easteregg') launchApp('terminal');
@@ -976,8 +1001,12 @@ export function App() {
       {/* Easter Egg: BSOD Recruiter Exception Screen */}
       {bsodActive && (
         <BSODScreen
-          onClose={() => setBsodActive(false)}
+          onClose={() => {
+            setBsodActive(false);
+            setBsodData(null);
+          }}
           onOpenRecruiter={() => launchApp('recruiter')}
+          errorData={bsodData}
         />
       )}
 

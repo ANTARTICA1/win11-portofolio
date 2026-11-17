@@ -89,6 +89,14 @@ export const Desktop = ({
       });
     } else if (item.app === 'pdf_viewer' || item.app === 'recruiter' || item.id === 'curriculum_vitae') {
       onLaunchApp('recruiter');
+    } else if (item.app === 'final_version' || item.id === 'final_final_v3_exe' || (item.name && item.name.toLowerCase().includes('final_final'))) {
+      onLaunchApp('bsod', {
+        stopCode: 'VERSION_CONFUSION',
+        headline: 'Which final version is actually final?',
+        whatFailed: 'FINAL_FINAL_V3.EXE',
+        desc: 'Sistem mengalami kebingungan identitas versi berkas yang tidak berujung.'
+      });
+      return;
     } else if (item.app === 'explorer') {
       if (item.id === 'this_pc') {
         onLaunchApp('settings', { tab: 'system' });

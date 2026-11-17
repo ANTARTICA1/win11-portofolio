@@ -92,6 +92,7 @@ export const FileExplorerApp = ({ initialPath = 'This PC', onOpenFile, onOpenFol
     if (currentPath === 'Downloads') {
       return [
         { name: 'Agung_Krisna_Resume.pdf', type: 'file', extension: 'pdf', size: '240 KB' },
+        { name: 'final_final_v3.exe', type: 'executable', extension: 'exe', size: '4.2 MB', description: 'Aplikasi versi final... yakin sudah final?' },
         { name: 'temuin_mobile_v1.apk', type: 'file', extension: 'apk', size: '18.2 MB' },
         {
           name: 'memo_asisten_jadul.txt',
@@ -398,6 +399,17 @@ Petunjuk Scavenger Hunt Lainnya:
     setMobileSidebarOpen(false);
     if (item.isSpec || item.type === 'system' || (item.name && item.name.toLowerCase().includes('spesifikasi'))) {
       if (onLaunchApp) onLaunchApp('settings', { tab: 'system' });
+      return;
+    }
+    if (item.name === 'final_final_v3.exe' || (item.name && item.name.toLowerCase().includes('final_final'))) {
+      if (onLaunchApp) {
+        onLaunchApp('bsod', {
+          stopCode: 'VERSION_CONFUSION',
+          headline: 'Which final version is actually final?',
+          whatFailed: 'FINAL_FINAL_V3.EXE',
+          desc: 'Sistem mengalami kebingungan identitas versi berkas yang tidak berujung.'
+        });
+      }
       return;
     }
     if (item.type === 'drive') {

@@ -934,7 +934,7 @@ export const VisionDeckApp = ({ onLaunchApp, initialSelectedProject = null }) =>
               {/* Product Philosophy Motto */}
               {selectedProject.motto && (
                 <div className="ms-motto-callout">
-                  <div className="ms-motto-badge">FILOSOFI &amp; MOTO KARYA</div>
+                  <div className="ms-motto-badge">FILOSOFI & MOTO KARYA</div>
                   <p className="ms-motto-text">&ldquo;{selectedProject.motto}&rdquo;</p>
                 </div>
               )}
@@ -948,7 +948,7 @@ export const VisionDeckApp = ({ onLaunchApp, initialSelectedProject = null }) =>
               {/* Tech Stack */}
               {selectedProject.stack && (
                 <div className="ms-detail-section">
-                  <h3 className="ms-detail-section-title">Teknologi &amp; Arsitektur</h3>
+                  <h3 className="ms-detail-section-title">Teknologi & Arsitektur</h3>
                   <div className="ms-stack-wrap">
                     {selectedProject.stack.map((item, idx) => (
                       <span key={idx} className="ms-stack-pill">{item}</span>

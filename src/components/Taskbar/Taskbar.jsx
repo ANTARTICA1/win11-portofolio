@@ -248,7 +248,7 @@ export const Taskbar = ({
           <div 
             className="tray-btn"
             onClick={handleToggleQuickSettings}
-            title="Internet, Sound &amp; Battery (Quick Settings)"
+            title="Quick Settings (Internet, Sound, Battery)"
             style={{ cursor: 'pointer' }}
           >
             <span style={{ display: 'inline-flex', padding: '2px 4px' }}>

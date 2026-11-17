@@ -4,11 +4,8 @@ import { Taskbar } from './components/Taskbar/Taskbar';
 import { Window } from './components/Windows/Window';
 import { ExternalLink } from 'lucide-react';
 
-import { RunDialog } from './components/Common/RunDialog';
 import { WinIcon } from './components/Common/WinIcon';
-import { BSODScreen } from './components/Common/BSODScreen';
 import { ClippyAssistant } from './components/Common/ClippyAssistant';
-import { ConfettiOverlay } from './components/Common/ConfettiOverlay';
 import { DESKTOP_ITEMS, INTRO_NOTE_CONTENT, INITIAL_USER } from './data/fileSystem';
 import { isMobileDevice } from './utils/device';
 import { 
@@ -20,6 +17,11 @@ import {
   setMasterVolume, 
   setSoundEnabled 
 } from './utils/sound';
+
+// Lazy-loaded auxiliary and easter-egg components
+const RunDialog = lazy(() => import('./components/Common/RunDialog').then(m => ({ default: m.RunDialog })));
+const BSODScreen = lazy(() => import('./components/Common/BSODScreen').then(m => ({ default: m.BSODScreen })));
+const ConfettiOverlay = lazy(() => import('./components/Common/ConfettiOverlay').then(m => ({ default: m.ConfettiOverlay })));
 
 // Code-split heavy application modules for lightning-fast initial page loads
 const FileExplorerApp = lazy(() => import('./components/Apps/FileExplorerApp').then(m => ({ default: m.FileExplorerApp })));
@@ -189,13 +191,17 @@ export function App() {
     };
     window.addEventListener('keydown', handleKeyDown);
 
-    // Idle timer for gentle Clippy appearance
+    // Throttled idle timer for gentle Clippy appearance
     let idleTimer = setTimeout(() => {
       setClippyActive(true);
       playClippySound();
     }, 110000); // 110 seconds
 
+    let lastReset = 0;
     const resetIdle = () => {
+      const now = Date.now();
+      if (now - lastReset < 10000) return; // Throttled to at most once per 10 seconds
+      lastReset = now;
       clearTimeout(idleTimer);
       idleTimer = setTimeout(() => {
         setClippyActive(true);
@@ -822,6 +828,7 @@ export function App() {
             <iframe 
               src="https://portofolio.krisnaartha.my.id" 
               title="portofolio.krisnaartha.my.id"
+              loading="lazy"
               style={{ flex: 1, width: '100%', border: 'none', backgroundColor: '#ffffff' }}
             />
           </div>
@@ -950,64 +957,70 @@ export function App() {
         closeFlyoutsSignal={closeFlyoutsSignal}
       />
 
-      <RunDialog
-        isOpen={runDialogOpen}
-        onClose={() => setRunDialogOpen(false)}
-        onRunCommand={(cmd) => {
-          if (cmd === 'resume' || cmd === 'cv') launchApp('recruiter');
-          else if (cmd === 'cmd' || cmd === 'powershell') launchApp('terminal');
-          else if (cmd === 'explorer') launchApp('explorer');
-          else if (cmd === 'notepad') launchApp('notepad');
-          else if (cmd === 'calc') launchApp('calculator');
-          else if (cmd === 'settings') launchApp('settings');
-          else if (cmd === 'linkedin') launchApp('linkedin');
-          else if (cmd === 'github' || cmd === 'git') launchApp('github');
-          else if (cmd === 'wa' || cmd === 'whatsapp') launchApp('whatsapp');
-          else if (cmd === 'web' || cmd === 'krisnaartha' || cmd === 'krisnaartha.my.id' || cmd === 'portofolio.krisnaartha.my.id' || cmd === 'porto') launchApp('krisnaartha_site');
-          else if (cmd === 'dino' || cmd === 'chrome://dino') launchApp('dino');
-          else if (cmd === 'solitaire' || cmd === 'sol') launchApp('solitaire');
-          else if (cmd === 'chess' || cmd === 'catur') launchApp('chess');
-          else if (cmd === 'hack' || cmd === 'cyber' || cmd === 'fallout') launchApp('terminal');
-          else if (cmd === 'store' || cmd === 'ms-store' || cmd === 'market' || cmd === 'katalog') launchApp('ms-store');
-          else if (cmd === 'visiondeck' || cmd === 'motto' || cmd === 'deck' || cmd === 'manifesto') launchApp('ms-store');
-          else if (cmd === 'onlyus') launchApp('chrome', { projectId: 'onlyus' });
-          else if (cmd.toLowerCase().includes('final_final')) {
-            launchApp('bsod', {
-              stopCode: 'VERSION_CONFUSION',
-              headline: 'Which final version is actually final?',
-              whatFailed: 'FINAL_FINAL_V3.EXE',
-              desc: 'Sistem mengalami kebingungan identitas versi berkas yang tidak berujung.'
-            });
-          }
-          else if (cmd.toLowerCase().includes('rm -rf') || cmd.toLowerCase().includes('sudo rm') || cmd.toLowerCase().includes('del /f /s /q')) {
-            launchApp('bsod', {
-              stopCode: 'BAD_DECISION',
-              headline: 'You knew what you were doing. Probably.',
-              whatFailed: 'SUDO_ROOT_DELETE.SYS',
-              desc: 'Menghapus seluruh sistem root bukanlah ide terbaik yang pernah ada.'
-            });
-          }
-          else if (cmd === 'bsod' || cmd === 'crash') {
-            setBsodData(null);
-            setBsodActive(true);
-          }
-          else if (cmd === 'clippy') { playClippySound(); setClippyActive(true); }
-          else if (cmd === 'konami') triggerKonamiAchievement();
-          else if (cmd === 'secret' || cmd === 'secrets' || cmd === 'easteregg') launchApp('terminal');
-          else launchApp(cmd);
-        }}
-      />
+      {runDialogOpen && (
+        <Suspense fallback={null}>
+          <RunDialog
+            isOpen={runDialogOpen}
+            onClose={() => setRunDialogOpen(false)}
+            onRunCommand={(cmd) => {
+              if (cmd === 'resume' || cmd === 'cv') launchApp('recruiter');
+              else if (cmd === 'cmd' || cmd === 'powershell') launchApp('terminal');
+              else if (cmd === 'explorer') launchApp('explorer');
+              else if (cmd === 'notepad') launchApp('notepad');
+              else if (cmd === 'calc') launchApp('calculator');
+              else if (cmd === 'settings') launchApp('settings');
+              else if (cmd === 'linkedin') launchApp('linkedin');
+              else if (cmd === 'github' || cmd === 'git') launchApp('github');
+              else if (cmd === 'wa' || cmd === 'whatsapp') launchApp('whatsapp');
+              else if (cmd === 'web' || cmd === 'krisnaartha' || cmd === 'krisnaartha.my.id' || cmd === 'portofolio.krisnaartha.my.id' || cmd === 'porto') launchApp('krisnaartha_site');
+              else if (cmd === 'dino' || cmd === 'chrome://dino') launchApp('dino');
+              else if (cmd === 'solitaire' || cmd === 'sol') launchApp('solitaire');
+              else if (cmd === 'chess' || cmd === 'catur') launchApp('chess');
+              else if (cmd === 'hack' || cmd === 'cyber' || cmd === 'fallout') launchApp('terminal');
+              else if (cmd === 'store' || cmd === 'ms-store' || cmd === 'market' || cmd === 'katalog') launchApp('ms-store');
+              else if (cmd === 'visiondeck' || cmd === 'motto' || cmd === 'deck' || cmd === 'manifesto') launchApp('ms-store');
+              else if (cmd === 'onlyus') launchApp('chrome', { projectId: 'onlyus' });
+              else if (cmd.toLowerCase().includes('final_final')) {
+                launchApp('bsod', {
+                  stopCode: 'VERSION_CONFUSION',
+                  headline: 'Which final version is actually final?',
+                  whatFailed: 'FINAL_FINAL_V3.EXE',
+                  desc: 'Sistem mengalami kebingungan identitas versi berkas yang tidak berujung.'
+                });
+              }
+              else if (cmd.toLowerCase().includes('rm -rf') || cmd.toLowerCase().includes('sudo rm') || cmd.toLowerCase().includes('del /f /s /q')) {
+                launchApp('bsod', {
+                  stopCode: 'BAD_DECISION',
+                  headline: 'You knew what you were doing. Probably.',
+                  whatFailed: 'SUDO_ROOT_DELETE.SYS',
+                  desc: 'Menghapus seluruh sistem root bukanlah ide terbaik yang pernah ada.'
+                });
+              }
+              else if (cmd === 'bsod' || cmd === 'crash') {
+                setBsodData(null);
+                setBsodActive(true);
+              }
+              else if (cmd === 'clippy') { playClippySound(); setClippyActive(true); }
+              else if (cmd === 'konami') triggerKonamiAchievement();
+              else if (cmd === 'secret' || cmd === 'secrets' || cmd === 'easteregg') launchApp('terminal');
+              else launchApp(cmd);
+            }}
+          />
+        </Suspense>
+      )}
 
       {/* Easter Egg: BSOD Recruiter Exception Screen */}
       {bsodActive && (
-        <BSODScreen
-          onClose={() => {
-            setBsodActive(false);
-            setBsodData(null);
-          }}
-          onOpenRecruiter={() => launchApp('recruiter')}
-          errorData={bsodData}
-        />
+        <Suspense fallback={null}>
+          <BSODScreen
+            onClose={() => {
+              setBsodActive(false);
+              setBsodData(null);
+            }}
+            onOpenRecruiter={() => launchApp('recruiter')}
+            errorData={bsodData}
+          />
+        </Suspense>
       )}
 
       {/* Easter Egg: Clippy Office Helper */}
@@ -1024,7 +1037,9 @@ export function App() {
 
       {/* Easter Egg: Konami Code Confetti Celebration */}
       {confettiActive && (
-        <ConfettiOverlay onComplete={() => setConfettiActive(false)} />
+        <Suspense fallback={null}>
+          <ConfettiOverlay onComplete={() => setConfettiActive(false)} />
+        </Suspense>
       )}
 
       {/* Konami Achievement Unlocked Floating Toast */}

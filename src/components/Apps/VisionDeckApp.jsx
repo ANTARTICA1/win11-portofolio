@@ -163,7 +163,7 @@ export const VisionDeckApp = ({ onLaunchApp, initialSelectedProject = null }) =>
 
           <div className="ms-store-publisher-badge">
             <div className="ms-publisher-avatar">
-              <img src="/certificates/foto_krisna.jpg" alt="Agung Krisna" />
+              <img src="/certificates/foto_krisna.jpg" alt="Agung Krisna" loading="lazy" decoding="async" />
             </div>
             <div className="ms-publisher-info">
               <div className="ms-publisher-name">Agung Krisna</div>

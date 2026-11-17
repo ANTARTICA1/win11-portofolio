@@ -182,19 +182,23 @@ export const Window = ({
   const windowRef = useRef(null);
   const dragRef = useRef({ isDragging: false, startX: 0, startY: 0, initX: 0, initY: 0 });
   const resizeRef = useRef({ isResizing: false, direction: '', startX: 0, startY: 0, initW: 0, initH: 0, initX: 0, initY: 0 });
+  const posRef = useRef(pos);
+  const sizeRef = useRef(size);
+  posRef.current = pos;
+  sizeRef.current = size;
 
   useEffect(() => {
     const handleResize = () => {
       const mobile = window.innerWidth <= 768;
       setIsMobile(mobile);
       if (!mobile) {
-        setPos(p => getSafeBounds(p, size).pos);
-        setSize(s => getSafeBounds(pos, s).size);
+        setPos(p => getSafeBounds(p, sizeRef.current).pos);
+        setSize(s => getSafeBounds(posRef.current, s).size);
       }
     };
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', handleResize, { passive: true });
     return () => window.removeEventListener('resize', handleResize);
-  }, [pos, size]);
+  }, []);
 
   const handleTitlePointerDown = (e) => {
     if (isMobile) return;

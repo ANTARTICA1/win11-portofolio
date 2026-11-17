@@ -128,6 +128,8 @@ export const WinIcon = ({ name, size = 32, className = '' }) => {
       <img
         src={iconSrc}
         alt={name}
+        loading="lazy"
+        decoding="async"
         style={{
           width: '100%',
           height: '100%',

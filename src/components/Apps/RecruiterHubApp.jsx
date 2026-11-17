@@ -619,7 +619,7 @@ export const RecruiterHubApp = ({ onOpenApp }) => {
               <aside className="cv-side">
                 <SideRails top={740} height={350} />
                 <div className="cv-photo">
-                  <img src={CV.photo} alt={CV.fullName} />
+                  <img src={CV.photo} alt={CV.fullName} loading="lazy" decoding="async" />
                 </div>
 
                 <div style={{ marginTop: 32 }}>

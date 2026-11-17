@@ -220,6 +220,8 @@ export const PhotosApp = ({
             <img
               src={currentImg.url}
               alt={currentImg.title}
+              loading="lazy"
+              decoding="async"
               style={{
                 maxWidth: '100%',
                 maxHeight: '100%',
